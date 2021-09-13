@@ -25,8 +25,30 @@ public class Server : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        socket.Receive(bytes);
-        string shit = Encoding.ASCII.GetString(bytes);
-        Debug.Log(shit);
+        // Receiving
+        byte[] rcvLenBytes = new byte[4];
+        socket.Receive(rcvLenBytes);
+        int rcvLen = System.BitConverter.ToInt32(rcvLenBytes, 0);
+        byte[] rcvBytes = new byte[rcvLen];
+        socket.Receive(rcvBytes);
+        string rcv = System.Text.Encoding.ASCII.GetString(rcvBytes);
+
+        if (rcv.Equals("u"))
+        {
+            gameObject.transform.Translate(0, 1, 0);
+        }
+        if (rcv.Equals("d"))
+        {
+            gameObject.transform.Translate(0, -1, 0);
+        }
+        if (rcv.Equals("l"))
+        {
+            gameObject.transform.Translate(-1, 0, 0);
+        }
+        if (rcv.Equals("r"))
+        {
+            gameObject.transform.Translate(1, 0, 0);
+        }
+
     }
 }

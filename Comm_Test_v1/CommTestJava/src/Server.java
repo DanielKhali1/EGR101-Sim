@@ -20,9 +20,16 @@ public class Server {
 			Thread t = new Thread(() -> {
 				while(true) {
 					try {
-						Scanner s = new Scanner(System.in);
-						String string = s.nextLine();
-						dos.writeUTF(string);
+						String toSend = "Hello Danny: ";
+				        byte[] toSendBytes = toSend.getBytes();
+				        int toSendLen = toSendBytes.length;
+				        byte[] toSendLenBytes = new byte[4];
+				        toSendLenBytes[0] = (byte)(toSendLen & 0xff);
+				        toSendLenBytes[1] = (byte)((toSendLen >> 8) & 0xff);
+				        toSendLenBytes[2] = (byte)((toSendLen >> 16) & 0xff);
+				        toSendLenBytes[3] = (byte)((toSendLen >> 24) & 0xff);
+				        dos.write(toSendLenBytes);
+				        dos.write(toSendBytes);
 						dos.flush();
 					} catch(Exception e) {
 						e.printStackTrace();
