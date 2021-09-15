@@ -7,5 +7,6 @@ public class ArduinoBehaviorManager {
 	public ArduinoBehaviorManager(BaseArduino arduino) {
 		this.arduino = arduino;
 	}
+	
 
 }

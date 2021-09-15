@@ -1,7 +1,18 @@
 package com.egr101sim.start;
 
+import com.egr101sim.ui.MainUI;
+
 public class Main {
+	
 	public static void main(String[] args) {
-		System.out.println("Hello World");
+			Runnable runnable = () -> { 
+				try {
+					new MainUI().start(new javafx.stage.Stage());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			};
+			Thread t = new Thread(runnable);
+			t.start();
 	}
 }

@@ -15,6 +15,7 @@ public class Arduino {
 		arduino = new BaseArduino(new Translator(instructions).translate());
 		behavior = new ArduinoBehaviorManager(arduino);
 		object = new TransformManager(position);
+		
 	}
 	
 }
