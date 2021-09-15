@@ -26,8 +26,6 @@ public class BaseArduino {
 		this.p5V = new Pin(PinType.POWER_5V);
 		this.p3_3v = new Pin(PinType.POWER_3_3V);
 	}
-	
-	
 
 	// behavior from each motor/sensor/other can be utilized in update
 	// behavior must somehow be affected by coding, the question is how that is effected
@@ -35,6 +33,8 @@ public class BaseArduino {
 	public void update() {
 		
 		//blink
+		//UserCode();
+		
 		//digital write 100 to pin 1 
 		//sleep(100)
 		//digital write 0 to pin 1
