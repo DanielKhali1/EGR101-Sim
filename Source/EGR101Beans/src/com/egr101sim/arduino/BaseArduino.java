@@ -1,9 +1,11 @@
 package com.egr101sim.arduino;
 
 import java.util.Arrays;
+import java.util.function.Supplier;
 
 import com.egr101sim.arduino.elements.Pin;
 import com.egr101sim.arduino.elements.PinType;
+import com.org.joor.Reflect;
 
 public class BaseArduino {
 	
@@ -13,9 +15,13 @@ public class BaseArduino {
 	
 	final Pin[] digitalArray;
 	private final Pin[] analogArray;
+	private final Supplier<String> supplier;
 	
 	
-	public BaseArduino() {
+	public BaseArduino(String instruction) {
+		
+		supplier = Reflect.compile("com.egr101sim.arduino.ArduinoBehavior", instruction).create().get();
+		
 		// initialize array of digital pins from 0 - 13
 		this.digitalArray = new Pin[14];
 		
@@ -27,22 +33,11 @@ public class BaseArduino {
 		this.p3_3v = new Pin(PinType.POWER_3_3V);
 	}
 
-	// behavior from each motor/sensor/other can be utilized in update
+	// behavior from each motor/sensor/other can be utilized in updated
 	// behavior must somehow be affected by coding, the question is how that is effected
 	// 
-	public void update() {
-		
-		//blink
-		//UserCode();
-		
-		//digital write 100 to pin 1 
-		//sleep(100)
-		//digital write 0 to pin 1
-		
-	}
 	
-	private static void fillPinArray(PinType type, Pin[] array) {
-		for(int i = 0; i < array.length; i++)
-			array[i] = new Pin(type);
+	public void update() {
+		supplier.get();
 	}
 }

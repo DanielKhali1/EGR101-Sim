@@ -12,4 +12,5 @@ public abstract class Widget {
 	
 	
 	abstract public void Behavior();
+	
 }
