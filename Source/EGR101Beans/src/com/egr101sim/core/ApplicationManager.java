@@ -25,7 +25,7 @@ public class ApplicationManager {
 		
 	}
 	
-	public void execute(String programCode) {
+	public void execute() {
 		
 	}
 

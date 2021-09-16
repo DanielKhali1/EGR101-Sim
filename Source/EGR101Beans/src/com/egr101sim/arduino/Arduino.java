@@ -22,8 +22,12 @@ public class Arduino {
 		System.out.println(instructions);
 		String translated = new Translator(instructions).translate();
 		System.out.println(translated);
-		//behavior.compile(translated);
+//		behavior.compile(translated);
 		
+	}
+	
+	public void execute() {
+		System.out.println("execute");
 	}
 	
 	private void loop() {
