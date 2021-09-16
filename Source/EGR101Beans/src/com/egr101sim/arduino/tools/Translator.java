@@ -11,9 +11,7 @@ public class Translator {
 	
 	public String translate() {
 		
-		
-		
-		return "stuff";
+		return "";
 	}
 	
 	private void cleanString(String arduinoProgram) {

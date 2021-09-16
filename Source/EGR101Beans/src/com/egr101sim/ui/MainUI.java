@@ -33,17 +33,26 @@ public class MainUI extends Application{
 										  "\r\n" + 
 										  "}");
 		
+		Button build = new Button("BUILD");
+		build.relocate(5, 5);
+		build.setPrefSize(40, 40);
+		
 		Button execute = new Button("GO");
-		execute.relocate(5, 5);
+		execute.relocate(50, 5);
 		execute.setPrefSize(40, 40);
+		
 		codeSpace.relocate(0, 50);
 		codeSpace.setPrefSize(600, 300);
+		
+		build.setOnAction(e->{
+			manager.updateBehavior(codeSpace.getText());
+		});
 		
 		execute.setOnAction(e->{
 			manager.execute(codeSpace.getText());
 		});
 		
-		pane.getChildren().addAll(execute, codeSpace);
+		pane.getChildren().addAll(build, execute, codeSpace);
 		
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("EGR101 Simulation Software");

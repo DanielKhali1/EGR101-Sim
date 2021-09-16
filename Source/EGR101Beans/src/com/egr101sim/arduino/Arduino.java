@@ -13,9 +13,21 @@ public class Arduino {
 	public Arduino(String instructions, Vector3d position) {
 		
 		arduino = new BaseArduino();
-		behavior = new ArduinoBehaviorManager(arduino, new Translator(instructions).translate());
+		behavior = new ArduinoBehaviorManager(arduino, null);
 		object = new TransformManager(position);
 		
+	}
+	
+	public void compileSketch(String instructions) {
+		System.out.println(instructions);
+		String translated = new Translator(instructions).translate();
+		System.out.println(translated);
+		//behavior.compile(translated);
+		
+	}
+	
+	private void loop() {
+		behavior.getSupplier().get();
 	}
 	
 }

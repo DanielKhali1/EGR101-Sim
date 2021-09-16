@@ -11,6 +11,20 @@ public class ApplicationManager {
 		arduino = new Arduino(null , new Vector3d());
 	}
 	
+	/**
+	 * update the code
+	 */
+	public void updateBehavior(String instructions) {
+		arduino.compileSketch(instructions);
+	}
+	
+	/**
+	 * update the wiring/widgets/design of bot
+	 */
+	public void updatePeripherals() {
+		
+	}
+	
 	public void execute(String programCode) {
 		
 	}
