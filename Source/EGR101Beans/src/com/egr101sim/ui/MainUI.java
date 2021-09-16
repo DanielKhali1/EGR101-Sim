@@ -9,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class MainUI extends Application{
@@ -33,26 +35,46 @@ public class MainUI extends Application{
 										  "\r\n" + 
 										  "}");
 		
-		Button build = new Button("BUILD");
-		build.relocate(5, 5);
-		build.setPrefSize(40, 40);
-		
-		Button execute = new Button("GO");
-		execute.relocate(50, 5);
-		execute.setPrefSize(40, 40);
 		
 		codeSpace.relocate(0, 50);
 		codeSpace.setPrefSize(600, 300);
+		
+		
+	
+		Rectangle rectangle = new Rectangle();
+		rectangle.setFill(Color.DARKGREEN);
+		rectangle.setX(0);
+		rectangle.setY(0);
+		rectangle.setWidth(600);
+		rectangle.setHeight(32.5);
+		
+		Button execute = new Button("Run");
+		execute.relocate(0, 35);
+		execute.setPrefSize(40, 30);
+		codeSpace.relocate(0, 100);
+		codeSpace.setPrefSize(600, 300);
+		
+		Button build = new Button("Build");
+		build.relocate(45, 35);
+		build.setPrefSize(45, 30);
 		
 		build.setOnAction(e->{
 			manager.updateBehavior(codeSpace.getText());
 		});
 		
+		Button file = new Button("File");
+		file.relocate(0, 0);
+		file.setPrefSize(40,30);
+		
+		Button sketch = new Button("Sketch");
+		sketch.relocate(45, 0);
+		sketch.setPrefSize(60, 30);
+		
 		execute.setOnAction(e->{
-			manager.execute(codeSpace.getText());
+			manager.execute();
 		});
 		
-		pane.getChildren().addAll(build, execute, codeSpace);
+		pane.getChildren().addAll(rectangle, build, execute, file, sketch, codeSpace);
 		
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("EGR101 Simulation Software");
