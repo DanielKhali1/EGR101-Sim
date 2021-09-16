@@ -1,8 +1,7 @@
 package com.egr101sim.arduino.elements;
 
 public class Pin {
-	double currentVoltage;
-	PinType pinType;
+	private PinType pinType;
 	
 	// whether it is on the arduino board or not
 	boolean local;
@@ -11,9 +10,9 @@ public class Pin {
 	 * 
 	 * @param pinType
 	 */
-	public Pin(PinType pinType) {
-		this.pinType = pinType;
-		this.local = false;
+	public Pin(PinType pinType, boolean local) {
+		this.setPinType(pinType);
+		this.local = local;
 	}
 	
 	/**
@@ -21,8 +20,17 @@ public class Pin {
 	 * @param pinType
 	 * @param local
 	 */
-	public Pin(PinType pinType, boolean local) {
-		this.pinType = pinType;
+	public Pin(boolean local) {
+		this.setPinType(PinType.IO);
 		this.local = local;
 	}
+
+	public PinType getPinType() {
+		return pinType;
+	}
+
+	public void setPinType(PinType pinType) {
+		this.pinType = pinType;
+	}
+
 }

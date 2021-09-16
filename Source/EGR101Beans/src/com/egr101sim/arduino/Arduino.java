@@ -12,8 +12,8 @@ public class Arduino {
 	
 	public Arduino(String instructions, Vector3d position) {
 		
-		arduino = new BaseArduino(new Translator(instructions).translate());
-		behavior = new ArduinoBehaviorManager(arduino);
+		arduino = new BaseArduino();
+		behavior = new ArduinoBehaviorManager(arduino, new Translator(instructions).translate());
 		object = new TransformManager(position);
 		
 	}
