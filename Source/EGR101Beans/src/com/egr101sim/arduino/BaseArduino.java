@@ -23,7 +23,7 @@ public class BaseArduino {
 	private final Pin p3_3v;
 	private final Pin ground;
 	
-	final DigitalPin[] digitalArray;
+	private final DigitalPin[] digitalArray;
 	private final AnalogPin[] analogArray;
 	
 	
@@ -84,7 +84,7 @@ public class BaseArduino {
 	 * @param pinIo
 	 */
 	public void pinMode(int pin, PinIO pinIo) {
-		digitalArray[pin].setPinIO(pinIo);
+		getDigitalArray()[pin].setPinIO(pinIo);
 	}
 	
 	/**
@@ -97,7 +97,7 @@ public class BaseArduino {
 	 * @param pinState
 	 */
 	public void digitalWrite(int pin, PinState pinState) {
-		digitalArray[pin].setPinState(pinState);
+		getDigitalArray()[pin].setPinState(pinState);
 	}
 	
 	/**
@@ -108,7 +108,11 @@ public class BaseArduino {
 	 * @return
 	 */
 	public PinState digitalRead(int pin) {
-		return digitalArray[pin].getPinState();
+		return getDigitalArray()[pin].getPinState();
+	}
+
+	public DigitalPin[] getDigitalArray() {
+		return digitalArray;
 	}
 	
 }

@@ -32,5 +32,10 @@ public class Pin {
 	public void setPinType(PinType pinType) {
 		this.pinType = pinType;
 	}
+	
+	public String toString() {
+		return "PIN TYPE: " + pinType.ordinal();
+		
+	}
 
 }

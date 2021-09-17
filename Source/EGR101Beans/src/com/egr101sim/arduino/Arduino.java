@@ -1,5 +1,7 @@
 package com.egr101sim.arduino;
 
+
+
 import com.egr101sim.arduino.tools.Translator;
 import com.egr101sim.physics.Vector3d;
 
@@ -15,23 +17,14 @@ public class Arduino {
 		arduino = new BaseArduino();
 		behavior = new ArduinoBehaviorManager(arduino, null);
 		object = new TransformManager(position);
-		
 	}
 	
 	public void compileSketch(String instructions) {
-		System.out.println(instructions);
-//		String translated = new Translator(instructions).translate();
-//		System.out.println(translated);
+		String translated = new Translator(instructions).translate();
 		
-		String translated = "package com.example;\n" +
-				    	    "class HelloWorld implements java.util.function.Supplier<String> {\n" +
-				    	    "    public String get() {\n" +
-				    	    "        return \"Hello World!\";\n" +
-				    	    "    }\n" +
-				    	    "}\n";
+		System.out.println(translated);
 		
 		behavior.compile(translated);
-		
 	}
 	
 	public void execute() {
@@ -39,7 +32,7 @@ public class Arduino {
 	}
 	
 	private void loop() {
-		behavior.getSupplier().get();
+		behavior.getFunction().apply(arduino);
 	}
 	
 }

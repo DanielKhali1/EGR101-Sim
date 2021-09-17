@@ -706,6 +706,7 @@ public class Reflect {
         // Try invoking the "canonical" constructor, i.e. the one with exact
         // matching argument types
         try {
+        	System.out.println(type());
             Constructor<?> constructor = type().getDeclaredConstructor(types);
             return on(constructor, args);
         }
