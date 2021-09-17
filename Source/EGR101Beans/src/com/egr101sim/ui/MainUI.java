@@ -6,22 +6,28 @@ import com.egr101sim.core.ApplicationManager;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.Separator;
+import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToolBar;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.geometry.*;
 
 public class MainUI extends Application{
 	
 	Pane pane;
 	Scene scene;
-	ApplicationManager manager;
+	//ApplicationManager manager;
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		manager = new ApplicationManager();
+		//manager = new ApplicationManager();
 		pane = new Pane();
 		scene = new Scene(pane, 600, 400);
 		
@@ -39,14 +45,14 @@ public class MainUI extends Application{
 		codeSpace.relocate(0, 50);
 		codeSpace.setPrefSize(600, 300);
 		
-		
+		ToolBar toolBar = new ToolBar();
 	
 		Rectangle rectangle = new Rectangle();
 		rectangle.setFill(Color.DARKGREEN);
 		rectangle.setX(0);
 		rectangle.setY(0);
 		rectangle.setWidth(600);
-		rectangle.setHeight(32.5);
+		rectangle.setHeight(80);
 		
 		Button execute = new Button("Run");
 		execute.relocate(0, 35);
@@ -58,23 +64,41 @@ public class MainUI extends Application{
 		build.relocate(45, 35);
 		build.setPrefSize(45, 30);
 		
+		/*
 		build.setOnAction(e->{
 			manager.updateBehavior(codeSpace.getText());
-		});
+		});*/
 		
-		Button file = new Button("File");
-		file.relocate(0, 0);
-		file.setPrefSize(40,30);
+		MenuItem btnfile = new MenuItem("New");
 		
-		Button sketch = new Button("Sketch");
-		sketch.relocate(45, 0);
-		sketch.setPrefSize(60, 30);
+		MenuItem btnsketch = new MenuItem("Open");
 		
+		MenuItem btnSave = new MenuItem("Save");
+		
+		MenuItem btnSaveAs = new MenuItem("Save As");
+		
+		MenuButton file = new MenuButton("File");
+		file.setPrefSize(70,20);
+		
+		file.getItems().addAll(btnfile, btnsketch , btnSave, btnSaveAs);
+		
+		MenuItem btnVerifyCompile = new MenuItem("Verify/Compile");
+		
+		MenuItem btnUpload = new MenuItem("Upload");
+		
+		MenuItem btnSerialMon = new MenuItem("Serial Monitor");
+		
+		MenuButton sketch = new MenuButton("Sketch");
+		sketch.setPrefSize(70,20);
+		
+		sketch.getItems().addAll(btnVerifyCompile, btnUpload, btnSerialMon);
+		
+		/*
 		execute.setOnAction(e->{
 			manager.execute();
-		});
-		
-		pane.getChildren().addAll(rectangle, build, execute, file, sketch, codeSpace);
+		});*/
+		toolBar.getItems().addAll(file, new Separator(), sketch);
+		pane.getChildren().addAll(rectangle, build, execute, codeSpace, file, toolBar);
 		
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("EGR101 Simulation Software");
