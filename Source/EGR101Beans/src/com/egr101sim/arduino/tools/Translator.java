@@ -2,7 +2,6 @@ package com.egr101sim.arduino.tools;
 
 public class Translator {
 	
-	public String program;
 	private String arduinoProgram;
 	
 	public Translator(String arduinoProgram) {
@@ -10,15 +9,13 @@ public class Translator {
 	}
 	
 	public String translate() {
+		String beginning = "";
+		
 		
 		return "";
 	}
 	
 	private void cleanString(String arduinoProgram) {
 		
-	}
-	
-	public String getJavaProgram() {
-		return program;
 	}
 }

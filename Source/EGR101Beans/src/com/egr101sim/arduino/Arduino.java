@@ -20,9 +20,17 @@ public class Arduino {
 	
 	public void compileSketch(String instructions) {
 		System.out.println(instructions);
-		String translated = new Translator(instructions).translate();
-		System.out.println(translated);
-//		behavior.compile(translated);
+//		String translated = new Translator(instructions).translate();
+//		System.out.println(translated);
+		
+		String translated = "package com.example;\n" +
+				    	    "class HelloWorld implements java.util.function.Supplier<String> {\n" +
+				    	    "    public String get() {\n" +
+				    	    "        return \"Hello World!\";\n" +
+				    	    "    }\n" +
+				    	    "}\n";
+		
+		behavior.compile(translated);
 		
 	}
 	
