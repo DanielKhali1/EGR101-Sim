@@ -26,7 +26,15 @@ public class Translator {
 							"		\r\n" + 
 							"		return \"wow\";\r\n" + 
 							"	}\r\n" + 
-							"	\r\n" + 
+							"	\r\n" +
+							"private static boolean isAlpha(char c) {return Character.isAlphabetic(c);}\r\n" + 
+							"private static boolean isAlphaNumeric(char c) {return Character.isAlphabetic(c) || Character.isDigit(c);}\r\n" + 
+							"private static boolean isDigit(char c) {return Character.isDigit(c);}\r\n" + 
+							"private static boolean isLowerCase(char c) {return Character.isLowerCase(c);}\r\n" + 
+							"private static boolean isPunct(char c) {return c == '!' || c == '.' || c == ',';}\r\n" + 
+							"private static boolean isSpace(char c) {	return c == '\\n' || c == '\\f' || c == '\\r' || c == '\\t' ;}\r\n" + 
+							"private static boolean isUpperCase(char c) {	return Character.isUpperCase(c);}\r\n" + 
+							"private static boolean isWhitespace(char c) {return c == '\\t' || c == ' ';}"+
 							"\r\n" + 
 							"}\r\n"
 							.replace("const", "final");
