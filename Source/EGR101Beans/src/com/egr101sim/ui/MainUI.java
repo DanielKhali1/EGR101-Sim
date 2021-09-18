@@ -29,7 +29,7 @@ public class MainUI extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		//manager = new ApplicationManager();
 		pane = new Pane();
-		scene = new Scene(pane, 600, 400);
+		scene = new Scene(pane, 600, 500);
 		
 		TextArea codeSpace = new TextArea("void setup() {\r\n" + 
 										  "  // put your setup code here, to run once:\r\n" + 
@@ -40,34 +40,45 @@ public class MainUI extends Application{
 										  "  // put your main code here, to run repeatedly:\r\n" + 
 										  "\r\n" + 
 										  "}");
+		codeSpace.relocate(50, 80);
+		codeSpace.setPrefSize(550, 500);
 		
-		
-		codeSpace.relocate(0, 50);
-		codeSpace.setPrefSize(600, 300);
-		
-		ToolBar toolBar = new ToolBar();
-	
 		Rectangle rectangle = new Rectangle();
 		rectangle.setFill(Color.DARKGREEN);
 		rectangle.setX(0);
 		rectangle.setY(0);
 		rectangle.setWidth(600);
-		rectangle.setHeight(80);
+		rectangle.setHeight(80); 
 		
-		Button execute = new Button("Run");
-		execute.relocate(0, 35);
-		execute.setPrefSize(40, 30);
-		codeSpace.relocate(0, 100);
-		codeSpace.setPrefSize(600, 300);
+		Button run = new Button("Run");
+		run.relocate(0, 35);
+		run.setPrefSize(40, 30);
 		
 		Button build = new Button("Build");
 		build.relocate(45, 35);
-		build.setPrefSize(45, 30);
 		
+		Button newFile = new Button("New File");
+		newFile.relocate(95, 35);
+		newFile.setPrefSize(65, 30);
+		
+		
+		pane.getChildren().addAll(rectangle, build, run, codeSpace, newFile, ToolBar(pane));
 		/*
 		build.setOnAction(e->{
 			manager.updateBehavior(codeSpace.getText());
 		});*/
+
+		
+		primaryStage.setScene(scene);
+		primaryStage.setTitle("EGR101 Simulation Software");
+		primaryStage.show();
+		
+	}
+	
+	public ToolBar ToolBar(Pane pane)
+	{
+		ToolBar toolBar = new ToolBar();
+		
 		
 		MenuItem btnfile = new MenuItem("New");
 		
@@ -98,12 +109,8 @@ public class MainUI extends Application{
 			manager.execute();
 		});*/
 		toolBar.getItems().addAll(file, new Separator(), sketch);
-		pane.getChildren().addAll(rectangle, build, execute, codeSpace, file, toolBar);
 		
-		primaryStage.setScene(scene);
-		primaryStage.setTitle("EGR101 Simulation Software");
-		primaryStage.show();
-		
+		return toolBar;
 	}
 	
 	public static void main(String[] args) {
