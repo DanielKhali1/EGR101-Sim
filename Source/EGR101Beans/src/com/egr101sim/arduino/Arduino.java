@@ -9,14 +9,12 @@ public class Arduino {
 	
 	ArduinoBehaviorManager behavior;
 	BaseArduino arduino;
-	TransformManager object;
 	
 	
-	public Arduino(String instructions, Vector3d position) {
+	public Arduino(String instructions) {
 		
 		arduino = new BaseArduino();
 		behavior = new ArduinoBehaviorManager(arduino, null);
-		object = new TransformManager(position);
 	}
 	
 	public void compileSketch(String instructions) {

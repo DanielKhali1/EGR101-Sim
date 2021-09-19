@@ -4,25 +4,35 @@ public class Translator {
 	
 	private String arduinoProgram;
 	
+	
+	
 	public Translator(String arduinoProgram) {
 		this.arduinoProgram = arduinoProgram;
 	}
 	
 	public String translate() {
-		String string =  "package com.egr101sim.arduino;\r\n" + 
+		String string =  ("package com.egr101sim.arduino;\r\n" + 
 							"\r\n" + 
 							"import java.util.Arrays;\r\n" + 
 							"\r\n" + 
 							"import com.egr101sim.arduino.BaseArduino;\r\n" + 
-							"\r\n" + 
+							"import com.egr101sim.arduino.elements.AnalogPin;\r\n" + 
+							"import com.egr101sim.arduino.elements.DigitalPin;\r\n" + 
+							"import com.egr101sim.arduino.elements.Pin;\r\n" + 
+							"import com.egr101sim.arduino.elements.PinIO;\r\n" + 
+							"import com.egr101sim.arduino.elements.PinState;\r\n" + 
+							"import com.egr101sim.arduino.elements.PinType;\r\n" + 
 							"public class ArduinoBehavior implements java.util.function.Function<BaseArduino,String>{\r\n" + 
-							"\r\n" + arduinoProgram + 
-							"\n\npublic ArduinoBehavior() {\n"
-							+ "      setup();\n"
-							+ "}\n"
-							+"	public String apply(BaseArduino t) {\r\n" + 
+							"   int count = 0;" + 
+							"	private static final int INPUT = 0;\r\n" + 
+							"	private static final int OUTPUT = 1;\r\n" + 
+							"	private static final int HIGH = 1;\r\n" + 
+							"	private static final int LOW = 0;\r\n" + 
+							"	private static final int INPUT_PULLUP = 2;\r\n" + 
+							"	private static final int LED_BUILTIN= 13;\r\n" + arduinoProgram + 
+							"	public String apply(BaseArduino t) {\r\n" + 
 							"		\r\n" + 
-							"		loop();\r\n" + 
+							"		if(count == 0) { count++; setup(t); } else {loop(t);}\r\n" + 
 							"		\r\n" + 
 							"		return \"wow\";\r\n" + 
 							"	}\r\n" + 
@@ -35,10 +45,51 @@ public class Translator {
 							"private static boolean isSpace(char c) {	return c == '\\n' || c == '\\f' || c == '\\r' || c == '\\t' ;}\r\n" + 
 							"private static boolean isUpperCase(char c) {	return Character.isUpperCase(c);}\r\n" + 
 							"private static boolean isWhitespace(char c) {return c == '\\t' || c == ' ';}"+
-							"\r\n" + 
-							"}\r\n"
-							.replace("const", "final");
-		
+							"private static int random(int val) {return (int)(Math.random()*val);}\r\n" + 
+							"private static int random(int min, int max) {return (int) (Math.random() * (max - min) ) + min;}\r\n" + 
+							"private static int abs(int val ) {return Math.abs(val);}\r\n" + 
+							"private static int constrain(int x, int a, int b) { return Math.min(Math.max(x, a), b);} \r\n" + 
+							"private static int map(int x, int in_min, int in_max, int out_min, int out_max) {return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;}\r\n" + 
+							"private static int max(int a, int b) { return Math.max(a, b);} \r\n" + 
+							"private static int min(int a, int b) { return Math.min(a, b);} \r\n" + 
+							"private static double pow(double a, int b) {return Math.pow(a, b);}\r\n" + 
+							"private static int sq(int val) {return val*val;}; \r\n" + 
+							"private static double sqrt(int val) {return Math.sqrt(val);}\r\n" + 
+							"private static double cos(int val) {return  Math.cos(val);}\r\n" + 
+							"private static double sin(int val) {return  Math.sin(val);}\r\n" + 
+							"private static double tan(int val) {return Math.tan(val);}\r\n" + 
+							"}\r\n")
+							.replace("const", "final")
+							.replace("void loop()", "void loop(BaseArduino t)")
+							.replace("void setup()", "void setup(BaseArduino t)")
+							.replace("unsigned", "")
+							.replace("digitalWrite", "t.digitalWrite")
+							.replace("digitalRead", "t.digitalRead")
+							.replace("analogWrite", "t.analogWrite")
+							.replace("analogRead", "t.analogRead")
+							.replace("micros", "t.micros")
+							.replace("millis", "t.millis")
+							.replace("delay", "t.delay")
+							.replace("delayMicroSeconds", "t.delayMicroSeconds")
+							.replace("pinMode", "t.pinMode")
+							.replace("A0","0")
+							.replace("A1","1")
+							.replace("A2","2")
+							.replace("A3","3")
+							.replace("A4","4")
+							.replace("A5","5")
+							.replace("A6","6")
+							.replace("A7","7")
+							.replace("A8","8")
+							.replace("A9","9")
+							.replace("A10","10")
+							.replace("A11","11")
+							.replace("A12","12")
+							.replace("A13", "13");	
 		return string;
 	}
+
+
+	
+	
 }
