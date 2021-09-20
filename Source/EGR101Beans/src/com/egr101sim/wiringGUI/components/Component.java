@@ -22,9 +22,9 @@ public class Component extends ImageView{
 			this.setFitHeight(350);
 		} else if (componentType == CompID.RESISTOR) {
 			i = new Image("file:Resources\\resistor.PNG");
-		} else if (componentType == CompID.LED) {
-			i = new Image("file:Resources\\button.PNG");
 		} else if (componentType == CompID.BUTTON) {
+			i = new Image("file:Resources\\button.PNG");
+		} else if (componentType == CompID.LED) {
 			i = new Image("file:Resources\\LED.PNG");
 		}
 		
