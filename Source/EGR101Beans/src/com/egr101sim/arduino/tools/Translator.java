@@ -30,6 +30,20 @@ public class Translator {
 							"	private static final int LOW = 0;\r\n" + 
 							"	private static final int INPUT_PULLUP = 2;\r\n" + 
 							"	private static final int LED_BUILTIN= 13;\r\n" + arduinoProgram + 
+							"   private static final int A0 = 0;" +
+							"   private static final int A1 = 1;" +
+							"   private static final int A2 = 2;" +
+							"   private static final int A3 = 3;" +
+							"   private static final int A4 = 4;" +
+							"   private static final int A5 = 5;" +
+							"   private static final int A6 = 6;" +
+							"   private static final int A7 = 7;" +
+							"   private static final int A8 = 8;" +
+							"   private static final int A9 = 9;" +
+							"   private static final int A10 = 10;" +
+							"   private static final int A11 = 11;" +
+							"   private static final int A12 = 12;" +
+							"   private static final int A13 = 13;" +
 							"	public String apply(BaseArduino t) {\r\n" + 
 							"		\r\n" + 
 							"		if(count == 0) { count++; setup(t); } else {loop(t);}\r\n" + 
@@ -71,21 +85,7 @@ public class Translator {
 							.replace("millis", "t.millis")
 							.replace("delay", "t.delay")
 							.replace("delayMicroSeconds", "t.delayMicroSeconds")
-							.replace("pinMode", "t.pinMode")
-							.replace("A0","0")
-							.replace("A1","1")
-							.replace("A2","2")
-							.replace("A3","3")
-							.replace("A4","4")
-							.replace("A5","5")
-							.replace("A6","6")
-							.replace("A7","7")
-							.replace("A8","8")
-							.replace("A9","9")
-							.replace("A10","10")
-							.replace("A11","11")
-							.replace("A12","12")
-							.replace("A13", "13");	
+							.replace("pinMode", "t.pinMode");
 		return string;
 	}
 
