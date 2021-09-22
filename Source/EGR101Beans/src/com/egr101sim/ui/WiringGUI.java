@@ -2,6 +2,8 @@ package com.egr101sim.ui;
 
 import java.util.ArrayList;
 
+import com.egr101sim.arduino.Arduino;
+import com.egr101sim.arduino.elements.Pin;
 import com.egr101sim.arduino.elements.PinType;
 import com.egr101sim.wiringGUI.components.Component;
 import com.egr101sim.wiringGUI.components.Component.CompID;
@@ -34,8 +36,16 @@ public class WiringGUI extends Application
 	boolean isOverComponent = false;
 	boolean wiring = false;
 	double[] wiringPivot = {0 , 0};
+	Pin tempPin;
 	
 	ArrayList<ArrayList<SLine>> lines = new ArrayList<ArrayList<SLine>>();
+	
+	Arduino arduino;
+	
+	public WiringGUI(Arduino arduino) {
+		
+		this.arduino = arduino;
+	}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -55,18 +65,18 @@ public class WiringGUI extends Application
 				Pane tempPane = new Pane();
 				
 				if(comp.compid == CompID.LED) {
-					PinSquare pin1 = new PinSquare(4, 45, PinType.GROUND, tempPane);
-					PinSquare pin2 = new PinSquare(17, 45, PinType.IO, tempPane);
+					PinSquare pin1 = new PinSquare(4, 45, PinType.GROUND, tempPane, false, false);
+					PinSquare pin2 = new PinSquare(17, 45, PinType.IO, tempPane, false, false);
 					tempPane.getChildren().addAll(comp, pin1, pin2);
 				} else if (comp.compid == CompID.RESISTOR) {
 
-					PinSquare pin1 = new PinSquare(8, 0, PinType.GROUND, tempPane);
-					PinSquare pin2 = new PinSquare(8, 60, PinType.IO, tempPane);
+					PinSquare pin1 = new PinSquare(8, 0, PinType.GROUND, tempPane, false, false);
+					PinSquare pin2 = new PinSquare(8, 60, PinType.IO, tempPane, false, false);
 					tempPane.getChildren().addAll(comp, pin1, pin2);
 				}
 				else if (comp.compid == CompID.BUTTON) {
-					PinSquare pin1 = new PinSquare(4, 45, PinType.GROUND, tempPane);
-					PinSquare pin2 = new PinSquare(17, 45, PinType.IO, tempPane);
+					PinSquare pin1 = new PinSquare(4, 45, PinType.GROUND, tempPane, false, false);
+					PinSquare pin2 = new PinSquare(17, 45, PinType.IO, tempPane, false, false);
 					tempPane.getChildren().addAll(comp, pin1, pin2);
 				}
 				
@@ -91,35 +101,37 @@ public class WiringGUI extends Application
 		Component arduino = new Component(CompID.ARDUINO);
 		arduino.relocate(0, 100);
 		
-		PinSquare pin1 = new PinSquare(250, 414, PinType.POWER_3_3V, pane);
-		PinSquare pin2 = new PinSquare(265, 414, PinType.POWER_5V, pane);
-		PinSquare pin3 = new PinSquare(280, 414, PinType.GROUND, pane);
-		PinSquare pin4 = new PinSquare(295, 414, PinType.GROUND, pane);
-		PinSquare pin5 = new PinSquare(310, 414, PinType.POWER_5V, pane);
+		PinSquare pin1 = new PinSquare(250, 414, PinType.POWER_3_3V, pane, true, false);
+		PinSquare pin2 = new PinSquare(265, 414, PinType.POWER_5V, pane, true, false );
+		PinSquare pin3 = new PinSquare(280, 414, PinType.GROUND, pane, true, false );
+		PinSquare pin4 = new PinSquare(295, 414, PinType.GROUND, pane, true, false );
+		PinSquare pin5 = new PinSquare(310, 414, PinType.POWER_5V, pane, true, false );
 		
-		PinSquare pin6 = new PinSquare(196, 131, PinType.GROUND, pane);
-		PinSquare pin7 = new PinSquare(196+15, 131, PinType.IO, pane);
-		PinSquare pin8 = new PinSquare(196+30, 131, PinType.IO, pane);
-		PinSquare pin9 = new PinSquare(196+45, 131, PinType.IO, pane);
-		PinSquare pin10 = new PinSquare(196+60, 131, PinType.IO, pane);
-		PinSquare pin11 = new PinSquare(196+75, 131, PinType.IO, pane);
-		PinSquare pin12 = new PinSquare(196+90, 131, PinType.IO, pane);
+		//digital
 		
-		PinSquare pin13 = new PinSquare(324-15, 131, PinType.IO, pane);
-		PinSquare pin14 = new PinSquare(324, 131, PinType.IO, pane);
-		PinSquare pin15 = new PinSquare(324+15, 131, PinType.IO, pane);
-		PinSquare pin16 = new PinSquare(324+30, 131, PinType.IO, pane);
-		PinSquare pin17 = new PinSquare(324+45, 131, PinType.IO, pane);
-		PinSquare pin18 = new PinSquare(324+60, 131, PinType.IO, pane);
-		PinSquare pin19 = new PinSquare(324+75, 131, PinType.IO, pane);
-		PinSquare pin20 = new PinSquare(324+90, 131, PinType.IO, pane);
+		PinSquare pin6 = new PinSquare(196, 131, PinType.GROUND, pane, true, true);
+		PinSquare pin7 = new PinSquare(196+15, 131, PinType.IO, pane, true, true);
+		PinSquare pin8 = new PinSquare(196+30, 131, PinType.IO, pane, true, true);
+		PinSquare pin9 = new PinSquare(196+45, 131, PinType.IO, pane, true, true);
+		PinSquare pin10 = new PinSquare(196+60, 131, PinType.IO, pane, true, true);
+		PinSquare pin11 = new PinSquare(196+75, 131, PinType.IO, pane, true, true);
+		PinSquare pin12 = new PinSquare(196+90, 131, PinType.IO, pane, true, true);
 		
-		PinSquare pin21 = new PinSquare(339, 414, PinType.IO, pane);
-		PinSquare pin22 = new PinSquare(339+15, 414, PinType.IO, pane);
-		PinSquare pin23 = new PinSquare(339+30, 414, PinType.IO, pane);
-		PinSquare pin24 = new PinSquare(339+45, 414, PinType.IO, pane);
-		PinSquare pin25 = new PinSquare(339+60, 414, PinType.IO, pane);
-		PinSquare pin26 = new PinSquare(339+75, 414, PinType.IO, pane);
+		PinSquare pin13 = new PinSquare(324-15, 131, PinType.IO, pane, true, true);
+		PinSquare pin14 = new PinSquare(324, 131, PinType.IO, pane, true, true);
+		PinSquare pin15 = new PinSquare(324+15, 131, PinType.IO, pane, true, true);
+		PinSquare pin16 = new PinSquare(324+30, 131, PinType.IO, pane, true, true);
+		PinSquare pin17 = new PinSquare(324+45, 131, PinType.IO, pane, true, true);
+		PinSquare pin18 = new PinSquare(324+60, 131, PinType.IO, pane, true, true);
+		PinSquare pin19 = new PinSquare(324+75, 131, PinType.IO, pane, true, true);
+		PinSquare pin20 = new PinSquare(324+90, 131, PinType.IO, pane, true, true);
+		
+		PinSquare pin21 = new PinSquare(339, 414, PinType.IO, pane, true, false);
+		PinSquare pin22 = new PinSquare(339+15, 414, PinType.IO, pane, true, false);
+		PinSquare pin23 = new PinSquare(339+30, 414, PinType.IO, pane, true, false);
+		PinSquare pin24 = new PinSquare(339+45, 414, PinType.IO, pane, true, false);
+		PinSquare pin25 = new PinSquare(339+60, 414, PinType.IO, pane, true, false);
+		PinSquare pin26 = new PinSquare(339+75, 414, PinType.IO, pane, true, false);
 		
 		arduino.setOnMouseClicked(e->{
 			System.out.println(e.getX() + " " + e.getY());
@@ -199,10 +211,6 @@ public class WiringGUI extends Application
 		lines.remove(arrayListIndex);
 	}
 	
-	public static void main(String[] args) {
-		launch(args);
-	}
-	
 	class SLine extends Line {
 		public SLine(double startx, double starty, double endx, double endy) {
 			super(startx, starty, endx, endy);
@@ -220,8 +228,12 @@ public class WiringGUI extends Application
 		
 		PinType pinType;
 		Pane p;
+		boolean local;
+		boolean isDigitalifIO;
 		
-		public PinSquare(double x, double y, PinType pinType, Pane p) {
+		public PinSquare(double x, double y, PinType pinType, Pane p, boolean local, boolean isDigitalifIO) {
+			this.local = local;
+			this.isDigitalifIO = isDigitalifIO;
 			this.p = p;
 			this.pinType = pinType;
 			this.setWidth(8);
@@ -257,6 +269,8 @@ public class WiringGUI extends Application
 					pane.getChildren().add(lines.get(lines.size()-1).get(lines.get(lines.size()-1).size()-1));
 					
 					System.out.println(lines.size());
+					
+					tempPin = new Pin(this.pinType, this.local);
 				} else {
 						lines.get(lines.size()-1).get(lines.get(lines.size()-1).size()-1).setEndX(this.p.getLayoutX() + getLayoutX()+getWidth()/2);
 						lines.get(lines.size()-1).get(lines.get(lines.size()-1).size()-1).setEndY(this.p.getLayoutY() + getLayoutY()+getHeight()/2);
@@ -264,6 +278,8 @@ public class WiringGUI extends Application
 					wiringPivot[0] = 0;
 					wiringPivot[1] = 0;
 					System.out.println("DONE WIRING");
+					
+					arduino.AddConnection(tempPin, new Pin(this.pinType, this.local));
 				}
 			});
 		}

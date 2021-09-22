@@ -8,13 +8,14 @@ import com.egr101sim.physics.Vector3d;
 
 public class ApplicationManager {
 	
-	Arduino arduino;
+	public Arduino arduino;
 	ArrayList<Component> widgets = new ArrayList<Component>();
 	
 	
 	
 	public ApplicationManager() {
 		arduino = new Arduino(null);
+		
 	}
 	
 	/**
