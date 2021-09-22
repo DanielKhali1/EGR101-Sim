@@ -56,13 +56,21 @@ public class MainUI extends Application{
 		
 		Button build = new Button("Build");
 		build.relocate(45, 35);
+		build.setPrefSize(45, 30);
 		
 		Button newFile = new Button("New File");
 		newFile.relocate(95, 35);
 		newFile.setPrefSize(65, 30);
+
+		Button open = new Button("Open");
+		open.relocate(165, 35);
+		open.setPrefSize(50, 30);
 		
+		Button save = new Button("Save");
+		save.relocate(220,35);
+		save.setPrefSize(50, 30);
 		
-		pane.getChildren().addAll(rectangle, build, run, codeSpace, newFile, ToolBar(pane));
+		pane.getChildren().addAll(rectangle, codeSpace,run, build, newFile,open,save, ToolBar());
 		/*
 		build.setOnAction(e->{
 			manager.updateBehavior(codeSpace.getText());
@@ -75,7 +83,7 @@ public class MainUI extends Application{
 		
 	}
 	
-	public ToolBar ToolBar(Pane pane)
+	public ToolBar ToolBar()
 	{
 		ToolBar toolBar = new ToolBar();
 		
@@ -88,30 +96,38 @@ public class MainUI extends Application{
 		
 		MenuItem btnSaveAs = new MenuItem("Save As");
 		
+		MenuItem btnSaveConfig = new MenuItem("Save Config File");
+		
 		MenuButton file = new MenuButton("File");
 		file.setPrefSize(70,20);
 		
-		file.getItems().addAll(btnfile, btnsketch , btnSave, btnSaveAs);
+		file.getItems().addAll(btnfile, btnsketch , btnSave, btnSaveAs, btnSaveConfig);
 		
 		MenuItem btnVerifyCompile = new MenuItem("Verify/Compile");
 		
 		MenuItem btnUpload = new MenuItem("Upload");
 		
-		MenuItem btnSerialMon = new MenuItem("Serial Monitor");
-		
 		MenuButton sketch = new MenuButton("Sketch");
 		sketch.setPrefSize(70,20);
 		
-		sketch.getItems().addAll(btnVerifyCompile, btnUpload, btnSerialMon);
+		sketch.getItems().addAll(btnVerifyCompile, btnUpload);
+		
+		MenuItem btnSerialMon = new MenuItem("Serial Monitor");
+		
+		MenuButton tools = new MenuButton("Tools");
+		tools.setPrefSize(70, 20);
+		
+		tools.getItems().addAll(btnSerialMon);
 		
 		/*
 		execute.setOnAction(e->{
 			manager.execute();
 		});*/
-		toolBar.getItems().addAll(file, new Separator(), sketch);
+		toolBar.getItems().addAll(file, new Separator(), sketch, new Separator(), tools);
 		
 		return toolBar;
 	}
+	
 	
 	public static void main(String[] args) {
 		launch(args);
