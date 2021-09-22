@@ -3,13 +3,13 @@ package com.egr101sim.core;
 import java.util.ArrayList;
 
 import com.egr101sim.arduino.Arduino;
-import com.egr101sim.arduino.widgets.Widget;
+import com.egr101sim.arduino.components.Component;
 import com.egr101sim.physics.Vector3d;
 
 public class ApplicationManager {
 	
 	Arduino arduino;
-	ArrayList<Widget> widgets = new ArrayList<Widget>();
+	ArrayList<Component> widgets = new ArrayList<Component>();
 	
 	
 	

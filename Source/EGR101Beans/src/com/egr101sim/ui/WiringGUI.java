@@ -74,15 +74,14 @@ public class WiringGUI extends Application
 				tempPane.relocate(scene.getWidth()/2, scene.getHeight()/2);
 				
 				comp.setOnMouseClicked(f->{
-					
-					if(!wiring) {
-						System.out.println("stuck to mouse");
-						if(stuckToMouse == null)
-							stuckToMouse = tempPane;
-						else if(stuckToMouse == tempPane){
-							stuckToMouse = null;
-						}
-					}
+						if(!wiring) {
+							System.out.println("stuck to mouse");
+							if(stuckToMouse == null)
+								stuckToMouse = tempPane;
+							else if(stuckToMouse == tempPane){
+								stuckToMouse = null;
+							}
+						}	
 				});
 			});
 		}
