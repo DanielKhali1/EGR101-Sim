@@ -24,11 +24,11 @@ public class MainUI extends Application{
 	
 	Pane pane;
 	Scene scene;
-	//ApplicationManager manager;
+	ApplicationManager manager;
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		//manager = new ApplicationManager();
+		manager = new ApplicationManager();
 		pane = new Pane();
 		scene = new Scene(pane, 600, 500);
 		
@@ -41,6 +41,9 @@ public class MainUI extends Application{
 										  "  // put your main code here, to run repeatedly:\r\n" + 
 										  "\r\n" + 
 										  "}");
+		
+		new WiringGUI(manager.arduino).start(new Stage());
+		
 		codeSpace.relocate(50, 80);
 		codeSpace.setPrefSize(550, 500);
 		

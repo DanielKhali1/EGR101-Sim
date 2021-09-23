@@ -1,5 +1,6 @@
 package com.egr101sim.arduino;
 
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 import com.org.joor.Reflect;
@@ -7,7 +8,7 @@ import com.org.joor.Reflect;
 public class ArduinoBehaviorManager {
 	
 	private final BaseArduino arduino;
-	private Supplier<String> supplier;
+	private Function<BaseArduino,String> function;
 	private String instruction;
 
 	
@@ -18,14 +19,15 @@ public class ArduinoBehaviorManager {
 	
 	public void compile(String instructions) {
 		this.instruction = instructions;
-		setSupplier(Reflect.compile("com.egr101sim.arduino.ArduinoBehavior", this.instruction).create().get());
+		setFunction(Reflect.compile("com.egr101sim.arduino.ArduinoBehavior", this.instruction).create().get());
 	}
 
-	public Supplier<String> getSupplier() {
-		return supplier;
+	public void setFunction(Function<BaseArduino,String> function) {
+		this.function = function;
+	}
+	
+	public Function<BaseArduino,String> getFunction() {
+		return function;
 	}
 
-	private void setSupplier(Supplier<String> supplier) {
-		this.supplier = supplier;
-	}
 }

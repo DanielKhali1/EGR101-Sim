@@ -1,14 +1,21 @@
 package com.egr101sim.core;
 
+import java.util.ArrayList;
+
 import com.egr101sim.arduino.Arduino;
+import com.egr101sim.arduino.components.Component;
 import com.egr101sim.physics.Vector3d;
 
 public class ApplicationManager {
 	
-	Arduino arduino;
+	public Arduino arduino;
+	ArrayList<Component> widgets = new ArrayList<Component>();
+	
+	
 	
 	public ApplicationManager() {
-		arduino = new Arduino(null , new Vector3d());
+		arduino = new Arduino(null);
+		
 	}
 	
 	/**
@@ -22,6 +29,10 @@ public class ApplicationManager {
 	 * update the wiring/widgets/design of bot
 	 */
 	public void updatePeripherals() {
+		
+	}
+	
+	public void updateConnections() {
 		
 	}
 	
