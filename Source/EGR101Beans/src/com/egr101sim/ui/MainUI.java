@@ -16,6 +16,7 @@ import javafx.scene.control.ToolBar;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.geometry.*;
 
@@ -70,7 +71,7 @@ public class MainUI extends Application{
 		save.relocate(220,35);
 		save.setPrefSize(50, 30);
 		
-		pane.getChildren().addAll(rectangle, codeSpace,run, build, newFile,open,save, ToolBar());
+		pane.getChildren().addAll(rectangle, codeSpace,run, build, newFile,open,save, ToolBar(primaryStage));
 		/*
 		build.setOnAction(e->{
 			manager.updateBehavior(codeSpace.getText());
@@ -83,14 +84,19 @@ public class MainUI extends Application{
 		
 	}
 	
-	public ToolBar ToolBar()
+	public ToolBar ToolBar(Stage stage)
 	{
+		FileChooser fileChooser = new FileChooser();
 		ToolBar toolBar = new ToolBar();
-		
 		
 		MenuItem btnfile = new MenuItem("New");
 		
 		MenuItem btnsketch = new MenuItem("Open");
+		
+		btnsketch.setOnAction(e ->{
+			fileChooser.setTitle("Open Resource File");
+			fileChooser.showOpenDialog(stage);
+		});
 		
 		MenuItem btnSave = new MenuItem("Save");
 		
