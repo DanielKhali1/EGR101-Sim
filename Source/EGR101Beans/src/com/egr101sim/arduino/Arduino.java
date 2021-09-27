@@ -2,7 +2,6 @@ package com.egr101sim.arduino;
 
 
 
-import com.egr101sim.arduino.elements.Connection;
 import com.egr101sim.arduino.elements.Pin;
 import com.egr101sim.arduino.tools.Translator;
 import com.egr101sim.physics.Vector3d;
@@ -19,10 +18,8 @@ public class Arduino {
 		behavior = new ArduinoBehaviorManager(arduino, null);
 	}
 	
-	public void AddConnection(Pin pin1, Pin pin2) {
-		Connection connection = new Connection(pin1, pin2);
-		pin1.getConnections().add(connection);
-		pin2.getConnections().add(connection);
+	public void AddConnection(Pin pin1, Pin pin2, boolean isDigitalifIO, int ioNumber) {
+		
 	}
 	
 	public void compileSketch(String instructions) {

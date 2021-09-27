@@ -1,7 +1,5 @@
 package com.egr101sim.arduino;
 
-import com.egr101sim.arduino.elements.AnalogPin;
-import com.egr101sim.arduino.elements.DigitalPin;
 import com.egr101sim.arduino.elements.Pin;
 import com.egr101sim.arduino.elements.PinIO;
 import com.egr101sim.arduino.elements.PinState;
@@ -23,8 +21,8 @@ public class BaseArduino {
 	private final Pin p3_3v;
 	private final Pin ground;
 	
-	private final DigitalPin[] digitalArray;
-	private final AnalogPin[] analogArray;
+	private final Pin[] digitalArray;
+	private final Pin[] analogArray;
 	
 	
 	private boolean delayed;
@@ -35,9 +33,9 @@ public class BaseArduino {
 	
 	public BaseArduino() {
 		// initialize array of digital pins from 0 - 13
-		this.digitalArray = new DigitalPin[14];
+		this.digitalArray = new Pin[14];
 		
-		this.analogArray = new AnalogPin[6];
+		this.analogArray = new Pin[6];
 
 		// initialize array of analog pins from 0 - 5
 		this.ground = new Pin(PinType.GROUND, true);
@@ -132,8 +130,8 @@ public class BaseArduino {
 	 * @param analogPin
 	 * @return
 	 */
-	public int analogRead(int analogPin) {
-		return analogArray[analogPin].getVoltage();
+	public double analogRead(int analogPin) {
+		return analogArray[analogPin].getCurrent();
 	}
 	
 	
@@ -150,7 +148,7 @@ public class BaseArduino {
 	 * @param val
 	 */
 	public void analogWrite(int analogPin, int val) {
-		analogArray[analogPin].setValue(val);
+		// TODO: initiate PWM using Time to send waves to the pin or something
 	}
 	
 	/**
@@ -190,7 +188,11 @@ public class BaseArduino {
 		return getDigitalArray()[pin].getPinState();
 	}
 
-	public DigitalPin[] getDigitalArray() {
+	/**
+	 * Returns the digital Array of Pin references
+	 * @return digitalArray
+	 */
+	public Pin[] getDigitalArray() {
 		return digitalArray;
 	}
 

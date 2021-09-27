@@ -4,7 +4,8 @@ import com.egr101sim.arduino.elements.Pin;
 import com.egr101sim.arduino.elements.PinType;
 
 public class Resistor extends Component {
-
+	
+	
 	
 	public Resistor() {
 		this.pins = new Pin[2];

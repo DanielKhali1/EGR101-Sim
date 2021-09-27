@@ -20,18 +20,6 @@ public class Led extends Component{
 	@Override
 	public void Behavior() {
 		
-		if(this.pins[0].getConnections().get(0).getVoltage() 
-				>= this.voltageLimit) {
-			System.out.println("LED EXPLODED");
-			return;
-		}
-		
-		if(this.pins[0].getConnections().get(0).getVoltage() 
-				> 1
-			&& this.pins[1].getConnections().get(0).isGround()) {
-		
-			System.out.println("LED turns on");
-		}
 		
 	}
 
