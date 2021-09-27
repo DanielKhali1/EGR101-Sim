@@ -8,11 +8,11 @@ public class Pin {
 	private PinIO pinIO;
 	
 	// whether it is on the arduino board or not
-	boolean local;
+	private boolean local;
 	Pin prev;
 	Pin next;
 	
-	double current;
+	private double current;
 	
 	
 	/**
@@ -39,14 +39,14 @@ public class Pin {
 	 */
 	public Pin(PinType pinType, boolean local) {
 		this.setPinType(pinType);
-		this.local = local;
+		this.setLocal(local);
 		
-		if (this.local) {
+		if (this.isLocal()) {
 			switch (this.pinType) {
-				case POWER_5V:   current = 5;   break;
-				case POWER_3_3V: current = 3.3; break;
-				case IO:         current = 0;   break;
-				case GROUND:     current = -1;  break;
+				case POWER_5V:   setCurrent(5);   break;
+				case POWER_3_3V: setCurrent(3.3); break;
+				case IO:         setCurrent(0);   break;
+				case GROUND:     setCurrent(-1);  break;
 			}
 		}
 		
@@ -59,7 +59,7 @@ public class Pin {
 	 */
 	public Pin(boolean local) {
 		this.setPinType(PinType.IO);
-		this.local = local;
+		this.setLocal(local);
 	}
 
 	public PinType getPinType() {
@@ -92,5 +92,17 @@ public class Pin {
 
 	public double getCurrent() {
 		return current;
+	}
+
+	public boolean isLocal() {
+		return local;
+	}
+
+	public void setLocal(boolean local) {
+		this.local = local;
+	}
+
+	public void setCurrent(double current) {
+		this.current = current;
 	}
 }

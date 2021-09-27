@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.egr101sim.arduino.Arduino;
 import com.egr101sim.arduino.elements.Pin;
 import com.egr101sim.arduino.elements.PinType;
+import com.egr101sim.core.ApplicationManager;
 import com.egr101sim.wiringGUI.components.Component;
 import com.egr101sim.wiringGUI.components.Component.CompID;
 
@@ -40,11 +41,13 @@ public class WiringGUI extends Application
 	
 	ArrayList<ArrayList<SLine>> lines = new ArrayList<ArrayList<SLine>>();
 	
-	Arduino arduino;
+	ApplicationManager manager;
+	public boolean pinDig;
+	public int tempPinNum;
 	
-	public WiringGUI(Arduino arduino) {
+	public WiringGUI(ApplicationManager manager) {
 		
-		this.arduino = arduino;
+		this.manager = manager;
 	}
 
 	@Override
@@ -232,6 +235,7 @@ public class WiringGUI extends Application
 		boolean local;
 		boolean isDigitalifIO;
 		int ioNumber = -1;
+		Pin pin;
 		
 		public PinSquare(double x, double y, PinType pinType, Pane p, boolean local, boolean isDigitalifIO, int ioNumber) {
 			this.ioNumber = ioNumber;
@@ -243,7 +247,6 @@ public class WiringGUI extends Application
 			this.setHeight(8);
 			setLayoutX(x);
 			setLayoutY(y);
-			
 			this.setFill(Color.BLACK);
 			this.setStroke(Color.BLACK);
 			
@@ -257,6 +260,7 @@ public class WiringGUI extends Application
 				this.setStroke(Color.BLACK);
 				isOverComponent = false;
 			});
+			pin = new Pin(pinType, local);
 			
 			
 			this.setOnMouseClicked(e-> {
@@ -273,7 +277,10 @@ public class WiringGUI extends Application
 					
 					System.out.println(lines.size());
 					
-					tempPin = new Pin(this.pinType, this.local);
+					tempPinNum = ioNumber;
+					pinDig = isDigitalifIO;
+					tempPin = pin;
+					
 				} else {
 						lines.get(lines.size()-1).get(lines.get(lines.size()-1).size()-1).setEndX(this.p.getLayoutX() + getLayoutX()+getWidth()/2);
 						lines.get(lines.size()-1).get(lines.get(lines.size()-1).size()-1).setEndY(this.p.getLayoutY() + getLayoutY()+getHeight()/2);
@@ -282,7 +289,7 @@ public class WiringGUI extends Application
 					wiringPivot[1] = 0;
 					System.out.println("DONE WIRING");
 					
-					arduino.AddConnection(tempPin, new Pin(this.pinType, this.local), isDigitalifIO, ioNumber);
+					manager.arduino.AddConnection(tempPin, pin, pinDig, isDigitalifIO, tempPinNum, ioNumber);
 				}
 			});
 		}

@@ -10,11 +10,13 @@ public class ApplicationManager {
 	
 	public Arduino arduino;
 	ArrayList<Component> widgets = new ArrayList<Component>();
+	public SimulationManager simManager;
 	
 	
 	
 	public ApplicationManager() {
-		arduino = new Arduino(null);
+		arduino = new Arduino();
+		simManager = new SimulationManager(arduino);
 		
 	}
 	
@@ -22,6 +24,7 @@ public class ApplicationManager {
 	 * update the code
 	 */
 	public void updateBehavior(String instructions) {
+		System.out.println("BUILDING..");
 		arduino.compileSketch(instructions);
 	}
 	
@@ -32,12 +35,10 @@ public class ApplicationManager {
 		
 	}
 	
-	public void updateConnections() {
-		
-	}
-	
 	public void execute() {
-		
+		System.out.println("SETTING UP SIM..");
+		simManager.setup();
+		System.out.println("EXECUTING..");
 	}
 
 }

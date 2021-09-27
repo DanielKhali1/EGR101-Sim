@@ -1,5 +1,6 @@
 package com.egr101sim.arduino;
 
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -9,6 +10,7 @@ public class ArduinoBehaviorManager {
 	
 	private final BaseArduino arduino;
 	private Function<BaseArduino,String> function;
+	
 	private String instruction;
 
 	
@@ -29,5 +31,4 @@ public class ArduinoBehaviorManager {
 	public Function<BaseArduino,String> getFunction() {
 		return function;
 	}
-
 }

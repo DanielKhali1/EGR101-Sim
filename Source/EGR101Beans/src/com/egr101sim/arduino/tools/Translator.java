@@ -16,8 +16,6 @@ public class Translator {
 							"import java.util.Arrays;\r\n" + 
 							"\r\n" + 
 							"import com.egr101sim.arduino.BaseArduino;\r\n" + 
-							"import com.egr101sim.arduino.elements.AnalogPin;\r\n" + 
-							"import com.egr101sim.arduino.elements.DigitalPin;\r\n" + 
 							"import com.egr101sim.arduino.elements.Pin;\r\n" + 
 							"import com.egr101sim.arduino.elements.PinIO;\r\n" + 
 							"import com.egr101sim.arduino.elements.PinState;\r\n" + 

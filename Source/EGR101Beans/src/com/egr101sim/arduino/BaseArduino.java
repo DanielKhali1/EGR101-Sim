@@ -131,7 +131,7 @@ public class BaseArduino {
 	 * @return
 	 */
 	public double analogRead(int analogPin) {
-		return analogArray[analogPin].getCurrent();
+		return getAnalogArray()[analogPin].getCurrent();
 	}
 	
 	
@@ -202,6 +202,10 @@ public class BaseArduino {
 
 	public void setDelayed(boolean delayed) {
 		this.delayed = delayed;
+	}
+
+	public Pin[] getAnalogArray() {
+		return analogArray;
 	}
 	
 }

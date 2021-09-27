@@ -41,7 +41,7 @@ public class MainUI extends Application{
 										  "\r\n" + 
 										  "}");
 		
-		new WiringGUI(manager.arduino).start(new Stage());
+		new WiringGUI(manager).start(new Stage());
 		
 		codeSpace.relocate(50, 80);
 		codeSpace.setPrefSize(550, 500);
@@ -74,10 +74,14 @@ public class MainUI extends Application{
 		save.setPrefSize(50, 30);
 		
 		pane.getChildren().addAll(rectangle, codeSpace,run, build, newFile,open,save, ToolBar());
-		/*
+		
 		build.setOnAction(e->{
 			manager.updateBehavior(codeSpace.getText());
-		});*/
+		});
+		
+		run.setOnAction(e->{
+			manager.execute();
+		});
 
 		
 		primaryStage.setScene(scene);
