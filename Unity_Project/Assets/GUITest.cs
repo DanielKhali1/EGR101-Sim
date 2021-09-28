@@ -26,6 +26,9 @@ public class GUITest : MonoBehaviour
         hSliderValue1 = GUI.HorizontalSlider(new Rect(30, 85, 100, 50), hSliderValue1, 0.0f, 10.0f);
         hSliderValue2 = GUI.HorizontalSlider(new Rect(30, 175, 100, 50), hSliderValue2, 0.0f, 10.0f);
 
-   
+        if(GUI.Button(new Rect(725, 30, 75, 40), "Wiring"))
+        {
+            //Create a connection to Java
+        }
     }
 }
