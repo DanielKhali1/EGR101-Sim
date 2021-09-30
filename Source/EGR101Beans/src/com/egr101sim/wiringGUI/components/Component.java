@@ -31,6 +31,8 @@ public class Component extends ImageView{
 		this.setImage(i);
 	}
 	
+	
+	
 	public enum CompID{
 		ARDUINO,
 		RESISTOR,

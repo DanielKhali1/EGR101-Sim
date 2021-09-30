@@ -2,6 +2,9 @@ package com.egr101sim.arduino;
 
 
 
+import java.util.ArrayList;
+
+import com.egr101sim.arduino.components.Component;
 import com.egr101sim.arduino.elements.Pin;
 import com.egr101sim.arduino.elements.PinType;
 import com.egr101sim.arduino.tools.Translator;
@@ -12,11 +15,16 @@ public class Arduino {
 	ArduinoBehaviorManager behavior;
 	BaseArduino arduino;
 	
+	ArrayList<Component> components = new ArrayList<Component>();
 	
 	public Arduino() {
 		
 		arduino = new BaseArduino();
 		behavior = new ArduinoBehaviorManager(arduino, null);
+	}
+	
+	public void addComponent(Component c) {
+		components.add(c);
 	}
 	
 	public void AddConnection(Pin pin1, Pin pin2,
@@ -47,8 +55,17 @@ public class Arduino {
 		System.out.println(translated);
 		
 		behavior.compile(translated);
+		
+		verifyComponentConnections();
 	}
 	
+	
+	private void verifyComponentConnections() {
+		for(int i = 0; i < components.size(); i++) {
+			
+		}
+	}
+
 	public void setup() {
 		loop();
 	}
