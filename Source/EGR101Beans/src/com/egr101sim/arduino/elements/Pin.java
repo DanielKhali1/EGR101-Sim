@@ -9,8 +9,11 @@ public class Pin {
 	
 	// whether it is on the arduino board or not
 	private boolean local;
-	Pin prev;
-	Pin next;
+	private Pin prev;
+	private Pin next;
+	
+	// in ohms
+	private double resistance;
 	
 	private double current;
 	
@@ -21,7 +24,7 @@ public class Pin {
 	 * @param p
 	 */
 	public void addPrev(Pin p) {
-		prev = p;
+		setPrev(p);
 	}
 	
 	/**
@@ -30,7 +33,7 @@ public class Pin {
 	 * @param p
 	 */
 	public void addNext(Pin p) {
-		next = p;
+		setNext(p);
 	}
 	
 	/**
@@ -104,5 +107,35 @@ public class Pin {
 
 	public void setCurrent(double current) {
 		this.current = current;
+	}
+
+	public Pin getPrev() {
+		return prev;
+	}
+
+	public void setPrev(Pin prev) {
+		this.prev = prev;
+	}
+
+	public Pin getNext() {
+		return next;
+	}
+
+	public void setNext(Pin next) {
+		this.next = next;
+	}
+
+	/**
+	 * @return the nextResistance
+	 */
+	public double getResistance() {
+		return resistance;
+	}
+
+	/**
+	 * @param nextResistance the nextResistance to set
+	 */
+	public void setResistance(double d) {
+		this.resistance = (double) d;
 	}
 }

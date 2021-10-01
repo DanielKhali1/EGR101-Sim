@@ -3,11 +3,13 @@ package com.egr101sim.ui;
 import java.util.ArrayList;
 
 import com.egr101sim.arduino.Arduino;
+import com.egr101sim.arduino.components.Component;
+import com.egr101sim.arduino.components.Led;
 import com.egr101sim.arduino.elements.Pin;
 import com.egr101sim.arduino.elements.PinType;
 import com.egr101sim.core.ApplicationManager;
-import com.egr101sim.wiringGUI.components.Component;
-import com.egr101sim.wiringGUI.components.Component.CompID;
+import com.egr101sim.wiringGUI.components.WGComonent;
+import com.egr101sim.wiringGUI.components.WGComonent.CompID;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -55,7 +57,7 @@ public class WiringGUI extends Application
 		Scene scene = new Scene(pane, 950, 600);
 		
 		HBox toolBarPane = new HBox();
-		toolBarPane.getChildren().addAll(new Pane(new Component(CompID.LED)), new Pane(new Component(CompID.BUTTON)), new Pane(new Component(CompID.RESISTOR)));
+		toolBarPane.getChildren().addAll(new Pane(new WGComonent(CompID.LED)), new Pane(new WGComonent(CompID.BUTTON)), new Pane(new WGComonent(CompID.RESISTOR)));
 		toolBarPane.relocate(20, 490);
 		for(int i = 0; i < toolBarPane.getChildren().size(); i++) {
 			final int ii = i;
@@ -64,20 +66,30 @@ public class WiringGUI extends Application
 			((Pane) toolBarPane.getChildren().get(i)).getChildren().get(0).relocate(30, 20);
 			
 			((Pane) toolBarPane.getChildren().get(i)).setOnMouseClicked(e->{
-				final Component comp = new Component(((Component)(((Pane) toolBarPane.getChildren().get(ii)).getChildren().get(0))).compid);
+				final WGComonent comp = new WGComonent(((WGComonent)(((Pane) toolBarPane.getChildren().get(ii)).getChildren().get(0))).compid);
 				Pane tempPane = new Pane();
 				pane.getChildren().add(tempPane);
 				stuckToMouse = tempPane;
 				
 				
 				if(comp.compid == CompID.LED) {
-					PinSquare pin1 = new PinSquare(4, 45, PinType.GROUND, tempPane, false, false, -1);
-					PinSquare pin2 = new PinSquare(17, 45, PinType.IO, tempPane, false, false, -1);
+					Led led = new Led();
+					this.manager.arduino.addComponent(new Led());
+					PinSquare pin1 = new PinSquare(4, 45, PinType.GENERAL, tempPane, false, false, -1);
+					PinSquare pin2 = new PinSquare(17, 45, PinType.GENERAL, tempPane, false, false, -1);
+					this.manager.arduino.getComponents().get(this.manager.arduino.getComponents().size()-1).getPins()[0] = pin1.pin;
+					this.manager.arduino.getComponents().get(this.manager.arduino.getComponents().size()-1).getPins()[1] = pin2.pin;
 					tempPane.getChildren().addAll(comp, pin1, pin2);
 				} else if (comp.compid == CompID.RESISTOR) {
 
-					PinSquare pin1 = new PinSquare(8, 0, PinType.GROUND, tempPane, false, false, -1);
-					PinSquare pin2 = new PinSquare(8, 60, PinType.IO, tempPane, false, false, -1);
+					PinSquare pin1 = new PinSquare(8, 0, PinType.GENERAL, tempPane, false, false, -1);
+					PinSquare pin2 = new PinSquare(8, 60, PinType.GENERAL, tempPane, false, false, -1);
+					Pin resistorPin = new Pin(PinType.GENERAL, false);
+					resistorPin.setResistance(2.27);
+					pin1.pin = resistorPin;
+					pin2.pin = resistorPin;
+					
+					
 					tempPane.getChildren().addAll(comp, pin1, pin2);
 				}
 				else if (comp.compid == CompID.BUTTON) {
@@ -85,6 +97,7 @@ public class WiringGUI extends Application
 					PinSquare pin2 = new PinSquare(17, 45, PinType.IO, tempPane, false, false, -1);
 					tempPane.getChildren().addAll(comp, pin1, pin2);
 				}
+				
 				
 				
 				comp.setOnMouseClicked(f->{
@@ -102,7 +115,7 @@ public class WiringGUI extends Application
 		
 		pane.setStyle("-fx-background-color: rgb(244,245,246);");
 		
-		Component arduino = new Component(CompID.ARDUINO);
+		WGComonent arduino = new WGComonent(CompID.ARDUINO);
 		arduino.relocate(0, 100);
 		
 		PinSquare pin1 = new PinSquare(250, 414, PinType.POWER_3_3V, pane, true, false, -1);
@@ -237,7 +250,7 @@ public class WiringGUI extends Application
 		int ioNumber = -1;
 		Pin pin;
 		
-		public PinSquare(double x, double y, PinType pinType, Pane p, boolean local, boolean isDigitalifIO, int ioNumber) {
+		public PinSquare( double x, double y, PinType pinType, Pane p, boolean local, boolean isDigitalifIO, int ioNumber) {
 			this.ioNumber = ioNumber;
 			this.local = local;
 			this.isDigitalifIO = isDigitalifIO;

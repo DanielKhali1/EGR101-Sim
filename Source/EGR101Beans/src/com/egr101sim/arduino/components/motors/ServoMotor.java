@@ -12,4 +12,10 @@ public class ServoMotor extends Component{
 	public void Behavior() {
 		
 	}
+
+	@Override
+	public void checkState() {
+		// TODO Auto-generated method stub
+		
+	}
 }

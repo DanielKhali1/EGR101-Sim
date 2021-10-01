@@ -7,11 +7,11 @@ import java.io.FileWriter;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class Component extends ImageView{
+public class WGComonent extends ImageView{
 	
 	public CompID compid;
 	
-	public Component(CompID componentType) {
+	public WGComonent(CompID componentType) {
 		
 		
 		this.compid = componentType;

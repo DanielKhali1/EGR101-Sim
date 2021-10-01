@@ -39,6 +39,10 @@ public class ApplicationManager {
 		System.out.println("SETTING UP SIM..");
 		simManager.setup();
 		System.out.println("EXECUTING..");
+		
+		while(true) {
+			simManager.iterate();
+		}
 	}
 
 }
