@@ -4,15 +4,17 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 
+import com.egr101sim.arduino.components.Led;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class WGComonent extends ImageView{
 	
 	public CompID compid;
+	public Led led;
 	
 	public WGComonent(CompID componentType) {
-		
 		
 		this.compid = componentType;
 		Image i = null;
@@ -29,6 +31,18 @@ public class WGComonent extends ImageView{
 		}
 		
 		this.setImage(i);
+	}
+	
+	
+	
+	public void changeImage() {
+		if(led.isPowered()) {
+			this.setImage(new Image("file:Resources\\LED_ON.PNG"));
+			System.out.println("LED PICTURE ON");
+		} else {
+			this.setImage(new Image("file:Resources\\LED.png"));
+			System.out.println("LED PICTURE OFF");
+		}
 	}
 	
 	

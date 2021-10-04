@@ -3,7 +3,10 @@ package com.egr101sim.ui;
 
 import java.io.File;
 import com.egr101sim.core.ApplicationManager;
+
+import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
@@ -43,7 +46,7 @@ public class MainUI extends Application {
 										  "\r\n" + 
 										  "}");
 		
-		// new WiringGUI(manager.arduino).start(new Stage());
+		new WiringGUI(manager).start(new Stage());
 		
 		codeSpace.relocate(0, 100);
 		codeSpace.setPrefSize(1000, 500);
@@ -132,10 +135,22 @@ public class MainUI extends Application {
 		save.setPrefSize(50, 30);
 		
 		pane.getChildren().addAll(rectangle6, rectangle5, rectangle4, rectangle, rectangle2, rectangle3, t, t2, codeSpace,run, build, newFile,open,save, ToolBar(primaryStage));
-		/*
+		
 		build.setOnAction(e->{
 			manager.updateBehavior(codeSpace.getText());
-		});*/
+		});
+		
+		run.setOnAction(e->{
+			
+			Platform.runLater(new Runnable() {
+			      @Override
+			      public void run() {
+			    	  new Thread(() -> {
+			    		  manager.execute();
+			    	  }).start();
+			      }
+			  });
+		});
 
 		File f = new File("Styles.css");
 		scene.getStylesheets().add("File:///"+f.getAbsolutePath().replace("\\","/"));

@@ -1,60 +1,67 @@
 package com.egr101sim.core;
 
+import java.io.IOException;
 import java.util.Date;
 
 import com.egr101sim.arduino.Arduino;
 import com.egr101sim.arduino.elements.Pin;
 import com.egr101sim.arduino.elements.PinState;
+import com.egr101sim.arduino.elements.SpecialPin;
 
 public class SimulationManager {
 
-	Arduino arduino;
+	private Arduino arduino;
 	Date startTime;
 	Date currentTime;
 	
 	
-	public SimulationManager(Arduino arduino) {
-		this.arduino = arduino;
+	public SimulationManager() {
 	}
 	
 	public void setup() {
-		arduino.setup();
+		getArduino().setup();
 		startTime = new Date();
-		arduino.getArduino().setMilli(0);
+		getArduino().getArduino().setMilli(0);
 	}
 	
 	
 	public void iterate() {
 		
-		currentTime = new Date();
-		arduino.getArduino().setMilli(currentTime.getTime() - startTime.getTime());
-		arduino.execute();
+		getArduino().execute();
 		
+		basicIterate();
+	}
+	
+	public void basicIterate() {
+		getArduino().getArduino().setMilli(new Date().getTime() - startTime.getTime());
+		getArduino().getArduino().update();
 		
 		// make if a write was executed turn on digital pins
-		translatePinStateToVoltage(arduino.getArduino().getDigitalArray());
+		translatePinStateToVoltage(getArduino().getArduino().getDigitalArray());
 
 		// send power through pins
-		sendPowerThroughPinConnections(arduino.getArduino().getDigitalArray());
-		sendPowerThroughPinConnections(arduino.getArduino().getP5V());
-		sendPowerThroughPinConnections(arduino.getArduino().getP3_3v());
+		sendPowerThroughPinConnections(getArduino().getArduino().getDigitalArray());
+		sendPowerThroughPinConnections((SpecialPin)getArduino().getArduino().getP5V());
+		sendPowerThroughPinConnections((SpecialPin)getArduino().getArduino().getP3_3v());
 		
 		// if components have power let them do things
 		updateComponentState();
 		
 		executeComponentBehavior();
+		
+		//System.out.println(getArduino().getArduino().getDigitalArray()[1].getCurrent());
 	}
 	
 	private void executeComponentBehavior() {
-		for(int i = 0; i < arduino.getComponents().size(); i++) { 
-			arduino.getComponents().get(i).Behavior();
+		for(int i = 0; i < getArduino().getComponents().size(); i++) { 
+			getArduino().getComponents().get(i).Behavior();
 		}
 		
 	}
 
 	private void updateComponentState() {
-		for(int i = 0; i < arduino.getComponents().size(); i++) {
-			try { arduino.getComponents().get(i).checkState(); } 
+		for(int i = 0; i < getArduino().getComponents().size(); i++) {
+			try { getArduino().getComponents().get(i).checkState(); } 
 			catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -62,6 +69,7 @@ public class SimulationManager {
 	}
 
 	private void sendPowerThroughPinConnections(Pin[] pins) {
+		
 		for(int i = 0; i < pins.length; i++) {
 			if(pins[i] != null) {
 				Pin cur = pins[i];
@@ -76,6 +84,21 @@ public class SimulationManager {
 			}
 		}
 	}
+	
+	private void sendPowerThroughPinConnections(SpecialPin pin) {
+			
+			for(int i = 0; i < pin.getNexts().size(); i++) {
+					Pin cur = pin.getNexts().get(i);
+					// run through the list of connections and send power through 
+					while(cur != null) {
+						if(cur.getPrev() != null) {
+							// set the current power to the previous pins power
+							cur.setCurrent(cur.getPrev().getCurrent() / cur.getPrev().getResistance());
+						}
+						cur = cur.getNext();
+					}
+			}
+		}
 
 	private void translatePinStateToVoltage(Pin[] pins) {
 		for(int i = 0; i < pins.length; i++) {
@@ -87,6 +110,20 @@ public class SimulationManager {
 				}
 			}
 		}
+	}
+
+	/**
+	 * @return the arduino
+	 */
+	public Arduino getArduino() {
+		return arduino;
+	}
+
+	/**
+	 * @param arduino the arduino to set
+	 */
+	public void setArduino(Arduino arduino) {
+		this.arduino = arduino;
 	}
 
 }

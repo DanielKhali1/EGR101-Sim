@@ -27,7 +27,7 @@ public class Translator {
 							"	private static final int HIGH = 1;\r\n" + 
 							"	private static final int LOW = 0;\r\n" + 
 							"	private static final int INPUT_PULLUP = 2;\r\n" + 
-							"	private static final int LED_BUILTIN= 13;\r\n" + arduinoProgram + 
+							"	private static final int LED_BUILTIN= 13;\r\n" +
 							"   private static final int A0 = 0;" +
 							"   private static final int A1 = 1;" +
 							"   private static final int A2 = 2;" +
@@ -42,6 +42,7 @@ public class Translator {
 							"   private static final int A11 = 11;" +
 							"   private static final int A12 = 12;" +
 							"   private static final int A13 = 13;" +
+							arduinoProgram + 
 							"	public String apply(BaseArduino t) {\r\n" + 
 							"		\r\n" + 
 							"		if(count == 0) { count++; setup(t); } else {loop(t);}\r\n" + 

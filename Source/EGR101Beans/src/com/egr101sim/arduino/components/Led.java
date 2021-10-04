@@ -7,7 +7,7 @@ public class Led extends Component{
 
 	
 	boolean grounded = false;
-	boolean powered = false;
+	private boolean powered = false;
 	
 	/**
 	 * short ground 1st pin
@@ -33,24 +33,37 @@ public class Led extends Component{
 		}
 		
 		// is powered?
-		if(getPins()[1].getPrev().getCurrent() <= 2.2 && getPins()[1].getPrev().getCurrent() > 1 ) {
-			powered = true;
+		if(getPins()[1].getCurrent() <= 2.2 && getPins()[1].getCurrent() > 1 ) {
+			System.out.println("LED POWER ON voltage rx: " + getPins()[1].getCurrent());
+			setPowered(true);
 		} else if(getPins()[1].getPrev().getCurrent() > 2.2) {
-			System.out.println("LED MELTED voltage in: " + getPins()[1].getPrev().getCurrent());
-			//throw new Exception();
+			System.out.println("LED MELTED voltage in: " + getPins()[1].getCurrent());
 		} else {
-			powered = false;
+			System.out.println("LED POWER OFF voltage rx: " + getPins()[1].getCurrent());
+			setPowered(false);
 		}
-			
-		
 	}
 	
 	@Override
 	public void Behavior() {
-		if(powered && grounded) {
+		if(isPowered() && grounded) {
 			System.out.println("LED ON");
 		}
 		
+	}
+
+	/**
+	 * @return the powered
+	 */
+	public boolean isPowered() {
+		return powered;
+	}
+
+	/**
+	 * @param powered the powered to set
+	 */
+	public void setPowered(boolean powered) {
+		this.powered = powered;
 	}
 
 }

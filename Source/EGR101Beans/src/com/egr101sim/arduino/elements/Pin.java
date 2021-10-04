@@ -43,10 +43,11 @@ public class Pin {
 	public Pin(PinType pinType, boolean local) {
 		this.setPinType(pinType);
 		this.setLocal(local);
+		this.setResistance(1);
 		
 		if (this.isLocal()) {
 			switch (this.pinType) {
-				case POWER_5V:   setCurrent(5);   break;
+				case POWER_5V:   setCurrent(5); System.out.println("I RAN");   break;
 				case POWER_3_3V: setCurrent(3.3); break;
 				case IO:         setCurrent(0);   break;
 				case GROUND:     setCurrent(-1);  break;

@@ -15,9 +15,9 @@ public class ApplicationManager {
 	
 	
 	public ApplicationManager() {
-		arduino = new Arduino();
-		simManager = new SimulationManager(arduino);
-		
+		simManager = new SimulationManager();
+		arduino = new Arduino(simManager);
+		simManager.setArduino(arduino);
 	}
 	
 	/**

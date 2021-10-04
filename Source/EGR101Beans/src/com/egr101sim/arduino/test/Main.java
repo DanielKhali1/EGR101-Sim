@@ -31,8 +31,8 @@ System.out.println(s.get());
 	}
 	
 	void test2() {
-		BaseArduino b = new BaseArduino();
-		System.out.println("basearduino: " + b);
+//		BaseArduino b = new BaseArduino();
+//		System.out.println("basearduino: " + b);
 		
 		Function<BaseArduino,String> f = Reflect.compile("com.egr101sim.arduino.ArduinoBehavior", 
 				"package com.egr101sim.arduino;\r\n" + 
@@ -53,6 +53,6 @@ System.out.println(s.get());
 				"\r\n" + 
 				"}\r\n" + 
 				"").create().get();
-		f.apply(b);
+//		f.apply(b);
 	}
 }
