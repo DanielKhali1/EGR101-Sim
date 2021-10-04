@@ -5,5 +5,16 @@ using UnityEngine.UI;
 
 public class SwitchScene : MonoBehaviour
 {
-    Debug.Log("Hello World");
+  	public Button yourButton;
+
+	void Start () 
+    {
+		Button btn = yourButton.GetComponent<Button>();
+		btn.onClick.AddListener(OpenNewScene);
+	}
+
+	void OpenNewScene()
+    {
+		
+	}
 }
