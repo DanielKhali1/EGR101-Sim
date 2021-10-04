@@ -1,9 +1,12 @@
 package com.egr101sim.ui;
 
 
+import java.io.File;
 import com.egr101sim.core.ApplicationManager;
 
+import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
@@ -16,10 +19,12 @@ import javafx.scene.control.ToolBar;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.geometry.*;
+import javafx.scene.text.*;
 
-public class MainUI extends Application{
+public class MainUI extends Application {
 	
 	Pane pane;
 	Scene scene;
@@ -29,7 +34,7 @@ public class MainUI extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		manager = new ApplicationManager();
 		pane = new Pane();
-		scene = new Scene(pane, 600, 500);
+		scene = new Scene(pane, 1000, 760);
 		
 		TextArea codeSpace = new TextArea("void setup() {\r\n" + 
 										  "  // put your setup code here, to run once:\r\n" + 
@@ -43,15 +48,71 @@ public class MainUI extends Application{
 		
 		new WiringGUI(manager).start(new Stage());
 		
-		codeSpace.relocate(50, 80);
-		codeSpace.setPrefSize(550, 500);
+		codeSpace.relocate(0, 100);
+		codeSpace.setPrefSize(1000, 500);
+		
+		// colors for background 
+		Color lightGreen = Color.web("#17a1a5");
+		Color darkGreen = Color.web("#006468");
+		Color textGreen = Color.web("#0f6464");
+		Color textBlue = Color.web("#1c9ea4");
+		Color textYellow = Color.web("#68731a");
 		
 		Rectangle rectangle = new Rectangle();
-		rectangle.setFill(Color.DARKGREEN);
+		rectangle.setFill(lightGreen);
 		rectangle.setX(0);
-		rectangle.setY(0);
-		rectangle.setWidth(600);
-		rectangle.setHeight(80); 
+		rectangle.setY(60);
+		rectangle.setWidth(1000);
+		rectangle.setHeight(40); 
+		
+		Rectangle rectangle2 = new Rectangle();
+		rectangle2.setFill(darkGreen);
+		rectangle2.setX(0);
+		rectangle2.setY(30);
+		rectangle2.setWidth(1000);
+		rectangle2.setHeight(40); 
+		
+		Rectangle rectangle4 = new Rectangle();
+		rectangle4.setFill(lightGreen);
+		rectangle4.setX(0);
+		rectangle4.setY(600);
+		rectangle4.setWidth(1000);
+		rectangle4.setHeight(30); 
+		
+		Rectangle rectangle5 = new Rectangle();
+		rectangle5.setFill(Color.BLACK);
+		rectangle5.setX(0);
+		rectangle5.setY(620);
+		rectangle5.setWidth(1000);
+		rectangle5.setHeight(100); 
+		
+		Rectangle rectangle6 = new Rectangle();
+		rectangle6.setFill(darkGreen);
+		rectangle6.setX(0);
+		rectangle6.setY(720);
+		rectangle6.setWidth(1000);
+		rectangle6.setHeight(50); 
+		
+		Rectangle rectangle3 = new Rectangle();
+		rectangle3.setFill(Color.WHITE);
+		rectangle3.setX(20);
+		rectangle3.setY(70);
+		rectangle3.setWidth(80);
+		rectangle3.setHeight(60); 
+		rectangle3.setArcHeight(10);
+		rectangle3.setArcWidth(10);
+		
+		Text t = new Text();
+		t.setX(30);
+		t.setY(90);
+		t.setText("sketch_");
+		t.setFill(textGreen);
+		
+		Text t2 = new Text();
+		t2.setX(940);
+		t2.setY(750);
+		t2.setText("Arduino");
+		t2.setFill(Color.WHITE);
 		
 		Button run = new Button("Run");
 		run.relocate(0, 35);
@@ -73,16 +134,26 @@ public class MainUI extends Application{
 		save.relocate(220,35);
 		save.setPrefSize(50, 30);
 		
-		pane.getChildren().addAll(rectangle, codeSpace,run, build, newFile,open,save, ToolBar());
+		pane.getChildren().addAll(rectangle6, rectangle5, rectangle4, rectangle, rectangle2, rectangle3, t, t2, codeSpace,run, build, newFile,open,save, ToolBar(primaryStage));
 		
 		build.setOnAction(e->{
 			manager.updateBehavior(codeSpace.getText());
 		});
 		
 		run.setOnAction(e->{
-			manager.execute();
+			
+			Platform.runLater(new Runnable() {
+			      @Override
+			      public void run() {
+			    	  new Thread(() -> {
+			    		  manager.execute();
+			    	  }).start();
+			      }
+			  });
 		});
 
+		File f = new File("Styles.css");
+		scene.getStylesheets().add("File:///"+f.getAbsolutePath().replace("\\","/"));
 		
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("EGR101 Simulation Software");
@@ -90,14 +161,19 @@ public class MainUI extends Application{
 		
 	}
 	
-	public ToolBar ToolBar()
+	public ToolBar ToolBar(Stage stage)
 	{
+		FileChooser fileChooser = new FileChooser();
 		ToolBar toolBar = new ToolBar();
-		
 		
 		MenuItem btnfile = new MenuItem("New");
 		
 		MenuItem btnsketch = new MenuItem("Open");
+		
+		btnsketch.setOnAction(e ->{
+			fileChooser.setTitle("Open Resource File");
+			fileChooser.showOpenDialog(stage);
+		});
 		
 		MenuItem btnSave = new MenuItem("Save");
 		

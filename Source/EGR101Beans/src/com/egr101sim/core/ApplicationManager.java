@@ -15,9 +15,9 @@ public class ApplicationManager {
 	
 	
 	public ApplicationManager() {
-		arduino = new Arduino();
-		simManager = new SimulationManager(arduino);
-		
+		simManager = new SimulationManager();
+		arduino = new Arduino(simManager);
+		simManager.setArduino(arduino);
 	}
 	
 	/**
@@ -39,6 +39,10 @@ public class ApplicationManager {
 		System.out.println("SETTING UP SIM..");
 		simManager.setup();
 		System.out.println("EXECUTING..");
+		
+		while(true) {
+			simManager.iterate();
+		}
 	}
 
 }

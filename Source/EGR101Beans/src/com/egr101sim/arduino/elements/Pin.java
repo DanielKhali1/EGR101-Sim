@@ -9,8 +9,11 @@ public class Pin {
 	
 	// whether it is on the arduino board or not
 	private boolean local;
-	Pin prev;
-	Pin next;
+	private Pin prev;
+	private Pin next;
+	
+	// in ohms
+	private double resistance;
 	
 	private double current;
 	
@@ -21,7 +24,7 @@ public class Pin {
 	 * @param p
 	 */
 	public void addPrev(Pin p) {
-		prev = p;
+		setPrev(p);
 	}
 	
 	/**
@@ -30,7 +33,7 @@ public class Pin {
 	 * @param p
 	 */
 	public void addNext(Pin p) {
-		next = p;
+		setNext(p);
 	}
 	
 	/**
@@ -40,10 +43,11 @@ public class Pin {
 	public Pin(PinType pinType, boolean local) {
 		this.setPinType(pinType);
 		this.setLocal(local);
+		this.setResistance(1);
 		
 		if (this.isLocal()) {
 			switch (this.pinType) {
-				case POWER_5V:   setCurrent(5);   break;
+				case POWER_5V:   setCurrent(5); System.out.println("I RAN");   break;
 				case POWER_3_3V: setCurrent(3.3); break;
 				case IO:         setCurrent(0);   break;
 				case GROUND:     setCurrent(-1);  break;
@@ -104,5 +108,35 @@ public class Pin {
 
 	public void setCurrent(double current) {
 		this.current = current;
+	}
+
+	public Pin getPrev() {
+		return prev;
+	}
+
+	public void setPrev(Pin prev) {
+		this.prev = prev;
+	}
+
+	public Pin getNext() {
+		return next;
+	}
+
+	public void setNext(Pin next) {
+		this.next = next;
+	}
+
+	/**
+	 * @return the nextResistance
+	 */
+	public double getResistance() {
+		return resistance;
+	}
+
+	/**
+	 * @param nextResistance the nextResistance to set
+	 */
+	public void setResistance(double d) {
+		this.resistance = (double) d;
 	}
 }
