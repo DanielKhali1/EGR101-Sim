@@ -111,17 +111,6 @@ public class BaseArduino {
 	}
 	
 	/**
-	 * increments milliseconds such that we can always understand how much time has passed in the arduino
-	 * @param iterator
-	 */
-	private void incrementMillis(long iterator) {
-		if(millis + iterator < Long.MAX_VALUE)
-			millis += iterator;
-		else
-			millis = 0;
-	}
-
-	/**
 	 * Reads the value from the specified analog pin.
 	 * Arduino boards contain a multichannel, 10-bit analog
 	 * to digital converter. This means that it will map

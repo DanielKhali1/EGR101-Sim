@@ -2,8 +2,6 @@ package com.egr101sim.ui;
 
 import java.util.ArrayList;
 
-import com.egr101sim.arduino.Arduino;
-import com.egr101sim.arduino.components.Component;
 import com.egr101sim.arduino.components.Led;
 import com.egr101sim.arduino.elements.Pin;
 import com.egr101sim.arduino.elements.PinType;
@@ -21,13 +19,9 @@ import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 

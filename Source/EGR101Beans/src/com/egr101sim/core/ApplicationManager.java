@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.egr101sim.arduino.Arduino;
 import com.egr101sim.arduino.components.Component;
-import com.egr101sim.physics.Vector3d;
 
 public class ApplicationManager {
 	

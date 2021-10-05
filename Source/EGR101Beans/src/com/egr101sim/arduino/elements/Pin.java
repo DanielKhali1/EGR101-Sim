@@ -1,7 +1,5 @@
 package com.egr101sim.arduino.elements;
 
-import java.util.ArrayList;
-
 public class Pin {
 	private PinType pinType;
 	private PinState pinState;
@@ -50,6 +48,7 @@ public class Pin {
 				case POWER_5V:   setCurrent(5); System.out.println("I RAN");   break;
 				case POWER_3_3V: setCurrent(3.3); break;
 				case IO:         setCurrent(0);   break;
+				case GENERAL:         setCurrent(0);   break;
 				case GROUND:     setCurrent(-1);  break;
 			}
 		}
