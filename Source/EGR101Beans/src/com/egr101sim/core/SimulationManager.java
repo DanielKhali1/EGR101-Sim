@@ -1,6 +1,5 @@
 package com.egr101sim.core;
 
-import java.io.IOException;
 import java.util.Date;
 
 import com.egr101sim.arduino.Arduino;

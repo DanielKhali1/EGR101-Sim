@@ -1,7 +1,6 @@
 package com.egr101sim.arduino.components;
 
 import com.egr101sim.arduino.elements.Pin;
-import com.egr101sim.arduino.elements.PinType;
 
 public class Led extends Component{
 

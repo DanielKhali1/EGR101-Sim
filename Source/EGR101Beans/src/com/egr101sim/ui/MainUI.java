@@ -4,7 +4,6 @@ package com.egr101sim.ui;
 import java.io.File;
 import com.egr101sim.core.ApplicationManager;
 
-import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -12,16 +11,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Separator;
-import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.geometry.*;
 import javafx.scene.text.*;
 
 public class MainUI extends Application {
@@ -55,8 +51,8 @@ public class MainUI extends Application {
 		Color lightGreen = Color.web("#17a1a5");
 		Color darkGreen = Color.web("#006468");
 		Color textGreen = Color.web("#0f6464");
-		Color textBlue = Color.web("#1c9ea4");
-		Color textYellow = Color.web("#68731a");
+//		Color textBlue = Color.web("#1c9ea4");
+//		Color textYellow = Color.web("#68731a");
 		
 		Rectangle rectangle = new Rectangle();
 		rectangle.setFill(lightGreen);
