@@ -19,6 +19,10 @@ public class Led extends Component{
 		this.currentDrain = 2.2;
 	}
 	
+	
+	/**
+	 * checks whether powered or grounded and updates LED state
+	 */
 	public void checkState() throws Exception {
 		
 		
@@ -33,12 +37,13 @@ public class Led extends Component{
 		
 		// is powered?
 		if(getPins()[1].getCurrent() <= 2.2 && getPins()[1].getCurrent() > 1 ) {
-			System.out.println("LED POWER ON voltage rx: " + getPins()[1].getCurrent());
+//			System.out.println("LED POWER ON voltage rx: " + getPins()[1].getCurrent());
 			setPowered(true);
 		} else if(getPins()[1].getPrev().getCurrent() > 2.2) {
-			System.out.println("LED MELTED voltage in: " + getPins()[1].getCurrent());
+//			System.out.println("LED MELTED voltage in: " + getPins()[1].getCurrent());
+			setPowered(false);
 		} else {
-			System.out.println("LED POWER OFF voltage rx: " + getPins()[1].getCurrent());
+//			System.out.println("LED POWER OFF voltage rx: " + getPins()[1].getCurrent());
 			setPowered(false);
 		}
 	}
@@ -46,9 +51,8 @@ public class Led extends Component{
 	@Override
 	public void Behavior() {
 		if(isPowered() && grounded) {
-			System.out.println("LED ON");
+			//if anything do it here
 		}
-		
 	}
 
 	/**
