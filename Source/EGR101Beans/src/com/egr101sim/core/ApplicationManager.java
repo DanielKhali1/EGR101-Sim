@@ -10,6 +10,7 @@ public class ApplicationManager {
 	public Arduino arduino;
 	ArrayList<Component> widgets = new ArrayList<Component>();
 	public SimulationManager simManager;
+	private boolean isSimRunning;
 	
 	
 	
@@ -17,6 +18,7 @@ public class ApplicationManager {
 		simManager = new SimulationManager();
 		arduino = new Arduino(simManager);
 		simManager.setArduino(arduino);
+		setSimRunning(false);
 	}
 	
 	/**
@@ -39,9 +41,25 @@ public class ApplicationManager {
 		simManager.setup();
 		System.out.println("EXECUTING..");
 		
-		while(true) {
+		while(isSimRunning()) {
 			simManager.iterate();
 		}
+		
+		simManager.shutDown();
+	}
+
+	/**
+	 * @return the isSimRunning
+	 */
+	public boolean isSimRunning() {
+		return isSimRunning;
+	}
+
+	/**
+	 * @param isSimRunning the isSimRunning to set
+	 */
+	public void setSimRunning(boolean isSimRunning) {
+		this.isSimRunning = isSimRunning;
 	}
 
 }

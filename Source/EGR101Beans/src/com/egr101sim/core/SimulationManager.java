@@ -125,4 +125,46 @@ public class SimulationManager {
 		this.arduino = arduino;
 	}
 
+	/**
+	 * shuts down Arduino
+	 */
+	public void shutDown() {
+		killAllPower(getArduino().getArduino().getDigitalArray());
+		killAllPower(getArduino().getArduino().getAnalogArray());
+		killAllPower((SpecialPin)getArduino().getArduino().getP5V());
+		killAllPower((SpecialPin)getArduino().getArduino().getP3_3v());
+		System.out.println("Killing Power");
+	}
+	
+	private void killAllPower(Pin[] pins) {
+		for(int i = 0; i < pins.length; i++) {
+			if(pins[i] != null) {
+				Pin cur = pins[i];
+				// run through the list of connections and send power through 
+				while(cur != null) {
+					if(cur.getPrev() != null) {
+						// set the current power to the previous pins power
+						cur.setCurrent(0);
+					}
+					cur = cur.getNext();
+				}
+			}
+		}
+	}
+	
+	private void killAllPower(SpecialPin pin) {
+		
+		for(int i = 0; i < pin.getNexts().size(); i++) {
+				Pin cur = pin.getNexts().get(i);
+				// run through the list of connections and send power through 
+				while(cur != null) {
+					if(cur.getPrev() != null) {
+						// set the current power to the previous pins power
+						cur.setCurrent(0);
+					}
+					cur = cur.getNext();
+				}
+		}
+	}
+
 }

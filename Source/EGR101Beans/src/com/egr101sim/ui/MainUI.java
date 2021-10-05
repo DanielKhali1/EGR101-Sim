@@ -25,6 +25,7 @@ public class MainUI extends Application {
 	Pane pane;
 	Scene scene;
 	ApplicationManager manager;
+	Thread thread;
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -138,14 +139,25 @@ public class MainUI extends Application {
 		
 		run.setOnAction(e->{
 			
-			Platform.runLater(new Runnable() {
-			      @Override
-			      public void run() {
-			    	  new Thread(() -> {
-			    		  manager.execute();
-			    	  }).start();
-			      }
-			  });
+			if(run.getText().equals("Run"))
+			{
+				
+			run.setText("End");
+				Platform.runLater(new Runnable() {
+				      @Override
+				      public void run() {
+				    	  thread = (new Thread(() -> {
+				    		  manager.setSimRunning(true);
+				    		  manager.execute();
+				    	  }));
+				    	  thread.start();
+				      }
+				  });
+			}
+			else {
+				run.setText("Run");
+				manager.setSimRunning(false);
+			}
 		});
 
 		File f = new File("Styles.css");
