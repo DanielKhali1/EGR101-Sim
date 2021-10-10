@@ -2,20 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
-public class SwitchScene : MonoBehaviour
+public class HelloWorld : MonoBehaviour
 {
   	public Button yourButton;
 
 	void Start () 
     {
 		Button btn = yourButton.GetComponent<Button>();
-		btn.onClick.AddListener(OpenNewScene);
+		btn.onClick.AddListener(print);
 	}
 
-	void OpenNewScene()
+    public void print()
     {
-		SceneManager.LoadScene("MainMenu");
-	}
+        Debug.Log("Hello World");
+    }
 }
