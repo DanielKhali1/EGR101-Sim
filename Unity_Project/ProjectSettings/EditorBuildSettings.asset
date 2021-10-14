@@ -5,13 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/WiringScene.unity
-    guid: c39433a9ed6ae78489fe92978ce2d338
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
-    guid: bfe0fc906e82677488b1be170ce6e47e
+    guid: 7351e574bcff6ed45afbe0c586a50f76
   - enabled: 1
     path: Assets/Scenes/IRSensorCustom.unity
-    guid: bf0d6188a437b2f44b99ad8d602886a0
+    guid: cd8db1aff7261e74481cfbb7e6a97e5d
   m_configObjects: {}
