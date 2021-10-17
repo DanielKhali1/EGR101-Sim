@@ -46,7 +46,8 @@ public class Translator {
 							"	public String apply(BaseArduino t) {\r\n" + 
 							"		\r\n" + 
 							"		if(count == 0) { count++; setup(t); } else {loop(t);}\r\n" + 
-							"		\r\n" + 
+							"		\r\nSystem.out.println(this);" + 
+							
 							"		return \"wow\";\r\n" + 
 							"	}\r\n" + 
 							"	\r\n" +
@@ -71,6 +72,10 @@ public class Translator {
 							"private static double cos(int val) {return  Math.cos(val);}\r\n" + 
 							"private static double sin(int val) {return  Math.sin(val);}\r\n" + 
 							"private static double tan(int val) {return Math.tan(val);}\r\n" + 
+							"protected void finalize()  \r\n" + 
+							"{  \r\n" + 
+							"System.out.println(\"Arduino Behavior has been Destroyed\");  \r\n" + 
+							"}  "+
 							"}\r\n")
 							.replace("const", "final")
 							.replace("void loop()", "void loop(BaseArduino t)")

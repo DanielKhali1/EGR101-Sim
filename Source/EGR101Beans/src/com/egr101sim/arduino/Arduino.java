@@ -28,6 +28,7 @@ public class Arduino {
 	private BaseArduino arduino;
 	
 	private ArrayList<Component> components = new ArrayList<Component>();
+	
 	/**
 	 * Base Arduino requires the parameter SimulationManager so this constructor
 	 * mainly is used to instantiate Base Arduino and pass its params
@@ -109,8 +110,8 @@ public class Arduino {
 	 * @param instructions
 	 */
 	public void compileSketch(String instructions) {
-		String translated = new Translator(instructions).translate();
 		
+		String translated = new Translator(instructions).translate();
 		behavior.compile(translated);
 	}
 
@@ -142,6 +143,7 @@ public class Arduino {
 	 */
 	private void loop() {
 		behavior.getFunction().apply(getArduino());
+		System.out.println(behavior.getFunction());
 	}
 
 	/**
@@ -174,6 +176,14 @@ public class Arduino {
 	 */
 	public void setComponents(ArrayList<Component> components) {
 		this.components = components;
+	}
+	
+	
+	/**
+	 * re-instantiates behavior for next compile
+	 */
+	public void reloadBehavior() {
+		behavior = new ArduinoBehaviorManager();
 	}
 
 }

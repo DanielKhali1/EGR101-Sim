@@ -134,7 +134,10 @@ public class MainUI extends Application {
 		pane.getChildren().addAll(rectangle6, rectangle5, rectangle4, rectangle, rectangle2, rectangle3, t, t2, codeSpace,run, build, newFile,open,save, ToolBar(primaryStage));
 		
 		build.setOnAction(e->{
-			manager.updateBehavior(codeSpace.getText());
+			if (!manager.isSimRunning()) {
+				//manager.arduino.reloadBehavior();
+				manager.updateBehavior(codeSpace.getText());
+			}
 		});
 		
 		run.setOnAction(e->{
@@ -149,6 +152,7 @@ public class MainUI extends Application {
 				    	  thread = (new Thread(() -> {
 				    		  manager.setSimRunning(true);
 				    		  manager.execute();
+				    		  System.out.println("thread over");
 				    	  }));
 				    	  thread.start();
 				      }
@@ -210,10 +214,6 @@ public class MainUI extends Application {
 		
 		tools.getItems().addAll(btnSerialMon);
 		
-		/*
-		execute.setOnAction(e->{
-			manager.execute();
-		});*/
 		toolBar.getItems().addAll(file, new Separator(), sketch, new Separator(), tools);
 		
 		return toolBar;
