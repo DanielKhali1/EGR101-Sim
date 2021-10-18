@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/IRSensorCustom.unity
     guid: cd8db1aff7261e74481cfbb7e6a97e5d
+  - enabled: 1
+    path: Assets/Scenes/ForksCustom.unity
+    guid: 71901546227cdc6459e40f7c673ca998
   m_configObjects: {}
