@@ -60,7 +60,7 @@ public class MainUI extends Application {
 		"REPORT_DIGITAL", "REPORT_ANALOG", "SET_PIN_MODE", "SYSTEM_RESET", "SYSEX_START",
 		"auto", "int8_t", "int16_t", "int32_t", "int64_t", "uint8_t", "uint16_t", 
 		"uint32_t", "uint64_t", "char16_t", "char32_t", "operator", "enum", "delete",
-		"bool", "boolean", "byte", "char", "const", "false", "float", "double", "null", 
+		"boolean", "bool","byte", "char", "const", "false", "float", "double", "null", 
 		"NULL", "int", "long", "new", "private", "protected", "public", "short", "signed",
 		"static", "volatile", "String", "void", "true", "unsigned", "word", "array",
 		"sizeof", "dynamic_cast", "typedef", "const_cast", "struct", "static_cast", 
@@ -108,8 +108,8 @@ public class MainUI extends Application {
 	
 	private static final Pattern PATTERN = Pattern.compile(
 		"(?<KEYWORDblue>" + KEYWORDblue_PATTERN + ")"
-		+ "(?<KEYWORDgreen>" + KEYWORDgreen_PATTERN + ")"
-		+ "(?<KEYWORDorange>" + KEYWORDorange_PATTERN + ")"
+		//+ "(?<KEYWORDgreen>" + KEYWORDgreen_PATTERN + ")"
+		//+ "(?<KEYWORDorange>" + KEYWORDorange_PATTERN + ")"
 	);
 	
 	private static final String startingcode = String.join("\n", new String[] 
@@ -256,7 +256,8 @@ public class MainUI extends Application {
 		
 		scene = new Scene(pane, 1000, 760);
 		
-		//scene.getStylesheets().add(MainUI.class.getResource("Styles.css").toExternalForm());
+		File f = new File("Styles.css");
+		scene.getStylesheets().add("File:///"+f.getAbsolutePath().replace("\\","/"));
 		
 		//Scene scene = new Scene(new StackPane(new VirtualizedScrollPane<>(codeArea)), 1000, 760);
 		primaryStage.setScene(scene);
@@ -326,7 +327,8 @@ public class MainUI extends Application {
 		            matcher.group("KEYWORDblue") != null ? "keywordblue" :
 		            matcher.group("KEYWORDgreen") != null ? "keywordgreen" :
 		            matcher.group("KEYWORDorange") != null ? "keywordorange" :
-		            null; /* never happens */ assert styleClass != null;
+		            null; 
+		    		assert styleClass != null;
 		    spansBuilder.add(Collections.emptyList(), matcher.start() - lastKeyWordEnd);
 		    spansBuilder.add(Collections.singleton(styleClass), matcher.end() - matcher.start());
 		    lastKeyWordEnd = matcher.end();
