@@ -42,10 +42,11 @@ public class Translator {
 							"   private static final int A11 = 11;" +
 							"   private static final int A12 = 12;" +
 							"   private static final int A13 = 13;" +
+							"   BaseArduino t;" +
 							arduinoProgram + 
 							"	public String apply(BaseArduino t) {\r\n" + 
 							"		\r\n" + 
-							"		if(count == 0) { count++; setup(t); } else {loop(t);}\r\n" + 
+							"		if(count == 0) { count++; setup(t); this.t = t; } else {loop(t);}\r\n" + 
 							"		\r\nSystem.out.println(this);" + 
 							
 							"		return \"wow\";\r\n" + 
@@ -89,7 +90,8 @@ public class Translator {
 							.replace("millis", "t.millis")
 							.replace("delay", "t.delay")
 							.replace("delayMicroSeconds", "t.delayMicroSeconds")
-							.replace("pinMode", "t.pinMode");
+							.replace("pinMode", "t.pinMode")
+							.replace("#include <Servo.h>", "import com.egr101sim.arduino.elements.Servo");
 		return string;
 	}
 
