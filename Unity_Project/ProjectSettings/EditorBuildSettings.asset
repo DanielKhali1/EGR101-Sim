@@ -23,4 +23,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ForksCustom.unity
     guid: 71901546227cdc6459e40f7c673ca998
+  - enabled: 1
+    path: Assets/Scenes/WheelCustom.unity
+    guid: 0eb15ac3c121f7a4994750268668e391
+  - enabled: 1
+    path: Assets/Scenes/UltraSensCustom.unity
+    guid: d828211b6cefe8f48991b76c16a97463
+  - enabled: 1
+    path: Assets/Scenes/InfraSensCustom.unity
+    guid: 411d1ddb1dbb743478893cc4c1c9d86c
   m_configObjects: {}
