@@ -16,8 +16,6 @@ public class Translator {
 							"import java.util.Arrays;\r\n" + 
 							"\r\n" + 
 							"import com.egr101sim.arduino.BaseArduino;\r\n" + 
-							"import com.egr101sim.arduino.elements.AnalogPin;\r\n" + 
-							"import com.egr101sim.arduino.elements.DigitalPin;\r\n" + 
 							"import com.egr101sim.arduino.elements.Pin;\r\n" + 
 							"import com.egr101sim.arduino.elements.PinIO;\r\n" + 
 							"import com.egr101sim.arduino.elements.PinState;\r\n" + 
@@ -29,7 +27,7 @@ public class Translator {
 							"	private static final int HIGH = 1;\r\n" + 
 							"	private static final int LOW = 0;\r\n" + 
 							"	private static final int INPUT_PULLUP = 2;\r\n" + 
-							"	private static final int LED_BUILTIN= 13;\r\n" + arduinoProgram + 
+							"	private static final int LED_BUILTIN= 13;\r\n" +
 							"   private static final int A0 = 0;" +
 							"   private static final int A1 = 1;" +
 							"   private static final int A2 = 2;" +
@@ -44,10 +42,13 @@ public class Translator {
 							"   private static final int A11 = 11;" +
 							"   private static final int A12 = 12;" +
 							"   private static final int A13 = 13;" +
+							"   BaseArduino t;" +
+							arduinoProgram + 
 							"	public String apply(BaseArduino t) {\r\n" + 
 							"		\r\n" + 
-							"		if(count == 0) { count++; setup(t); } else {loop(t);}\r\n" + 
-							"		\r\n" + 
+							"		if(count == 0) { count++; setup(t); this.t = t; } else {loop(t);}\r\n" + 
+							"		\r\nSystem.out.println(this);" + 
+							
 							"		return \"wow\";\r\n" + 
 							"	}\r\n" + 
 							"	\r\n" +
@@ -72,6 +73,10 @@ public class Translator {
 							"private static double cos(int val) {return  Math.cos(val);}\r\n" + 
 							"private static double sin(int val) {return  Math.sin(val);}\r\n" + 
 							"private static double tan(int val) {return Math.tan(val);}\r\n" + 
+							"protected void finalize()  \r\n" + 
+							"{  \r\n" + 
+							"System.out.println(\"Arduino Behavior has been Destroyed\");  \r\n" + 
+							"}  "+
 							"}\r\n")
 							.replace("const", "final")
 							.replace("void loop()", "void loop(BaseArduino t)")
@@ -85,7 +90,8 @@ public class Translator {
 							.replace("millis", "t.millis")
 							.replace("delay", "t.delay")
 							.replace("delayMicroSeconds", "t.delayMicroSeconds")
-							.replace("pinMode", "t.pinMode");
+							.replace("pinMode", "t.pinMode")
+							.replace("#include <Servo.h>", "import com.egr101sim.arduino.elements.Servo");
 		return string;
 	}
 

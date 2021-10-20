@@ -22,6 +22,7 @@ import org.reactfx.collection.ListModification;
 import org.reactfx.Subscription;
 
 import com.egr101sim.core.ApplicationManager;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -29,9 +30,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Separator;
-import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -42,7 +41,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.control.ContextMenu; 
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.geometry.*;
 import javafx.scene.text.*;
 
 public class MainUI extends Application {
@@ -50,6 +48,7 @@ public class MainUI extends Application {
 	Pane pane;
 	Scene scene;
 	ApplicationManager manager;
+	Thread thread;
 	
 	private static final String[] KEYWORDSblue = new String[] {
 		"HIGH", "LOW", "INPUT", "INPUT_PULLUP", "OUTPUT", "DEC", "BIN",
@@ -157,7 +156,7 @@ public class MainUI extends Application {
 		
 		codeArea.replaceText(0, 0, startingcode);
 		
-		// new WiringGUI(manager.arduino).start(new Stage());
+		new WiringGUI(manager).start(new Stage());
 		
 		codeArea.relocate(0, 100);
 		codeArea.setPrefSize(1000, 500);
@@ -170,6 +169,11 @@ public class MainUI extends Application {
 		Color lightGreen = Color.web("#17a1a5");
 		Color darkGreen = Color.web("#006468");
 		Color textGreen = Color.web("#0f6464");
+<<<<<<< HEAD
+=======
+//		Color textBlue = Color.web("#1c9ea4");
+//		Color textYellow = Color.web("#68731a");
+>>>>>>> main
 		
 		Rectangle rectangle = new Rectangle();
 		rectangle.setFill(lightGreen);
@@ -247,6 +251,7 @@ public class MainUI extends Application {
 		save.relocate(220,35);
 		save.setPrefSize(50, 30);
 		
+<<<<<<< HEAD
 		pane.getChildren().addAll(rectangle4, rectangle, rectangle3, rectangle5, codeArea, rectangle2, t, t2,run, build, 
 				newFile, open, save, ToolBar(primaryStage));
 		/*
@@ -256,6 +261,41 @@ public class MainUI extends Application {
 		
 		scene = new Scene(pane, 1000, 760);
 		
+=======
+		pane.getChildren().addAll(rectangle6, rectangle5, rectangle4, rectangle, rectangle2, rectangle3, t, t2, codeSpace,run, build, newFile,open,save, ToolBar(primaryStage));
+		
+		build.setOnAction(e->{
+			if (!manager.isSimRunning()) {
+				//manager.arduino.reloadBehavior();
+				manager.updateBehavior(codeSpace.getText());
+			}
+		});
+		
+		run.setOnAction(e->{
+			
+			if(run.getText().equals("Run"))
+			{
+				
+			run.setText("End");
+				Platform.runLater(new Runnable() {
+				      @Override
+				      public void run() {
+				    	  thread = (new Thread(() -> {
+				    		  manager.setSimRunning(true);
+				    		  manager.execute();
+				    		  System.out.println("thread over");
+				    	  }));
+				    	  thread.start();
+				      }
+				  });
+			}
+			else {
+				run.setText("Run");
+				manager.setSimRunning(false);
+			}
+		});
+
+>>>>>>> main
 		File f = new File("Styles.css");
 		scene.getStylesheets().add("File:///"+f.getAbsolutePath().replace("\\","/"));
 		
@@ -307,10 +347,6 @@ public class MainUI extends Application {
 		
 		tools.getItems().addAll(btnSerialMon);
 		
-		/*
-		execute.setOnAction(e->{
-			manager.execute();
-		});*/
 		toolBar.getItems().addAll(file, new Separator(), sketch, new Separator(), tools);
 		
 		return toolBar;

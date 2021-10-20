@@ -1,38 +1,72 @@
 package com.egr101sim.arduino.components;
 
 import com.egr101sim.arduino.elements.Pin;
-import com.egr101sim.arduino.elements.PinType;
 
 public class Led extends Component{
 
 	
+	boolean grounded = false;
+	private boolean powered = false;
 	
+	/**
+	 * short ground 1st pin
+	 * longweird one power 2nd pin
+	 */
 	public Led() {
-		this.pins = new Pin[2];
+		this.setPins(new Pin[2]);
 		//2 volts
-		this.voltageLimit = 2;
-		// has an IO pin not native to the Arduino board
-		this.pins[0] = new Pin(PinType.IO, false);
-		// has a ground pin not native to the Arduino board
-		this.pins[1] = new Pin(PinType.GROUND, false);
+		this.voltageLimit = 2.2;
+		this.currentDrain = 2.2;
+	}
+	
+	
+	/**
+	 * checks whether powered or grounded and updates LED state
+	 */
+	public void checkState() throws Exception {
+		
+		
+		// is grounded?
+		Pin cur = getPins()[0];
+		while(cur != null) {
+			if(cur.isLocal()) {
+				grounded = true;
+			}
+			cur = cur.getPrev();
+		}
+		
+		// is powered?
+		if(getPins()[1].getCurrent() <= 2.2 && getPins()[1].getCurrent() > 1 ) {
+//			System.out.println("LED POWER ON voltage rx: " + getPins()[1].getCurrent());
+			setPowered(true);
+		} else if(getPins()[1].getPrev().getCurrent() > 2.2) {
+//			System.out.println("LED MELTED voltage in: " + getPins()[1].getCurrent());
+			setPowered(false);
+		} else {
+//			System.out.println("LED POWER OFF voltage rx: " + getPins()[1].getCurrent());
+			setPowered(false);
+		}
 	}
 	
 	@Override
 	public void Behavior() {
-		
-		if(this.pins[0].getConnections().get(0).getVoltage() 
-				>= this.voltageLimit) {
-			System.out.println("LED EXPLODED");
-			return;
+		if(isPowered() && grounded) {
+			//if anything do it here
 		}
-		
-		if(this.pins[0].getConnections().get(0).getVoltage() 
-				> 1
-			&& this.pins[1].getConnections().get(0).isGround()) {
-		
-			System.out.println("LED turns on");
-		}
-		
+	}
+
+	/**
+	 * @return the powered
+	 */
+	public boolean isPowered() {
+		return powered;
+	}
+
+	/**
+	 * @param powered the powered to set
+	 */
+	public void setPowered(boolean powered) {
+		this.powered = powered;
 	}
 
 }
