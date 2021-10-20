@@ -169,11 +169,6 @@ public class MainUI extends Application {
 		Color lightGreen = Color.web("#17a1a5");
 		Color darkGreen = Color.web("#006468");
 		Color textGreen = Color.web("#0f6464");
-<<<<<<< HEAD
-=======
-//		Color textBlue = Color.web("#1c9ea4");
-//		Color textYellow = Color.web("#68731a");
->>>>>>> main
 		
 		Rectangle rectangle = new Rectangle();
 		rectangle.setFill(lightGreen);
@@ -251,23 +246,14 @@ public class MainUI extends Application {
 		save.relocate(220,35);
 		save.setPrefSize(50, 30);
 		
-<<<<<<< HEAD
 		pane.getChildren().addAll(rectangle4, rectangle, rectangle3, rectangle5, codeArea, rectangle2, t, t2,run, build, 
 				newFile, open, save, ToolBar(primaryStage));
-		/*
-		build.setOnAction(e->{
-			manager.updateBehavior(codeSpace.getText());
-		});*/
 		
 		scene = new Scene(pane, 1000, 760);
-		
-=======
-		pane.getChildren().addAll(rectangle6, rectangle5, rectangle4, rectangle, rectangle2, rectangle3, t, t2, codeSpace,run, build, newFile,open,save, ToolBar(primaryStage));
-		
+
 		build.setOnAction(e->{
 			if (!manager.isSimRunning()) {
-				//manager.arduino.reloadBehavior();
-				manager.updateBehavior(codeSpace.getText());
+				manager.updateBehavior(codeArea.getText());
 			}
 		});
 		
@@ -295,7 +281,6 @@ public class MainUI extends Application {
 			}
 		});
 
->>>>>>> main
 		File f = new File("Styles.css");
 		scene.getStylesheets().add("File:///"+f.getAbsolutePath().replace("\\","/"));
 		
