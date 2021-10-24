@@ -107,8 +107,8 @@ public class MainUI extends Application {
 	
 	private static final Pattern PATTERN = Pattern.compile(
 		"(?<KEYWORDblue>" + KEYWORDblue_PATTERN + ")"
-		//+ "(?<KEYWORDgreen>" + KEYWORDgreen_PATTERN + ")"
-		//+ "(?<KEYWORDorange>" + KEYWORDorange_PATTERN + ")"
+		+ "|(?<KEYWORDgreen>" + KEYWORDgreen_PATTERN + ")"
+		+ "|(?<KEYWORDorange>" + KEYWORDorange_PATTERN + ")"
 	);
 	
 	private static final String startingcode = String.join("\n", new String[] 
