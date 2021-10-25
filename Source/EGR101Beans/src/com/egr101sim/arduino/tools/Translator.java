@@ -91,7 +91,7 @@ public class Translator {
 							.replace("delay", "t.delay")
 							.replace("delayMicroSeconds", "t.delayMicroSeconds")
 							.replace("pinMode", "t.pinMode")
-							.replace("#include <Servo.h>", "import com.egr101sim.arduino.elements.Servo");
+							.replace("#include \"Servo.h\"", "import com.egr101sim.arduino.elements.Servo");
 		return string;
 	}
 
