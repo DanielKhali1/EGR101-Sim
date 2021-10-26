@@ -156,8 +156,6 @@ public class MainUI extends Application {
 		
 		codeArea.replaceText(0, 0, startingcode);
 		
-		new WiringGUI(manager).start(new Stage());
-		
 		codeArea.relocate(0, 100);
 		codeArea.setPrefSize(1000, 500);
 		
@@ -246,10 +244,24 @@ public class MainUI extends Application {
 		save.relocate(220,35);
 		save.setPrefSize(50, 30);
 		
+		Button wiring = new Button("Wiring Interface");
+		wiring.relocate(880, 35);
+		wiring.setPrefSize(110, 30);
+		
 		pane.getChildren().addAll(rectangle4, rectangle, rectangle3, rectangle5, codeArea, rectangle2, t, t2,run, build, 
-				newFile, open, save, ToolBar(primaryStage));
+				newFile, open, save, wiring, ToolBar(primaryStage));
 		
 		scene = new Scene(pane, 1000, 760);
+		
+		wiring.setOnAction(e -> 
+			{
+				try {
+					new WiringGUI(manager).start(new Stage());
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			});
 
 		build.setOnAction(e->{
 			if (!manager.isSimRunning()) {
