@@ -14,6 +14,7 @@ public class Pin {
 	private double resistance;
 	
 	private double current;
+	private double angle;
 	
 	
 	/**
@@ -137,5 +138,19 @@ public class Pin {
 	 */
 	public void setResistance(double d) {
 		this.resistance = (double) d;
+	}
+
+	/**
+	 * @return the angle
+	 */
+	public double getAngle() {
+		return angle;
+	}
+
+	/**
+	 * @param angle the angle to set
+	 */
+	public void setAngle(double angle) {
+		this.angle = angle;
 	}
 }

@@ -13,8 +13,8 @@ public class ContinuousServoMotor extends Component {
 	 */
 	public ContinuousServoMotor() {
 		this.setPins(new Pin[3]);
-		this.voltageLimit = 5;
-		this.currentDrain = 5;
+		this.voltageLimit = 6;
+		this.currentDrain = 6;
 		angle = 0;
 		rotations = 0;
 		writtenAngle = 0;
@@ -46,9 +46,13 @@ public class ContinuousServoMotor extends Component {
 	@Override
 	public void Behavior() {
 		// is grounded
-		if(isPowered() && isGrounded()) {
+		if(isPowered() && isGrounded() && angle != 90) {
 			
 		}
+	}
+
+	public long getAngle() {
+		return angle;
 	}
 
 }

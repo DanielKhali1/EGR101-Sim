@@ -47,8 +47,6 @@ public class SimulationManager {
 		updateComponentState();
 		
 		executeComponentBehavior();
-		
-		//System.out.println(getArduino().getArduino().getDigitalArray()[1].getCurrent());
 	}
 	
 	private void executeComponentBehavior() {
@@ -93,6 +91,7 @@ public class SimulationManager {
 						if(cur.getPrev() != null) {
 							// set the current power to the previous pins power
 							cur.setCurrent(cur.getPrev().getCurrent() / cur.getPrev().getResistance());
+							cur.setAngle(cur.getPrev().getAngle());
 						}
 						cur = cur.getNext();
 					}
@@ -145,6 +144,7 @@ public class SimulationManager {
 					if(cur.getPrev() != null) {
 						// set the current power to the previous pins power
 						cur.setCurrent(0);
+						cur.setAngle(0);
 					}
 					cur = cur.getNext();
 				}
@@ -161,6 +161,7 @@ public class SimulationManager {
 					if(cur.getPrev() != null) {
 						// set the current power to the previous pins power
 						cur.setCurrent(0);
+						cur.setAngle(0);
 					}
 					cur = cur.getNext();
 				}

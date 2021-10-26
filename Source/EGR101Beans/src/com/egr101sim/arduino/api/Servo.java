@@ -1,5 +1,7 @@
 package com.egr101sim.arduino.api;
 
+import com.egr101sim.arduino.BaseArduino;
+
 /**
  * This Class allows an Arduino board to control RC 
  * (hobby)servo motors. Servos have integrated gears and 
@@ -17,8 +19,9 @@ public class Servo {
 	private int pin;
 	
 	private int angle;
+	BaseArduino b;
 	
-	public Servo() {
+	public Servo(BaseArduino b) {
 		this.min = 544;
 		this.max = 2400;
 		this.pin = -1;
@@ -58,7 +61,7 @@ public class Servo {
 	 * @param angle the value to write to the servo, from 0 to 180
 	 */
 	public void write(int angle) {
-		this.angle = angle;
+		b.getDigitalArray()[pin].setAngle(angle);
 	}
 	
 	/**
@@ -80,14 +83,7 @@ public class Servo {
 	 */
 	public void writeMicroseconds(int us) {
 		//TODO: figure out how to convert microseconds to angle
-		angle = (int) Math.round(us/11.1111111111111);
-	}
-	
-	public static void main(String[] args) {
-		Servo s = new Servo();
-		s.writeMicroseconds(1500);
-		
-		System.out.println(s.angle);
+		b.getDigitalArray()[pin].setAngle(us/11.1111111111111);
 	}
 	
 	/**

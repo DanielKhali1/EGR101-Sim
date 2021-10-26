@@ -2,6 +2,7 @@ package com.egr101sim.ui;
 
 import java.util.ArrayList;
 
+import com.egr101sim.arduino.components.ContinuousServoMotor;
 import com.egr101sim.arduino.components.Led;
 import com.egr101sim.arduino.elements.Pin;
 import com.egr101sim.arduino.elements.PinType;
@@ -45,6 +46,8 @@ public class WiringGUI extends Application
 	public boolean pinDig;
 	public int tempPinNum;
 	
+	Color curColor;
+	
 	public WiringGUI(ApplicationManager manager) {
 		
 		this.manager = manager;
@@ -55,7 +58,7 @@ public class WiringGUI extends Application
 		Scene scene = new Scene(pane, 950, 600);
 		
 		HBox toolBarPane = new HBox();
-		toolBarPane.getChildren().addAll(new Pane(new WGComonent(CompID.LED)), new Pane(new WGComonent(CompID.BUTTON)), new Pane(new WGComonent(CompID.RESISTOR)));
+		toolBarPane.getChildren().addAll(new Pane(new WGComonent(CompID.LED)), new Pane(new WGComonent(CompID.MOTOR)), new Pane(new WGComonent(CompID.RESISTOR)));
 		toolBarPane.relocate(20, 490);
 		for(int i = 0; i < toolBarPane.getChildren().size(); i++) {
 			final int ii = i;
@@ -89,13 +92,22 @@ public class WiringGUI extends Application
 					pin1.pin = resistorPin;
 					pin2.pin = resistorPin;
 					
-					
 					tempPane.getChildren().addAll(comp, pin1, pin2);
 				}
-				else if (comp.compid == CompID.BUTTON) {
-					PinSquare pin1 = new PinSquare(4, 45, PinType.GROUND, tempPane, false, false, -1);
-					PinSquare pin2 = new PinSquare(17, 45, PinType.IO, tempPane, false, false, -1);
-					tempPane.getChildren().addAll(comp, pin1, pin2);
+				else if (comp.compid == CompID.MOTOR) {
+					wgComponent.add(comp);
+					ContinuousServoMotor csm = new ContinuousServoMotor();
+					wgComponent.get(wgComponent.size()-1).motor = csm;
+					this.manager.arduino.addComponent(csm);
+					
+					PinSquare pin1 = new PinSquare(4, 45, PinType.GENERAL, tempPane, false, false, -1);
+					PinSquare pin2 = new PinSquare(17, 45, PinType.GENERAL, tempPane, false, false, -1);
+					PinSquare pin3 = new PinSquare(17 + (17-4), 45, PinType.GENERAL, tempPane, false, false, -1);
+					this.manager.arduino.getComponents().get(this.manager.arduino.getComponents().size()-1).getPins()[0] = pin1.pin;
+					this.manager.arduino.getComponents().get(this.manager.arduino.getComponents().size()-1).getPins()[1] = pin2.pin;
+					this.manager.arduino.getComponents().get(this.manager.arduino.getComponents().size()-1).getPins()[2] = pin3.pin;
+					
+					tempPane.getChildren().addAll(comp, pin1, pin2, pin3);
 				}
 				
 				
@@ -155,19 +167,16 @@ public class WiringGUI extends Application
 		});
 		
 		
-		Rectangle x = new Rectangle(100, 100, 100, 100);
 		pane.getChildren().addAll(arduino, toolBarPane, 
 				pin1, pin2, pin3, pin4, pin5, pin6, pin7, pin8, pin9, pin10, pin11, pin12,
-				pin13, pin14, pin15, pin16, pin17, pin18, pin19, pin20, pin21, pin22, pin23, pin24, pin25, pin26
-				,x);
+				pin13, pin14, pin15, pin16, pin17, pin18, pin19, pin20, pin21, pin22, pin23, pin24, pin25, pin26);
 		
 		int angle = 0;
 		timeline = new Timeline(new KeyFrame(Duration.millis(20), (ActionEvent event) -> {
-			x.getTransforms().add(new Rotate(angle+1, 0, 0, 0, Rotate.Z_AXIS));
 			scene.setOnMouseMoved(a->{
 				if(stuckToMouse != null && !wiring) {
-					stuckToMouse.setLayoutX(a.getX()-((ImageView) stuckToMouse.getChildren().get(0)).getImage().getWidth()/2);
-					stuckToMouse.setLayoutY(a.getY()-((ImageView) stuckToMouse.getChildren().get(0)).getImage().getHeight()/2);
+					stuckToMouse.setLayoutX(a.getX()-((Pane) stuckToMouse.getChildren().get(0)).getWidth()/2);
+					stuckToMouse.setLayoutY(a.getY()-((Pane) stuckToMouse.getChildren().get(0)).getHeight()/2);
 				}
 				
 				if(wiring) {
@@ -207,7 +216,12 @@ public class WiringGUI extends Application
 			});
 			
 			for(int i = 0; i < wgComponent.size(); i++) {
-				wgComponent.get(i).changeImage();
+				if(wgComponent.get(i).led != null) {
+					wgComponent.get(i).changeImage();
+				}
+				else if (wgComponent.get(i).motor != null) {
+					wgComponent.get(i).spinMotor();
+				}
 			}
 			
 		}));
@@ -300,8 +314,6 @@ public class WiringGUI extends Application
 			} else {
 				pin = new Pin(pinType, local);
 			}
-			
-			
 			
 			this.setOnMouseClicked(e-> {
 				if(!wiring) {
