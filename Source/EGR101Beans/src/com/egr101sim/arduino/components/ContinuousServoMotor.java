@@ -6,6 +6,8 @@ public class ContinuousServoMotor extends Component {
 	
 	long angle;
 	int rotations;
+	
+	int writtenAngle;
 	/**
 	 * 
 	 */
@@ -15,6 +17,7 @@ public class ContinuousServoMotor extends Component {
 		this.currentDrain = 5;
 		angle = 0;
 		rotations = 0;
+		writtenAngle = 0;
 	}
 
 	@Override
@@ -37,7 +40,6 @@ public class ContinuousServoMotor extends Component {
 		}
 		
 		//is angle being written to?
-		
 		
 	}
 

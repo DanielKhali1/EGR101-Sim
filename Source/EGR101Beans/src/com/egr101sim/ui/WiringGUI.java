@@ -22,6 +22,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -154,14 +155,15 @@ public class WiringGUI extends Application
 		});
 		
 		
-		
+		Rectangle x = new Rectangle(100, 100, 100, 100);
 		pane.getChildren().addAll(arduino, toolBarPane, 
 				pin1, pin2, pin3, pin4, pin5, pin6, pin7, pin8, pin9, pin10, pin11, pin12,
-				pin13, pin14, pin15, pin16, pin17, pin18, pin19, pin20, pin21, pin22, pin23, pin24, pin25, pin26);
+				pin13, pin14, pin15, pin16, pin17, pin18, pin19, pin20, pin21, pin22, pin23, pin24, pin25, pin26
+				,x);
 		
-		
+		int angle = 0;
 		timeline = new Timeline(new KeyFrame(Duration.millis(20), (ActionEvent event) -> {
-			
+			x.getTransforms().add(new Rotate(angle+1, 0, 0, 0, Rotate.Z_AXIS));
 			scene.setOnMouseMoved(a->{
 				if(stuckToMouse != null && !wiring) {
 					stuckToMouse.setLayoutX(a.getX()-((ImageView) stuckToMouse.getChildren().get(0)).getImage().getWidth()/2);
