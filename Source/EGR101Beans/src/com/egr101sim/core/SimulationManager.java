@@ -75,6 +75,8 @@ public class SimulationManager {
 					if(cur.getPrev() != null) {
 						// set the current power to the previous pins power
 						cur.setCurrent(cur.getPrev().getCurrent() / cur.getPrev().getResistance());
+						cur.setAngle(cur.getPrev().getAngle());
+
 					}
 					cur = cur.getNext();
 				}
@@ -105,7 +107,7 @@ public class SimulationManager {
 					pins[i].setCurrent(5);
 				} else if(pins[i].getPinState() == PinState.LOW) {
 					pins[i].setCurrent(0);
-				}
+				} 
 			}
 		}
 	}
@@ -144,7 +146,7 @@ public class SimulationManager {
 					if(cur.getPrev() != null) {
 						// set the current power to the previous pins power
 						cur.setCurrent(0);
-						cur.setAngle(0);
+						cur.setAngle(90);
 					}
 					cur = cur.getNext();
 				}
@@ -161,7 +163,7 @@ public class SimulationManager {
 					if(cur.getPrev() != null) {
 						// set the current power to the previous pins power
 						cur.setCurrent(0);
-						cur.setAngle(0);
+						cur.setAngle(90);
 					}
 					cur = cur.getNext();
 				}

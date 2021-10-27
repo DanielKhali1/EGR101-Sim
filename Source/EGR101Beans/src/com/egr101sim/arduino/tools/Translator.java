@@ -1,9 +1,10 @@
 package com.egr101sim.arduino.tools;
 
+import java.util.LinkedList;
+
 public class Translator {
 	
 	private String arduinoProgram;
-	
 	
 	
 	public Translator(String arduinoProgram) {
@@ -11,9 +12,7 @@ public class Translator {
 	}
 	
 	public String translate() {
-		String string =  ("package com.egr101sim.arduino;\r\n" + 
-							"\r\n" + 
-							"import java.util.Arrays;\r\n" + 
+		String string =  ( "import java.util.Arrays;\r\n" + 
 							"\r\n" + 
 							"import com.egr101sim.arduino.BaseArduino;\r\n" + 
 							"import com.egr101sim.arduino.elements.Pin;\r\n" + 
@@ -28,9 +27,9 @@ public class Translator {
 							"	private static final int LOW = 0;\r\n" + 
 							"	private static final int INPUT_PULLUP = 2;\r\n" + 
 							"	private static final int LED_BUILTIN= 13;\r\n" +
-							"   private static final int A0 = 0;" +
-							"   private static final int A1 = 1;" +
-							"   private static final int A2 = 2;" +
+							"   private static final int A0 = 0;\n\r" +
+							"   private static final int A1 = 1;\n\r" +
+							"   private static final int A2 = 2;\n\r" +
 							"   private static final int A3 = 3;" +
 							"   private static final int A4 = 4;" +
 							"   private static final int A5 = 5;" +
@@ -46,9 +45,7 @@ public class Translator {
 							arduinoProgram + 
 							"	public String apply(BaseArduino t) {\r\n" + 
 							"		\r\n" + 
-							"		if(count == 0) { count++; setup(t); this.t = t; } else {loop(t);}\r\n" + 
-							"		\r\nSystem.out.println(this);" + 
-							
+							"		if(count == 0) { count++; "+ instantiateAnyObjects(arduinoProgram)+";setup(t); this.t = t;  } else {loop(t);}\r\n" + 
 							"		return \"wow\";\r\n" + 
 							"	}\r\n" + 
 							"	\r\n" +
@@ -90,12 +87,57 @@ public class Translator {
 							.replace("millis", "t.millis")
 							.replace("delay", "t.delay")
 							.replace("delayMicroSeconds", "t.delayMicroSeconds")
-							.replace("pinMode", "t.pinMode")
-							.replace("#include \"Servo.h\"", "import com.egr101sim.arduino.elements.Servo");
+							.replace("pinMode", "t.pinMode");
+		
+		if(string.contains("#include \"Servo.h\"")) {
+			string = string .replace("#include \"Servo.h\"", "");
+			string = "import com.egr101sim.arduino.api.Servo;\n" + string;
+		}
+		
+		string = "package com.egr101sim.arduino;\r\n" + string;
+		//need to somehow give Servo myservo access to Base arduino reference
+		// also somehow instantiate Servo
+		string = instantiateAllMentions(string, "Servo ", "= new Servo()");
+		
+		System.out.println(string);
+		
 		return string;
 	}
-
-
 	
-	
+	private static String instantiateAnyObjects(String arduinoProgram) {
+		//SERVO OBJECT
+		LinkedList<String> l = new LinkedList<String>();
+		
+		if(arduinoProgram.indexOf("Servo ") != -1) {
+			for(int index = arduinoProgram.indexOf("Servo "); index >= 0; index = arduinoProgram.indexOf("Servo ", index+1)) {
+				//given index find ; index
+				int semiColonIndex = arduinoProgram.substring(index).indexOf(";")+index;
+				String temp = arduinoProgram.substring(index, semiColonIndex);
+				l.add(temp.substring(temp.split("=")[0].indexOf(" ")+1));
+			}
+		}
+		
+		String ret = "";
+		for(String varName : l) {
+			ret += varName + ".b = t;\n";
+		}
+		
+		
+		
+		
+		return ret;
+	}
+
+	public static String instantiateAllMentions(String code, String nameOfObject, String instantiationString) {
+		String fin =code;
+		if(fin.indexOf(nameOfObject) != -1) {
+			for(int index = fin.indexOf(nameOfObject); index >= 0; index = fin.indexOf(nameOfObject, index+1)) {
+				//given index find ; index
+				int semiColonIndex = fin.substring(index).indexOf(";")+index;
+				System.out.println(fin.substring(index, semiColonIndex)+instantiationString);
+				fin = fin.replace(fin.substring(index, semiColonIndex), fin.substring(index, semiColonIndex)+instantiationString);
+			}
+		}
+		return fin;
+	}
 }

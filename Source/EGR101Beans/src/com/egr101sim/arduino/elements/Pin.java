@@ -43,6 +43,7 @@ public class Pin {
 		this.setPinType(pinType);
 		this.setLocal(local);
 		this.setResistance(1);
+		this.setAngle(90);
 		
 		if (this.isLocal()) {
 			switch (this.pinType) {

@@ -45,8 +45,7 @@ public class WGComonent extends Pane{
 	}
 	
 	public void spinMotor() {
-		if(this.compid == CompID.MOTOR && this.motor.isPowered() && this.motor.isGrounded() && this.motor.getAngle() != 90)
-			motorTick.getTransforms().add(new Rotate(this.motor.getAngle(), motorTick.getStartX(), motorTick.getStartY(), 0, Rotate.Z_AXIS));
+		motorTick.getTransforms().add(new Rotate(this.motor.writtenAngle, motorTick.getStartX(), motorTick.getStartY(), 0, Rotate.Z_AXIS));
 	}
 	
 	

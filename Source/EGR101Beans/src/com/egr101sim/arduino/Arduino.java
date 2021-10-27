@@ -143,7 +143,6 @@ public class Arduino {
 	 */
 	private void loop() {
 		behavior.getFunction().apply(getArduino());
-		System.out.println(behavior.getFunction());
 	}
 
 	/**

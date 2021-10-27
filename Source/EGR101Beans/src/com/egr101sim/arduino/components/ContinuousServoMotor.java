@@ -1,13 +1,14 @@
 package com.egr101sim.arduino.components;
 
 import com.egr101sim.arduino.elements.Pin;
+import com.egr101sim.arduino.elements.PinType;
 
 public class ContinuousServoMotor extends Component {
 	
-	long angle;
+	double angle;
 	int rotations;
 	
-	int writtenAngle;
+	public double writtenAngle;
 	/**
 	 * 
 	 */
@@ -23,21 +24,29 @@ public class ContinuousServoMotor extends Component {
 	@Override
 	public void checkState() throws Exception {
 		
+		angle = getPins()[0].getAngle();
 		// is grounded?
-		Pin cur = getPins()[0];
+		Pin cur = getPins()[2];
 		while(cur != null) {
-			if(cur.isLocal()) {
+			if(cur.isLocal() && cur.getPinType() == PinType.GROUND ) {
 				setGrounded(true);
 			}
 			cur = cur.getPrev();
 		}
 		
-		// is powered?
-		if(getPins()[1].getCurrent() <= 6 && getPins()[1].getCurrent() > 4.8 ) {
-			setPowered(true);
-		} else {
-			setPowered(false);
+		// is 5V powered?
+		cur = getPins()[1];
+		while(cur != null) {
+			if(cur.isLocal() && cur.getPinType() == PinType.POWER_5V) {
+				setPowered(true);
+			}
+			cur = cur.getPrev();
 		}
+//		if(getPins()[1].getCurrent() <= 6 && getPins()[1].getCurrent() > 4.8 ) {
+//			setPowered(true);
+//		} else {
+//			setPowered(false);
+//		}
 		
 		//is angle being written to?
 		
@@ -47,11 +56,14 @@ public class ContinuousServoMotor extends Component {
 	public void Behavior() {
 		// is grounded
 		if(isPowered() && isGrounded() && angle != 90) {
-			
+			writtenAngle = (angle-90)/4;
+		} else if(angle == 90) {
+			writtenAngle = 0;
 		}
+		
 	}
 
-	public long getAngle() {
+	public double getAngle() {
 		return angle;
 	}
 

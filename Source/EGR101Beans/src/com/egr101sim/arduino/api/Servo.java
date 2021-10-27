@@ -19,9 +19,9 @@ public class Servo {
 	private int pin;
 	
 	private int angle;
-	BaseArduino b;
+	public BaseArduino b;
 	
-	public Servo(BaseArduino b) {
+	public Servo() {
 		this.min = 544;
 		this.max = 2400;
 		this.pin = -1;
@@ -83,7 +83,7 @@ public class Servo {
 	 */
 	public void writeMicroseconds(int us) {
 		//TODO: figure out how to convert microseconds to angle
-		b.getDigitalArray()[pin].setAngle(us/11.1111111111111);
+		b.getDigitalArray()[pin].setAngle(us/16.6666666666667);
 	}
 	
 	/**
