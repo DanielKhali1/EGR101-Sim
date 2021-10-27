@@ -1,33 +1,34 @@
 package com.egr101sim.arduino;
 
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 import com.org.joor.Reflect;
 
 public class ArduinoBehaviorManager {
 	
-	private final BaseArduino arduino;
 	private Function<BaseArduino,String> function;
-	private String instruction;
-
+	int index;
 	
-	public ArduinoBehaviorManager(BaseArduino arduino, String instruction) {
-		this.instruction = instruction;
-		this.arduino = arduino;
+	public ArduinoBehaviorManager() {
+		index = 1;
 	}
 	
 	public void compile(String instructions) {
-		this.instruction = instructions;
-		setFunction(Reflect.compile("com.egr101sim.arduino.ArduinoBehavior", this.instruction).create().get());
+		//trashiest fix ever
+		instructions = instructions.replace("class ArduinoBehavior implements", "class ArduinoBehavior"+ index +" implements");
+		setFunction(Reflect.compile("com.egr101sim.arduino.ArduinoBehavior"+index, instructions ).create().get());
+		index ++;
 	}
 
 	public void setFunction(Function<BaseArduino,String> function) {
+		System.out.println("THE FUNCTION HAS CHANGED");
+		if(this.function != null)
+			System.out.println(this.function.equals(function));
 		this.function = function;
+		
 	}
 	
 	public Function<BaseArduino,String> getFunction() {
 		return function;
 	}
-
 }
