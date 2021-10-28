@@ -51,14 +51,12 @@ public class WiringGUI extends Application
 	Color curColor;
 	
 	public WiringGUI(ApplicationManager manager) {
-		
 		this.manager = manager;
 	}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		Scene scene = new Scene(pane, 950, 600);
-		
 		HBox toolBarPane = new HBox();
 		toolBarPane.getChildren().addAll(
 				new Pane(new WGComonent(CompID.LED)), 
@@ -130,6 +128,15 @@ public class WiringGUI extends Application
 					tf.relocate(-5, -30);
 					tf.setPrefWidth(40);
 					
+					
+					
+					tf.setOnKeyReleased(a->{
+						try {
+							lrirs.readVal(Integer.parseInt(tf.getText()));
+						} catch (NumberFormatException h) {
+							lrirs.readVal(0);
+						}
+					});
 					
 					PinSquare pin1 = new PinSquare(4-5, 45+10, PinType.GENERAL, comp, false, false, -1);
 					PinSquare pin2 = new PinSquare(17-5, 45+10, PinType.GENERAL, comp, false, false, -1);
@@ -235,7 +242,7 @@ public class WiringGUI extends Application
 					for(int i = 1; i < stuckToMouse.getChildren().size(); i++) {
 						if(stuckToMouse.compid == CompID.MOTOR && i < 3)
 							continue;
-						else if(stuckToMouse.compid == CompID.LINE_IR && i < 3)
+						else if(stuckToMouse.compid == CompID.LINE_IR && i < 4)
 							continue;
 						else
 						{
@@ -254,6 +261,8 @@ public class WiringGUI extends Application
 							//start at 1 because image is 0th index
 							for(int i = 1; i < stuckToMouse.getChildren().size(); i++) {
 								if(stuckToMouse.compid == CompID.MOTOR && i < 3)
+									continue;
+								else if(stuckToMouse.compid == CompID.LINE_IR && i < 3)
 									continue;
 								else
 								{

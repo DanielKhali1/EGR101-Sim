@@ -50,7 +50,7 @@ public class LineReadingIRSensor extends Component{
 		
 		//this is the output pin
 		cur = getPins()[1];
-		double current = 5 * (whiteness/100) + (Math.random()*(randomNoiseBound[1] - randomNoiseBound[0]) + randomNoiseBound[0]);
+		double current = 5.0 * ((double)whiteness/(double)100) + (Math.random()*(randomNoiseBound[1] - randomNoiseBound[0]) + randomNoiseBound[0]);
 		
 		while(cur != null) {
 			if(cur.isLocal() && cur.getPinType() == PinType.IO && cur.getPinIO() == PinIO.INPUT) {

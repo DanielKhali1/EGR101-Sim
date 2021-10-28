@@ -124,8 +124,16 @@ public class BaseArduino {
 	 * @param analogPin
 	 * @return
 	 */
-	public int analogRead(int pin) {
-		return (int)(getDigitalArray()[pin].getCurrent()/0.0049);
+	public double analogRead(int pin) {
+		
+		if(pin >= 160 && pin < 2576) {
+			return getAnalogArray()[pin-160].getCurrent()/0.0049;
+		} else if(pin >= 2576) {
+			return getDigitalArray()[pin-2566].getCurrent()/0.0049;
+		}
+		return getDigitalArray()[pin].getCurrent()/0.0049;
+		
+		
 	}
 	
 	
@@ -156,7 +164,12 @@ public class BaseArduino {
 	 * @param pinIo
 	 */
 	public void pinMode(int pin, int pinIo) {
-		if(getDigitalArray()[pin] != null)
+		if(pin >= 160 && pin < 2576) {
+			getAnalogArray()[pin-160].setPinIO((pinIo == 0) ? PinIO.INPUT : PinIO.OUTPUT);
+		} else if(pin >= 2576) {
+			getAnalogArray()[pin-2566].setPinIO((pinIo == 0) ? PinIO.INPUT : PinIO.OUTPUT);
+		}
+		else if(getDigitalArray()[pin] != null)
 			getDigitalArray()[pin].setPinIO((pinIo == 0) ? PinIO.INPUT : PinIO.OUTPUT);
 	}
 	
@@ -170,9 +183,13 @@ public class BaseArduino {
 	 * @param pinState
 	 */
 	public void digitalWrite(int pin, int pinState) {
-		if(getDigitalArray()[pin] != null)
+		if(pin >= 160 && pin < 2576) {
+			getAnalogArray()[pin-160].setPinState((pinState == 0) ? PinState.LOW : PinState.HIGH);
+		} else if(pin >= 2576) {
+			getAnalogArray()[pin-2566].setPinState((pinState == 0) ? PinState.LOW : PinState.HIGH);
+		}
+		else if(getDigitalArray()[pin] != null)
 			getDigitalArray()[pin].setPinState((pinState == 0) ? PinState.LOW : PinState.HIGH);
-		
 	}
 	
 	/**
@@ -183,6 +200,12 @@ public class BaseArduino {
 	 * @return
 	 */
 	public int digitalRead(int pin) {
+		if(pin >= 160 && pin < 2576) {
+			return (getAnalogArray()[pin-160].getCurrent() > 3.0) ? 1 : 0;
+		} else if(pin >= 2576) {
+			return (getAnalogArray()[pin-2566].getCurrent() > 3.0) ? 1 : 0;
+		}
+		
 		return (digitalArray[pin].getCurrent() > 3.0) ? 1 : 0;
 	}
 

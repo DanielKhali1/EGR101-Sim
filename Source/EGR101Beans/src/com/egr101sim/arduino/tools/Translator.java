@@ -27,20 +27,20 @@ public class Translator {
 							"	private static final int LOW = 0;\r\n" + 
 							"	private static final int INPUT_PULLUP = 2;\r\n" + 
 							"	private static final int LED_BUILTIN= 13;\r\n" +
-							"   private static final int A0 = 0;\n\r" +
-							"   private static final int A1 = 1;\n\r" +
-							"   private static final int A2 = 2;\n\r" +
-							"   private static final int A3 = 3;" +
-							"   private static final int A4 = 4;" +
-							"   private static final int A5 = 5;" +
-							"   private static final int A6 = 6;" +
-							"   private static final int A7 = 7;" +
-							"   private static final int A8 = 8;" +
-							"   private static final int A9 = 9;" +
-							"   private static final int A10 = 10;" +
-							"   private static final int A11 = 11;" +
-							"   private static final int A12 = 12;" +
-							"   private static final int A13 = 13;" +
+							"   private static final int A0 = 0xA0;\n\r" +
+							"   private static final int A1 = 0xA1;\n\r" +
+							"   private static final int A2 = 0xA2;\n\r" +
+							"   private static final int A3 = 0xA3;" +
+							"   private static final int A4 = 0xA4;" +
+							"   private static final int A5 = 0xA5;" +
+							"   private static final int A6 = 0xA6;" +
+							"   private static final int A7 = 0xA7;" +
+							"   private static final int A8 = 0xA8;" +
+							"   private static final int A9 = 0xA9;" +
+							"   private static final int A10 = 0xA10;" +
+							"   private static final int A11 = 0xA11;" +
+							"   private static final int A12 = 0xA12;" +
+							"   private static final int A13 = 0xA13;" +
 							"   BaseArduino t;" +
 							arduinoProgram + 
 							"	public String apply(BaseArduino t) {\r\n" + 
