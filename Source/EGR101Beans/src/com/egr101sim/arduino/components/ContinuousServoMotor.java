@@ -26,30 +26,26 @@ public class ContinuousServoMotor extends Component {
 		
 		angle = getPins()[0].getAngle();
 		// is grounded?
+		boolean grounded = false;
 		Pin cur = getPins()[2];
 		while(cur != null) {
-			if(cur.isLocal() && cur.getPinType() == PinType.GROUND ) {
-				setGrounded(true);
+			if(cur.isLocal()) {
+				grounded = true;
 			}
 			cur = cur.getPrev();
 		}
+		setGrounded(grounded);
 		
+		boolean powered = false;
 		// is 5V powered?
 		cur = getPins()[1];
 		while(cur != null) {
 			if(cur.isLocal() && cur.getPinType() == PinType.POWER_5V) {
-				setPowered(true);
+				powered = true;
 			}
 			cur = cur.getPrev();
 		}
-//		if(getPins()[1].getCurrent() <= 6 && getPins()[1].getCurrent() > 4.8 ) {
-//			setPowered(true);
-//		} else {
-//			setPowered(false);
-//		}
-		
-		//is angle being written to?
-		
+		setPowered(powered);
 	}
 
 	@Override

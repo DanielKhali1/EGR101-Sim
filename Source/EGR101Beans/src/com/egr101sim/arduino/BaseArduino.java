@@ -124,8 +124,8 @@ public class BaseArduino {
 	 * @param analogPin
 	 * @return
 	 */
-	public double analogRead(int analogPin) {
-		return getAnalogArray()[analogPin].getCurrent();
+	public int analogRead(int pin) {
+		return (int)(getDigitalArray()[pin].getCurrent()/0.0049);
 	}
 	
 	
@@ -182,11 +182,8 @@ public class BaseArduino {
 	 * @param pin
 	 * @return
 	 */
-	public PinState digitalRead(int pin) {
-		
-		return (getDigitalArray()[pin] != null) ? 
-				getDigitalArray()[pin].getPinState()
-				: PinState.ERROR;
+	public int digitalRead(int pin) {
+		return (digitalArray[pin].getCurrent() > 3.0) ? 1 : 0;
 	}
 
 	/**

@@ -20,22 +20,27 @@ public class Led extends Component{
 	 */
 	public void checkState() throws Exception {
 		// is grounded?
+		
+		boolean grounded = false;
 		Pin cur = getPins()[0];
 		while(cur != null) {
 			if(cur.isLocal()) {
-				setGrounded(true);
+				grounded = true;
 			}
 			cur = cur.getPrev();
 		}
+		setGrounded(grounded);
 		
 		// is powered?
+		boolean powered = false;
 		if(getPins()[1].getCurrent() <= 2.2 && getPins()[1].getCurrent() > 1 ) {
-			setPowered(true);
+			powered = true;
 		} else if(getPins()[1].getPrev().getCurrent() > 2.2) {
-			setPowered(false);
+			powered = false;
 		} else {
-			setPowered(false);
+			powered = false;
 		}
+		setPowered(powered);
 	}
 	
 	@Override

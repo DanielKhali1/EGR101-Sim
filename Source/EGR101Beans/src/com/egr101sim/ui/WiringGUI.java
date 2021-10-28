@@ -2,6 +2,7 @@ package com.egr101sim.ui;
 
 import java.util.ArrayList;
 
+import com.egr101sim.arduino.component.sensors.LineReadingIRSensor;
 import com.egr101sim.arduino.components.ContinuousServoMotor;
 import com.egr101sim.arduino.components.Led;
 import com.egr101sim.arduino.elements.Pin;
@@ -17,20 +18,21 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.transform.Rotate;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class WiringGUI extends Application
 {
 	
-	Pane stuckToMouse = null;
+	WGComonent stuckToMouse = null;
 	Pane pane = new Pane();
 	
 	Timeline timeline;
@@ -58,71 +60,119 @@ public class WiringGUI extends Application
 		Scene scene = new Scene(pane, 950, 600);
 		
 		HBox toolBarPane = new HBox();
-		toolBarPane.getChildren().addAll(new Pane(new WGComonent(CompID.LED)), new Pane(new WGComonent(CompID.MOTOR)), new Pane(new WGComonent(CompID.RESISTOR)));
+		toolBarPane.getChildren().addAll(
+				new Pane(new WGComonent(CompID.LED)), 
+				new Pane(new WGComonent(CompID.MOTOR)), 
+				new Pane(new WGComonent(CompID.RESISTOR)),
+				new Pane(new WGComonent(CompID.LINE_IR)),
+				new Pane(new WGComonent(CompID.DIST_IR)),
+				new Pane(new WGComonent(CompID.ULTRA_SONIC)));
 		toolBarPane.relocate(20, 490);
 		for(int i = 0; i < toolBarPane.getChildren().size(); i++) {
 			final int ii = i;
 			((Pane) toolBarPane.getChildren().get(i)).setPrefSize(100, 100);
 			toolBarPane.getChildren().get(i).setStyle("-fx-border-style: solid; -fx-border-color: black");
-			((Pane) toolBarPane.getChildren().get(i)).getChildren().get(0).relocate(30, 20);
-			
+			if(i != 5)
+				((Pane) toolBarPane.getChildren().get(i)).getChildren().get(0).relocate(30, 20);
+			else 
+				((Pane) toolBarPane.getChildren().get(i)).getChildren().get(0).relocate(5, 20);
 			((Pane) toolBarPane.getChildren().get(i)).setOnMouseClicked(e->{
 				final WGComonent comp = new WGComonent(((WGComonent)(((Pane) toolBarPane.getChildren().get(ii)).getChildren().get(0))).compid);
-				Pane tempPane = new Pane();
-				pane.getChildren().add(tempPane);
-				stuckToMouse = tempPane;
-				
+				pane.getChildren().add(comp);
+				stuckToMouse = (WGComonent) comp;
 				
 				if(comp.compid == CompID.LED) {
 					wgComponent.add(comp);
 					Led led = new Led();
-					wgComponent.get(wgComponent.size()-1).led = led;
+					wgComponent.get(wgComponent.size()-1).comp = led;
 					this.manager.arduino.addComponent(led);
-					PinSquare pin1 = new PinSquare(4, 45, PinType.GENERAL, tempPane, false, false, -1);
-					PinSquare pin2 = new PinSquare(17, 45, PinType.GENERAL, tempPane, false, false, -1);
+					PinSquare pin1 = new PinSquare(4, 45, PinType.GENERAL, comp, false, false, -1);
+					PinSquare pin2 = new PinSquare(17, 45, PinType.GENERAL, comp, false, false, -1);
 					this.manager.arduino.getComponents().get(this.manager.arduino.getComponents().size()-1).getPins()[0] = pin1.pin;
 					this.manager.arduino.getComponents().get(this.manager.arduino.getComponents().size()-1).getPins()[1] = pin2.pin;
-					tempPane.getChildren().addAll(comp, pin1, pin2);
+					comp.getChildren().addAll(pin1, pin2);
 				} else if (comp.compid == CompID.RESISTOR) {
 
-					PinSquare pin1 = new PinSquare(8, 0, PinType.GENERAL, tempPane, false, false, -1);
-					PinSquare pin2 = new PinSquare(8, 60, PinType.GENERAL, tempPane, false, false, -1);
+					PinSquare pin1 = new PinSquare(8, 0, PinType.GENERAL, comp, false, false, -1);
+					PinSquare pin2 = new PinSquare(8, 60, PinType.GENERAL, comp, false, false, -1);
 					Pin resistorPin = new Pin(PinType.GENERAL, false);
 					resistorPin.setResistance(3);
 					pin1.pin = resistorPin;
 					pin2.pin = resistorPin;
 					
-					tempPane.getChildren().addAll(comp, pin1, pin2);
+					comp.getChildren().addAll(pin1, pin2);
 				}
 				else if (comp.compid == CompID.MOTOR) {
 					wgComponent.add(comp);
 					ContinuousServoMotor csm = new ContinuousServoMotor();
-					wgComponent.get(wgComponent.size()-1).motor = csm;
+					wgComponent.get(wgComponent.size()-1).comp = csm;
 					this.manager.arduino.addComponent(csm);
 					
-					PinSquare pin1 = new PinSquare(4, 45, PinType.GENERAL, tempPane, false, false, -1);
-					PinSquare pin2 = new PinSquare(17, 45, PinType.GENERAL, tempPane, false, false, -1);
-					PinSquare pin3 = new PinSquare(17 + (17-4), 45, PinType.GENERAL, tempPane, false, false, -1);
+					PinSquare pin1 = new PinSquare(4, 45, PinType.GENERAL, comp, false, false, -1);
+					PinSquare pin2 = new PinSquare(17, 45, PinType.GENERAL, comp, false, false, -1);
+					PinSquare pin3 = new PinSquare(17 + (17-4), 45, PinType.GENERAL, comp, false, false, -1);
 					this.manager.arduino.getComponents().get(this.manager.arduino.getComponents().size()-1).getPins()[0] = pin1.pin;
 					this.manager.arduino.getComponents().get(this.manager.arduino.getComponents().size()-1).getPins()[1] = pin2.pin;
 					this.manager.arduino.getComponents().get(this.manager.arduino.getComponents().size()-1).getPins()[2] = pin3.pin;
 					
-					tempPane.getChildren().addAll(comp, pin1, pin2, pin3);
+					comp.getChildren().addAll(pin1, pin2, pin3);
+				}
+				else if (comp.compid == CompID.LINE_IR) {
+					wgComponent.add(comp);
+					LineReadingIRSensor lrirs = new LineReadingIRSensor();
+					wgComponent.get(wgComponent.size()-1).comp = lrirs;
+					this.manager.arduino.addComponent(lrirs);
+					
+					Text txt = new Text("light reflect %");
+					txt.setStyle("-fx-font-size: 10;");
+					txt.relocate(-11, -50);
+					TextField tf = new TextField("0");
+					tf.relocate(-5, -30);
+					tf.setPrefWidth(40);
+					
+					
+					PinSquare pin1 = new PinSquare(4-5, 45+10, PinType.GENERAL, comp, false, false, -1);
+					PinSquare pin2 = new PinSquare(17-5, 45+10, PinType.GENERAL, comp, false, false, -1);
+					PinSquare pin3 = new PinSquare(17 + (17-4)-5, 45+10, PinType.GENERAL, comp, false, false, -1);
+					this.manager.arduino.getComponents().get(this.manager.arduino.getComponents().size()-1).getPins()[0] = pin1.pin;
+					this.manager.arduino.getComponents().get(this.manager.arduino.getComponents().size()-1).getPins()[1] = pin2.pin;
+					this.manager.arduino.getComponents().get(this.manager.arduino.getComponents().size()-1).getPins()[2] = pin3.pin;
+					
+					
+					
+					
+					comp.getChildren().addAll(txt, tf, pin1, pin2, pin3);
+				}
+				else if (comp.compid == CompID.DIST_IR) {
+					wgComponent.add(comp);
+					ContinuousServoMotor csm = new ContinuousServoMotor();
+					wgComponent.get(wgComponent.size()-1).comp = csm;
+					this.manager.arduino.addComponent(csm);
+					
+					PinSquare pin1 = new PinSquare(4, 45, PinType.GENERAL, comp, false, false, -1);
+					PinSquare pin2 = new PinSquare(17, 45, PinType.GENERAL, comp, false, false, -1);
+					PinSquare pin3 = new PinSquare(17 + (17-4), 45, PinType.GENERAL, comp, false, false, -1);
+					this.manager.arduino.getComponents().get(this.manager.arduino.getComponents().size()-1).getPins()[0] = pin1.pin;
+					this.manager.arduino.getComponents().get(this.manager.arduino.getComponents().size()-1).getPins()[1] = pin2.pin;
+					this.manager.arduino.getComponents().get(this.manager.arduino.getComponents().size()-1).getPins()[2] = pin3.pin;
+					
+					comp.getChildren().addAll(pin1, pin2, pin3);
 				}
 				
 				
 				
-				comp.setOnMouseClicked(f->{
+				comp.setOnMouseReleased(f->{
 						if(!wiring) {
 							System.out.println("stuck to mouse");
 							if(stuckToMouse == null)
-								stuckToMouse = tempPane;
-							else if(stuckToMouse == tempPane){
+								stuckToMouse = comp;
+							else if(stuckToMouse == comp){
 								stuckToMouse = null;
 							}
 						}	
 				});
 			});
+
 		}
 		
 		pane.setStyle("-fx-background-color: rgb(244,245,246);");
@@ -166,18 +216,77 @@ public class WiringGUI extends Application
 			System.out.println(e.getX() + " " + e.getY());
 		});
 		
-		
 		pane.getChildren().addAll(arduino, toolBarPane, 
 				pin1, pin2, pin3, pin4, pin5, pin6, pin7, pin8, pin9, pin10, pin11, pin12,
 				pin13, pin14, pin15, pin16, pin17, pin18, pin19, pin20, pin21, pin22, pin23, pin24, pin25, pin26);
 		
-		int angle = 0;
 		timeline = new Timeline(new KeyFrame(Duration.millis(20), (ActionEvent event) -> {
 			scene.setOnMouseMoved(a->{
 				if(stuckToMouse != null && !wiring) {
-					stuckToMouse.setLayoutX(a.getX()-((Pane) stuckToMouse.getChildren().get(0)).getWidth()/2);
-					stuckToMouse.setLayoutY(a.getY()-((Pane) stuckToMouse.getChildren().get(0)).getHeight()/2);
+					if(stuckToMouse.compid != CompID.LINE_IR) {
+						stuckToMouse.setLayoutX(a.getX()-( stuckToMouse).getWidth()/2);
+						stuckToMouse.setLayoutY(a.getY()-( stuckToMouse).getHeight()/2);
+					} else {
+						stuckToMouse.setLayoutX((a.getX()-( stuckToMouse).getWidth()/2)+20);
+						stuckToMouse.setLayoutY((a.getY()-( stuckToMouse).getHeight()/2)+30);
+					}
+					
+					//start at 1 because image is 0th index
+					for(int i = 1; i < stuckToMouse.getChildren().size(); i++) {
+						if(stuckToMouse.compid == CompID.MOTOR && i < 3)
+							continue;
+						else if(stuckToMouse.compid == CompID.LINE_IR && i < 3)
+							continue;
+						else
+						{
+							PinSquare temp = (PinSquare)stuckToMouse.getChildren().get(i);
+							if(temp.line != null) {
+								temp.line.setEndX(stuckToMouse.getLayoutX() + temp.getLayoutX()+temp.getWidth()/2);
+								temp.line.setEndY(stuckToMouse.getLayoutY() + temp.getLayoutY()+temp.getHeight()/2);
+							}
+						}
+					}
+					
 				}
+				scene.setOnKeyPressed(e->{
+					if(e.getCode() == KeyCode.ESCAPE) {
+						if(stuckToMouse != null) {
+							//start at 1 because image is 0th index
+							for(int i = 1; i < stuckToMouse.getChildren().size(); i++) {
+								if(stuckToMouse.compid == CompID.MOTOR && i < 3)
+									continue;
+								else
+								{
+									PinSquare tempPin = (PinSquare)stuckToMouse.getChildren().get(i);
+									//given line what arraylist is it apart of remove the lines if it is contained
+									
+									for(int j = 0; j < lines.size(); j++) {
+										if(lines.get(j).contains(tempPin.line)) {
+											ArrayList<SLine> tempLine = lines.get(j);
+											lines.remove(lines.size()-1);
+											for(int k = 0; k < tempLine.size(); k++) {
+												pane.getChildren().remove(tempLine.get(k));
+											}
+										}
+									}
+								}
+								
+							}
+							this.manager.arduino.getComponents().remove(stuckToMouse.comp);
+							pane.getChildren().remove(stuckToMouse);
+							stuckToMouse = null;
+							
+						} else if (wiring) {
+							wiring = false;
+							ArrayList<SLine> temp = lines.get(lines.size()-1);
+							lines.remove(lines.size()-1);
+							
+							for(int i = 0; i < temp.size(); i++) {
+								pane.getChildren().remove(temp.get(i));
+							}
+						}
+					}
+				});
 				
 				if(wiring) {
 					
@@ -216,10 +325,10 @@ public class WiringGUI extends Application
 			});
 			
 			for(int i = 0; i < wgComponent.size(); i++) {
-				if(wgComponent.get(i).led != null) {
+				if(wgComponent.get(i).compid == CompID.LED) {
 					wgComponent.get(i).changeImage();
 				}
-				else if (wgComponent.get(i).motor != null) {
+				else if (wgComponent.get(i).compid == CompID.MOTOR) {
 					wgComponent.get(i).spinMotor();
 				}
 			}
@@ -282,7 +391,12 @@ public class WiringGUI extends Application
 		int ioNumber = -1;
 		Pin pin;
 		
+		Line line;
 		boolean resistor = false;
+		
+		public void setLineReference(Line line) {
+			this.line = line;
+		}
 		
 		public PinSquare( double x, double y, PinType pinType, Pane p, boolean local, boolean isDigitalifIO, int ioNumber) {
 			this.ioNumber = ioNumber;
@@ -335,10 +449,14 @@ public class WiringGUI extends Application
 				} else {
 						lines.get(lines.size()-1).get(lines.get(lines.size()-1).size()-1).setEndX(this.p.getLayoutX() + getLayoutX()+getWidth()/2);
 						lines.get(lines.size()-1).get(lines.get(lines.size()-1).size()-1).setEndY(this.p.getLayoutY() + getLayoutY()+getHeight()/2);
+						
+						this.setLineReference(lines.get(lines.size()-1).get(lines.get(lines.size()-1).size()-1));
 					wiring = false;
 					wiringPivot[0] = 0;
 					wiringPivot[1] = 0;
 					System.out.println("DONE WIRING");
+					
+					
 					
 					if(!resistor) {
 						manager.arduino.AddConnection(tempPin, pin, pinDig, isDigitalifIO, tempPinNum, ioNumber);

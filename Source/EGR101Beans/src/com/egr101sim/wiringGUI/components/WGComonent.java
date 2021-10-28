@@ -1,5 +1,6 @@
 package com.egr101sim.wiringGUI.components;
 
+import com.egr101sim.arduino.components.Component;
 import com.egr101sim.arduino.components.ContinuousServoMotor;
 import com.egr101sim.arduino.components.Led;
 
@@ -15,8 +16,8 @@ public class WGComonent extends Pane{
 	
 	public CompID compid;
 	ImageView imageView;
-	public Led led;
-	public ContinuousServoMotor motor;
+	
+	public Component comp;
 	
 	public Line motorTick;
 	
@@ -40,18 +41,26 @@ public class WGComonent extends Pane{
 			this.getChildren().addAll(rectangle, motorTick);
 		} else if (componentType == CompID.LED) {
 			i = new Image("file:Resources\\LED.PNG");
+		} else if (componentType == CompID.LINE_IR) {
+			i = new Image("file:Resources\\lineReadingIR.PNG");
+			imageView.setFitHeight(50);
+		} else if (componentType == CompID.DIST_IR) {
+			i = new Image("file:Resources\\IRSensor.PNG");
+		} else if (componentType == CompID.ULTRA_SONIC) {
+			i = new Image("file:Resources\\UltraSonic.PNG");
+			imageView.setFitHeight(50);
 		}
 		imageView.setImage(i);
 	}
 	
 	public void spinMotor() {
-		motorTick.getTransforms().add(new Rotate(this.motor.writtenAngle, motorTick.getStartX(), motorTick.getStartY(), 0, Rotate.Z_AXIS));
+		motorTick.getTransforms().add(new Rotate(((ContinuousServoMotor)this.comp).writtenAngle, motorTick.getStartX(), motorTick.getStartY(), 0, Rotate.Z_AXIS));
 	}
 	
 	
 	
 	public void changeImage() {
-		if(led.isPowered()) {
+		if(((Led)comp).isPowered()) {
 			imageView.setImage(new Image("file:Resources\\LED_ON.PNG"));
 		} else {
 			imageView.setImage(new Image("file:Resources\\LED.png"));
@@ -65,7 +74,10 @@ public class WGComonent extends Pane{
 		RESISTOR,
 		LED,
 		BUTTON,
-		MOTOR
+		MOTOR, 
+		LINE_IR, 
+		DIST_IR, 
+		ULTRA_SONIC
 	}
 
 }
