@@ -3,20 +3,18 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Scanner;
 
 public class Server {
 	public static void main(String[] args) {
 		try {
 			
+			@SuppressWarnings("resource")
 			ServerSocket ss = new ServerSocket(666);
 			
 			Socket sock = ss.accept();
 			
 			DataInputStream dis = new DataInputStream(sock.getInputStream());
 			DataOutputStream dos = new DataOutputStream(sock.getOutputStream());
-			
-			String str = "";
 			
 			Thread t = new Thread(() -> {
 				while(true) {
@@ -38,7 +36,6 @@ public class Server {
 				}
 			});
 			t.start();
-			
 			while(true) {
 				System.out.println("Client = " + (String)(dis.readUTF()));
 			}

@@ -1,11 +1,11 @@
 package com.egr101sim.arduino;
 
-import com.egr101sim.arduino.elements.AnalogPin;
-import com.egr101sim.arduino.elements.DigitalPin;
 import com.egr101sim.arduino.elements.Pin;
 import com.egr101sim.arduino.elements.PinIO;
 import com.egr101sim.arduino.elements.PinState;
 import com.egr101sim.arduino.elements.PinType;
+import com.egr101sim.arduino.elements.SpecialPin;
+import com.egr101sim.core.SimulationManager;
 
 /**
  * 
@@ -19,43 +19,43 @@ import com.egr101sim.arduino.elements.PinType;
  */
 public class BaseArduino {
 	
-	private final Pin p5V;
-	private final Pin p3_3v;
-	private final Pin ground;
+	private final SpecialPin p5V;
+	private final SpecialPin p3_3v;
+	private final Pin[] ground;
 	
-	private final DigitalPin[] digitalArray;
-	private final AnalogPin[] analogArray;
+	private final Pin[] digitalArray;
+	private final Pin[] analogArray;
 	
 	
 	private boolean delayed;
 	private long delayedTimer;
 	
 	private long millis = 0;
+	SimulationManager simulationManager;
 	
-	
-	public BaseArduino() {
+	public BaseArduino(SimulationManager s) {
 		// initialize array of digital pins from 0 - 13
-		this.digitalArray = new DigitalPin[14];
+		this.digitalArray = new Pin[14];
 		
-		this.analogArray = new AnalogPin[6];
-
 		// initialize array of analog pins from 0 - 5
-		this.ground = new Pin(PinType.GROUND, true);
-		this.p5V = new Pin(PinType.POWER_5V, true);
-		this.p3_3v = new Pin(PinType.POWER_3_3V, true);
+		this.analogArray = new Pin[14];
+
+		this.ground = new Pin[3];
+		
+		this.p5V = new SpecialPin(PinType.POWER_5V, true);
+		this.p3_3v = new SpecialPin(PinType.POWER_3_3V, true);
+		
+		simulationManager =s;
+
 	}
 	
 	// call every time iteration so we can update millis
 	public void update() {
 		
 		if(delayed) {
-			delayedTimer -= millis;
-			if(delayedTimer <= 0)
+			if(delayedTimer < millis())
 				delayed = false;			
 		}
-		
-		if (!delayed)
-			incrementMillis(1);
 	}
 	
 	/**
@@ -65,8 +65,11 @@ public class BaseArduino {
 	 * @param milliseconds
 	 */
 	public void delay(long milliseconds) {
-		delayed = true;
-		delayedTimer = milliseconds;
+		
+		delayedTimer = milliseconds + millis();
+		while(delayedTimer > millis()) {
+			simulationManager.basicIterate();
+		}
 	}
 	
 	/**
@@ -108,17 +111,6 @@ public class BaseArduino {
 	}
 	
 	/**
-	 * increments milliseconds such that we can always understand how much time has passed in the arduino
-	 * @param iterator
-	 */
-	private void incrementMillis(long iterator) {
-		if(millis + iterator < Long.MAX_VALUE)
-			millis += iterator;
-		else
-			millis = 0;
-	}
-
-	/**
 	 * Reads the value from the specified analog pin.
 	 * Arduino boards contain a multichannel, 10-bit analog
 	 * to digital converter. This means that it will map
@@ -132,8 +124,8 @@ public class BaseArduino {
 	 * @param analogPin
 	 * @return
 	 */
-	public int analogRead(int analogPin) {
-		return analogArray[analogPin].getVoltage();
+	public double analogRead(int analogPin) {
+		return getAnalogArray()[analogPin].getCurrent();
 	}
 	
 	
@@ -150,7 +142,8 @@ public class BaseArduino {
 	 * @param val
 	 */
 	public void analogWrite(int analogPin, int val) {
-		analogArray[analogPin].setValue(val);
+		// TODO: initiate PWM using Time to send waves to the pin or something
+		//analogArray[analogPin].setCurrent(val);
 	}
 	
 	/**
@@ -163,7 +156,8 @@ public class BaseArduino {
 	 * @param pinIo
 	 */
 	public void pinMode(int pin, int pinIo) {
-		getDigitalArray()[pin].setPinIO((pinIo == 0) ? PinIO.INPUT : PinIO.OUTPUT);
+		if(getDigitalArray()[pin] != null)
+			getDigitalArray()[pin].setPinIO((pinIo == 0) ? PinIO.INPUT : PinIO.OUTPUT);
 	}
 	
 	/**
@@ -176,7 +170,9 @@ public class BaseArduino {
 	 * @param pinState
 	 */
 	public void digitalWrite(int pin, int pinState) {
-		getDigitalArray()[pin].setPinState((pinState == 0) ? PinState.LOW : PinState.HIGH);
+		if(getDigitalArray()[pin] != null)
+			getDigitalArray()[pin].setPinState((pinState == 0) ? PinState.LOW : PinState.HIGH);
+		
 	}
 	
 	/**
@@ -187,10 +183,17 @@ public class BaseArduino {
 	 * @return
 	 */
 	public PinState digitalRead(int pin) {
-		return getDigitalArray()[pin].getPinState();
+		
+		return (getDigitalArray()[pin] != null) ? 
+				getDigitalArray()[pin].getPinState()
+				: PinState.ERROR;
 	}
 
-	public DigitalPin[] getDigitalArray() {
+	/**
+	 * Returns the digital Array of Pin references
+	 * @return digitalArray
+	 */
+	public Pin[] getDigitalArray() {
 		return digitalArray;
 	}
 
@@ -200,6 +203,35 @@ public class BaseArduino {
 
 	public void setDelayed(boolean delayed) {
 		this.delayed = delayed;
+	}
+
+	public Pin[] getAnalogArray() {
+		return analogArray;
+	}
+
+	public void setMilli(long time) {
+		millis = time;
+	}
+
+	/**
+	 * @return the p5V
+	 */
+	public Pin getP5V() {
+		return p5V;
+	}
+
+	/**
+	 * @return the p3_3v
+	 */
+	public Pin getP3_3v() {
+		return p3_3v;
+	}
+
+	/**
+	 * @return the ground
+	 */
+	public Pin[] getGround() {
+		return ground;
 	}
 	
 }
