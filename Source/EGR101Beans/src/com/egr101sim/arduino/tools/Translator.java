@@ -86,7 +86,7 @@ public class Translator {
 							.replace("micros", "t.micros")
 							.replace("millis", "t.millis")
 							.replace("delay", "t.delay")
-							.replace("Serial.out.print", "System.out.print")
+							.replace("Serial.print", "System.out.print")
 							.replace("delayMicroSeconds", "t.delayMicroSeconds")
 							.replace("pinMode", "t.pinMode");
 		

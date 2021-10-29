@@ -1,19 +1,76 @@
 package com.egr101sim.arduino.component.sensors;
 
 import com.egr101sim.arduino.components.Component;
+import com.egr101sim.arduino.elements.Pin;
+import com.egr101sim.arduino.elements.PinIO;
+import com.egr101sim.arduino.elements.PinType;
 
-public class UltrasonicSensor extends Component {
+public class UltrasonicSensor extends Component{
 
+	
+	int whiteness;
+	int[] randomNoiseBound;
+	
+	boolean works;
+	
+	public UltrasonicSensor() {
+		this.setPins(new Pin[3]);
+		this.voltageLimit = 5;
+		this.currentDrain = 5;
+		randomNoiseBound = new int[2];
+		randomNoiseBound[0] = 0;
+		randomNoiseBound[1] = 0;
+		works = false;
+	}
+	
 	@Override
 	public void checkState() throws Exception {
-		// TODO Auto-generated method stub
 		
+		// is grounded?
+		boolean grounded = false;
+		Pin cur = getPins()[3];
+		while(cur != null) {
+			if(cur.isLocal() && cur.getPinType() == PinType.GROUND ) {
+				grounded = true;
+			}
+			cur = cur.getPrev();
+		}
+		setGrounded(grounded);
+		
+		boolean powered = false;
+		// is 5V powered?
+		cur = getPins()[0];
+		while(cur != null) {
+			if(cur.isLocal() && cur.getPinType() == PinType.POWER_5V) {
+				powered = true;
+			}
+			cur = cur.getPrev();
+		}
+		setPowered(powered);
+		
+		//this is the trig pin
+		cur = getPins()[1];
+		double current = 5.0 * ((double)whiteness/(double)100) + (Math.random()*(randomNoiseBound[1] - randomNoiseBound[0]) + randomNoiseBound[0]);
+		
+		while(cur != null) {
+			if(cur.isLocal() && cur.getPinType() == PinType.IO && cur.getPinIO() == PinIO.INPUT) {
+				cur.setCurrent(current);
+			}
+			cur = cur.getPrev();
+		}
+		
+	}
+	
+	public void readVal(int whiteness) {
+		if(works)
+			this.whiteness = whiteness;
 	}
 
 	@Override
 	public void Behavior() {
-		// TODO Auto-generated method stub
-		
+		if(isPowered() && isGrounded()) {
+			works = true;
+		}
 	}
-	
+
 }

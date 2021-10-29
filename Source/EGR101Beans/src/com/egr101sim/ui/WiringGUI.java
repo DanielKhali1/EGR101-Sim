@@ -2,6 +2,7 @@ package com.egr101sim.ui;
 
 import java.util.ArrayList;
 
+import com.egr101sim.arduino.component.sensors.DistanceMeasuringIRSensor;
 import com.egr101sim.arduino.component.sensors.LineReadingIRSensor;
 import com.egr101sim.arduino.components.ContinuousServoMotor;
 import com.egr101sim.arduino.components.Led;
@@ -152,20 +153,69 @@ public class WiringGUI extends Application
 				}
 				else if (comp.compid == CompID.DIST_IR) {
 					wgComponent.add(comp);
-					ContinuousServoMotor csm = new ContinuousServoMotor();
-					wgComponent.get(wgComponent.size()-1).comp = csm;
-					this.manager.arduino.addComponent(csm);
+					DistanceMeasuringIRSensor dmirs = new DistanceMeasuringIRSensor();
+					wgComponent.get(wgComponent.size()-1).comp = dmirs;
+					this.manager.arduino.addComponent(dmirs);
 					
-					PinSquare pin1 = new PinSquare(4, 45, PinType.GENERAL, comp, false, false, -1);
-					PinSquare pin2 = new PinSquare(17, 45, PinType.GENERAL, comp, false, false, -1);
-					PinSquare pin3 = new PinSquare(17 + (17-4), 45, PinType.GENERAL, comp, false, false, -1);
+					Text txt = new Text("distance cm");
+					txt.setStyle("-fx-font-size: 10;");
+					txt.relocate(10, -50);
+					TextField tf = new TextField("0");
+					tf.relocate(10, -30);
+					tf.setPrefWidth(40);
+
+					tf.setOnKeyReleased(a->{
+						try {
+							dmirs.readVal(Integer.parseInt(tf.getText()));
+						} catch (NumberFormatException h) {
+							dmirs.readVal(0);
+						}
+					});
+					
+					PinSquare pin1 = new PinSquare(4+10, 45+20, PinType.GENERAL, comp, false, false, -1);
+					PinSquare pin2 = new PinSquare(17+10, 45+20, PinType.GENERAL, comp, false, false, -1);
+					PinSquare pin3 = new PinSquare(17 + (17-4)+10, 45+20, PinType.GENERAL, comp, false, false, -1);
 					this.manager.arduino.getComponents().get(this.manager.arduino.getComponents().size()-1).getPins()[0] = pin1.pin;
 					this.manager.arduino.getComponents().get(this.manager.arduino.getComponents().size()-1).getPins()[1] = pin2.pin;
 					this.manager.arduino.getComponents().get(this.manager.arduino.getComponents().size()-1).getPins()[2] = pin3.pin;
 					
-					comp.getChildren().addAll(pin1, pin2, pin3);
+					comp.getChildren().addAll(txt, tf, pin1, pin2, pin3);
 				}
-				
+				else if (comp.compid == CompID.ULTRA_SONIC) {
+					wgComponent.add(comp);
+					LineReadingIRSensor lrirs = new LineReadingIRSensor();
+					wgComponent.get(wgComponent.size()-1).comp = lrirs;
+					this.manager.arduino.addComponent(lrirs);
+					
+					Text txt = new Text("light reflect %");
+					txt.setStyle("-fx-font-size: 10;");
+					txt.relocate(-11, -50);
+					TextField tf = new TextField("0");
+					tf.relocate(-5, -30);
+					tf.setPrefWidth(40);
+					
+					
+					
+					tf.setOnKeyReleased(a->{
+						try {
+							lrirs.readVal(Integer.parseInt(tf.getText()));
+						} catch (NumberFormatException h) {
+							lrirs.readVal(0);
+						}
+					});
+					
+					PinSquare pin1 = new PinSquare(4-5, 45+10, PinType.GENERAL, comp, false, false, -1);
+					PinSquare pin2 = new PinSquare(17-5, 45+10, PinType.GENERAL, comp, false, false, -1);
+					PinSquare pin3 = new PinSquare(17 + (17-4)-5, 45+10, PinType.GENERAL, comp, false, false, -1);
+					this.manager.arduino.getComponents().get(this.manager.arduino.getComponents().size()-1).getPins()[0] = pin1.pin;
+					this.manager.arduino.getComponents().get(this.manager.arduino.getComponents().size()-1).getPins()[1] = pin2.pin;
+					this.manager.arduino.getComponents().get(this.manager.arduino.getComponents().size()-1).getPins()[2] = pin3.pin;
+					
+					
+					
+					
+					comp.getChildren().addAll(txt, tf, pin1, pin2, pin3);
+				}
 				
 				
 				comp.setOnMouseReleased(f->{
@@ -242,7 +292,7 @@ public class WiringGUI extends Application
 					for(int i = 1; i < stuckToMouse.getChildren().size(); i++) {
 						if(stuckToMouse.compid == CompID.MOTOR && i < 3)
 							continue;
-						else if(stuckToMouse.compid == CompID.LINE_IR && i < 4)
+						else if((stuckToMouse.compid == CompID.LINE_IR || stuckToMouse.compid == CompID.DIST_IR) && i < 4)
 							continue;
 						else
 						{
@@ -262,7 +312,7 @@ public class WiringGUI extends Application
 							for(int i = 1; i < stuckToMouse.getChildren().size(); i++) {
 								if(stuckToMouse.compid == CompID.MOTOR && i < 3)
 									continue;
-								else if(stuckToMouse.compid == CompID.LINE_IR && i < 3)
+								else if((stuckToMouse.compid == CompID.LINE_IR || stuckToMouse.compid == CompID.DIST_IR) && i < 4)
 									continue;
 								else
 								{
