@@ -17,6 +17,6 @@ public class AddSensor : MonoBehaviour
     void createSensor()
     {
         Debug.Log("Create object");
-        Instantiate(sensor, new Vector3(281.5f, 158.5f, 0f), Quaternion.identity);
+        Instantiate(sensor, new Vector3(292.5f, 42.7f, 50f), Quaternion.identity);
     }
 }
