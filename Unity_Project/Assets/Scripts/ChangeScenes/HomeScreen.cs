@@ -2,19 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public class HelloWorld : MonoBehaviour
+public class HomeScreen : MonoBehaviour
 {
   	public Button yourButton;
 
 	void Start () 
     {
 		Button btn = yourButton.GetComponent<Button>();
-		btn.onClick.AddListener(print);
+		btn.onClick.AddListener(OpenNewScene);
 	}
 
-    public void print()
+	void OpenNewScene()
     {
-        Debug.Log("Hello World");
-    }
+		SceneManager.LoadScene("MainMenu");
+	}
 }

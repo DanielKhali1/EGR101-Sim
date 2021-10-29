@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1234,7 +1234,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 851427604}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87a9598aa1aefc24ba82026828039e41, type: 3}
+  m_Script: {fileID: 11500000, guid: 2d9422816d02dd247bceaaa01c09f63d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   yourButton: {fileID: 851427607}
@@ -1448,7 +1448,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1043180197}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a2be8eed8f12e940a819a89e4513612, type: 3}
+  m_Script: {fileID: 11500000, guid: cd2d2ad37bf3e674abe7b0bd534bd9f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   yourButton: {fileID: 1043180200}
@@ -1649,7 +1649,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1054696496}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50e09f7786e7e01499de2a66e12ce22d, type: 3}
+  m_Script: {fileID: 11500000, guid: 875af85923988574998c78f00467c8cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   yourButton: {fileID: 1054696499}
@@ -1784,7 +1784,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1061540814}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfb95737051dde64a9129fe05dfc88c2, type: 3}
+  m_Script: {fileID: 11500000, guid: c53d3f8654b657c41974f714e183d925, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   yourButton: {fileID: 1061540817}
@@ -2850,6 +2850,7 @@ GameObject:
   - component: {fileID: 1587655676}
   - component: {fileID: 1587655678}
   - component: {fileID: 1587655677}
+  - component: {fileID: 1587655679}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -2918,6 +2919,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1587655675}
   m_CullTransparentMesh: 1
+--- !u!114 &1587655679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1587655675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 351bc333cccbe4743823614529136a31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  yourButton: {fileID: 2032385440}
 --- !u!1 &1588855795
 GameObject:
   m_ObjectHideFlags: 0
@@ -3070,7 +3084,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1593570767}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fdf405758877704889d072323aa62cf, type: 3}
+  m_Script: {fileID: 11500000, guid: 8b564eaf0a280e549bbfa288a65a3088, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   yourButton: {fileID: 1593570770}
@@ -3952,7 +3966,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab4f61bc9a5f3634587ce96cf2d5a3d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yourButton: {fileID: 2032385440}
 --- !u!114 &2032385440
 MonoBehaviour:
   m_ObjectHideFlags: 0

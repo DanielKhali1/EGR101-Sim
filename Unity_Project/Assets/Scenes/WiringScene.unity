@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657892, g: 0.4964128, b: 0.5748173, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -270,7 +270,6 @@ GameObject:
   - component: {fileID: 146658010}
   - component: {fileID: 146658009}
   - component: {fileID: 146658008}
-  - component: {fileID: 146658011}
   m_Layer: 5
   m_Name: WireBtn
   m_TagString: Untagged
@@ -380,19 +379,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 146658006}
   m_CullTransparentMesh: 1
---- !u!114 &146658011
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 146658006}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 183cbe8bcc8b355419392f267fb6281e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  yourButton: {fileID: 146658008}
 --- !u!1 &248293489
 GameObject:
   m_ObjectHideFlags: 0
@@ -809,7 +795,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 549415966}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 215, y: 157, z: -377}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -827,6 +813,7 @@ GameObject:
   - component: {fileID: 655846233}
   - component: {fileID: 655846232}
   - component: {fileID: 655846231}
+  - component: {fileID: 655846234}
   m_Layer: 5
   m_Name: ResistorBtn
   m_TagString: Untagged
@@ -851,7 +838,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -60, y: 0}
+  m_AnchoredPosition: {x: -59, y: 0}
   m_SizeDelta: {x: 60, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &655846231
@@ -936,6 +923,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 655846229}
   m_CullTransparentMesh: 1
+--- !u!114 &655846234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 655846229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84104aa874baddd4fbdb72e8a49aa5b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sensor: {fileID: 3143176721640674987, guid: 8050b921658c87c48802f01e2349c66f, type: 3}
+  yourButton: {fileID: 655846231}
 --- !u!1 &722959093
 GameObject:
   m_ObjectHideFlags: 0
@@ -948,6 +949,7 @@ GameObject:
   - component: {fileID: 722959097}
   - component: {fileID: 722959096}
   - component: {fileID: 722959095}
+  - component: {fileID: 722959098}
   m_Layer: 5
   m_Name: DistanceIRSensorBtn
   m_TagString: Untagged
@@ -1057,6 +1059,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 722959093}
   m_CullTransparentMesh: 1
+--- !u!114 &722959098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 722959093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84104aa874baddd4fbdb72e8a49aa5b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sensor: {fileID: 8191283469131335430, guid: 4b5e895d1ec2ead43aa63bcfc3f4bcd0, type: 3}
+  yourButton: {fileID: 722959095}
 --- !u!1 &931279993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1069,6 +1085,7 @@ GameObject:
   - component: {fileID: 931279997}
   - component: {fileID: 931279996}
   - component: {fileID: 931279995}
+  - component: {fileID: 931279998}
   m_Layer: 5
   m_Name: UltrasonicSensorBtn
   m_TagString: Untagged
@@ -1178,6 +1195,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 931279993}
   m_CullTransparentMesh: 1
+--- !u!114 &931279998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931279993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84104aa874baddd4fbdb72e8a49aa5b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sensor: {fileID: 1452887301444006895, guid: d747b44f136702e4fa12e93de4081131, type: 3}
+  yourButton: {fileID: 931279995}
 --- !u!1 &1068088308
 GameObject:
   m_ObjectHideFlags: 0
@@ -1589,6 +1620,7 @@ GameObject:
   - component: {fileID: 1804863165}
   - component: {fileID: 1804863164}
   - component: {fileID: 1804863163}
+  - component: {fileID: 1804863166}
   m_Layer: 5
   m_Name: IRSensorBtn
   m_TagString: Untagged
@@ -1698,6 +1730,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1804863161}
   m_CullTransparentMesh: 1
+--- !u!114 &1804863166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804863161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84104aa874baddd4fbdb72e8a49aa5b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sensor: {fileID: 5974476442551320580, guid: babd54722117d6345ba743e36598b0c7, type: 3}
+  yourButton: {fileID: 1804863163}
 --- !u!1 &2078443716
 GameObject:
   m_ObjectHideFlags: 0

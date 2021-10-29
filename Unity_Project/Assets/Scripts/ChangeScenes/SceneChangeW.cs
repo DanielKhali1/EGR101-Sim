@@ -4,18 +4,18 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class SwitchScene : MonoBehaviour
+public class SceneChangeW : MonoBehaviour
 {
-  	public Button yourButton;
+	public Button yourButton;
 
-	void Start () 
-    {
+	void Start()
+	{
 		Button btn = yourButton.GetComponent<Button>();
 		btn.onClick.AddListener(OpenNewScene);
 	}
 
 	void OpenNewScene()
-    {
-		SceneManager.LoadScene("MainMenu");
+	{
+		SceneManager.LoadScene("WiringScene");
 	}
 }
