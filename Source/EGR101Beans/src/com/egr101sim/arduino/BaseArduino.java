@@ -192,6 +192,27 @@ public class BaseArduino {
 			getDigitalArray()[pin].setPinState((pinState == 0) ? PinState.LOW : PinState.HIGH);
 	}
 	
+	public double pulseIn(int pin, int pinState) {
+		if(pin >= 160 && pin < 2576) {
+			if (getAnalogArray()[pin-160].getPinIO()!= PinIO.INPUT)
+				return 0;
+			
+			return getAnalogArray()[pin-160].getMicro();
+		} else if(pin >= 2576) {
+			if (getAnalogArray()[pin-2566].getPinIO()!= PinIO.INPUT)
+				return 0;
+			
+			return  getAnalogArray()[pin-2566].getMicro();
+		}
+		else if(getDigitalArray()[pin] != null)
+		{
+			if (getDigitalArray()[pin].getPinIO()!= PinIO.INPUT)
+				return 0;
+			return getDigitalArray()[pin].getMicro();
+		}
+		return 0;
+	}
+	
 	/**
 	 * Reads the value from a specified digital pin,
 	 * returns either HIGH or LOW.

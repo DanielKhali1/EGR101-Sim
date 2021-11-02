@@ -8,13 +8,13 @@ import com.egr101sim.arduino.elements.PinType;
 public class UltrasonicSensor extends Component{
 
 	
-	int whiteness;
+	int distance;
 	int[] randomNoiseBound;
 	
 	boolean works;
 	
 	public UltrasonicSensor() {
-		this.setPins(new Pin[3]);
+		this.setPins(new Pin[4]);
 		this.voltageLimit = 5;
 		this.currentDrain = 5;
 		randomNoiseBound = new int[2];
@@ -48,22 +48,21 @@ public class UltrasonicSensor extends Component{
 		}
 		setPowered(powered);
 		
-		//this is the trig pin
-		cur = getPins()[1];
-		double current = 5.0 * ((double)whiteness/(double)100) + (Math.random()*(randomNoiseBound[1] - randomNoiseBound[0]) + randomNoiseBound[0]);
 		
-		while(cur != null) {
-			if(cur.isLocal() && cur.getPinType() == PinType.IO && cur.getPinIO() == PinIO.INPUT) {
-				cur.setCurrent(current);
-			}
-			cur = cur.getPrev();
+		if(getPins()[1].getCurrent() > 3.0) {
+			works = true;
+		} else {
+			works = false;
 		}
 		
+		
+		//this is the echo pin (INPUT PIN)
+		getPins()[2].setMicro(distance*29*2);
 	}
 	
-	public void readVal(int whiteness) {
-		if(works)
-			this.whiteness = whiteness;
+	public void readVal(int distance) {
+		//if(works)
+			this.distance = distance;
 	}
 
 	@Override

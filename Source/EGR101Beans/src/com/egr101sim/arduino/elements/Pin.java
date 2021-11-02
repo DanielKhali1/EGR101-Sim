@@ -15,6 +15,7 @@ public class Pin {
 	
 	private double current;
 	private double angle;
+	private double micro;
 	
 	
 	/**
@@ -153,5 +154,13 @@ public class Pin {
 	 */
 	public void setAngle(double angle) {
 		this.angle = angle;
+	}
+
+	public double getMicro() {
+		return micro;
+	}
+
+	public void setMicro(double micro) {
+		this.micro = micro;
 	}
 }
