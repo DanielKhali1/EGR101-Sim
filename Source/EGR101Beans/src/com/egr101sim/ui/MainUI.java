@@ -105,16 +105,20 @@ public class MainUI extends Application {
 	
 	private static final String KEYWORDorange_PATTERN = String.join("|", KEYWORDSorange);
 	
+	private static final String COMMENT_PATTERN = "//[^\n]*" + "|" + "/\\*(.|\\R)*?\\*/"   // for whole text processing (text blocks)
+             + "|" + "/\\*[^\\v]*" + "|" + "^\\h*\\*([^\\v]*|/)";  // for visible paragraph processing (line by line)
+	
 	private static final Pattern PATTERN = Pattern.compile(
 		"(?<KEYWORDblue>" + KEYWORDblue_PATTERN + ")"
 		+ "|(?<KEYWORDgreen>" + KEYWORDgreen_PATTERN + ")"
 		+ "|(?<KEYWORDorange>" + KEYWORDorange_PATTERN + ")"
+		+ "|(?<COMMENT>" + COMMENT_PATTERN + ")"
 	);
 	
 	private static final String startingcode = String.join("\n", new String[] 
 			{
 					"void setup() {\r\n" + 
-							  "  // put your setup code here, to run once:\r\n" + 
+							  "  // put your set up code here, to run once:\r\n" + 
 							  "\r\n" + 
 							  "}\r\n" + 
 							  "\r\n" + 
@@ -360,6 +364,7 @@ public class MainUI extends Application {
 		            matcher.group("KEYWORDblue") != null ? "keywordblue" :
 		            matcher.group("KEYWORDgreen") != null ? "keywordgreen" :
 		            matcher.group("KEYWORDorange") != null ? "keywordorange" :
+		            matcher.group("COMMENT") != null ? "comment" :
 		            null; 
 		    		assert styleClass != null;
 		    spansBuilder.add(Collections.emptyList(), matcher.start() - lastKeyWordEnd);
