@@ -2,8 +2,7 @@ package com.egr101sim.ui;
 
 
 import java.io.File;
-
-import java.time.Duration;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.function.Consumer;
@@ -11,7 +10,6 @@ import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.fxmisc.flowless.VirtualizedScrollPane;
 import org.fxmisc.richtext.CodeArea;
 import org.fxmisc.richtext.GenericStyledArea;
 import org.fxmisc.richtext.LineNumberFactory;
@@ -19,8 +17,6 @@ import org.fxmisc.richtext.model.Paragraph;
 import org.fxmisc.richtext.model.StyleSpans;
 import org.fxmisc.richtext.model.StyleSpansBuilder;
 import org.reactfx.collection.ListModification;
-import org.reactfx.Subscription;
-
 import com.egr101sim.core.ApplicationManager;
 
 import javafx.application.Application;
@@ -30,12 +26,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Separator;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.ToolBar;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.control.ContextMenu; 
@@ -256,11 +250,15 @@ public class MainUI extends Application {
 		wiring.setOnAction(e -> 
 			{
 				try {
-					new WiringGUI(manager).start(new Stage());
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+	                Runtime runTime = Runtime.getRuntime();
+	                
+	                String executablePath = "C:\\Users\\crump\\OneDrive\\Desktop\\Trash\\Unity_Project.exe";
+	                
+	                Process process = runTime.exec(executablePath);
+	                } catch (IOException e1) 
+	                {
+	                    e1.printStackTrace();
+	                }
 			});
 
 		build.setOnAction(e->{
