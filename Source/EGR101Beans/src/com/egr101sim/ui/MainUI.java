@@ -1,5 +1,5 @@
-package com.egr101sim.ui;
 
+package com.egr101sim.ui;
 
 import java.io.File;
 import java.io.IOException;
