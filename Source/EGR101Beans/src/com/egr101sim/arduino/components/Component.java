@@ -5,8 +5,8 @@ import com.egr101sim.arduino.elements.Pin;
 public abstract class Component {
 	
 	private Pin[] pins;
-	double voltageLimit;
-	double currentDrain;
+	protected double voltageLimit;
+	protected double currentDrain;
 	private boolean grounded;
 	private boolean powered;
 	
