@@ -252,7 +252,7 @@ public class MainUI extends Application {
 				try {
 	                Runtime runTime = Runtime.getRuntime();
 	                
-	                String executablePath = "C:\\Users\\crump\\OneDrive\\Desktop\\Trash\\Unity_Project.exe";
+	                String executablePath = "..\\..\\Executables\\Unity_Project.exe";
 	                
 	                Process process = runTime.exec(executablePath);
 	                } catch (IOException e1) 
