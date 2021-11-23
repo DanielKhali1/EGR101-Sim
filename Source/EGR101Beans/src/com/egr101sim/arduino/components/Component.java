@@ -7,6 +7,7 @@ public abstract class Component {
 	private Pin[] pins;
 	protected double voltageLimit;
 	protected double currentDrain;
+	protected String state;
 	private boolean grounded;
 	private boolean powered;
 	
@@ -30,6 +31,19 @@ public abstract class Component {
 	 */
 	public void setPins(Pin[] pins) {
 		this.pins = pins;
+	}
+	
+	/**
+	 * @return the state
+	 */
+	public String getState() {
+		return state;
+	}
+	/**
+	 * @param state to set
+	 */
+	public void setState(String state) {
+		this.state = state;
 	}
 	
 	/**
