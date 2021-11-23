@@ -9,6 +9,8 @@ public class ContinuousServoMotor extends Component {
 	int rotations;
 	
 	public double writtenAngle;
+	
+	
 	/**
 	 * 
 	 */
@@ -19,6 +21,7 @@ public class ContinuousServoMotor extends Component {
 		angle = 0;
 		rotations = 0;
 		writtenAngle = 0;
+		state = "writtenAngle: 0";
 	}
 
 	@Override
@@ -56,7 +59,7 @@ public class ContinuousServoMotor extends Component {
 		} else if(angle == 90) {
 			writtenAngle = 0;
 		}
-		
+		state = " " + writtenAngle;
 	}
 
 	public double getAngle() {

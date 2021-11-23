@@ -21,6 +21,10 @@ public class SimulationManager {
 		getArduino().setup();
 		startTime = new Date();
 		getArduino().getArduino().setMilli(0);
+		
+		
+		
+		
 	}
 	
 	
@@ -168,6 +172,16 @@ public class SimulationManager {
 					cur = cur.getNext();
 				}
 		}
+	}
+
+	public String generateMessage() {
+		//run through list of components and send behaviors per frame
+		String message = "";
+		for(int i = 0; i < arduino.getComponents().size(); i++) {
+			message+= i + "," + arduino.getComponents().get(i).getState() + "\n";
+		}
+		
+		return message;
 	}
 
 }

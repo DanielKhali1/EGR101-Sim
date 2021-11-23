@@ -19,7 +19,7 @@ public class RotateBot : MonoBehaviour
 
     private void Update()
     {
-        if(!pickup) rb.velocity += new Vector3(0, -50.0f, 0);
+        //if(!pickup) rb.velocity += new Vector3(0, -50.0f, 0);
     }
 
     void Start()

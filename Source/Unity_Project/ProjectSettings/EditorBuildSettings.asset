@@ -8,25 +8,25 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainMenu.unity
     guid: 676e72af19fc7d64881226929a9c36fe
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/InfraSensCustom.unity
     guid: 83e3bff54c273684dabf3365a2fd41e1
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ForksCustom.unity
     guid: 711f0c4cd93c84449a1a502184799c27
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/IRSensorCustom.unity
     guid: 4738d4a793d8c9a43bc784b2b0e6a98e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/UltraSensCustom.unity
     guid: 4beec1b72e9b1f042bf80457e81e7024
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/WheelCustom.unity
     guid: 1b180d32ac03d904d869c8030e498b57
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/WiringScene.unity
     guid: b8fb7e7f97a779d489b9305567a0e980
   m_configObjects: {}
