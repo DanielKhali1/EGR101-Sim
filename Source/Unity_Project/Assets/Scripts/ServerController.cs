@@ -41,11 +41,11 @@ public class ServerController : UnityEngine.MonoBehaviour
             string[] info = message.Split(',');
             if(info[0] == "0")
             {
-                //boeBot.GetComponent<BoeBotMove>().moveRightWheel();
+               // boeBot.GetComponent<BoeBotMove>().moveRightWheel();
             }
             else if(info[0] == "1")
             {
-                //boeBot.GetComponent<BoeBotMove>().moveLeftWheel();
+              //  boeBot.GetComponent<BoeBotMove>().moveLeftWheel();
             }
         }
 
