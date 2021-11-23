@@ -5,21 +5,28 @@ using UnityEngine;
 public class BoeBotMove : MonoBehaviour
 {
 	Quaternion rot = Quaternion.Euler(new Vector3(0, 0, 0));
-	public void GetInput()
+	public void GetInput(float leftWheelDrive_, float rightWheelDrive_)
 	{
-		leftWheelDrive = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.Z);
-		rightWheelDrive = Input.GetKey(KeyCode.X) || Input.GetKey(KeyCode.S);
-		
+		//leftWheelDrive = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.Z);
+		//rightWheelDrive = Input.GetKey(KeyCode.X) || Input.GetKey(KeyCode.S);
+
+		leftWheelForce = leftWheelDrive_;
+		rightWheelForce = -rightWheelDrive_;
+
+		Debug.Log(leftWheelForce + " " + rightWheelForce);
+
+		leftWheelDrive = true;
+		rightWheelDrive = true;
 	}
 
 	private void Drive()
 	{
 		bool forward = true;
-		leftWheelForce = (leftWheelDrive) ? setleftWheelForce : 0;
-		rightWheelForce = (rightWheelDrive) ? setrightWheelForce : 0;
+		//leftWheelForce = (leftWheelDrive) ? setleftWheelForce : 0;
+		//rightWheelForce = (rightWheelDrive) ? setrightWheelForce : 0;
 
-		leftWheelForce *= (Input.GetKey(KeyCode.Z)) ? -1 : 1;
-		rightWheelForce *= (Input.GetKey(KeyCode.S)) ? -1 : 1;
+		//leftWheelForce *= (Input.GetKey(KeyCode.Z)) ? -1 : 1;
+		//rightWheelForce *= (Input.GetKey(KeyCode.S)) ? -1 : 1;
 
 		float difference = leftWheelForce - rightWheelForce;
 
@@ -53,10 +60,8 @@ public class BoeBotMove : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		GetInput();
 		Drive();
 		UpdateWheelPoses();
-		
 	}
 	private void Start()
 	{
@@ -66,8 +71,7 @@ public class BoeBotMove : MonoBehaviour
 
 	private bool leftWheelDrive;
 	private bool rightWheelDrive;
-	private bool leftWheelReverse;
-	private bool rightWheelReverse;
+
 
 	public Transform frontDriverT, frontPassengerT;
 	private float leftWheelForce;

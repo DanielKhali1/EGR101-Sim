@@ -1,5 +1,10 @@
 package com.egr101sim.core;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.Date;
 
 import com.egr101sim.arduino.Arduino;
@@ -12,6 +17,10 @@ public class SimulationManager {
 	private Arduino arduino;
 	Date startTime;
 	Date currentTime;
+	private ServerSocket ss;
+	private Socket sock;
+	private DataInputStream dis;
+	private DataOutputStream dos;
 	
 	
 	public SimulationManager() {
@@ -21,10 +30,6 @@ public class SimulationManager {
 		getArduino().setup();
 		startTime = new Date();
 		getArduino().getArduino().setMilli(0);
-		
-		
-		
-		
 	}
 	
 	
@@ -33,6 +38,8 @@ public class SimulationManager {
 		getArduino().execute();
 		
 		basicIterate();
+		
+		//should send messages here
 	}
 	
 	public void basicIterate() {
@@ -51,6 +58,16 @@ public class SimulationManager {
 		updateComponentState();
 		
 		executeComponentBehavior();
+		
+		//send message to unity
+		
+		new Thread(()-> sendMessage(generateMessage())).start();;
+		try {
+			Thread.sleep(10);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	private void executeComponentBehavior() {
@@ -139,6 +156,26 @@ public class SimulationManager {
 		killAllPower((SpecialPin)getArduino().getArduino().getP5V());
 		killAllPower((SpecialPin)getArduino().getArduino().getP3_3v());
 		System.out.println("Killing Power");
+		
+		
+	}
+	
+	public void sendMessage(String s) {
+		try {
+	        byte[] toSendBytes = s.getBytes();
+	        int toSendLen = toSendBytes.length;
+	        byte[] toSendLenBytes = new byte[4];
+	        toSendLenBytes[0] = (byte)(toSendLen & 0xff);
+	        toSendLenBytes[1] = (byte)((toSendLen >> 8) & 0xff);
+	        toSendLenBytes[2] = (byte)((toSendLen >> 16) & 0xff);
+	        toSendLenBytes[3] = (byte)((toSendLen >> 24) & 0xff);
+	        dos.write(toSendLenBytes);
+	        dos.write(toSendBytes);
+			dos.flush();
+		} catch(Exception e) {
+			//System.out.println("no connection");
+		}
+		
 	}
 	
 	private void killAllPower(Pin[] pins) {
@@ -181,7 +218,18 @@ public class SimulationManager {
 			message+= i + "," + arduino.getComponents().get(i).getState() + "\n";
 		}
 		
+//		System.out.println(message);
+		
 		return message;
+	}
+
+	public void setupComms(ServerSocket ss, Socket sock, DataInputStream dis, DataOutputStream dos) {
+		this.ss = ss;
+		this.sock = sock;
+		this.dis = dis;
+		this.dos = dos;
+		
+		
 	}
 
 }

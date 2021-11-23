@@ -4,6 +4,9 @@ using System.Net.Sockets;
 using System.Net;
 using System.Text;
 
+using System;
+
+
 public class ServerController : UnityEngine.MonoBehaviour
 {
     Socket socket;
@@ -35,19 +38,21 @@ public class ServerController : UnityEngine.MonoBehaviour
 
         string[] messages = rcv.Split('\n');
 
-
+        float[] motorInput = { 0, 0 };
         foreach (string message in messages)
         {
             string[] info = message.Split(',');
             if(info[0] == "0")
             {
-               // boeBot.GetComponent<BoeBotMove>().moveRightWheel();
+                motorInput[1] = Single.Parse(info[1]);
             }
             else if(info[0] == "1")
             {
-              //  boeBot.GetComponent<BoeBotMove>().moveLeftWheel();
+                motorInput[0] = Single.Parse(info[1]);
             }
         }
+        boeBot.GetComponent<BoeBotMove>().GetInput(motorInput[0]/5.0f, motorInput[1] / 5.0f);
+
 
 
     }

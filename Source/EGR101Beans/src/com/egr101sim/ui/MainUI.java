@@ -43,6 +43,7 @@ public class MainUI extends Application {
 	Scene scene;
 	ApplicationManager manager;
 	Thread thread;
+	Process runProcess;
 	
 	private static final String[] KEYWORDSblue = new String[] {
 		"HIGH", "LOW", "INPUT", "INPUT_PULLUP", "OUTPUT", "DEC", "BIN",
@@ -248,18 +249,10 @@ public class MainUI extends Application {
 		scene = new Scene(pane, 1000, 760);
 		
 		wiring.setOnAction(e -> 
-			{
-				try {
-	                Runtime runTime = Runtime.getRuntime();
-	                
-	                String executablePath = "..\\..\\Executables\\Unity_Project.exe";
-	                
-	                Process process = runTime.exec(executablePath);
-	                } catch (IOException e1) 
-	                {
-	                    e1.printStackTrace();
-	                }
-			});
+		{
+			try {Process process = Runtime.getRuntime().exec("..\\..\\Executables\\customization\\Unity_Project.exe");} 
+			catch (IOException e1){e1.printStackTrace();}
+		});
 
 		build.setOnAction(e->{
 			if (!manager.isSimRunning()) {
@@ -271,22 +264,26 @@ public class MainUI extends Application {
 			
 			if(run.getText().equals("Run"))
 			{
+				try {runProcess = Runtime.getRuntime().exec("..\\..\\Executables\\simulation\\Unity_Project.exe");} 
+				catch (IOException e1){e1.printStackTrace();}
 				
-			run.setText("End");
-				Platform.runLater(new Runnable() {
-				      @Override
-				      public void run() {
-				    	  thread = (new Thread(() -> {
-				    		  manager.setSimRunning(true);
-				    		  manager.execute();
-				    		  System.out.println("thread over");
-				    	  }));
-				    	  thread.start();
-				      }
-				  });
+				run.setText("End");
+					Platform.runLater(new Runnable() {
+					      @Override
+					      public void run() {
+					    	  
+					    	  thread = (new Thread(() -> {
+					    		  manager.setSimRunning(true);
+					    		  manager.execute();
+					    		  System.out.println("thread over");
+					    	  }));
+					    	  thread.start();
+					      }
+					  });
 			}
 			else {
 				run.setText("Run");
+				runProcess.destroy();
 				manager.setSimRunning(false);
 			}
 		});

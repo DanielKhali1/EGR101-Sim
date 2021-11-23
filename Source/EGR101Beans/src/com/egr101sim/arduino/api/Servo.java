@@ -62,6 +62,11 @@ public class Servo {
 	 */
 	public void write(int angle) {
 		b.getDigitalArray()[pin].setAngle(angle);
+		try {
+			Thread.sleep(10);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -84,6 +89,12 @@ public class Servo {
 	public void writeMicroseconds(int us) {
 		//TODO: figure out how to convert microseconds to angle
 		b.getDigitalArray()[pin].setAngle(us/16.6666666666667);
+//		System.out.println(pin + " " + b.getDigitalArray()[pin].getAngle());
+		try {
+			Thread.sleep(10);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
