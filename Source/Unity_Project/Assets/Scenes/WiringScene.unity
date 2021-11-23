@@ -1020,7 +1020,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToFollow: {fileID: 935285752}
-  offset: {x: -0.71, y: 10.82, z: 26}
+  offset: {x: -23.25, y: 10.82, z: 26}
   followSpeed: 10
   lookSpeed: 10
 --- !u!1 &639690089
@@ -1452,7 +1452,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1477445620665155347, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: motorForce
-      value: 300
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1477445620665155347, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: setrightWheelForce
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1599736453033204961, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_Enabled
@@ -1528,7 +1532,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2505652179342406639, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_Constraints
-      value: 36
+      value: 116
       objectReference: {fileID: 0}
     - target: {fileID: 2688477577237838916, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_RootOrder
@@ -1552,7 +1556,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2688477577237838916, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.3
+      value: 2.41
       objectReference: {fileID: 0}
     - target: {fileID: 2688477577237838916, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2297,8 +2301,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1791195086}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 120.59176, y: 74.56775, z: -70.01233}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 120.59176, y: 37.6, z: -70.01233}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 639690090}
   - {fileID: 1861793088}

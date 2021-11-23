@@ -28,6 +28,7 @@ public class ContinuousServoMotor extends Component {
 	public void checkState() throws Exception {
 		
 		angle = getPins()[0].getAngle();
+//		System.out.println("angle from checkState = " + getPins()[0].getPrev().getAngle());
 		// is grounded?
 		boolean grounded = false;
 		Pin cur = getPins()[2];
@@ -48,6 +49,8 @@ public class ContinuousServoMotor extends Component {
 			}
 			cur = cur.getPrev();
 		}
+		
+//		System.out.println(isPowered() + " " + isGrounded() + " " + angle);
 		setPowered(powered);
 	}
 
@@ -59,7 +62,7 @@ public class ContinuousServoMotor extends Component {
 		} else if(angle == 90) {
 			writtenAngle = 0;
 		}
-		state = " " + writtenAngle;
+		state = "" + writtenAngle;
 	}
 
 	public double getAngle() {
