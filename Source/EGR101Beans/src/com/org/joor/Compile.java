@@ -99,8 +99,12 @@ class Compile {
 
                 task.call();
 
-                if (fileManager.isEmpty())
-                    throw new ReflectException("Compilation error: " + out);
+                if (fileManager.isEmpty()) {
+                	
+                	System.out.println(out);
+                	throw new ReflectException("Compilation error: " + out);
+                }
+                
 
                 Class<?> result = null;
 
