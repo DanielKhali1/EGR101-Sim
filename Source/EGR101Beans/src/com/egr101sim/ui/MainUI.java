@@ -239,7 +239,7 @@ public class MainUI extends Application {
 		save.relocate(220,35);
 		save.setPrefSize(50, 30);
 		
-		Button wiring = new Button("Wiring Interface");
+		Button wiring = new Button("Bot Design");
 		wiring.relocate(880, 35);
 		wiring.setPrefSize(110, 30);
 		

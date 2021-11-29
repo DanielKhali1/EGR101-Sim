@@ -1021,7 +1021,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToFollow: {fileID: 935285752}
   offset: {x: -23.25, y: 10.82, z: 26}
-  followSpeed: 10
+  followSpeed: 6.88
   lookSpeed: 10
 --- !u!1 &639690089
 GameObject:
@@ -1455,8 +1455,12 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1477445620665155347, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: setleftWheelForce
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1477445620665155347, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: setrightWheelForce
-      value: -0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1599736453033204961, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_Enabled
@@ -1941,7 +1945,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e11fe7f439be52846bc6c886e8c696ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boeBot: {fileID: 0}
+  boeBot: {fileID: 1539886203}
 --- !u!4 &1116107191
 Transform:
   m_ObjectHideFlags: 0
@@ -2276,6 +2280,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 15, y: 0, z: 0}
+--- !u!1 &1539886203 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3315973895192667902, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+  m_PrefabInstance: {fileID: 727195149}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1791195086
 GameObject:
   m_ObjectHideFlags: 0
