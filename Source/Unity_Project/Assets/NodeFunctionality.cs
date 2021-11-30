@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class NodeFunctionality : MonoBehaviour, IPointerClickHandler
 {
     public GameObject object1, object2, object3, object4;
+    public GameObject bot;
     public int mode = 0;
 
     // Start is called before the first frame update
@@ -22,34 +23,27 @@ public class NodeFunctionality : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        GameObject temp = null;
 
         if (mode == 1)
         {
-            GameObject temp = Instantiate(object2);
-            temp.transform.position = new Vector3(0, 5, -5);
-            Debug.Log("Hello");
+            temp = Instantiate(object1);
         }
         if (mode == 2)
         {
-            GameObject temp = Instantiate(object4);
-            temp.transform.position = new Vector3(0, 5, -5);
-            Debug.Log("Hello");
+            temp = Instantiate(object2);
         }
         if (mode == 3)
         {
-            GameObject temp = Instantiate(object3);
-            temp.transform.position = new Vector3(0, 5, -5);
-            Debug.Log("Hello");
+            temp = Instantiate(object3);
         }
         if (mode == 4)
         {
-            GameObject temp = Instantiate(object1);
-            temp.transform.position = new Vector3(0, 5, -5);
-            Debug.Log("Hello");
+            temp = Instantiate(object4);
         }
-       
-
+        temp.transform.parent = bot.gameObject.transform;
+        temp.transform.position = new Vector3(0, 5, -3);
     }
 
-   
+
 }
