@@ -36,19 +36,36 @@ public class updateToolBar : MonoBehaviour
                 toolslot2.GetComponent<Image>().sprite = null;
                 toolslot3.GetComponent<Image>().sprite = null;
                 toolslot4.GetComponent<Image>().sprite = null;
+
+                toolslot1.GetComponent<NodeFunctionality>().mode = 1;
+                toolslot2.GetComponent<NodeFunctionality>().mode = 1;
+                toolslot3.GetComponent<NodeFunctionality>().mode = 1;
+                toolslot4.GetComponent<NodeFunctionality>().mode = 1;
                 break;
+
             case 2:
                 toolslot1.GetComponent<Image>().sprite = (wheelType1);
                 toolslot2.GetComponent<Image>().sprite = (wheelType2);
                 toolslot3.GetComponent<Image>().sprite = (wheelType2);
                 toolslot4.GetComponent<Image>().sprite = null;
+
+                toolslot1.GetComponent<NodeFunctionality>().mode = 2;
+                toolslot2.GetComponent<NodeFunctionality>().mode = 2;
+                toolslot3.GetComponent<NodeFunctionality>().mode = 2;
+                toolslot4.GetComponent<NodeFunctionality>().mode = 2;
                 break;
+
             case 3:
 
                 toolslot1.GetComponent<Image>().sprite = (mountType1);
                 toolslot2.GetComponent<Image>().sprite = (mountType2);
                 toolslot3.GetComponent<Image>().sprite = (mountType3);
                 toolslot4.GetComponent<Image>().sprite = null;
+
+                toolslot1.GetComponent<NodeFunctionality>().mode = 3;
+                toolslot2.GetComponent<NodeFunctionality>().mode = 3;
+                toolslot3.GetComponent<NodeFunctionality>().mode = 3;
+                toolslot4.GetComponent<NodeFunctionality>().mode = 3;
                 break;
 
             case 4:
@@ -56,6 +73,11 @@ public class updateToolBar : MonoBehaviour
                 toolslot2.GetComponent<Image>().sprite = (ultraSonicSensor);
                 toolslot3.GetComponent<Image>().sprite = (distanceMeasuringIRSensor);
                 toolslot4.GetComponent<Image>().sprite = null;
+
+                toolslot1.GetComponent<NodeFunctionality>().mode = 4;
+                toolslot2.GetComponent<NodeFunctionality>().mode = 4;
+                toolslot3.GetComponent<NodeFunctionality>().mode = 4;
+                toolslot4.GetComponent<NodeFunctionality>().mode = 4;
                 break;
         }
     }
