@@ -7,6 +7,7 @@ import com.org.joor.Reflect;
 public class ArduinoBehaviorManager {
 	
 	private Function<BaseArduino,String> function;
+	private String stackTrace; 
 	int index;
 	
 	public ArduinoBehaviorManager() {
@@ -16,8 +17,19 @@ public class ArduinoBehaviorManager {
 	public void compile(String instructions) {
 		//trashiest fix ever
 		instructions = instructions.replace("class ArduinoBehavior implements", "class ArduinoBehavior"+ index +" implements");
-		setFunction(Reflect.compile("com.egr101sim.arduino.ArduinoBehavior"+index, instructions ).create().get());
-		index ++;
+		Object f = Reflect.compile("com.egr101sim.arduino.ArduinoBehavior"+index, instructions, this); 
+		//System.out.println((String) f);
+		
+		try
+		{
+			setFunction(((Reflect) f).create().get());
+			index ++;
+		}
+		catch(NullPointerException e)
+		{
+			System.out.println("Build errors");
+		}
+		
 	}
 
 	public void setFunction(Function<BaseArduino,String> function) {
@@ -27,6 +39,17 @@ public class ArduinoBehaviorManager {
 		this.function = function;
 		
 	}
+	
+	public String stackPrint() 
+	{
+		return stackTrace; 
+	}
+	
+	public void setStackTrace(String s)
+	{
+		stackTrace = s; 
+	}
+
 	
 	public Function<BaseArduino,String> getFunction() {
 		return function;

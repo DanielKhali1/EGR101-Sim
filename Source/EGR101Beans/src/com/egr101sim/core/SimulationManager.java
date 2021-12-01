@@ -61,9 +61,9 @@ public class SimulationManager {
 		
 		//send message to unity
 		
-		new Thread(()-> sendMessage(generateMessage())).start();;
+		new Thread(()-> sendMessage(generateMessage())).start();
 		try {
-			Thread.sleep(10);
+			Thread.sleep(100);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

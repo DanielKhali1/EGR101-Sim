@@ -25,7 +25,7 @@ public class RotateBot : MonoBehaviour
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
-        position = rb.position + new Vector3(0, 20, 0);
+        position = rb.position + new Vector3(0, 0.5f, 0);
     }
 
     public void OnMouseDown()

@@ -28,6 +28,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import com.egr101sim.arduino.ArduinoBehaviorManager;
+
 /**
  * A wrapper for an {@link Object} or {@link Class} upon which reflective calls
  * can be made.
@@ -75,8 +77,8 @@ public class Reflect {
      * @return A wrapped {@link Class}
      * @throws ReflectException if anything went wrong compiling the class.
      */
-    public static Reflect compile(String name, String content) throws ReflectException {
-        return compile(name, content, new CompileOptions());
+    public static Reflect compile(String name, String content, ArduinoBehaviorManager maanger) throws ReflectException {
+        return (Reflect) compile(name, content, new CompileOptions(), maanger);
     }
 
     /**
@@ -97,15 +99,28 @@ public class Reflect {
      * @param name The qualified class name
      * @param content The source code for the class
      * @param options compiler options
+     * @param maanger 
      * @return A wrapped {@link Class}
      * @throws ReflectException if anything went wrong compiling the class.
      */
-    public static Reflect compile(String name, String content, CompileOptions options) throws ReflectException {
-        return onClass(Compile.compile(name, content, options));
+    public static Object compile(String name, String content, CompileOptions options, ArduinoBehaviorManager maanger) throws ReflectException {
+        Object[] temp = Compile.compile(name, content, options);
+        Class<?> pleasework = (Class<?>) temp[1];
+        Reflect r = onClass(pleasework);
+        System.out.print((String) temp[0]);
+        maanger.setStackTrace((String) temp[0]);
+        return r;
     }
 
+	private String stackTrace;
 
-    /**
+
+    private void setStackTrace(String string) {
+		// TODO Auto-generated method stub
+		stackTrace = string; 
+	}
+
+	/**
      * Wrap a class name.
      * <p>
      * This is the same as calling <code>on(Class.forName(name))</code>
@@ -706,7 +721,6 @@ public class Reflect {
         // Try invoking the "canonical" constructor, i.e. the one with exact
         // matching argument types
         try {
-        	System.out.println(type());
             Constructor<?> constructor = type().getDeclaredConstructor(types);
             return on(constructor, args);
         }
@@ -721,6 +735,11 @@ public class Reflect {
             }
 
             throw new ReflectException(e);
+        }
+        catch(NullPointerException e)
+        {
+        	// to make work
+        	return null; 
         }
     }
 
@@ -1012,4 +1031,9 @@ public class Reflect {
     }
 
     private static class NULL {}
+
+	public String getStackTrace() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
