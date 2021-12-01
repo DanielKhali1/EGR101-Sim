@@ -51,21 +51,26 @@ import javax.tools.ToolProvider;
  */
 class Compile {
 
-    static Class<?> compile(String className, String content, CompileOptions compileOptions) {
+    static Object[] compile(String className, String content, CompileOptions compileOptions) {
         Lookup lookup = MethodHandles.lookup();
         ClassLoader cl = lookup.lookupClass().getClassLoader();
 
+        Object[] ob = new Object[2];
+        ob[0] = "";
+        		
         try {
-            return cl.loadClass(className);
+            ob[1] = cl.loadClass(className);
+            return ob; 
         }
         catch (ClassNotFoundException ignore) {
             JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+            StringWriter out = new StringWriter();
             try {
                 ClassFileManager fileManager = new ClassFileManager(compiler.getStandardFileManager(null, null, null));
 
                 List<CharSequenceJavaFileObject> files = new ArrayList<>();
                 files.add(new CharSequenceJavaFileObject(className, content));
-                StringWriter out = new StringWriter();
+                
 
                 List<String> options = new ArrayList<>(compileOptions.options);
                 if (!options.contains("-classpath")) {
@@ -100,16 +105,19 @@ class Compile {
                 task.call();
 
                 if (fileManager.isEmpty())
-                    throw new ReflectException("Compilation error: " + out);
+                {
+                	ob[0] = out.toString(); 
+                }
+                    //throw new ReflectException("Compilation error: " + out);
 
-                Class<?> result = null;
+                ob[1] = null;
 
                 // This works if we have private-access to the interfaces in the class hierarchy
                 if (Reflect.CACHED_LOOKUP_CONSTRUCTOR != null) {
-                    result = fileManager.loadAndReturnMainClass(className,
+                    ob[1] = fileManager.loadAndReturnMainClass(className,
                         (name, bytes) -> Reflect.on(cl).call("defineClass", name, bytes, 0, bytes.length).get());
                 }
-                return result;
+                return ob;
             }
             catch (ReflectException e) {
                 throw e;

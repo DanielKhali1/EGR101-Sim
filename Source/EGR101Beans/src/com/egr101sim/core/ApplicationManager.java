@@ -61,5 +61,10 @@ public class ApplicationManager {
 	public void setSimRunning(boolean isSimRunning) {
 		this.isSimRunning = isSimRunning;
 	}
+	
+	public String stackPrint() 
+	{
+		return arduino.stackPrint();
+	}
 
 }

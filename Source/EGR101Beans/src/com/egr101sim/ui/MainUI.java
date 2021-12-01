@@ -79,12 +79,12 @@ public class MainUI extends Application {
 		"logf", "lrint", "lrintf", "lround", "lroundf", "map", "max", "min", "pow", "powf", "radians",
 		"random", "randomSeed", "round", "roundf", "signbit", "sin", "sinh", "sinhf", "sq", "sqrt", "sqrtf",
 		"sqrtf", "tan", "tanf", "tanh", "tanhf", "trunc", "truncf", "bitRead", "bitWrite", "bitSet", "bitClear",
-		"bit", "highByte", "lowByte", "analogReference", "analogRead", "analogReadResolution", "analogWrite",
-		"analogWriteResolution", "attachInterrupt", "detachInterrupt", "digitalPinToInterrupt", "delay",
+		"bit", "highByte", "lowByte", "analogReference", "analogReadResolution", "analogRead", 
+		"analogWriteResolution", "analogWrite", "attachInterrupt", "detachInterrupt", "digitalPinToInterrupt", "delay",
 		"delayMicroseconds", "digitalWrite", "digitalRead", "interrupts", "millis", "micros", "noInterrupts",
 		"noTone", "pinMode", "pulseIn", "pulseInLong", "shiftIn", "shiftOut", "tone", "yield", "Stream", 
-		"Serial", "Serial1", "Serial2", "Serial3", "SerialUSB", "begin", "end", "peek", "read", "print", "println",
-		"avaliable", "avaliableForWrite", "flush", "setTimeout", "find", "findUntil", "parseInt", "parseFloat", 
+		"Serial", "Serial1", "Serial2", "Serial3", "SerialUSB", "begin", "end", "peek", "read", "println", "print",
+		"avaliable", "avaliableForWrite", "flush", "setTimeout", "findUntil", "find", "parseInt", "parseFloat", 
 		"readBytes", "readBytesUntil", "readString", "readStringUntil", "trim", "toUpperCase",
 		"toLowerCase", "charAt", "compareTo", "concat", "endsWith", "startsWith", "equals", "equalsIgnoreCase", 
 		"getBytes", "indexOf", "lastIndexOf", "length", "replace", "setCharAt", "substring", "toCharArray", "toInt",
@@ -94,9 +94,9 @@ public class MainUI extends Application {
 	};
 	
 	private static final String[] KEYWORDSgreen = new String[] {
-		"break", "case", "override", "final", "continue", "default", "do", "else", "for", "if", "return", "goto",
+		"break", "case", "override", "final", "continue", "default", "do", "#else", "#error", "#if", "else", "for", "if", "return", "goto",
 		"switch", "throw", "try", "while", "setup", "loop", "export", "not", "or", "and", "xor", "#include", "#define", 
-		"#elif", "#else", "#error", "#if", "#ifdef", "#ifndef", "#pragma", "#warning"
+		"#elif",  "#ifdef", "#ifndef", "#pragma", "#warning"
 	};
 	
 	private static final String KEYWORDblue_PATTERN = String.join("|", KEYWORDSblue);
@@ -161,7 +161,7 @@ public class MainUI extends Application {
 		codeArea.replaceText(0, 0, startingcode);
 		
 		codeArea.relocate(0, 100);
-		codeArea.setPrefSize(1000, 500);
+		codeArea.setPrefSize(1000, 400);
 		
 		// colors for background 
 		
@@ -189,23 +189,30 @@ public class MainUI extends Application {
 		Rectangle rectangle4 = new Rectangle();
 		rectangle4.setFill(lightGreen);
 		rectangle4.setX(0);
-		rectangle4.setY(600);
+		rectangle4.setY(500);
 		rectangle4.setWidth(1000);
 		rectangle4.setHeight(30); 
 		
 		Rectangle rectangle5 = new Rectangle();
 		rectangle5.setFill(Color.BLACK);
 		rectangle5.setX(0);
-		rectangle5.setY(620);
+		rectangle5.setY(520);
 		rectangle5.setWidth(1000);
-		rectangle5.setHeight(100); 
+		rectangle5.setHeight(170); 
 		
 		Rectangle rectangle6 = new Rectangle();
 		rectangle6.setFill(darkGreen);
 		rectangle6.setX(0);
-		rectangle6.setY(720);
+		rectangle6.setY(670);
 		rectangle6.setWidth(1000);
 		rectangle6.setHeight(50); 
+		
+		Rectangle cover = new Rectangle();
+		cover.setFill(Color.BLACK);
+		cover.setX(0);
+		cover.setY(520);
+		cover.setWidth(1000);
+		cover.setHeight(170); 
 		
 		Rectangle rectangle3 = new Rectangle();
 		rectangle3.setFill(Color.WHITE);
@@ -221,12 +228,12 @@ public class MainUI extends Application {
 		t.setY(90);
 		t.setText("sketch_");
 		t.setFill(textGreen);
-		
-		Text t2 = new Text();
-		t2.setX(940);
-		t2.setY(750);
-		t2.setText("Arduino");
-		t2.setFill(Color.WHITE);
+	
+		Text console = new Text();
+		console.setX(10);
+		console.setY(535);
+		console.setText("Console Output");
+		console.setFill(Color.WHITE);
 		
 		Button run = new Button("Run");
 		run.relocate(0, 35);
@@ -252,8 +259,8 @@ public class MainUI extends Application {
 		wiring.relocate(880, 35);
 		wiring.setPrefSize(110, 30);
 		
-		pane.getChildren().addAll(rectangle4, rectangle, rectangle3, rectangle5, codeArea, rectangle2, t, t2,run, build, 
-				newFile, open, save, wiring, ToolBar(primaryStage));
+		pane.getChildren().addAll(rectangle4, rectangle, rectangle3, rectangle6, codeArea, rectangle2, t,run, build, 
+				newFile, rectangle5, open, save, wiring, console, ToolBar(primaryStage));
 		
 		scene = new Scene(pane, 1000, 760);
 		
@@ -271,6 +278,8 @@ public class MainUI extends Application {
 			if (!manager.isSimRunning()) {
 				manager.updateBehavior(codeArea.getText());
 			}
+			//console output 
+			console.setText(manager.stackPrint());
 		});
 		
 		run.setOnAction(e->{

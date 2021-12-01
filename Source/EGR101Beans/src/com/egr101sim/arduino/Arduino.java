@@ -41,6 +41,12 @@ public class Arduino {
 		behavior = new ArduinoBehaviorManager();
 	}
 	
+	public String stackPrint() 
+	{
+		return behavior.stackPrint(); 
+	}
+
+	
 	/**
 	 * adds component object to the component list
 	 * 
