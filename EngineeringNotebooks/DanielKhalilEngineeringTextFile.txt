@@ -1,0 +1,203 @@
+September 12th 2021
+11:37 PM
+Just finished the design for a TCP Networking application that will connect 
+Unity and Java together I got it to work with a controller in java that can move
+a cube in Unity. commited it to the main on github.
+
+September 13th 2021
+Worked on PBL, UML, and sprint breakdown with team.
+
+September 14th 2021
+created a small mockup for the BotDesign GUI to give to Keely.
+created the initial file setup, added the BaseArduino, Pin, and Pintype classes
+did a bit more file setup adding the Pin, Widget, and Servo motor classes
+
+September 15th 2021
+Keely made a BotDesign GUI mockup and I gave feedback on it
+Created the initial UI for an IDE with a textArea that 
+I could shoot strings in to be translated to Java code
+added the JOOR API to allow us to compile at runtime
+(for adding code translating it and compiling at runtime)
+
+Septermber 16th 2021
+did a lot of Pin support added Analog Digital PinState PinType,
+and ArduinoBehavior Manager classes to project.
+ight need an overhaul eventually because apparently 
+you can read and write digitally or analog from any pin which 
+(I assume) would mean we should test the behavior of that on an actual arduino
+added translator class (doesn't work)
+
+September 17th 2021
+still working on the ArduinoBehaviorManager which should facilitate the
+Translation and compilation of code to a javaclass at runtime
+Finally got Translation to work so that we can code in arduino and it will build
+to a java class that can execute commands on the base arduino class
+
+September 18th 2021
+Added more translator updates
+
+September 19th 2021
+I need to test components so I'm going to be making an in house Wiring GUI
+added PNGs of LED, Arduino.
+Wrote a ton of code getting wiring GUI to work you can point and click on pins to
+drag out wires to other components.
+
+September 20th 2021
+Fixed a bug with the wiring code
+
+September 22nd 2021
+Fixed the actual bug with the wiring code
+Created the application Manager 
+Created and added the SDS and SRS 
+Merged Lukes work into main
+
+September 23rd 2021
+Widgets are now called components
+Added a ton of issues to the Github tool to track tickets and stuff
+Added the PBL
+worked on the SRS
+
+September 27th 2021
+Re-setup Base Simulation by creating a SimulationManager class
+ripped up old Pin abstraction setup
+
+September 28th 2021
+worked more on the SDS
+
+September 29th 2021
+worked even more on Software Design Documents
+
+October 1st 2021
+I'm still building the simulation design
+final document update should be good to submit
+I merged Keelys branch into me
+
+October 4th 2021
+Just did a massive commit from the last few days that modified 27 different classes and added 2 classes
+This commit allows for the Wiring GUI I made a while back to add an LED and a resistor, wire them to an arduino
+fully through the GUI and then code it with the IDE we have. it follows digital writes and follows delays like real life arduino
+
+October 5th
+took some gifs for the 1st demo of the semester
+cleaned up A LOT of code, removed warnings, removed redundant code
+merged my branch in to main
+also added a shutdown process that kills the simulation thread when the simulation is over.
+helped keely add RichTextFX to the project directory and link it to the build path
+
+October 14th
+spotted a bug with compiling multiple times, it seems to short my memory...
+got a blue screen of death from it while testing :(
+
+October 17th
+fixed an error with the compile class from the JOOR Library, we can now compile as many times as we'd like,
+the instance of the created translation behavior will add an index to the end of the class name so we don't recompile
+the same class over and over again
+
+October 18th
+added Serial and Servo classes to act as references we can access fromt he IDE. When people code they can access
+these libraries to get Servo motors working or to print. Each of these classes are taken basically verbatum from 
+the Arduino reference website
+added a testplan document to our directory and worked on that for a bit today as well
+
+October 19th
+JDK is a real pain in the ass to keep reconfiguring each time someone hands off the project so I linked it
+straight to the project folder so our project now has jdk pre-packaged within it.
+
+October 20th 
+added more edits to Testplan
+also merged alot of working branches together in main
+
+October 25th
+added a ton of components now that the Serial and Servo library is finished I think the 
+plan will be to work on Servo motors first then IR then distnace then finally ultrasonic
+
+October 26th 
+added edits to the SRS
+worked all day on getting the Servo motor to function (1 in the display) and (2 in the simulation)
+finally spins but it looks ugly.
+
+October 27th 
+can now control the spin with code you put in to our IDE and build
+
+October 28th
+made an overhaul of all our UI elements, added new sensors and moved components around
+added funciotnality so that I could delete componets and it would remove the connected wires from them
+/: that does not work
+
+November 1st
+fixed the bug from the 28th
+got distance measuring IR sensors to semi work,
+the problem is that we have to approximate a funciton that is inherint in the design of the Distance IR sensor 
+component (SHARP GP2Y0A710K0F)
+I finished by eyeballing an approximate piecewise function that will approximate voltage based off of distance
+calculations are as follows
+-29.053 + 9.35(y/22)^(1/-1.32) = x from 15 to 80
+y = 0.235x from 0 to 10
+y = 1.35 + 0.1x from 10 to 15
+checking against other code bases this seems to be more than sufficient to approximate voltages
+based on (https://gist.github.com/reefwing/6bb74409774d5152f904)
+
+November 4th
+added ultrasonic things and made it work
+
+November 5th
+Think I might move to help the others with Unity related things. 
+I added models that Vivian created, to the Unity project
+added these models to the scene Luke and Emily were working on and constructed the models to look like a boe-bot
+
+November 9th
+added the Sprint Demo 2 powerpoint to the repo
+
+November 15th
+began picking up some slack for the BotDesign stuff
+started working on getting the bot to rotate with a mouse drag
+
+November 16th
+it rotates now when you drag over the model
+
+November 17th
+created a GUI that has a dropdown that you can select boe-bot components to drag and drop them onto the screen/
+onto the bot.
+
+November 18th
+played with lighting for the Unity scene a bit. might add a skybox to this
+the previous statment was a mistake so I reverted what I did
+
+November 21st
+I decided that I'll start working on the Simulation of the boe bot as to not step on other peoples toes.
+So I created a new scene and started by playing with rigid bodies on the prefab we have for the boe-bot.
+after a long LONG LONG LONG time getting the physics right I can now rotate specific wheels on the boe-bot
+to rotate and move the bot in directions depending on the boebots wheel positioning
+also created a new follow script which has the camera follow the bot
+
+November 22nd
+started wiring up the java project so that it could start the server socket that can communicate information to
+the unity bot so that it will move based off of the packets send from java. This seemed to work well so I think I'll
+finish for my work on this project and move to work on documentation
+
+November 23rd
+the last statement was a lie because I played with the physics a little more in the unity project
+but finally started working on the SDS and SRS with vivian
+
+--------------------------- THanks giving break -----------------
+
+November 27th
+came back from break to work on the SDS and SRS me and vivian made a shared document
+
+November 28th
+uploaded both docouments again after more work was done
+
+November 29th
+the SRS is complete but the SDS has a ton of work left
+more work was done and now I believe we are finished with the SDS
+
+November 30th
+we weren't finished because my meeting with Cheng made me realize I uploaded the wrong SDS
+we reuploaed the SDS again fromt the shared document so now all of our documentation is up to date.
+also did a lot of merging for other members that were working to main
+
+December 1st
+just worked with the team to compile the power point for the final demo.
+merged all loose ends together in the main 
+(had to sort through quite a bit of merge conflicts but I think we're okay now)
+
