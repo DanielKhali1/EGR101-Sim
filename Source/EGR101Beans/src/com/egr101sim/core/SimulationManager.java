@@ -63,7 +63,7 @@ public class SimulationManager {
 		
 		new Thread(()-> sendMessage(generateMessage())).start();
 		try {
-			Thread.sleep(100);
+			Thread.sleep(50);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
