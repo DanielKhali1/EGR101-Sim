@@ -24,6 +24,7 @@ public class SimulationManager {
 	
 	
 	public SimulationManager() {
+		
 	}
 	
 	public void setup() {
