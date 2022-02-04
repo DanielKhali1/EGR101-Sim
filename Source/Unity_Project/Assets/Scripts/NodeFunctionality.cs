@@ -30,7 +30,6 @@ public class NodeFunctionality : MonoBehaviour, IPointerClickHandler
         }
         temp.transform.parent = bot.gameObject.transform;
         temp.transform.position = new Vector3(0, 5, -3);
-        Debug.Log("MODE: " + mode + " object: " + temp);
     }
 
 

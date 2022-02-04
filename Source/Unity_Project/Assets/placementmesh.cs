@@ -12,10 +12,18 @@ public class placementmesh : MonoBehaviour
 
     void Start()
     {
+        origin = new Vector3(0, -3, 0);
         createLeftFace();
         createRightFace();
         createBackwardFace();
         createForwardFace();
+
+
+        for (int i = 0; i < meshNodes.Count; i++)
+        {
+            meshNodes[i].GetComponent<MeshRenderer>().enabled = false;
+        }
+
     }
 
     void createLeftFace() 
