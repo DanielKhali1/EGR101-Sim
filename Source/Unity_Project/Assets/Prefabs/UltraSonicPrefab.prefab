@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4605162426927518033}
   - component: {fileID: 2391792547241498257}
   - component: {fileID: 3201764011476972247}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: UltraSonicPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,13 +28,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6797503252447711238}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!114 &4323939270060589606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,8 +108,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.903007, y: 1.0691121, z: 0.454099}
-  m_Center: {x: 0.027587503, y: -0.065403014, z: -0.2309595}
+  m_Size: {x: 1.903007, y: 1.0691121, z: 0.1334061}
+  m_Center: {x: 0.027587533, y: -0.065402985, z: -0.27974257}
 --- !u!54 &3201764011476972247
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -124,5 +124,5 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 126
+  m_Constraints: 94
   m_CollisionDetection: 0

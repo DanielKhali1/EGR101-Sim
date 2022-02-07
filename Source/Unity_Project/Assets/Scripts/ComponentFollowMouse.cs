@@ -8,6 +8,7 @@ public class ComponentFollowMouse : MonoBehaviour
     Vector3 bestPosition;
     GameObject bot;
     public float pickuptimer = 0;
+    Vector3 m_EulerAngleVelocity = new Vector3(0, 100, 0);
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,7 @@ public class ComponentFollowMouse : MonoBehaviour
         {
             nodes[i].GetComponent<MeshRenderer>().enabled = true;
         }
+        Physics.IgnoreLayerCollision(1,7,true);  
 
     }
     public void OnMouseDown()
@@ -38,7 +40,6 @@ public class ComponentFollowMouse : MonoBehaviour
             }
         }
     }
-
 
     // Update is called once per frame
     void Update()
@@ -82,11 +83,8 @@ public class ComponentFollowMouse : MonoBehaviour
                 pickuptimer -= Time.deltaTime;
             }
 
-            Vector3 v3LookPos = transform.parent.position;
-            
-            transform.LookAt(v3LookPos);
-        }
+            gameObject.GetComponent<Rigidbody>().MoveRotation(Quaternion.Euler(new Vector3(0, 0, 0)));
 
-        
+        }
     }
 }
