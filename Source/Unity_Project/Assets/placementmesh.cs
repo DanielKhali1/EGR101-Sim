@@ -13,11 +13,10 @@ public class placementmesh : MonoBehaviour
     void Start()
     {
         origin = new Vector3(0, -3, 0);
-        createLeftFace();
-        createRightFace();
-        createBackwardFace();
         createForwardFace();
-
+        createLeftFace();
+        createBackwardFace();
+        createRightFace();
 
         for (int i = 0; i < meshNodes.Count; i++)
         {
@@ -28,52 +27,52 @@ public class placementmesh : MonoBehaviour
 
     void createLeftFace() 
     {
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < 5; i++)
         {
             for (int j = 0; j < 4; j++)
             {
                 GameObject sphere = makeSphere();
                 sphere.transform.parent = gameObject.transform;
-                sphere.transform.position = new Vector3(origin.x - dimensions.x * .8f, origin.y + dimensions.y * 1.7f - (j * 1.5f), origin.z + 5 - (i * 1.5f));
+                sphere.transform.position = new Vector3(origin.x - dimensions.x * .8f, origin.y + dimensions.y * 1.7f - (j * 1.5f), origin.z + 5.7f - (i * 2.1f));
             }
         }
     }
 
     void createRightFace()
     {
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < 5; i++)
         {
             for (int j = 0; j < 4; j++)
             {
                 GameObject sphere = makeSphere();
                 sphere.transform.parent = gameObject.transform;
-                sphere.transform.position = new Vector3(origin.x + dimensions.x * .8f, origin.y + dimensions.y * 1.7f - (j * 1.5f), origin.z + 5 - (i * 1.5f));
+                sphere.transform.position = new Vector3(origin.x + dimensions.x * .8f, origin.y + dimensions.y * 1.7f - (j * 1.5f), origin.z + 5.7f - (i * 2.1f));
             }
         }
     }
 
     void createBackwardFace()
     {
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < 5; i++)
         {
             for (int j = 0; j < 4; j++)
             {
                 GameObject sphere = makeSphere();
                 sphere.transform.parent = gameObject.transform;
-                sphere.transform.position = new Vector3(origin.x + dimensions.x * .8f - (i * 1.5f), origin.y + dimensions.y * 1.7f - (j * 1.5f), origin.z + 6 );
+                sphere.transform.position = new Vector3(origin.x + dimensions.x * .8f - (i * 1.5f), origin.y + dimensions.y * 1.7f - (j * 1.5f), origin.z + 7 );
             }
         }
     }
 
     void createForwardFace()
     {
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < 5; i++)
         {
             for (int j = 0; j < 4; j++)
             {
                 GameObject sphere = makeSphere();
                 sphere.transform.parent = gameObject.transform;
-                sphere.transform.position = new Vector3(origin.x + dimensions.x * .8f - (i * 1.5f), origin.y + dimensions.y * 1.7f - (j * 1.5f), origin.z - 4);
+                sphere.transform.position = new Vector3(origin.x + dimensions.x * .6f - (i * 1.5f), origin.y + dimensions.y * 1.7f - (j * 1.5f), origin.z - 4);
             }
         }
     }
