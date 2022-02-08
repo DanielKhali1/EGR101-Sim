@@ -296,7 +296,11 @@ public class MainUI extends Application {
 			}
 			else {
 				run.setText("Run");
-				runProcess.destroy();
+				try {
+					runProcess.destroy();					
+				} catch (NullPointerException ex) {
+					System.out.println("process null");
+				}
 				manager.setSimRunning(false);
 			}
 		});

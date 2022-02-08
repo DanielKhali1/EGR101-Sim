@@ -42,6 +42,11 @@ public class updateToolBar : MonoBehaviour
                 toolslot2.GetComponent<NodeFunctionality>().mode = 1;
                 toolslot3.GetComponent<NodeFunctionality>().mode = 1;
                 toolslot4.GetComponent<NodeFunctionality>().mode = 1;
+
+                toolslot1.GetComponent<NodeFunctionality>().preset = false;
+                toolslot2.GetComponent<NodeFunctionality>().preset = false;
+                toolslot3.GetComponent<NodeFunctionality>().preset = false;
+                toolslot4.GetComponent<NodeFunctionality>().preset = false;
                 break;
 
             case 2:
@@ -55,6 +60,11 @@ public class updateToolBar : MonoBehaviour
                 toolslot2.GetComponent<NodeFunctionality>().mode = 2;
                 toolslot3.GetComponent<NodeFunctionality>().mode = 2;
                 toolslot4.GetComponent<NodeFunctionality>().mode = 2;
+
+                toolslot1.GetComponent<NodeFunctionality>().preset = true;
+                toolslot2.GetComponent<NodeFunctionality>().preset = true;
+                toolslot3.GetComponent<NodeFunctionality>().preset = true;
+                toolslot4.GetComponent<NodeFunctionality>().preset = true;
                 break;
 
             case 3:
@@ -68,6 +78,11 @@ public class updateToolBar : MonoBehaviour
                 toolslot2.GetComponent<NodeFunctionality>().mode = 3;
                 toolslot3.GetComponent<NodeFunctionality>().mode = 3;
                 toolslot4.GetComponent<NodeFunctionality>().mode = 3;
+
+                toolslot1.GetComponent<NodeFunctionality>().preset = true;
+                toolslot2.GetComponent<NodeFunctionality>().preset = true;
+                toolslot3.GetComponent<NodeFunctionality>().preset = true;
+                toolslot4.GetComponent<NodeFunctionality>().preset = true;
                 break;
 
             case 4:
@@ -81,6 +96,11 @@ public class updateToolBar : MonoBehaviour
                 toolslot2.GetComponent<NodeFunctionality>().mode = 4;
                 toolslot3.GetComponent<NodeFunctionality>().mode = 4;
                 toolslot4.GetComponent<NodeFunctionality>().mode = 4;
+
+                toolslot1.GetComponent<NodeFunctionality>().preset = false;
+                toolslot2.GetComponent<NodeFunctionality>().preset = false;
+                toolslot3.GetComponent<NodeFunctionality>().preset = false;
+                toolslot4.GetComponent<NodeFunctionality>().preset = false;
                 break;
         }
     }
