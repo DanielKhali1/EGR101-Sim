@@ -64,7 +64,9 @@ public class ApplicationManager {
 	
 	public String stackPrint() 
 	{
-		return arduino.stackPrint();
+		String temp = arduino.stackPrint();
+		String stackPrint = temp.replace("/com/egr101sim/arduino/ArduinoBehavior1.java:19: ","");
+		return stackPrint; 
 	}
 
 }
