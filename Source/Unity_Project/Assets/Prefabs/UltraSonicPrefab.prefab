@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7116050582917537643}
   - component: {fileID: 4605162426927518033}
   - component: {fileID: 2391792547241498257}
-  - component: {fileID: 3201764011476972247}
+  - component: {fileID: 6476951757452122347}
   m_Layer: 7
   m_Name: UltraSonicPrefab
   m_TagString: Untagged
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee469b3bb0799d94881364d0141030cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickuptimer: 0
+  pickuptimer: 1
 --- !u!23 &7116050582917537643
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -108,9 +108,9 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.903007, y: 1.0691121, z: 0.1334061}
-  m_Center: {x: 0.027587533, y: -0.065402985, z: -0.27974257}
---- !u!54 &3201764011476972247
+  m_Size: {x: 1.903007, y: 1.0691121, z: 0.35689157}
+  m_Center: {x: 0.027587533, y: -0.065402985, z: -0.51454854}
+--- !u!54 &6476951757452122347
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,7 +122,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 94
+  m_Constraints: 0
   m_CollisionDetection: 0

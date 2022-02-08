@@ -24,9 +24,9 @@ public class ComponentFollowMouse : MonoBehaviour
         Physics.IgnoreLayerCollision(1,7,true);  
 
     }
-    public void OnMouseDown()
+    public void mouse(GameObject ob)
     {
-        if(!Follow)
+        if(!Follow && ob == gameObject)
         {
             Follow = true;
             Debug.Log("selected component: " + Follow);
@@ -44,6 +44,18 @@ public class ComponentFollowMouse : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit, 100.0f))
+            {
+                Debug.Log(hit.transform.gameObject); 
+                mouse(hit.transform.gameObject);
+                Debug.Log("You selected the " + hit.transform.name); 
+            }
+        }
+
         if (Follow)
         {
             Vector3 WorldPosition = Camera.main.ScreenToWorldPoint(new Vector3( Input.mousePosition.x,  Input.mousePosition.y, 7));
@@ -82,8 +94,6 @@ public class ComponentFollowMouse : MonoBehaviour
             {
                 pickuptimer -= Time.deltaTime;
             }
-
-            gameObject.GetComponent<Rigidbody>().MoveRotation(Quaternion.Euler(new Vector3(0, 0, 0)));
 
         }
     }
