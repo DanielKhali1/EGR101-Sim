@@ -1,41 +1,56 @@
-
 package com.egr101sim.ui;
 
+
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.IOException;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.security.Timestamp;
+import java.time.Duration;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+import org.fxmisc.flowless.VirtualizedScrollPane;
 import org.fxmisc.richtext.CodeArea;
 import org.fxmisc.richtext.GenericStyledArea;
 import org.fxmisc.richtext.LineNumberFactory;
+import org.fxmisc.richtext.StyleClassedTextArea;
 import org.fxmisc.richtext.model.Paragraph;
 import org.fxmisc.richtext.model.StyleSpans;
 import org.fxmisc.richtext.model.StyleSpansBuilder;
 import org.reactfx.collection.ListModification;
+import org.reactfx.Subscription;
+
 import com.egr101sim.core.ApplicationManager;
 
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Separator;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.ToolBar;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.control.ContextMenu; 
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.text.*;
+import java.util.Observable;
+import java.util.Observer;
 
 public class MainUI extends Application {
 	
@@ -43,10 +58,9 @@ public class MainUI extends Application {
 	Scene scene;
 	ApplicationManager manager;
 	Thread thread;
-	Process runProcess;
 	
 	private static final String[] KEYWORDSblue = new String[] {
-		"HIGH", "LOW", "INPUT", "INPUT_PULLUP", "OUTPUT", "DEC", "BIN",
+		"HIGH", "LOW", "INPUT_PULLUP",  "INPUT", "OUTPUT", "DEC", "BIN",
 		"HEX", "OCT", "PI", "HALF_PI", "TWO_PI", "LSBFIRST", "MSBFIRST", 
 		"CHANGE", "FALLING", "RISING", "DEFAULT", "EXTERNAL", "INTERNAL",
 		"INTERNAL1V1", "INTERNAL2V56", "LED_BUILTIN", "LED_BUILTIN_RX", 
@@ -68,12 +82,12 @@ public class MainUI extends Application {
 	private static final String[] KEYWORDSorange = new String[] {
 		"abs", "acos", "acosf", "asin", "asinf", "atan", "atan2", "atan2f", "atanf", "cbrt",
 		"cbrtf", "ceil", "ceilf", "constrain", "copysign", "copysignf", "cos", "cosf",
-		"cosh", "coshf", "degrees", "exp", "expf", "fabs", "fabsf", "fdim", "fdimf", "floor", 
-		"floorf", "fma", "fmaf", "fmax", "fmaxf", "fmin", "fminf", "fmod", "fmodf", 
-		"hypot", "hypotf", "isfinite", "isinf", "isnan", "ldexp", "ldexpf", "log", "log10", "log10f",
+		 "coshf","cosh", "degrees",  "expf", "exp", "fabsf","fabs", "fdimf", "fdim", "floorf", "floor",
+		 "fmaf","fmaf", "fmaxf", "fmax",  "fminf", "fmin", "fmodf",  "fmod", 
+		"hypotf", "hypot",  "isfinite", "isinf", "isnan", "ldexpf", "ldexp",  "log10f", "log10", "log", 
 		"logf", "lrint", "lrintf", "lround", "lroundf", "map", "max", "min", "pow", "powf", "radians",
-		"random", "randomSeed", "round", "roundf", "signbit", "sin", "sinh", "sinhf", "sq", "sqrt", "sqrtf",
-		"sqrtf", "tan", "tanf", "tanh", "tanhf", "trunc", "truncf", "bitRead", "bitWrite", "bitSet", "bitClear",
+		"random", "randomSeed", "round", "roundf", "signbit", "sinhf", "sinh","sin", "sqrtf",
+		"sqrt",  "sq", "tanhf", "tanf", "tanh", "tan","trunc", "truncf", "bitRead", "bitWrite", "bitSet", "bitClear",
 		"bit", "highByte", "lowByte", "analogReference", "analogReadResolution", "analogRead", 
 		"analogWriteResolution", "analogWrite", "attachInterrupt", "detachInterrupt", "digitalPinToInterrupt", "delay",
 		"delayMicroseconds", "digitalWrite", "digitalRead", "interrupts", "millis", "micros", "noInterrupts",
@@ -227,80 +241,143 @@ public class MainUI extends Application {
 		Text console = new Text();
 		console.setX(10);
 		console.setY(535);
-		console.setText("Console Output");
+		console.setText("");
 		console.setFill(Color.WHITE);
 		
-		Button run = new Button("Run");
-		run.relocate(0, 35);
-		run.setPrefSize(40, 30);
+		Image runImg = new Image("file:Resources\\arro.JPG");
+		ImageView runimage = new ImageView();
+		runimage.setImage(runImg);
+		runimage.setX(40);
+		runimage.setY(27);
+		runimage.setFitHeight(43);
+		runimage.setFitWidth(40);
 		
-		Button build = new Button("Build");
-		build.relocate(45, 35);
-		build.setPrefSize(45, 30);
+		Image buildImg = new Image("file:Resources\\Checkmark.JPG");
+		ImageView buildimage = new ImageView();
+		buildimage.setImage(buildImg);
+		buildimage.setX(0);
+		buildimage.setY(30);
+		buildimage.setFitHeight(40);
+		buildimage.setFitWidth(40);
 		
-		Button newFile = new Button("New File");
-		newFile.relocate(95, 35);
-		newFile.setPrefSize(65, 30);
-
-		Button open = new Button("Open");
-		open.relocate(165, 35);
-		open.setPrefSize(50, 30);
+		Image newFileImage = new Image("file:Resources\\newfile.JPG");
+		ImageView newimage = new ImageView();
+		newimage.setImage(newFileImage);
+		newimage.setX(80);
+		newimage.setY(30);
+		newimage.setFitHeight(40);
+		newimage.setFitWidth(40);
 		
-		Button save = new Button("Save");
-		save.relocate(220,35);
-		save.setPrefSize(50, 30);
+		Image openImage = new Image("file:Resources\\upload.JPG");
+		ImageView openimage = new ImageView();
+		openimage.setImage(openImage);
+		openimage.setX(120);
+		openimage.setY(33);
+		openimage.setFitHeight(35);
+		openimage.setFitWidth(40);
 		
-		Button wiring = new Button("Bot Design");
+		Image saveImage = new Image("file:Resources\\download.JPG");
+		ImageView saveimage = new ImageView();
+		saveimage.setImage(saveImage);
+		saveimage.setX(160);
+		saveimage.setY(31);
+		saveimage.setFitHeight(37);
+		saveimage.setFitWidth(40);
+		
+		Button wiring = new Button("Wiring Interface");
 		wiring.relocate(880, 35);
 		wiring.setPrefSize(110, 30);
 		
-		pane.getChildren().addAll(rectangle4, rectangle, rectangle3, rectangle6, codeArea, rectangle2, t,run, build, 
-				newFile, rectangle5, open, save, wiring, console, ToolBar(primaryStage));
+		pane.getChildren().addAll(rectangle4, rectangle, rectangle3, rectangle6, codeArea, rectangle2, t, rectangle5, wiring, console);
+		
+		pane.getChildren().addAll(runimage, buildimage, newimage, saveimage, openimage);
+		
+		pane.getChildren().addAll(ToolBar(primaryStage));
 		
 		scene = new Scene(pane, 1000, 760);
 		
 		wiring.setOnAction(e -> 
-		{
-			try {Process process = Runtime.getRuntime().exec("..\\..\\Executables\\customization\\Unity_Project.exe");} 
-			catch (IOException e1){e1.printStackTrace();}
-		});
+			{
+				try {
+					new WiringGUI(manager).start(new Stage());
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			});
 
-		build.setOnAction(e->{
-			if (!manager.isSimRunning()) {
+		buildimage.setOnMouseClicked(e->
+		{
+			if (!manager.isSimRunning()) 
+			{
 				manager.updateBehavior(codeArea.getText());
 			}
 			//console output 
 			console.setText(manager.stackPrint());
 		});
 		
-		run.setOnAction(e->{
-			
-			if(run.getText().equals("Run"))
+		runimage.setOnMouseClicked(e -> 
+		{
+			Platform.runLater(new Runnable() 
 			{
-//				try {runProcess = Runtime.getRuntime().exec("..\\..\\Executables\\simulation\\Unity_Project.exe");} 
-//				catch (IOException e1){e1.printStackTrace();}
-				
-				run.setText("End");
-					Platform.runLater(new Runnable() {
-					      @Override
-					      public void run() {
-					    	  
-					    	  thread = (new Thread(() -> {
-					    		  manager.setSimRunning(true);
-					    		  manager.execute();
-					    		  System.out.println("thread over");
-					    	  }));
-					    	  thread.start();
-					      }
-					  });
+			      @Override
+			      public void run() 
+			      {
+			    	  thread = (new Thread(() -> 
+			    	  {
+			    		  manager.setSimRunning(true);
+			    		  manager.execute();
+			    		  System.out.println("thread over");
+			    	  }));
+			    	  thread.start();
+			      }
+			});
+			manager.setSimRunning(false);
+		});
+		
+		saveimage.setOnMouseClicked(e->
+		{
+			try
+			{
+				Date date = new Date();
+				String tempName = date.getTime() + ".txt";
+				File file = new File(tempName);
+				FileWriter fw = new FileWriter(file);
+				String code = codeArea.textProperty().getValue();
+				fw.write(code);
+				fw.close();
+				console.setText("File has been saved");
 			}
-			else {
-				run.setText("Run");
-				runProcess.destroy();
-				manager.setSimRunning(false);
+			catch(Exception e2)
+			{
+				console.setText("Unable to save file");
 			}
 		});
-
+		
+		openimage.setOnMouseClicked(e->
+		{
+			try
+			{
+				FileChooser fileChooser2 = new FileChooser();
+			}
+			catch(Exception e2)
+			{
+				console.setText("Unable to open file");
+			}
+		});
+		
+		newimage.setOnMouseClicked(e->
+		{
+			try
+			{
+				
+			}
+			catch(Exception e2)
+			{
+				console.setText("Unable to create new file");
+			}
+		});
+		
 		File f = new File("Styles.css");
 		scene.getStylesheets().add("File:///"+f.getAbsolutePath().replace("\\","/"));
 		
