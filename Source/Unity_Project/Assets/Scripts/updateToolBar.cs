@@ -32,6 +32,7 @@ public class updateToolBar : MonoBehaviour
         switch (t)
         {
             case 1:
+                Debug.Log("IN general mode");
                 toolslot1.GetComponent<Image>().sprite = (LED);
                 toolslot2.GetComponent<Image>().sprite = null;
                 toolslot3.GetComponent<Image>().sprite = null;
@@ -44,6 +45,7 @@ public class updateToolBar : MonoBehaviour
                 break;
 
             case 2:
+                Debug.Log("IN wheel mode");
                 toolslot1.GetComponent<Image>().sprite = (wheelType1);
                 toolslot2.GetComponent<Image>().sprite = (wheelType2);
                 toolslot3.GetComponent<Image>().sprite = (wheelType2);
@@ -56,7 +58,7 @@ public class updateToolBar : MonoBehaviour
                 break;
 
             case 3:
-
+                Debug.Log("IN mount mode");
                 toolslot1.GetComponent<Image>().sprite = (mountType1);
                 toolslot2.GetComponent<Image>().sprite = (mountType2);
                 toolslot3.GetComponent<Image>().sprite = (mountType3);
@@ -69,6 +71,7 @@ public class updateToolBar : MonoBehaviour
                 break;
 
             case 4:
+                Debug.Log("IN sensor mode");
                 toolslot1.GetComponent<Image>().sprite = (lineReadingSensor);
                 toolslot2.GetComponent<Image>().sprite = (ultraSonicSensor);
                 toolslot3.GetComponent<Image>().sprite = (distanceMeasuringIRSensor);

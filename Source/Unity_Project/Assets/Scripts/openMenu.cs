@@ -10,6 +10,9 @@ public class openMenu : MonoBehaviour
 	public GameObject menu2;
 	public Button btn2;
 	Button btn;
+	public int toolType;
+	public Button firstbt;
+	public GameObject ToolBarController;
 
 	void Start()
 	{
@@ -30,6 +33,8 @@ public class openMenu : MonoBehaviour
 		menu2.SetActive(false);
 		btn.interactable = false;
 		btn2.interactable = true;
+		firstbt.Select();
+		ToolBarController.GetComponent<updateToolBar>().updateEnumType(toolType);
 
 	}
 }

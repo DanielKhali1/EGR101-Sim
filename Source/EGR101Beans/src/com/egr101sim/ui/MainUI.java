@@ -277,8 +277,8 @@ public class MainUI extends Application {
 			
 			if(run.getText().equals("Run"))
 			{
-				try {runProcess = Runtime.getRuntime().exec("..\\..\\Executables\\simulation\\Unity_Project.exe");} 
-				catch (IOException e1){e1.printStackTrace();}
+//				try {runProcess = Runtime.getRuntime().exec("..\\..\\Executables\\simulation\\Unity_Project.exe");} 
+//				catch (IOException e1){e1.printStackTrace();}
 				
 				run.setText("End");
 					Platform.runLater(new Runnable() {
