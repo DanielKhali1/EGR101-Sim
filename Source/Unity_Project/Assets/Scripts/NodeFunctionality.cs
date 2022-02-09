@@ -10,6 +10,7 @@ public class NodeFunctionality : MonoBehaviour, IPointerClickHandler
     public GameObject bot;
     public int mode = 0;
     public bool preset = false;
+    public int num = 0;
     public void OnPointerClick(PointerEventData eventData)
     {
         GameObject temp = null;
@@ -24,7 +25,7 @@ public class NodeFunctionality : MonoBehaviour, IPointerClickHandler
                 break;
 
             case 3: //mount
-                bot.GetComponent<presetSwitch>().ToggleMount(mesh2);
+                bot.GetComponent<presetSwitch>().ToggleMount(mesh2, num);
                 break;
 
             case 4: temp = Instantiate(object4);
