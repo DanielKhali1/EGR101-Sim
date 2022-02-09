@@ -401,6 +401,9 @@ public class MainUI extends Application {
 				Date date2 = new Date();
 				String tempName2 = "sketch_" + date2.getTime() + ".txt";
 				
+				codeArea.clear();
+				codeArea.replaceText(0, 0, startingcode);
+				
 				Text t2 = new Text();
 				t.setX(40);
 				t.setY(90);
