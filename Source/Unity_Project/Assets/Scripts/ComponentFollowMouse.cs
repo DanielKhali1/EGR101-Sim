@@ -71,13 +71,13 @@ public class ComponentFollowMouse : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit, 100.0f))
             {
-                Debug.Log(hit.transform.gameObject); 
+                //Debug.Log(hit.transform.gameObject); 
                 mouse(hit.transform.gameObject);
-                Debug.Log("You clicked on the " + hit.transform.name); 
+                //Debug.Log("You clicked on the " + hit.transform.name); 
             }
         }
 
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKey(KeyCode.Escape) && selected)
         {
             selected = false;
             List<GameObject> nodes = bot.GetComponent<placementmesh>().meshNodes;
