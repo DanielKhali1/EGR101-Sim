@@ -15,10 +15,13 @@ public class updateToolBar : MonoBehaviour
     public Sprite wheelType1;
     public Sprite wheelType2;
     public Sprite wheelType3;
+    public Sprite wheelType4;
+
 
     public Sprite mountType1;
     public Sprite mountType2;
     public Sprite mountType3;
+    public Sprite mountType4;
 
     public Sprite LED;
 
@@ -53,8 +56,8 @@ public class updateToolBar : MonoBehaviour
                 Debug.Log("IN wheel mode");
                 toolslot1.GetComponent<Image>().sprite = (wheelType1);
                 toolslot2.GetComponent<Image>().sprite = (wheelType2);
-                toolslot3.GetComponent<Image>().sprite = (wheelType2);
-                toolslot4.GetComponent<Image>().sprite = null;
+                toolslot3.GetComponent<Image>().sprite = (wheelType3);
+                toolslot4.GetComponent<Image>().sprite = (wheelType4);
 
                 toolslot1.GetComponent<NodeFunctionality>().mode = 2;
                 toolslot2.GetComponent<NodeFunctionality>().mode = 2;
@@ -72,7 +75,7 @@ public class updateToolBar : MonoBehaviour
                 toolslot1.GetComponent<Image>().sprite = (mountType1);
                 toolslot2.GetComponent<Image>().sprite = (mountType2);
                 toolslot3.GetComponent<Image>().sprite = (mountType3);
-                toolslot4.GetComponent<Image>().sprite = null;
+                toolslot4.GetComponent<Image>().sprite = (mountType4);
 
                 toolslot1.GetComponent<NodeFunctionality>().mode = 3;
                 toolslot2.GetComponent<NodeFunctionality>().mode = 3;

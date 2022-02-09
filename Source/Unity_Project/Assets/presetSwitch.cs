@@ -4,33 +4,21 @@ using UnityEngine;
 
 public class presetSwitch : MonoBehaviour
 {
-    public GameObject mount1;
-    public GameObject mount2;
-    public GameObject mount3;
-    public GameObject mount4;
+    public GameObject leftWheel;
+    public GameObject rightWheel;
 
-    public GameObject wheel1;
-    public GameObject wheel2;
-    public GameObject wheel3;
-    public GameObject wheel4;
+    public GameObject mount;
 
-    public void ToggleWheel(GameObject wheel)
+
+    public void ToggleWheel(Mesh mesh)
     {
-        wheel1.SetActive(false);
-        wheel2.SetActive(false);
-        wheel3.SetActive(false);
-        wheel4.SetActive(false);
+        leftWheel.GetComponent<MeshFilter>().mesh = mesh;
+        rightWheel.GetComponent<MeshFilter>().mesh = mesh;
 
-        wheel.SetActive(true);
     }
 
-    public void ToggleMount(GameObject mount)
+    public void ToggleMount(Mesh mesh)
     {
-        mount1.SetActive(false);
-        mount2.SetActive(false);
-       // mount3.SetActive(false);
-        //mount4.SetActive(false);
-
-        mount.SetActive(true);
+        mount.GetComponent<MeshFilter>().mesh = mesh;
     }
 }
