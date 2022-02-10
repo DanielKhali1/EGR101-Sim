@@ -1,9 +1,11 @@
 package com.egr101sim.ui;
 
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.security.Timestamp;
 import java.time.Duration;
@@ -136,7 +138,7 @@ public class MainUI extends Application {
 							  "\r\n" + 
 							  "}"
 			});
-	
+
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		manager = new ApplicationManager();
@@ -225,17 +227,29 @@ public class MainUI extends Application {
 		
 		Rectangle rectangle3 = new Rectangle();
 		rectangle3.setFill(Color.WHITE);
-		rectangle3.setX(20);
+		rectangle3.setX(30);
 		rectangle3.setY(70);
-		rectangle3.setWidth(80);
+		rectangle3.setWidth(160);
 		rectangle3.setHeight(60); 
 		rectangle3.setArcHeight(10);
 		rectangle3.setArcWidth(10);
 		
+		Rectangle rectanglefix = new Rectangle();
+		rectangle3.setFill(Color.WHITE);
+		rectangle3.setX(30);
+		rectangle3.setY(70);
+		rectangle3.setWidth(160);
+		rectangle3.setHeight(60); 
+		rectangle3.setArcHeight(10);
+		rectangle3.setArcWidth(10);
+
+		Date date = new Date();
+		String tempName = "sketch_" + date.getTime() + ".txt";
+		
 		Text t = new Text();
-		t.setX(30);
+		t.setX(40);
 		t.setY(90);
-		t.setText("sketch_");
+		t.setText(tempName);
 		t.setFill(textGreen);
 	
 		Text console = new Text();
@@ -372,18 +386,18 @@ public class MainUI extends Application {
 		{
 			try
 			{
-				Date date = new Date();
-				String tempName = date.getTime() + ".txt";
-				File file = new File(tempName);
+				FileChooser fileChooser1 = new FileChooser();
+				fileChooser1.setInitialFileName(tempName);
+				File file = fileChooser1.showSaveDialog(primaryStage);
 				FileWriter fw = new FileWriter(file);
 				String code = codeArea.textProperty().getValue();
 				fw.write(code);
 				fw.close();
-				console.setText("File has been saved");
+				
 			}
 			catch(Exception e2)
 			{
-				console.setText("Unable to save file");
+				console.setText("ERROR: Unable to save file");
 			}
 		});
 		
@@ -392,29 +406,59 @@ public class MainUI extends Application {
 			try
 			{
 				FileChooser fileChooser2 = new FileChooser();
+				File Opened = fileChooser2.showOpenDialog(primaryStage);
+				
+				BufferedReader in = new BufferedReader(new FileReader(Opened));
+		        String str = "";
+		        String code = "";
+		         
+		         while ((str = in.readLine()) != null) {
+		            code = code + str + "\n";
+		         } 
+		        
+		        codeArea.clear();
+				codeArea.replaceText(0, 0, code);
+				codeArea.relocate(0, 100);
+				codeArea.setPrefSize(1000, 400);
 			}
 			catch(Exception e2)
 			{
-				console.setText("Unable to open file");
+				console.setText("ERROR: Unable to open file");
 			}
 		});
 		
 		newimage.setOnMouseClicked(e->
 		{
 			try
-			{
+			{	
+				Date date2 = new Date();
+				String tempName2 = "sketch_" + date2.getTime() + ".txt";
 				
+				codeArea.clear();
+				codeArea.replaceText(0, 0, startingcode);
+				
+				Text t2 = new Text();
+				t.setX(40);
+				t.setY(90);
+				t.setText(tempName2);
+				t.setFill(textGreen);
+				
+				pane.getChildren().addAll(rectanglefix, t2);
+				Stage stage2 = new Stage();
+				stage2.setScene(scene);
+				stage2.setTitle("EGR101 Simulation Software");
+				stage2.show();
 			}
 			catch(Exception e2)
 			{
-				console.setText("Unable to create new file");
+				console.setText("ERROR: Unable to create new file");
+				e2.printStackTrace();
 			}
 		});
 		
 		File f = new File("Styles.css");
 		scene.getStylesheets().add("File:///"+f.getAbsolutePath().replace("\\","/"));
 		
-		//Scene scene = new Scene(new StackPane(new VirtualizedScrollPane<>(codeArea)), 1000, 760);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("EGR101 Simulation Software");
 		primaryStage.show();
