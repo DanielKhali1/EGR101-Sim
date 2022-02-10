@@ -244,7 +244,7 @@ public class MainUI extends Application {
 		rectangle3.setArcWidth(10);
 
 		Date date = new Date();
-		String tempName = "sketch_" + date.getTime() + ".txt";
+		String tempName = "sketch_" + date.getTime() + ".ino";
 		
 		Text t = new Text();
 		t.setX(40);
@@ -432,7 +432,7 @@ public class MainUI extends Application {
 			try
 			{	
 				Date date2 = new Date();
-				String tempName2 = "sketch_" + date2.getTime() + ".txt";
+				String tempName2 = "sketch_" + date2.getTime() + ".ino";
 				
 				codeArea.clear();
 				codeArea.replaceText(0, 0, startingcode);
