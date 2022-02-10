@@ -16,47 +16,56 @@ public class RotateBot : MonoBehaviour
 
     bool pickup = false;
 
+    bool drag;
 
-    private void Update()
+
+    public void setDrag(bool d)
     {
-        //if(!pickup) rb.velocity += new Vector3(0, -50.0f, 0);
+        drag = d;
     }
 
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
         position = rb.position + new Vector3(0, 0.5f, 0);
+        drag = true;
     }
 
     public void OnMouseDown()
     {
-        initialPosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-        rb.position = position;
-        pickup = true;
+        if(drag)
+        {
+            initialPosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            rb.position = position;
+            pickup = true;
+        }
     }
 
     public void OnMouseDrag()
     {
-        Vector3 cursorPoint = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-        Vector3 heading = cursorPoint - initialPosition;
-        Vector3 direction = new Vector3(0, -(cursorPoint.x - initialPosition.x)/20, 0);
+        if(drag)
+        {
+            Vector3 cursorPoint = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            Vector3 heading = cursorPoint - initialPosition;
+            Vector3 direction = new Vector3(0, -(cursorPoint.x - initialPosition.x)/20, 0);
 
-        direction.x = 0;
-        direction.z = 0;
+            direction.x = 0;
+            direction.z = 0;
 
-        rb.angularVelocity = direction;
-        rb.position = position;
-        pickup = true;
-
+            rb.angularVelocity = direction;
+            rb.position = position;
+            pickup = true;
+        }
     }
 
     void OnMouseUp()
     {
-        rb.angularVelocity = new Vector3(0, 0, 0);
-        rb.position = position;
-        pickup = false;
-
+        if(drag)
+        {
+            rb.angularVelocity = new Vector3(0, 0, 0);
+            rb.position = position;
+            pickup = false;
+        }
     }
-
 
 }
