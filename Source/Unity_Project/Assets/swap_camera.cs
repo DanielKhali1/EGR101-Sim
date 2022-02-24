@@ -10,7 +10,6 @@ public class swap_camera : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("Switched Camera");
         cam1.GetComponent<Camera>().enabled = !cam1.GetComponent<Camera>().enabled;
         cam2.GetComponent<Camera>().enabled = !cam2.GetComponent<Camera>().enabled;
     }

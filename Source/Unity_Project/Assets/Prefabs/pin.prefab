@@ -109,8 +109,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5418b80042f5344090b697384e9e0e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  work: 0
-  wiringComp: {fileID: 8299193883539295763, guid: b016daa3d027d3342913be7c550fc7d0, type: 3}
+  work: 1
+  cam: {fileID: 0}
 --- !u!54 &7976668045738206633
 Rigidbody:
   m_ObjectHideFlags: 0

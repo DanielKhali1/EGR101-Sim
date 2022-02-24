@@ -8,6 +8,7 @@ public class Selected : MonoBehaviour
     Color32 c;
 
     public bool work;
+    public GameObject cam;
 
     private void Start()
     {
@@ -15,7 +16,7 @@ public class Selected : MonoBehaviour
     }
     public void OnMouseEnter()
     {
-        if(work)
+        if(work && cam.GetComponent<Camera>().enabled)
         {
             gameObject.GetComponent<MeshRenderer>().material.color = new Color(255, 0, 255);
         }

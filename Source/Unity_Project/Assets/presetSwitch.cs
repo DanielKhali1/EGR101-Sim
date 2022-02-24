@@ -98,7 +98,5 @@ public class presetSwitch : MonoBehaviour
         }
 
         activePositions = gameobs;
-
-        Debug.Log(activePositions.Count);
     }
 }
