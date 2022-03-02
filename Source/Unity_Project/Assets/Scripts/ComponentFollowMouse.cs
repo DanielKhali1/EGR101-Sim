@@ -35,7 +35,6 @@ public class ComponentFollowMouse : MonoBehaviour
         {
             if (!selected)
             {
-
                 Debug.Log("selected component: " + ob);
                 GameObject.FindGameObjectWithTag("UI").GetComponent<UnityEngine.UI.Text>().text = gameObject.name;
                 GetComponent<Outline>().enabled = true;

@@ -27,59 +27,68 @@ public class placementmesh : MonoBehaviour
 
     void createLeftFace() 
     {
+        int count = 0;
         for (int i = 0; i < 5; i++)
         {
             for (int j = 0; j < 4; j++)
             {
-                GameObject sphere = makeSphere();
+                GameObject sphere = makeSphere("LSphere" + count);
                 sphere.transform.parent = gameObject.transform;
                 sphere.transform.position = new Vector3(origin.x - dimensions.x * .8f, origin.y + dimensions.y * 1.7f - (j * 1.5f), origin.z + 5.7f - (i * 2.1f));
+                count++;
             }
         }
     }
 
     void createRightFace()
     {
+        int count = 0;
         for (int i = 0; i < 5; i++)
         {
             for (int j = 0; j < 4; j++)
             {
-                GameObject sphere = makeSphere();
+                GameObject sphere = makeSphere("RSphere" + count);
                 sphere.transform.parent = gameObject.transform;
                 sphere.transform.position = new Vector3(origin.x + dimensions.x * .8f, origin.y + dimensions.y * 1.7f - (j * 1.5f), origin.z + 5.7f - (i * 2.1f));
+                count++;
             }
         }
     }
 
     void createBackwardFace()
     {
+        int count = 0;
         for (int i = 0; i < 5; i++)
         {
             for (int j = 0; j < 4; j++)
             {
-                GameObject sphere = makeSphere();
+                GameObject sphere = makeSphere("BSphere" + count);
                 sphere.transform.parent = gameObject.transform;
                 sphere.transform.position = new Vector3(origin.x + dimensions.x * .8f - (i * 1.5f), origin.y + dimensions.y * 1.7f - (j * 1.5f), origin.z + 7 );
+                count++;
             }
         }
     }
 
     void createForwardFace()
     {
+        int count = 0;
         for (int i = 0; i < 5; i++)
         {
             for (int j = 0; j < 4; j++)
             {
-                GameObject sphere = makeSphere();
+                GameObject sphere = makeSphere("FSphere" + count);
                 sphere.transform.parent = gameObject.transform;
                 sphere.transform.position = new Vector3(origin.x + dimensions.x * .6f - (i * 1.5f), origin.y + dimensions.y * 1.7f - (j * 1.5f), origin.z - 4);
+                count++;
             }
         }
     }
 
-    GameObject makeSphere()
+    GameObject makeSphere(string name)
     {
         GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        sphere.name = name;
         sphere.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         sphere.GetComponent<Renderer>().material.SetColor("_Color", new Color(0, 1, 0, 0.2f));
         meshNodes.Add(sphere);
