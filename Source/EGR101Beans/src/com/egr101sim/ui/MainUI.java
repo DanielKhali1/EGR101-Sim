@@ -425,6 +425,7 @@ public class MainUI extends Application {
 		
 		File f = new File("Styles.css");
 		scene.getStylesheets().add("File:///"+f.getAbsolutePath().replace("\\","/"));
+		scene.setFill(Color.BLACK);
 		
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("EGR101 Simulation Software");
