@@ -12,6 +12,8 @@ import com.egr101sim.arduino.elements.Pin;
 import com.egr101sim.arduino.elements.PinState;
 import com.egr101sim.arduino.elements.SpecialPin;
 
+import javafx.scene.text.Text;
+
 public class SimulationManager {
 
 	private Arduino arduino;
@@ -150,13 +152,29 @@ public class SimulationManager {
 
 	/**
 	 * shuts down Arduino
+	 * @param console 
 	 */
-	public void shutDown() {
+	public void shutDown(Text console) {
 		killAllPower(getArduino().getArduino().getDigitalArray());
 		killAllPower(getArduino().getArduino().getAnalogArray());
 		killAllPower((SpecialPin)getArduino().getArduino().getP5V());
 		killAllPower((SpecialPin)getArduino().getArduino().getP3_3v());
 		System.out.println("Killing Power");
+		console.setText(console.getText() + "\nKilling Power..");
+
+		
+		if(ss != null) {
+			try {
+				ss.close();
+				sock.close();
+				dis.close();
+				dos.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		console.setText(console.getText() + "\nEnding Server Processes..");
+		System.out.println("Closing Socket Streams");
 		
 		
 	}
