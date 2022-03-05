@@ -14,6 +14,8 @@ public class Pin {
 	private double resistance;
 	
 	private double current;
+	private double angle;
+	private double micro;
 	
 	
 	/**
@@ -42,6 +44,7 @@ public class Pin {
 		this.setPinType(pinType);
 		this.setLocal(local);
 		this.setResistance(1);
+		this.setAngle(90);
 		
 		if (this.isLocal()) {
 			switch (this.pinType) {
@@ -137,5 +140,27 @@ public class Pin {
 	 */
 	public void setResistance(double d) {
 		this.resistance = (double) d;
+	}
+
+	/**
+	 * @return the angle
+	 */
+	public double getAngle() {
+		return angle;
+	}
+
+	/**
+	 * @param angle the angle to set
+	 */
+	public void setAngle(double angle) {
+		this.angle = angle;
+	}
+
+	public double getMicro() {
+		return micro;
+	}
+
+	public void setMicro(double micro) {
+		this.micro = micro;
 	}
 }

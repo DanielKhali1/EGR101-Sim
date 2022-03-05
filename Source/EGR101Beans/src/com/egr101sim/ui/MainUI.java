@@ -302,7 +302,11 @@ public class MainUI extends Application {
 		wiring.relocate(880, 35);
 		wiring.setPrefSize(110, 30);
 		
-		pane.getChildren().addAll(rectangle4, rectangle, rectangle3, rectangle6, codeArea, rectangle2, t, rectangle5, wiring, console);
+		Button botCustomization = new Button("Bot Customization");
+		botCustomization.relocate(750, 35);
+		botCustomization.setPrefSize(120, 30);
+		
+		pane.getChildren().addAll(rectangle4, rectangle, rectangle3, rectangle6, codeArea, rectangle2, t, rectangle5, wiring, botCustomization, console);
 		
 		pane.getChildren().addAll(runimage, buildimage, newimage, saveimage, openimage);
 		
@@ -313,9 +317,24 @@ public class MainUI extends Application {
 		wiring.setOnAction(e -> 
 			{
 				try {
-					new WiringGUI(manager).start(new Stage());
+					Runtime runTime = Runtime.getRuntime();
+					String executablePath = "C:\\Users\\crump\\OneDrive\\Documents\\GitHub\\EGR101-Sim\\Executables\\wiring\\Unity_Project.exe";
+					Process process = runTime.exec(executablePath);
+					//new WiringGUI(manager).start(new Stage());
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			});
+		
+		botCustomization.setOnAction(e ->
+			{
+				try 
+				{
+					Runtime runTime = Runtime.getRuntime();
+					String executablePath = "C:\\Users\\crump\\OneDrive\\Documents\\GitHub\\EGR101-Sim\\Executables\\customization\\Unity_Project.exe";
+					Process process = runTime.exec(executablePath);
+				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
 			});
@@ -340,9 +359,23 @@ public class MainUI extends Application {
 			    	  thread = (new Thread(() -> 
 			    	  {
 			    		  manager.setSimRunning(true);
-			    		  manager.execute();
+			    		  try {
+			    			  manager.execute();
+			    		  } catch (NullPointerException e3)
+			    		  {
+			    			  System.out.println("Compile me Pls");
+			    		  }
+			    		  
 			    		  System.out.println("thread over");
 			    	  }));
+			    	  try 
+						{
+							Runtime runTime = Runtime.getRuntime();
+							String executablePath = "C:\\Users\\crump\\OneDrive\\Documents\\GitHub\\EGR101-Sim\\Executables\\simulation\\Unity_Project.exe";
+							Process process = runTime.exec(executablePath);
+						} catch (Exception e1) {
+							e1.printStackTrace();
+						}
 			    	  thread.start();
 			      }
 			});
