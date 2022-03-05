@@ -24,6 +24,7 @@ public class IrFollowMouse : MonoBehaviour
         bot = GameObject.FindGameObjectWithTag("Player");
         bot.GetComponent<ComponentStructure>().getIRSensorList().Add(gameObject);
         nodes = bot.GetComponent<presetSwitch>().activePositions;
+        bot.GetComponent<placementmesh>().sensors.Add(gameObject);
         gameObject.transform.rotation = bot.transform.rotation;
         gameObject.transform.Rotate(new Vector3(0, -90, 0), Space.Self);
         
