@@ -22,7 +22,7 @@ public class CreateWire : MonoBehaviour
                     GameObject line = Instantiate(linePrefab, new Vector3(0,0,0), Quaternion.identity);
                     LineRenderer lineRenderer = line.GetComponent<LineRenderer>();
 
-                    Debug.Log(count + " " + hit.transform.parent.name);
+                    //Debug.Log(count + " " + hit.transform.parent.name);
                     if(count % 2 == 0)
                     {
                         

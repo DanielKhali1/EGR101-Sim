@@ -6102,6 +6102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dimensions: {x: 5, y: 5}
   meshNodes: []
+  sensors: []
 --- !u!114 &1035932014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7702,6 +7703,7 @@ GameObject:
   - component: {fileID: 1277570246}
   - component: {fileID: 1277570245}
   - component: {fileID: 1277570244}
+  - component: {fileID: 1277570247}
   - component: {fileID: 1277570243}
   m_Layer: 5
   m_Name: swap_camera_wire
@@ -7798,6 +7800,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1277570241}
   m_CullTransparentMesh: 1
+--- !u!114 &1277570247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1277570241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f1f37b5b1759ee4ab9f55019dd1415c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1302376599
 GameObject:
   m_ObjectHideFlags: 0

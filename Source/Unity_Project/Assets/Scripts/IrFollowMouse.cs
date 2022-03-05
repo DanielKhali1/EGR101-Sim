@@ -26,7 +26,6 @@ public class IrFollowMouse : MonoBehaviour
         nodes = bot.GetComponent<presetSwitch>().activePositions;
         gameObject.transform.rotation = bot.transform.rotation;
         gameObject.transform.Rotate(new Vector3(0, -90, 0), Space.Self);
-
         
         Physics.IgnoreLayerCollision(1, 7, true);
 

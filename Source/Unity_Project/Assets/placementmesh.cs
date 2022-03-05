@@ -9,6 +9,7 @@ public class placementmesh : MonoBehaviour
     Vector3 origin;
 
     public List<GameObject> meshNodes = new List<GameObject>();
+    public List<GameObject> sensors = new List<GameObject>();
 
     void Start()
     {

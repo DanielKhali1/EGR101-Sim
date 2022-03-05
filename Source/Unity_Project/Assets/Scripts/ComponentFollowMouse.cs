@@ -20,6 +20,8 @@ public class ComponentFollowMouse : MonoBehaviour
         GetComponent<Outline>().enabled = true;
         bot = GameObject.FindGameObjectWithTag("Player");
         List<GameObject> nodes = bot.GetComponent<placementmesh>().meshNodes;
+        List<GameObject> sensor = bot.GetComponent<placementmesh>().sensors;
+        sensor.Add(gameObject);
         gameObject.transform.rotation = bot.transform.rotation;
 
         for(int i = 0;i < nodes.Count; i++)
@@ -124,7 +126,7 @@ public class ComponentFollowMouse : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0) && pickuptimer <= 0)
             {
-                Debug.Log("placed object");
+                //Debug.Log("placed object");
                 bot.GetComponent<RotateBot>().setDrag(false);
 
                 Follow = false;
