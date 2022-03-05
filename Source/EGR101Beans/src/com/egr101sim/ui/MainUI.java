@@ -422,14 +422,10 @@ public class MainUI extends Application {
 		});
 
 		File f = new File("Styles.css");
-<<<<<<< HEAD
+		
 		scene.getStylesheets().add("File:///"+f.getAbsolutePath().replace("\\","/"));
 		scene.setFill(Color.BLACK);
-		
-=======
-		scene.getStylesheets().add("File:///" + f.getAbsolutePath().replace("\\", "/"));
 
->>>>>>> origin/BugFixing
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("EGR101 Simulation Software");
 		primaryStage.show();
