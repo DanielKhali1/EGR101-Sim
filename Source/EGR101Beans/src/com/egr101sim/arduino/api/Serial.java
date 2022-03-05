@@ -1,6 +1,7 @@
 package com.egr101sim.arduino.api;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 public class Serial 
 {
 	public static void println(String words)
@@ -66,4 +67,8 @@ public class Serial {
 		//TODO: figure out what the fuck this means
 	}
 >>>>>>> origin/BugFixing
+=======
+public class Serial {
+
+>>>>>>> parent of e750308 (updated serial class)
 }
