@@ -11,6 +11,9 @@ import com.egr101sim.arduino.elements.SpecialPin;
 import com.egr101sim.arduino.tools.Translator;
 import com.egr101sim.core.SimulationManager;
 
+import javafx.scene.control.TextArea;
+import javafx.scene.text.Text;
+
 /**
  * 
  * @author danny
@@ -24,7 +27,7 @@ import com.egr101sim.core.SimulationManager;
  */
 public class Arduino {
 	
-	ArduinoBehaviorManager behavior;
+	public ArduinoBehaviorManager behavior;
 	private BaseArduino arduino;
 	
 	private ArrayList<Component> components = new ArrayList<Component>();
@@ -115,10 +118,10 @@ public class Arduino {
 	 * 
 	 * @param instructions
 	 */
-	public void compileSketch(String instructions) {
+	public void compileSketch(String instructions, Text console) {
 		
 		String translated = new Translator(instructions).translate();
-		behavior.compile(translated);
+		behavior.compile(translated, console);
 	}
 
 	/**

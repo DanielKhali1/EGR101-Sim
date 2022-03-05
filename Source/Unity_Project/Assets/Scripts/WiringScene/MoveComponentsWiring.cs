@@ -23,26 +23,28 @@ public class MoveComponentsWiring : MonoBehaviour,  IPointerClickHandler
         {
             Debug.Log(sensor[i].transform.localPosition.x);
             //Right Face
-            if(sensor[i].transform.localPosition.x == -4)
+            if(sensor[i].transform.localPosition.x >= -4.01f && sensor[i].transform.localPosition.x <= -3.99f)
             {
-                MoveRightFace();
+                MoveRightFace(sensor[i]);
+                sensor[i].transform.Rotate(new Vector3(-90,0,0));
             }
             //Left Face
             if(sensor[i].transform.localPosition.x >= 3.9f && sensor[i].transform.localPosition.x <= 4.1f)
             {
-                Debug.Log("Hello There");
                 MoveLeftFace(sensor[i]);
                 sensor[i].transform.Rotate(new Vector3(-90,0,0));
             }
             //Front Face
-            if(sensor[i].transform.localPosition.z == -5)
+            if(sensor[i].transform.localPosition.z >= -5.01f && sensor[i].transform.localPosition.z <= -4.99f)
             {
-                MoveFrontFace();
+                MoveFrontFace(sensor[i]);
+                sensor[i].transform.Rotate(new Vector3(-90,0,0));
             }
             //Back Face
-            if(sensor[i].transform.localPosition.x == 6)
+            if(sensor[i].transform.localPosition.z <= 6.01f && sensor[i].transform.localPosition.z >= 5.99f)
             {
-                MoveBackFace();
+                MoveBackFace(sensor[i]);
+                sensor[i].transform.Rotate(new Vector3(-90,0,0));
             }
         }
     }
@@ -59,18 +61,39 @@ public class MoveComponentsWiring : MonoBehaviour,  IPointerClickHandler
             sensor.transform.localPosition = new Vector3(10, 4, sensor.transform.localPosition.z);    
     }
 
-    private void MoveRightFace()
+    private void MoveRightFace(GameObject sensor)
     {
-
+        if(sensor.transform.localPosition.y <= -0.9f && sensor.transform.localPosition.y >= -1.1f)
+            sensor.transform.localPosition = new Vector3(-4, 4, sensor.transform.localPosition.z);
+        if(sensor.transform.localPosition.y >= 0.49f && sensor.transform.localPosition.y <= 0.51f)
+            sensor.transform.localPosition = new Vector3(-6, 4, sensor.transform.localPosition.z);
+        if(sensor.transform.localPosition.y >= 1.99f && sensor.transform.localPosition.y <= 2.1f)
+            sensor.transform.localPosition = new Vector3(-8, 4, sensor.transform.localPosition.z);
+        if(sensor.transform.localPosition.y >= 3.49f && sensor.transform.localPosition.y <= 3.51f)
+            sensor.transform.localPosition = new Vector3(-10, 4, sensor.transform.localPosition.z); 
     }
 
-    private void MoveFrontFace()
+    private void MoveFrontFace(GameObject sensor)
     {
-
+        if(sensor.transform.localPosition.y <= -0.9f && sensor.transform.localPosition.y >= -1.1f)
+            sensor.transform.localPosition = new Vector3(sensor.transform.localPosition.x, 4, -5);
+        if(sensor.transform.localPosition.y >= 0.49f && sensor.transform.localPosition.y <= 0.51f)
+            sensor.transform.localPosition = new Vector3(sensor.transform.localPosition.x, 4, -7);
+        if(sensor.transform.localPosition.y >= 1.99f && sensor.transform.localPosition.y <= 2.1f)
+            sensor.transform.localPosition = new Vector3(sensor.transform.localPosition.x, 4, -9);
+        if(sensor.transform.localPosition.y >= 3.49f && sensor.transform.localPosition.y <= 3.51f)
+            sensor.transform.localPosition = new Vector3(sensor.transform.localPosition.x, 4, -11); 
     }
 
-    private void MoveBackFace()
+    private void MoveBackFace(GameObject sensor)
     {
-
+        if(sensor.transform.localPosition.y <= -0.9f && sensor.transform.localPosition.y >= -1.1f)
+            sensor.transform.localPosition = new Vector3(sensor.transform.localPosition.x, 4, 5);
+        if(sensor.transform.localPosition.y >= 0.49f && sensor.transform.localPosition.y <= 0.51f)
+            sensor.transform.localPosition = new Vector3(sensor.transform.localPosition.x, 4, 7);
+        if(sensor.transform.localPosition.y >= 1.99f && sensor.transform.localPosition.y <= 2.1f)
+            sensor.transform.localPosition = new Vector3(sensor.transform.localPosition.x, 4, 9);
+        if(sensor.transform.localPosition.y >= 3.49f && sensor.transform.localPosition.y <= 3.51f)
+            sensor.transform.localPosition = new Vector3(sensor.transform.localPosition.x, 4, 11); 
     }
 }
