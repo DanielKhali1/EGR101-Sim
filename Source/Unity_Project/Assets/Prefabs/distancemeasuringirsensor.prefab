@@ -65,6 +65,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickuptimer: 1
+  isSim: 1
 --- !u!114 &3212856477322723388
 MonoBehaviour:
   m_ObjectHideFlags: 0

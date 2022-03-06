@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickuptimer: 1
+  isSim: 1
 --- !u!23 &7116050582917537643
 MeshRenderer:
   m_ObjectHideFlags: 0

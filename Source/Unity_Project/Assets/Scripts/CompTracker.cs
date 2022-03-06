@@ -8,18 +8,14 @@ using System.Threading.Tasks;
 
 public class CompTracker : MonoBehaviour
 {
-
+    public bool isSim;
     List<GameObject> components;
     // Start is called before the first frame update
     void Start()
     {
-        components = new List<GameObject>();
+        components = gameObject.GetComponent<placementmesh>().sensors;
     }
 
-    public void AddComponent(GameObject component)
-    {
-        components.Add(component);
-    }
     public void saveData()
     {
         //save component data to a file
@@ -31,14 +27,18 @@ public class CompTracker : MonoBehaviour
             text += comp.name+"\n";
             text += comp.transform.localPosition + "\n";
             text += comp.transform.localRotation + "\n";
-
+            text += comp.transform.localScale + "\n";
         }
 
-        File.WriteAllText("WriteText.txt", text);
+        File.WriteAllText("..\\..\\Data\\Component_Data.dat", text);
     }
     void OnApplicationQuit()
     {
-        saveData();
+        if(!isSim)
+        {
+            Debug.Log("SAVING");
+            saveData();
+        }
     }
 
 

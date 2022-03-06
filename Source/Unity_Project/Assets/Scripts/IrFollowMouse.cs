@@ -11,6 +11,7 @@ public class IrFollowMouse : MonoBehaviour
     Vector3 m_EulerAngleVelocity = new Vector3(0, 100, 0);
     int currentAngle = 0;
     bool selected;
+    public bool isSim = false;
 
     List<GameObject> nodes;
 
@@ -20,7 +21,10 @@ public class IrFollowMouse : MonoBehaviour
 
         Follow = true;
         selected = true;
-        GetComponent<Outline>().enabled = true;
+        if(!isSim)
+        {
+            GetComponent<Outline>().enabled = true;
+        }
         bot = GameObject.FindGameObjectWithTag("Player");
         bot.GetComponent<ComponentStructure>().getIRSensorList().Add(gameObject);
         nodes = bot.GetComponent<presetSwitch>().activePositions;
