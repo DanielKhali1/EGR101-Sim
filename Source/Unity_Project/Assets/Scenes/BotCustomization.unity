@@ -6103,6 +6103,7 @@ MonoBehaviour:
   dimensions: {x: 5, y: 5}
   meshNodes: []
   sensors: []
+  origSensorsPos: []
 --- !u!114 &1035932014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6662,6 +6663,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1166472883}
   - component: {fileID: 1166472884}
+  - component: {fileID: 1166472885}
   m_Layer: 0
   m_Name: wiringCam
   m_TagString: MainCamera
@@ -6726,6 +6728,24 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &1166472885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1166472882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f3d420bb8e2652489150e13aacf8007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panSpeed: 20
+  panBorderThickness: 10
+  panLimit: {x: 10, y: 10}
+  scrollSpeed: 20
+  minY: 10
+  maxY: 30
 --- !u!1 &1169895259
 GameObject:
   m_ObjectHideFlags: 0
@@ -7812,6 +7832,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f1f37b5b1759ee4ab9f55019dd1415c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wiringCam: {fileID: 1166472884}
+  dimensions: {x: 0, y: 0}
 --- !u!1 &1302376599
 GameObject:
   m_ObjectHideFlags: 0

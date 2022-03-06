@@ -24,8 +24,7 @@ public class ComponentFollowMouse : MonoBehaviour
         }
         bot = GameObject.FindGameObjectWithTag("Player");
         List<GameObject> nodes = bot.GetComponent<placementmesh>().meshNodes;
-        List<GameObject> sensor = bot.GetComponent<placementmesh>().sensors;
-        sensor.Add(gameObject);
+        bot.GetComponent<placementmesh>().sensors.Add(gameObject);
         gameObject.transform.rotation = bot.transform.rotation;
 
         for(int i = 0;i < nodes.Count; i++)

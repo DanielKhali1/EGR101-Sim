@@ -10,6 +10,7 @@ public class placementmesh : MonoBehaviour
 
     public List<GameObject> meshNodes = new List<GameObject>();
     public List<GameObject> sensors = new List<GameObject>();
+    public List<Vector3> origSensorsPos = new List<Vector3>();
 
     void Start()
     {
