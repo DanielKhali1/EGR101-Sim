@@ -4247,6 +4247,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5823236699222798638}
     m_Modifications:
+    - target: {fileID: 1069614574859888336, guid: 18729fdeac1c199468f04798ebcf10c4, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7976668045738206633, guid: 18729fdeac1c199468f04798ebcf10c4, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8310763271011032585, guid: 18729fdeac1c199468f04798ebcf10c4, type: 3}
       propertyPath: m_Name
       value: GND
@@ -4321,6 +4329,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5823236699222798638}
     m_Modifications:
+    - target: {fileID: 1069614574859888336, guid: 18729fdeac1c199468f04798ebcf10c4, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7976668045738206633, guid: 18729fdeac1c199468f04798ebcf10c4, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8310763271011032585, guid: 18729fdeac1c199468f04798ebcf10c4, type: 3}
       propertyPath: m_Name
       value: V0
@@ -4395,6 +4411,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5823236699222798638}
     m_Modifications:
+    - target: {fileID: 1069614574859888336, guid: 18729fdeac1c199468f04798ebcf10c4, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7976668045738206633, guid: 18729fdeac1c199468f04798ebcf10c4, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8310763271011032585, guid: 18729fdeac1c199468f04798ebcf10c4, type: 3}
       propertyPath: m_Name
       value: VCC

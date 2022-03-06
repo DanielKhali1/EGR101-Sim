@@ -19,10 +19,13 @@ public class MoveComponentsWiring : MonoBehaviour,  IPointerClickHandler
         for(int i = 0; i < sensor.Count; i++)
         {
             bot.GetComponent<placementmesh>().origSensorsPos.Add(sensor[i].transform.localPosition);
+            Debug.Log(sensor[i].transform.localPosition);
         }
 
         if(wiringCam.GetComponent<Camera>().enabled)
         {
+            bot.GetComponent<Transform>().rotation = Quaternion.Euler(0,0,0);
+            bot.GetComponent<Rigidbody>().freezeRotation = true;
             for(int i = 0; i < sensor.Count; i++)
             {
                 //Right Face
@@ -58,6 +61,7 @@ public class MoveComponentsWiring : MonoBehaviour,  IPointerClickHandler
         }
         if(!wiringCam.GetComponent<Camera>().enabled)
         {
+            bot.GetComponent<Rigidbody>().freezeRotation = false;
             for(int i = 0; i < sensor.Count; i++)
             {
                 Debug.Log(originalSensors[i]);

@@ -12900,6 +12900,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1166472882}
     - target: {fileID: 6520551709866580662, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6520551709866580662, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_Constraints
       value: 126
       objectReference: {fileID: 0}
