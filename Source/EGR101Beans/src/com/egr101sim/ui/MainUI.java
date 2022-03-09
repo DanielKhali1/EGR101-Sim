@@ -27,17 +27,21 @@ import org.fxmisc.richtext.model.StyleSpansBuilder;
 import org.reactfx.collection.ListModification;
 import org.reactfx.Subscription;
 
+import com.egr101sim.arduino.api.Serial;
 import com.egr101sim.core.ApplicationManager;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextAreaBuilder;
 import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -45,10 +49,14 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.layout.VBoxBuilder;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.text.*;
 import java.util.Observable;
@@ -80,16 +88,16 @@ public class MainUI extends Application {
 			"atan2", "atan2f", "atanf", "cbrt", "cbrtf", "ceil", "ceilf", "constrain", "copysign", "copysignf", "cos",
 			"cosf", "coshf", "cosh", "degrees", "expf", "exp", "fabsf", "fabs", "fdimf", "fdim", "floorf", "floor",
 			"fmaf", "fmaf", "fmaxf", "fmax", "fminf", "fmin", "fmodf", "fmod", "hypotf", "hypot", "isfinite", "isinf",
-			"isnan", "ldexpf", "ldexp", "log10f", "log10", "log", "logf", "lrint", "lrintf", "lround", "lroundf", "map",
-			"max", "min", "pow", "powf", "radians", "random", "randomSeed", "round", "roundf", "signbit", "sinhf",
-			"sinh", "sin", "sqrtf", "sqrt", "sq", "tanhf", "tanf", "tanh", "tan", "trunc", "truncf", "bitRead",
+			"isnan", "ldexpf", "ldexp", "log10", "log10f", "logf", "log", "lrintf", "lrint", "lroundf", "lround", "map",
+			"max", "min", "powf", "pow", "radians", "randomSeed", "random", "roundf", "round", "signbit", "sinhf",
+			"sinh", "sin", "sqrtf", "sqrt", "sq", "tanhf", "tanf", "tanh", "tan", "truncf", "trunc", "bitRead",
 			"bitWrite", "bitSet", "bitClear", "bit", "highByte", "lowByte", "analogReference", "analogReadResolution",
 			"analogRead", "analogWriteResolution", "analogWrite", "attachInterrupt", "detachInterrupt",
-			"digitalPinToInterrupt", "delay", "delayMicroseconds", "digitalWrite", "digitalRead", "interrupts",
-			"millis", "micros", "noInterrupts", "noTone", "pinMode", "pulseIn", "pulseInLong", "shiftIn", "shiftOut",
-			"tone", "yield", "Stream", "Serial", "Serial1", "Serial2", "Serial3", "SerialUSB", "begin", "end", "peek",
+			"digitalPinToInterrupt", "delayMicroseconds", "delay", "digitalWrite", "digitalRead", "interrupts",
+			"millis", "micros", "noInterrupts", "noTone", "pinMode", "pulseInLong", "pulseIn", "shiftIn", "shiftOut",
+			"tone", "yield", "Stream", "Serial1", "Serial2", "Serial3", "SerialUSB", "Serial", "begin", "end", "peek",
 			"read", "println", "print", "avaliable", "avaliableForWrite", "flush", "setTimeout", "findUntil", "find",
-			"parseInt", "parseFloat", "readBytes", "readBytesUntil", "readString", "readStringUntil", "trim",
+			"parseInt", "parseFloat", "readBytesUntil", "readBytes", "readStringUntil", "readString", "trim",
 			"toUpperCase", "toLowerCase", "charAt", "compareTo", "concat", "endsWith", "startsWith", "equals",
 			"equalsIgnoreCase", "getBytes", "indexOf", "lastIndexOf", "length", "replace", "setCharAt", "substring",
 			"toCharArray", "toInt", "Keyboard", "Mouse", "press", "release", "releaseAll", "accept", "click", "move",
@@ -151,10 +159,7 @@ public class MainUI extends Application {
 		codeArea.setPrefSize(1000, 400);
 
 		// colors for background
-
-		Color orangeText = Color.web("#d35400");
-		Color greenText = Color.web("#728E00");
-		Color blueText = Color.web("#00979c");
+		
 		Color lightGreen = Color.web("#17a1a5");
 		Color darkGreen = Color.web("#006468");
 		Color textGreen = Color.web("#0f6464");
@@ -192,7 +197,7 @@ public class MainUI extends Application {
 		rectangle6.setX(0);
 		rectangle6.setY(670);
 		rectangle6.setWidth(1000);
-		rectangle6.setHeight(50);
+		rectangle6.setHeight(70);
 
 		Rectangle cover = new Rectangle();
 		cover.setFill(Color.BLACK);
@@ -233,6 +238,17 @@ public class MainUI extends Application {
 		console.setY(535);
 		console.setText("");
 		console.setFill(Color.WHITE);
+         
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setStyle("-fx-background: #000000; -fx-border-color: #000000;");
+        scrollPane.setFitToWidth(true);
+        scrollPane.setPrefWidth(1000);
+        scrollPane.setPrefHeight(170);
+        scrollPane.setTranslateX(0);
+        scrollPane.setTranslateY(530);
+        console.wrappingWidthProperty().bind(rectangle5.widthProperty());
+        scrollPane.setContent(console);
+        scrollPane.setVvalue(scrollPane.getVmax());
 
 		Image runImg = new Image("file:Resources\\arro.JPG");
 		ImageView runimage = new ImageView();
@@ -273,19 +289,27 @@ public class MainUI extends Application {
 		saveimage.setY(31);
 		saveimage.setFitHeight(37);
 		saveimage.setFitWidth(40);
+		
+		Image serialImage = new Image("file:Resources\\serial2.JPG");
+		ImageView serialimage = new ImageView();
+		serialimage.setImage(serialImage);
+		serialimage.setX(960);
+		serialimage.setY(35);
+		serialimage.setFitHeight(30);
+		serialimage.setFitWidth(35);
 
 		Button wiring = new Button("Wiring Interface");
-		wiring.relocate(880, 35);
+		wiring.relocate(840, 35);
 		wiring.setPrefSize(110, 30);
 
 		Button botCustomization = new Button("Bot Customization");
-		botCustomization.relocate(750, 35);
+		botCustomization.relocate(715, 35);
 		botCustomization.setPrefSize(120, 30);
 
 		pane.getChildren().addAll(rectangle4, rectangle, rectangle3, rectangle6, codeArea, rectangle2, t, rectangle5,
-				wiring, botCustomization, console);
+				wiring, botCustomization, scrollPane, console);
 
-		pane.getChildren().addAll(runimage, buildimage, newimage, saveimage, openimage);
+		pane.getChildren().addAll(runimage, buildimage, newimage, saveimage, openimage, serialimage);
 
 		pane.getChildren().addAll(ToolBar(primaryStage));
 
@@ -316,9 +340,11 @@ public class MainUI extends Application {
 		buildimage.setOnMouseClicked(e -> {
 			if (!manager.isSimRunning()) {
 				manager.updateBehavior(codeArea.getText(), console);
+				scrollPane.setVvalue(scrollPane.getVmax());
 			}
 			// console output
 			console.setText(console.getText() + "\n" + manager.stackPrint());
+			scrollPane.setVvalue(scrollPane.getVmax());
 		});
 
 		runimage.setOnMouseClicked(e -> {
@@ -340,11 +366,13 @@ public class MainUI extends Application {
 							manager.setSimRunning(true);
 							try {
 								manager.execute(process, console);
-
+								console.setText(console.getText() + "\n" + Serial.serialLog);
+								scrollPane.setVvalue(scrollPane.getVmax());
 							} catch (NullPointerException e3) {
 								process.destroy();
 								manager.setSimRunning(false);
 								manager.simManager.shutDown(console);
+								scrollPane.setVvalue(scrollPane.getVmax());
 							}
 
 							System.out.println("arduino execution thread over");
@@ -353,6 +381,7 @@ public class MainUI extends Application {
 						thread.start();
 					} else {
 						console.setText("Verify before running!");
+						scrollPane.setVvalue(scrollPane.getVmax());
 					}
 				}
 			});
@@ -371,6 +400,7 @@ public class MainUI extends Application {
 
 			} catch (Exception e2) {
 				console.setText("ERROR: Unable to save file");
+				scrollPane.setVvalue(scrollPane.getVmax());
 			}
 		});
 
@@ -393,6 +423,7 @@ public class MainUI extends Application {
 				codeArea.setPrefSize(1000, 400);
 			} catch (Exception e2) {
 				console.setText("ERROR: Unable to open file");
+				scrollPane.setVvalue(scrollPane.getVmax());
 			}
 		});
 
@@ -417,6 +448,62 @@ public class MainUI extends Application {
 				stage2.show();
 			} catch (Exception e2) {
 				console.setText("ERROR: Unable to create new file");
+				scrollPane.setVvalue(scrollPane.getVmax());
+				e2.printStackTrace();
+			}
+		});
+		
+		serialimage.setOnMouseClicked(e -> {
+			try {
+				System.out.println("serial clicked");
+				Stage popupwindow=new Stage();
+			      
+				popupwindow.initModality(Modality.APPLICATION_MODAL);
+				popupwindow.setTitle("Serial Monitor");
+				 
+				VBox layout= new VBox(10);
+				
+				Text serial = new Text();
+				serial.setX(10);
+				serial.setY(535);
+				serial.setText(Serial.serialLog);
+				serial.setFill(Color.BLACK);
+				
+				Rectangle rectangle0 = new Rectangle();
+				rectangle0.setFill(Color.WHITE);
+				rectangle0.setX(0);
+				rectangle0.setY(0);
+				rectangle0.setWidth(300);
+				
+				ScrollPane scrollPane2 = new ScrollPane();
+		        scrollPane2.setStyle("-fx-background: #ffffff;");
+		        scrollPane2.setFitToWidth(true);
+		        scrollPane2.setPrefWidth(300);
+		        scrollPane2.setPrefHeight(600);
+		        scrollPane2.setTranslateX(0);
+		        scrollPane2.setTranslateY(0);
+		        scrollPane2.setContent(serial);
+		        serial.wrappingWidthProperty().bind(rectangle0.widthProperty());
+		        scrollPane2.setVvalue(scrollPane2.getVmax());
+				      
+				layout.getChildren().addAll(rectangle0, scrollPane2, serial);
+				
+				Scene scene1= new Scene(layout, 300, 600);
+				      
+				popupwindow.setScene(scene1);
+				      
+				popupwindow.show();
+				
+				for(int i = 0; i < 100; i++)
+				{
+					serial.setText(Serial.serialLog);
+					scrollPane2.setContent(serial);
+					scrollPane2.setVvalue(scrollPane2.getVmax());
+				}
+				
+			} catch (Exception e2) {
+				console.setText("ERROR: Unable to open Serial Monitor");
+				scrollPane.setVvalue(scrollPane.getVmax());
 				e2.printStackTrace();
 			}
 		});
@@ -424,7 +511,6 @@ public class MainUI extends Application {
 		File f = new File("Styles.css");
 		
 		scene.getStylesheets().add("File:///"+f.getAbsolutePath().replace("\\","/"));
-		scene.setFill(Color.BLACK);
 
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("EGR101 Simulation Software");
