@@ -4177,6 +4177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickuptimer: 0
+  isSim: 1
 --- !u!65 &2131779197313485332
 BoxCollider:
   m_ObjectHideFlags: 0
