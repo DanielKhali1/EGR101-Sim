@@ -144,7 +144,7 @@ public class ApplicationManager {
 	public String stackPrint() 
 	{
 		String temp = arduino.stackPrint();
-		String stackPrint = temp.replace("/com/egr101sim/arduino/ArduinoBehavior1.java:19: ","");
+		String stackPrint = temp.replace("/com/egr101sim/arduino/ArduinoBehavior1.java:","");
 		return stackPrint; 
 	}
 

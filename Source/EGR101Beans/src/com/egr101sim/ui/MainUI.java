@@ -32,6 +32,7 @@ import com.egr101sim.core.ApplicationManager;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -47,6 +48,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -57,6 +59,7 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.scene.text.*;
 import java.util.Observable;
@@ -456,17 +459,11 @@ public class MainUI extends Application {
 		serialimage.setOnMouseClicked(e -> {
 			try {
 				System.out.println("serial clicked");
-				Stage popupwindow=new Stage();
-			      
-				popupwindow.initModality(Modality.APPLICATION_MODAL);
-				popupwindow.setTitle("Serial Monitor");
-				 
-				VBox layout= new VBox(10);
 				
 				Text serial = new Text();
 				serial.setX(10);
-				serial.setY(535);
-				serial.setText(Serial.serialLog);
+				serial.setY(20);
+				serial.setText("Serial Monitor \n\n");
 				serial.setFill(Color.BLACK);
 				
 				Rectangle rectangle0 = new Rectangle();
@@ -474,6 +471,7 @@ public class MainUI extends Application {
 				rectangle0.setX(0);
 				rectangle0.setY(0);
 				rectangle0.setWidth(300);
+				rectangle0.setHeight(600);
 				
 				ScrollPane scrollPane2 = new ScrollPane();
 		        scrollPane2.setStyle("-fx-background: #ffffff;");
@@ -485,21 +483,19 @@ public class MainUI extends Application {
 		        scrollPane2.setContent(serial);
 		        serial.wrappingWidthProperty().bind(rectangle0.widthProperty());
 		        scrollPane2.setVvalue(scrollPane2.getVmax());
-				      
-				layout.getChildren().addAll(rectangle0, scrollPane2, serial);
+		        
+		        final Popup popupwindow = new Popup();
+				popupwindow.setX(1000);
+		        popupwindow.setY(165);
+		        popupwindow.setWidth(300);
+		        popupwindow.setHeight(600);
+		        popupwindow.getContent().addAll(rectangle0, scrollPane2, serial);
+		        
+				popupwindow.show(primaryStage);
 				
-				Scene scene1= new Scene(layout, 300, 600);
-				      
-				popupwindow.setScene(scene1);
-				      
-				popupwindow.show();
-				
-				for(int i = 0; i < 100; i++)
-				{
-					serial.setText(Serial.serialLog);
-					scrollPane2.setContent(serial);
-					scrollPane2.setVvalue(scrollPane2.getVmax());
-				}
+				//find better way to update i guess 
+			    //serial.setText(Serial.serialLog);
+			    //scrollPane2.setVvalue(scrollPane2.getVmax());
 				
 			} catch (Exception e2) {
 				console.setText("ERROR: Unable to open Serial Monitor");
