@@ -16,6 +16,7 @@ public class MoveComponentsWiring : MonoBehaviour,  IPointerClickHandler
         bot = GameObject.FindGameObjectWithTag("Player");
         List<GameObject> sensor = bot.GetComponent<placementmesh>().sensors;
         originalSensors = bot.GetComponent<placementmesh>().origSensorsPos;
+        //sets the originalSensorPos to the positions of the sn
         for(int i = 0; i < sensor.Count; i++)
         {
             bot.GetComponent<placementmesh>().origSensorsPos.Add(sensor[i].transform.localPosition);
