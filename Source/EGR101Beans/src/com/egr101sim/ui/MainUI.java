@@ -274,34 +274,18 @@ public class MainUI extends Application {
 		saveimage.setFitHeight(37);
 		saveimage.setFitWidth(40);
 
-		Button wiring = new Button("Wiring Interface");
-		wiring.relocate(880, 35);
-		wiring.setPrefSize(110, 30);
-
 		Button botCustomization = new Button("Bot Customization");
-		botCustomization.relocate(750, 35);
+		botCustomization.relocate(870, 35);
 		botCustomization.setPrefSize(120, 30);
 
 		pane.getChildren().addAll(rectangle4, rectangle, rectangle3, rectangle6, codeArea, rectangle2, t, rectangle5,
-				wiring, botCustomization, console);
+				 botCustomization, console);
 
 		pane.getChildren().addAll(runimage, buildimage, newimage, saveimage, openimage);
 
 		pane.getChildren().addAll(ToolBar(primaryStage));
 
 		scene = new Scene(pane, 1000, 760);
-
-		wiring.setOnAction(e -> {
-			try {
-				Runtime runTime = Runtime.getRuntime();
-				String executablePath = "..\\..\\Executables\\wiring\\Unity_Project.exe";
-				Process process = runTime.exec(executablePath);
-				// new WiringGUI(manager).start(new Stage());
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		});
 
 		botCustomization.setOnAction(e -> {
 			try {
