@@ -302,11 +302,11 @@ public class MainUI extends Application {
 		serialimage.setFitWidth(35);
 
 		Button botCustomization = new Button("Bot Customization");
-		botCustomization.relocate(870, 35);
+		botCustomization.relocate(830, 35);
 		botCustomization.setPrefSize(120, 30);
 
 		pane.getChildren().addAll(rectangle4, rectangle, rectangle3, rectangle6, codeArea, rectangle2, t, rectangle5,
-				 botCustomization, console);
+				 botCustomization, scrollPane,console);
 
 		pane.getChildren().addAll(runimage, buildimage, newimage, saveimage, openimage, serialimage);
 

@@ -2,6 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/Keely/Documents/GitHub/EGR101-Sim/Lib/richtextfx-fat-0.10.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/crump/OneDrive/Documents/GitHub/EGR101-Sim/Lib/richtextfx-fat-0.10.6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
