@@ -20,7 +20,6 @@ public class MoveComponentsWiring : MonoBehaviour,  IPointerClickHandler
         for(int i = 0; i < sensor.Count; i++)
         {
             bot.GetComponent<placementmesh>().origSensorsPos.Add(sensor[i].transform.localPosition);
-            Debug.Log(sensor[i].transform.localPosition);
         }
 
         if(wiringCam.GetComponent<Camera>().enabled)
@@ -65,11 +64,12 @@ public class MoveComponentsWiring : MonoBehaviour,  IPointerClickHandler
             bot.GetComponent<Rigidbody>().freezeRotation = false;
             for(int i = 0; i < sensor.Count; i++)
             {
-                Debug.Log(originalSensors[i]);
                 sensor[i].transform.localPosition = originalSensors[i];
-                if(sensor[i].transform.localPosition.y > -2.3)
-                    sensor[i].transform.Rotate(90,0,0);      
+                if(sensor[i].transform.localPosition.y > -2.3f)
+                    sensor[i].transform.Rotate(90,0,0);
+                //bot.GetComponent<placementmesh>().origSensorsPos.Remove(sensor[i].transform.localPosition);
             }
+            bot.GetComponent<placementmesh>().origSensorsPos.RemoveAll(item => item.x < 100);
         }
     }
 
