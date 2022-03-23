@@ -201,3 +201,64 @@ just worked with the team to compile the power point for the final demo.
 merged all loose ends together in the main 
 (had to sort through quite a bit of merge conflicts but I think we're okay now)
 
+--------------------------- Second Semester _-----------------------------
+
+January 3rd
+there is a bug with how our unity client receieves packets I think it overloads the client 
+and stalls out, I've been testing our simulation exe and it keeps stalling after around 5 seconds of playing
+
+January 10th
+have been working on this bug for a hot second and I'm not figuring it out. I gave this to luke since I believe it might require
+us to switch to UDP instead of TCP I've been adding "thread.sleep" to see if I can slow down the distribution of packets to our client as
+it sends every iteration from the arduino emulation.
+
+January 13th
+more playing around with thread sleep
+
+January 18th
+did some clean up of our code
+
+January 20th
+going to start work on bot customization GUI we have a lot of work to do to add components and presets to the bot and somehow tie it in to the wiring/simulation
+the idea is that we will have a mesh of points surrounding the bot that you can snap components too when you click to instantiate a component
+
+January 22th
+still working on this point mesh
+
+January 28th
+finished the point mesh and can successfully add components to it.
+Unfortunately the only way to add components is to use rigidbody and rigidbodies have physics attached to them which is a gigantic pain because now they're flopping around the bot
+
+January 30th
+figured out the flopping around bug for Ultrasonic sensors will be now distributing to the distance measuring IR sensor. Also am begining to work on selecting components by highlighting them.
+rotation around the bot is difficult because of the trig it involves
+
+Febuary 1st
+just added presets and modeled 4 different mounts and 4 different wheels and a new distance IR sensor so it's no longer a default sphere. added their pictures and now I'm thinking of implementing emily's
+color commits to allow for color picking, as well as rotation of components as they are selected.
+
+Feburary 3rd
+added a mesh around the entire boebot that you could snap items onto 
+
+Feburary 4th
+have been fixing the UI in bot customization GUI so that it looks better
+
+Feburary 7th
+added elements to the ultra sonic sensor prefab that way it would snap better, and in doing so added a bug
+
+Feburary 7th
+fixed the bug snapping ultrasonic sensor is now working
+
+Feburary 8th
+started trying to fix threading issues that come up when closing the simulation window instead of hitting end
+did a lot of work making sure that the communication ends when it is supposed to
+
+Feburary 9th
+made a small change on IR sensors and the camera swapping
+
+Feburary 20th
+started working on the component tracker ( a feature that makes changes to components known within simulations )
+
+March 5th 
+spent an entire day working on the component tracker, got mostly everything finished but I'm blocked by luke so I can't
+implement the wiring configuration integration yet.
