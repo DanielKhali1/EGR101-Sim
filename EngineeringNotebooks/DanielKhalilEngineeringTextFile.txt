@@ -236,3 +236,29 @@ rotation around the bot is difficult because of the trig it involves
 Febuary 1st
 just added presets and modeled 4 different mounts and 4 different wheels and a new distance IR sensor so it's no longer a default sphere. added their pictures and now I'm thinking of implementing emily's
 color commits to allow for color picking, as well as rotation of components as they are selected.
+
+Feburary 3rd
+added a mesh around the entire boebot that you could snap items onto 
+
+Feburary 4th
+have been fixing the UI in bot customization GUI so that it looks better
+
+Feburary 7th
+added elements to the ultra sonic sensor prefab that way it would snap better, and in doing so added a bug
+
+Feburary 7th
+fixed the bug snapping ultrasonic sensor is now working
+
+Feburary 8th
+started trying to fix threading issues that come up when closing the simulation window instead of hitting end
+did a lot of work making sure that the communication ends when it is supposed to
+
+Feburary 9th
+made a small change on IR sensors and the camera swapping
+
+Feburary 20th
+started working on the component tracker ( a feature that makes changes to components known within simulations )
+
+March 5th 
+spent an entire day working on the component tracker, got mostly everything finished but I'm blocked by luke so I can't
+implement the wiring configuration integration yet.

@@ -11,15 +11,20 @@ public class ComponentFollowMouse : MonoBehaviour
     Vector3 m_EulerAngleVelocity = new Vector3(0, 100, 0);
     int currentAngle = 0;
     bool selected;
+    public bool isSim = false;
 
     // Start is called before the first frame update
     void Start()
     {
         Follow = true;
         selected = true;
-        GetComponent<Outline>().enabled = true;
+        if (!isSim)
+        {
+            GetComponent<Outline>().enabled = true;
+        }
         bot = GameObject.FindGameObjectWithTag("Player");
         List<GameObject> nodes = bot.GetComponent<placementmesh>().meshNodes;
+        bot.GetComponent<placementmesh>().sensors.Add(gameObject);
         gameObject.transform.rotation = bot.transform.rotation;
 
         for(int i = 0;i < nodes.Count; i++)
@@ -35,7 +40,6 @@ public class ComponentFollowMouse : MonoBehaviour
         {
             if (!selected)
             {
-
                 Debug.Log("selected component: " + ob);
                 GameObject.FindGameObjectWithTag("UI").GetComponent<UnityEngine.UI.Text>().text = gameObject.name;
                 GetComponent<Outline>().enabled = true;
@@ -125,7 +129,7 @@ public class ComponentFollowMouse : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0) && pickuptimer <= 0)
             {
-                Debug.Log("placed object");
+                //Debug.Log("placed object");
                 bot.GetComponent<RotateBot>().setDrag(false);
 
                 Follow = false;

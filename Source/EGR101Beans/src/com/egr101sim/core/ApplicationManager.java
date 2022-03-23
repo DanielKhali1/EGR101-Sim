@@ -15,6 +15,9 @@ import com.egr101sim.arduino.elements.Pin;
 import com.egr101sim.arduino.elements.PinType;
 import com.egr101sim.arduino.elements.SpecialPin;
 
+import javafx.scene.control.TextArea;
+import javafx.scene.text.Text;
+
 public class ApplicationManager {
 	
 	public Arduino arduino;
@@ -40,6 +43,7 @@ public class ApplicationManager {
 	public void initializeServerCharacteristics() {
 		
 		try {
+			System.out.println("Starting Socket Streams");
 			ss = new ServerSocket(666);
 			sock = ss.accept();
 			
@@ -57,9 +61,10 @@ public class ApplicationManager {
 	/**
 	 * update the code
 	 */
-	public void updateBehavior(String instructions) {
+	public void updateBehavior(String instructions, Text console) {
 		System.out.println("BUILDING..");
-		arduino.compileSketch(instructions);
+		console.setText(console.getText() + "\nBuilding..");
+		arduino.compileSketch(instructions, console);
 	}
 	
 	/**
@@ -101,31 +106,25 @@ public class ApplicationManager {
 		arduino.getComponents().add(leftMotor);
 	}
 	
-	public void execute() {
+	public void execute(Process process, Text console) {
+		console.setText(console.getText() + "\nSimulation setting up..");
 		System.out.println("SETTING UP SIM..");
 		new Thread(() -> initializeServerCharacteristics()).start();
 		simManager.setup();
 		
+		console.setText(console.getText() + "\nSimulation executing..");
 		System.out.println("EXECUTING..");
 		
 		while(isSimRunning()) {
 			
 			simManager.iterate();
 			//new Thread(() -> { sendMessage(simManager.generateMessage());}).start();
+			
+			if(!process.isAlive()) {
+				setSimRunning(false);
+			}
 		}
-		
-		
-		
-		simManager.shutDown();
-		
-		try {
-			ss.close();
-			sock.close();
-			dis.close();
-			dos.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		simManager.shutDown(console);
 	}
 
 	/**
@@ -144,7 +143,9 @@ public class ApplicationManager {
 	
 	public String stackPrint() 
 	{
-		return arduino.stackPrint();
+		String temp = arduino.stackPrint();
+		String stackPrint = temp.replace("/com/egr101sim/arduino/ArduinoBehavior1.java:","");
+		return stackPrint; 
 	}
 
 }
