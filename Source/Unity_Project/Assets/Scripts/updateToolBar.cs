@@ -29,6 +29,10 @@ public class updateToolBar : MonoBehaviour
     public Sprite ultraSonicSensor;
     public Sprite distanceMeasuringIRSensor;
 
+    private void Start()
+    {
+        Screen.SetResolution(1280, 720, false);
+    }
     public void fitImagesInToolbar(int t)
     {
 

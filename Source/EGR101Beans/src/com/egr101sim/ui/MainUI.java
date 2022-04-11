@@ -317,7 +317,7 @@ public class MainUI extends Application {
 		botCustomization.setOnAction(e -> {
 			try {
 				Runtime runTime = Runtime.getRuntime();
-				String executablePath = "..\\..\\Executables\\customization\\Unity_Project.exe";
+				String executablePath = "..\\..\\Executables\\customization\\Unity_Project.exe --width=1280 --height=720";
 				Process process = runTime.exec(executablePath);
 			} catch (Exception e1) {
 				e1.printStackTrace();
