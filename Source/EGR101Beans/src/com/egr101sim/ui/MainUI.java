@@ -57,6 +57,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Popup;
@@ -219,13 +221,11 @@ public class MainUI extends Application {
 		rectangle3.setArcWidth(10);
 
 		Rectangle rectanglefix = new Rectangle();
-		rectangle3.setFill(Color.WHITE);
-		rectangle3.setX(30);
-		rectangle3.setY(70);
-		rectangle3.setWidth(160);
-		rectangle3.setHeight(60);
-		rectangle3.setArcHeight(10);
-		rectangle3.setArcWidth(10);
+		rectanglefix.setFill(Color.WHITE);
+		rectanglefix.setX(0);
+		rectanglefix.setY(0);
+		rectanglefix.setWidth(1000);
+		rectanglefix.setHeight(60);
 
 		Date date = new Date();
 		String tempName = "sketch_" + date.getTime() + ".ino";
@@ -257,8 +257,8 @@ public class MainUI extends Application {
 		ImageView runimage = new ImageView();
 		runimage.setImage(runImg);
 		runimage.setX(40);
-		runimage.setY(27);
-		runimage.setFitHeight(43);
+		runimage.setY(30);
+		runimage.setFitHeight(40);
 		runimage.setFitWidth(40);
 
 		Image buildImg = new Image("file:Resources\\Checkmark.JPG");
@@ -308,13 +308,38 @@ public class MainUI extends Application {
 		Button botCustomization = new Button("Bot Customization");
 		botCustomization.relocate(715, 35);
 		botCustomization.setPrefSize(120, 30);
+		
+		// new menu bar 
+		Menu filebar = new Menu("File");
+		MenuItem item1 = new MenuItem("");
+		filebar.getItems().addAll(item1);
+		
+		Menu edit = new Menu("Edit");
+		MenuItem item2 = new MenuItem("");
+		edit.getItems().addAll(item2);
+		
+		Menu sketch = new Menu("Sketch");
+		MenuItem item3 = new MenuItem("");
+		sketch.getItems().addAll(item3);
+		
+		Menu tools = new Menu("Tools");
+		MenuItem item4 = new MenuItem("");
+		tools.getItems().addAll(item4);
+		
+		Menu help = new Menu("Help");
+		MenuItem item5 = new MenuItem("");
+		help.getItems().addAll(item5);
+		
+		MenuBar menuBar = new MenuBar();
+		menuBar.setTranslateX(0);
+		menuBar.setTranslateY(5);
+		menuBar.setMinWidth(1000);
+		menuBar.getMenus().addAll(filebar, edit, sketch, tools, help);
 
-		pane.getChildren().addAll(rectangle4, rectangle, rectangle3, rectangle6, codeArea, rectangle2, t, rectangle5,
-				wiring, botCustomization, scrollPane, console);
+		pane.getChildren().addAll(rectanglefix, rectangle4, rectangle, rectangle3, rectangle6, codeArea, rectangle2, t, rectangle5,
+				wiring, botCustomization, scrollPane, console, menuBar);
 
 		pane.getChildren().addAll(runimage, buildimage, newimage, saveimage, openimage, serialimage);
-
-		pane.getChildren().addAll(ToolBar(primaryStage));
 
 		scene = new Scene(pane, 1000, 760);
 
@@ -503,7 +528,7 @@ public class MainUI extends Application {
 				e2.printStackTrace();
 			}
 		});
-
+		
 		File f = new File("Styles.css");
 		
 		scene.getStylesheets().add("File:///"+f.getAbsolutePath().replace("\\","/"));
@@ -512,51 +537,6 @@ public class MainUI extends Application {
 		primaryStage.setTitle("EGR101 Simulation Software");
 		primaryStage.show();
 
-	}
-
-	public ToolBar ToolBar(Stage stage) {
-		FileChooser fileChooser = new FileChooser();
-		ToolBar toolBar = new ToolBar();
-
-		MenuItem btnfile = new MenuItem("New");
-
-		MenuItem btnsketch = new MenuItem("Open");
-
-		btnsketch.setOnAction(e -> {
-			fileChooser.setTitle("Open Resource File");
-			fileChooser.showOpenDialog(stage);
-		});
-
-		MenuItem btnSave = new MenuItem("Save");
-
-		MenuItem btnSaveAs = new MenuItem("Save As");
-
-		MenuItem btnSaveConfig = new MenuItem("Save Config File");
-
-		MenuButton file = new MenuButton("File");
-		file.setPrefSize(70, 20);
-
-		file.getItems().addAll(btnfile, btnsketch, btnSave, btnSaveAs, btnSaveConfig);
-
-		MenuItem btnVerifyCompile = new MenuItem("Verify/Compile");
-
-		MenuItem btnUpload = new MenuItem("Upload");
-
-		MenuButton sketch = new MenuButton("Sketch");
-		sketch.setPrefSize(70, 20);
-
-		sketch.getItems().addAll(btnVerifyCompile, btnUpload);
-
-		MenuItem btnSerialMon = new MenuItem("Serial Monitor");
-
-		MenuButton tools = new MenuButton("Tools");
-		tools.setPrefSize(70, 20);
-
-		tools.getItems().addAll(btnSerialMon);
-
-		toolBar.getItems().addAll(file, new Separator(), sketch, new Separator(), tools);
-
-		return toolBar;
 	}
 
 	private StyleSpans<Collection<String>> computeHighlighting(String text) {
