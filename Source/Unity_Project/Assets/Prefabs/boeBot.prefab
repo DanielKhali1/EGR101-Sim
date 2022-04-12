@@ -164,7 +164,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cce4a90e30faa6844a00579682c22b4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSim: 0
 --- !u!114 &5119991707754157874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3180,10 +3179,6 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 273fc84cbe896534b82e546aa4bb392a, type: 3}
       propertyPath: m_Name
       value: egr101_board
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 273fc84cbe896534b82e546aa4bb392a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 273fc84cbe896534b82e546aa4bb392a, type: 3}

@@ -6,7 +6,7 @@ public class CreateWire : MonoBehaviour
 {
     public GameObject linePrefab;
     LineRenderer oldLineRender;
-    bool wiringMode = false;
+    int count = 0;
 
      void Update()
     {
@@ -21,25 +21,19 @@ public class CreateWire : MonoBehaviour
                     
                     GameObject line = Instantiate(linePrefab, new Vector3(0,0,0), Quaternion.identity);
                     LineRenderer lineRenderer = line.GetComponent<LineRenderer>();
-                    Color notReadyColor = Color.red;
-                    lineRenderer.sharedMaterial.SetColor("_Color", notReadyColor);
-
 
                     //Debug.Log(count + " " + hit.transform.parent.name);
-                    if (!wiringMode)
+                    if(count % 2 == 0)
                     {
                         
                         lineRenderer.SetPosition(0, hit.transform.parent.position);
-                        wiringMode = true;
-                        Debug.Log("turning on wiring mode");
                     }
                     else
                     {
                         oldLineRender.SetPosition(1, hit.transform.parent.position);
-                        wiringMode = false;
-                        Debug.Log("turning off wiring mode");
                     }
                     oldLineRender = lineRenderer;
+                    count++;
                 } 
             }catch {
 

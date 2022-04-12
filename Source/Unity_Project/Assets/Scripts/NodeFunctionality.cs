@@ -20,6 +20,7 @@ public class NodeFunctionality : MonoBehaviour, IPointerClickHandler
             case 1: temp = Instantiate(object1);
                 temp.transform.parent = bot.gameObject.transform;
                 temp.transform.position = new Vector3(0, 5, -3); break;
+                bot.GetComponent<CompTracker>().AddComponent(temp);
             case 2: //wheel
                 bot.GetComponent<presetSwitch>().ToggleWheel(mesh1);
                 break;
@@ -31,6 +32,7 @@ public class NodeFunctionality : MonoBehaviour, IPointerClickHandler
             case 4: temp = Instantiate(object4);
                 temp.transform.parent = bot.gameObject.transform;
                 temp.transform.position = new Vector3(0, 5, -3); break;
+                bot.GetComponent<CompTracker>().AddComponent(temp);
         }
         
 

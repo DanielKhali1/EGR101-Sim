@@ -8,10 +8,4 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/WiringScene.unity
     guid: b8fb7e7f97a779d489b9305567a0e980
-  - enabled: 0
-    path: Assets/Scenes/Simulation.unity
-    guid: 682257f006d1a264995865b06759fd6e
-  - enabled: 1
-    path: Assets/Scenes/BotCustomization.unity
-    guid: 4738d4a793d8c9a43bc784b2b0e6a98e
   m_configObjects: {}
