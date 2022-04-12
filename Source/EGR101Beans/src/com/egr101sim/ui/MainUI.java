@@ -519,8 +519,8 @@ public class MainUI extends Application {
 				popupwindow.show(primaryStage);
 				
 				//find better way to update i guess 
-			    //serial.setText(Serial.serialLog);
-			    //scrollPane2.setVvalue(scrollPane2.getVmax());
+			    serial.setText(Serial.serialLog);
+			    scrollPane2.setVvalue(scrollPane2.getVmax());
 				
 			} catch (Exception e2) {
 				console.setText("ERROR: Unable to open Serial Monitor");
