@@ -11,16 +11,19 @@ public class IrFollowMouse : MonoBehaviour
     Vector3 m_EulerAngleVelocity = new Vector3(0, 100, 0);
     int currentAngle = 0;
     bool selected;
+    public bool isSim = false;
 
     List<GameObject> nodes;
 
     // Start is called before the first frame update
     void Start()
     {
-
         Follow = true;
         selected = true;
-        GetComponent<Outline>().enabled = true;
+        if(!isSim)
+        {
+            GetComponent<Outline>().enabled = true;
+        }
         bot = GameObject.FindGameObjectWithTag("Player");
         bot.GetComponent<ComponentStructure>().getIRSensorList().Add(gameObject);
         nodes = bot.GetComponent<presetSwitch>().activePositions;
@@ -90,7 +93,7 @@ public class IrFollowMouse : MonoBehaviour
             Vector3 WorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
 
             float closest = float.MaxValue;
-            int bI = 0;
+            //int bI = 0;
 
             for (int i = 0; i < nodes.Count; i++)
             {

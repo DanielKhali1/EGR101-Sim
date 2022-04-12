@@ -301,12 +301,8 @@ public class MainUI extends Application {
 		serialimage.setFitHeight(30);
 		serialimage.setFitWidth(35);
 
-		Button wiring = new Button("Wiring Interface");
-		wiring.relocate(840, 35);
-		wiring.setPrefSize(110, 30);
-
 		Button botCustomization = new Button("Bot Customization");
-		botCustomization.relocate(715, 35);
+		botCustomization.relocate(830, 35);
 		botCustomization.setPrefSize(120, 30);
 		
 		// new menu bar 
@@ -343,22 +339,10 @@ public class MainUI extends Application {
 
 		scene = new Scene(pane, 1000, 760);
 
-		wiring.setOnAction(e -> {
-			try {
-				Runtime runTime = Runtime.getRuntime();
-				String executablePath = "..\\..\\Executables\\wiring\\Unity_Project.exe";
-				Process process = runTime.exec(executablePath);
-				// new WiringGUI(manager).start(new Stage());
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		});
-
 		botCustomization.setOnAction(e -> {
 			try {
 				Runtime runTime = Runtime.getRuntime();
-				String executablePath = "..\\..\\Executables\\customization\\Unity_Project.exe";
+				String executablePath = "..\\..\\Executables\\customization\\Unity_Project.exe --width=1280 --height=720";
 				Process process = runTime.exec(executablePath);
 			} catch (Exception e1) {
 				e1.printStackTrace();
