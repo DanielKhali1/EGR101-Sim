@@ -22,17 +22,17 @@ public class cust_sim_transfer : MonoBehaviour
         for(int i = 0; i < list.Count; i+=4)
         {
             GameObject temp = null;
-            if(list[i].Equals("UltraSonicPrefab(Clone)"))
+            if(list[i].Contains("UltraSonic"))
             {
                 temp = Instantiate(ultransonic);
                 temp.GetComponent<Outline>().enabled = false;
             }
-            else if (list[i].Equals("lineReadingIR(Clone)"))
+            else if (list[i].Contains("lineReadingIR"))
             {
                 temp = Instantiate(linereadingir);
                 temp.GetComponent<Outline>().enabled = false;
             }
-            else if (list[i].Equals("distancemeasuringirsensor(Clone)"))
+            else if (list[i].Contains("distancemeasuringirsensor"))
             {
                 temp = Instantiate(distanceir);
                 temp.GetComponent<Outline>().enabled = false;

@@ -46,4 +46,13 @@ public class CreateWire : MonoBehaviour
             }
         }
     }
+
+    //update every
+    // - new connection formed
+    // - connection deleted
+    private void updateConnectionList(List<List<GameObject>> connectionslist)
+    {
+        // hi luke 
+    }
 }
+

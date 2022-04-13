@@ -10,6 +10,7 @@ public abstract class Component {
 	protected String state;
 	private boolean grounded;
 	private boolean powered;
+	private String name;
 	
 	public Component() {
 		this.setGrounded(false);
@@ -74,5 +75,15 @@ public abstract class Component {
 	 */
 	public void setGrounded(boolean grounded) {
 		this.grounded = grounded;
+	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }
