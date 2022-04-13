@@ -5,6 +5,7 @@ using UnityEngine;
 public class CreateWire : MonoBehaviour
 {
     public GameObject linePrefab;
+    private List<List<GameObject>> connectionsList;
     LineRenderer oldLineRender;
     public Camera wiringCam;
     private GameObject bot;
@@ -31,10 +32,20 @@ public class CreateWire : MonoBehaviour
             {
                 if(hit.collider.gameObject.transform.parent.tag == "Pin")
                 {
-                    //Only pins here
+                    List<GameObject> wire = new List<GameObject>();
+                    hit.collider.gameObject.transform.name = hit.collider.gameObject.transform.parent.name;
+                    //Begining of the wire
+                    wire.Add(hit.collider.gameObject);
+
                 }
             }
         }
+    }
+
+    private List<GameObject> middlePins(List<GameObject> wire, RaycastHit hit)
+    {
+        while()
+        return wire;
     }
 
     //update every
