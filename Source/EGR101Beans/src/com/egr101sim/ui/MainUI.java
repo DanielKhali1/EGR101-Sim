@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.net.BindException;
@@ -338,6 +339,13 @@ public class MainUI extends Application {
 			Platform.runLater(new Runnable() {
 				@Override
 				public void run() {
+					
+					try {
+						manager.addComponentsAndConnections();
+					} catch (FileNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 
 					if (manager.simManager.getArduino().behavior.getFunction() != null) {
 						try {
