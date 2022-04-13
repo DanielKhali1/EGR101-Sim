@@ -348,14 +348,14 @@ public class MainUI extends Application {
 					}
 
 					if (manager.simManager.getArduino().behavior.getFunction() != null) {
-						try {
-							Runtime runTime = Runtime.getRuntime();
-							String executablePath = "..\\..\\Executables\\simulation\\Unity_Project.exe";
-							process = runTime.exec(executablePath);
-
-						} catch (Exception e1) {
-							e1.printStackTrace();
-						}
+//						try {
+//							Runtime runTime = Runtime.getRuntime();
+//							String executablePath = "..\\..\\Executables\\simulation\\Unity_Project.exe";
+//							process = runTime.exec(executablePath);
+//
+//						} catch (Exception e1) {
+//							e1.printStackTrace();
+//						}
 
 						thread = (new Thread(() -> {
 							manager.setSimRunning(true);

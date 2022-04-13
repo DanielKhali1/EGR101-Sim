@@ -42,14 +42,18 @@ public class ServerController : UnityEngine.MonoBehaviour
         float[] motorInput = { 0, 0 };
         foreach (string message in messages)
         {
+            UnityEngine.Debug.Log(message);
             string[] info = message.Split(',');
-            if (info[1].Equals("leftMotor"))
+            if(info.Length > 2)
             {
-                motorInput[1] = Single.Parse(info[2]);
-            }
-            else if (info[1].Equals("rightMotor"))
-            {
-                motorInput[0] = Single.Parse(info[2]);
+                if (info[1].Equals("leftMotor"))
+                {
+                    motorInput[1] = Single.Parse(info[2]);
+                }
+                else if (info[1].Equals("rightMotor"))
+                {
+                    motorInput[0] = Single.Parse(info[2]);
+                }
             }
         }
         boeBot.GetComponent<BoeBotMove>().GetInput(motorInput[0]/5.0f, motorInput[1] / 5.0f);

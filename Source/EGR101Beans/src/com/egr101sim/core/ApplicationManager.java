@@ -120,10 +120,11 @@ public class ApplicationManager {
 			simManager.iterate();
 			// new Thread(()->simManager.sendMessage(simManager.generateMessage()));
 
-			if (!process.isAlive()) {
-				setSimRunning(false);
-			}
+//			if (!process.isAlive()) {
+//				setSimRunning(false);
+//			}
 		}
+		
 		simManager.shutDown(console);
 		for(int i = 2;i  < arduino.getComponents().size(); i++) {
 			System.out.println("removing");
