@@ -6,43 +6,33 @@ public class CreateWire : MonoBehaviour
 {
     public GameObject linePrefab;
     LineRenderer oldLineRender;
+    public Camera wiringCam;
+    private GameObject bot;
     bool wiringMode = false;
 
-     void Update()
+    void Start()
     {
-        if( Input.GetMouseButtonDown(0) )
+        bot = GameObject.FindGameObjectWithTag("Player");
+    }
+
+    /*
+        1. Create initial position
+        2. Add positions 
+        3. When another pin is clicked end the list.
+    */
+
+    void Update()
+    {
+        if(wiringCam.GetComponent<Camera>().enabled && Input.GetMouseButtonDown(0))
         {
-            try{
-                Ray ray = Camera.main.ScreenPointToRay( Input.mousePosition );
-                RaycastHit hit;
-            
-                if( Physics.Raycast( ray, out hit, 100 ) && hit.transform.parent.name != "Walls")
+            Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+            RaycastHit hit;
+            if(Physics.Raycast(ray, out hit))
+            {
+                if(hit.collider.gameObject.transform.parent.tag == "Pin")
                 {
-                    
-                    GameObject line = Instantiate(linePrefab, new Vector3(0,0,0), Quaternion.identity);
-                    LineRenderer lineRenderer = line.GetComponent<LineRenderer>();
-                    Color notReadyColor = Color.red;
-                    lineRenderer.sharedMaterial.SetColor("_Color", notReadyColor);
-
-
-                    //Debug.Log(count + " " + hit.transform.parent.name);
-                    if (!wiringMode)
-                    {
-                        
-                        lineRenderer.SetPosition(0, hit.transform.parent.position);
-                        wiringMode = true;
-                        Debug.Log("turning on wiring mode");
-                    }
-                    else
-                    {
-                        oldLineRender.SetPosition(1, hit.transform.parent.position);
-                        wiringMode = false;
-                        Debug.Log("turning off wiring mode");
-                    }
-                    oldLineRender = lineRenderer;
-                } 
-            }catch {
-
+                    //Only pins here
+                }
             }
         }
     }
