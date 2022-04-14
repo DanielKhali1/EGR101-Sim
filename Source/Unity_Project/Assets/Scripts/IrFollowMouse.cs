@@ -43,7 +43,7 @@ public class IrFollowMouse : MonoBehaviour
                 //refresh nodes
                 nodes = bot.GetComponent<presetSwitch>().activePositions;
                 Debug.Log("selected component: " + ob);
-                GameObject.FindGameObjectWithTag("UI").GetComponent<UnityEngine.UI.Text>().text = gameObject.name;
+                //GameObject.FindGameObjectsWithTag("UI")[0].GetComponent<UnityEngine.UI.Text>().text = gameObject.name;
                 GetComponent<Outline>().enabled = true;
                 selected = true;
             }

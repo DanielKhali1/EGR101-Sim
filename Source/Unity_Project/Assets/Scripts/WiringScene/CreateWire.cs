@@ -42,11 +42,6 @@ public class CreateWire : MonoBehaviour
         }
     }
 
-    private List<GameObject> middlePins(List<GameObject> wire, RaycastHit hit)
-    {
-        while()
-        return wire;
-    }
 
     //update every
     // - new connection formed
