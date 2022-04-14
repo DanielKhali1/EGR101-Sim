@@ -108,7 +108,7 @@ public class IrFollowMouse : MonoBehaviour
                     }
                 }
 
-                bestPosition -= new Vector3(0, 0.4f, 0);
+                bestPosition -= new Vector3(0, 0.12f, 0);
                 gameObject.transform.position = bestPosition;
 
            
