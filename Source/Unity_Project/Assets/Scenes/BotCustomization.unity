@@ -956,7 +956,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   linePrefab: {fileID: 795101825768598135, guid: b3f5cec50dad46344847f567349f98b8, type: 3}
-  wiringCam: {fileID: 0}
+  wiringCam: {fileID: 1166472884}
 --- !u!1 &626110804
 GameObject:
   m_ObjectHideFlags: 0
@@ -4902,6 +4902,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 1279471034940380965, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1166472882}
     - target: {fileID: 1300909897328327770, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_Constraints
       value: 126
@@ -5766,6 +5770,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 5366364105906440143, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1166472882}
     - target: {fileID: 5385876554979931906, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_Constraints
       value: 126
@@ -5894,6 +5902,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 6078254614512838893, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1166472882}
     - target: {fileID: 6120331954305047885, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_Constraints
       value: 126
@@ -5986,6 +5998,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 54
       objectReference: {fileID: 0}
+    - target: {fileID: 6601648066412918398, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1166472882}
     - target: {fileID: 6646074720278236566, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_Constraints
       value: 126
@@ -6302,6 +6318,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 7806817710436602413, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1166472882}
     - target: {fileID: 7808807841893235715, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -6321,7 +6341,7 @@ PrefabInstance:
     - target: {fileID: 7914210743684727448, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
       value: 
-      objectReference: {fileID: 2505652179724725501}
+      objectReference: {fileID: 1166472882}
     - target: {fileID: 7940932099701653099, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -6370,6 +6390,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 8185216146561292272, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1166472882}
     - target: {fileID: 8189489643749005621, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_RootOrder
       value: 13
@@ -6407,6 +6431,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8295051524322305241, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1166472882}
+    - target: {fileID: 8320057384954362746, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
@@ -6560,8 +6588,3 @@ PrefabInstance:
       objectReference: {fileID: 1166472882}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
---- !u!1 &2505652179724725501 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6294176621368200354, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
-  m_PrefabInstance: {fileID: 2505652179724725500}
-  m_PrefabAsset: {fileID: 0}
