@@ -70,7 +70,6 @@ public class SimulationManager {
 		} catch (Exception e) {
 			System.out.println("Issue Sending message");
 		}
-		
 	}
 	
 	private void executeComponentBehavior() {
@@ -180,6 +179,7 @@ public class SimulationManager {
 	}
 	
 	public void sendMessage(String s) {
+		System.out.println(s);
 		try {
 	        byte[] toSendBytes = s.getBytes();
 	        int toSendLen = toSendBytes.length;
@@ -234,7 +234,7 @@ public class SimulationManager {
 		//run through list of components and send behaviors per frame
 		String message = "";
 		for(int i = 0; i < arduino.getComponents().size(); i++) {
-			message+= i + "," + arduino.getComponents().get(i).getState() + "\n";
+			message+= i + "," + arduino.getComponents().get(i).getName() + "," + arduino.getComponents().get(i).getState() + "\n";
 		}
 		
 //		System.out.println(message);

@@ -11,6 +11,7 @@ public class ServerController : UnityEngine.MonoBehaviour
 {
     Socket socket;
     byte[] bytes = new byte[1024];
+    public string sendBuffer = "";
 
     public UnityEngine.GameObject boeBot;
     
@@ -21,7 +22,7 @@ public class ServerController : UnityEngine.MonoBehaviour
         socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         IPAddress ipAddress = Dns.GetHostEntry("localhost").AddressList[0];
 
-        socket.Connect(IPAddress.Parse("127.0.0.1"), 666);
+        socket.Connect(IPAddress.Parse("127.0.0.1"), 667);
         UnityEngine.Debug.Log("Socket connected to " + socket.RemoteEndPoint.ToString());
     }
 
@@ -41,18 +42,31 @@ public class ServerController : UnityEngine.MonoBehaviour
         float[] motorInput = { 0, 0 };
         foreach (string message in messages)
         {
+            UnityEngine.Debug.Log(message);
             string[] info = message.Split(',');
-            if(info[0] == "0")
+            if(info.Length > 2)
             {
-                motorInput[1] = Single.Parse(info[1]);
-            }
-            else if(info[0] == "1")
-            {
-                motorInput[0] = Single.Parse(info[1]);
+                if (info[1].Equals("leftMotor"))
+                {
+                    motorInput[1] = Single.Parse(info[2]);
+                }
+                else if (info[1].Equals("rightMotor"))
+                {
+                    motorInput[0] = Single.Parse(info[2]);
+                }
             }
         }
         boeBot.GetComponent<BoeBotMove>().GetInput(motorInput[0]/5.0f, motorInput[1] / 5.0f);
 
+        // Sending
+        if(sendBuffer.Length > 0)
+        {
+            int toSendLen = System.Text.Encoding.ASCII.GetByteCount(sendBuffer);
+            byte[] toSendBytes = System.Text.Encoding.ASCII.GetBytes(sendBuffer);
+            byte[] toSendLenBytes = System.BitConverter.GetBytes(toSendLen);
+            socket.Send(toSendLenBytes);
+            socket.Send(toSendBytes);
+        }
 
 
     }

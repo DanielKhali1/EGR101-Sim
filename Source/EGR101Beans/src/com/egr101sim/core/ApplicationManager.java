@@ -50,7 +50,7 @@ public class ApplicationManager {
 
 		try {
 			System.out.println("Starting Socket Streams");
-			ss = new ServerSocket(666);
+			ss = new ServerSocket(667);
 			sock = ss.accept();
 
 			dis = new DataInputStream(sock.getInputStream());
@@ -99,6 +99,9 @@ public class ApplicationManager {
 		leftMotor.getPins()[1].setPrev(arduino.getArduino().getP5V());
 		leftMotor.getPins()[2].setPrev(arduino.getArduino().getGround()[0]);
 
+		
+		leftMotor.setName("leftMotor");
+		rightMotor.setName("rightMotor");
 		arduino.getComponents().add(rightMotor);
 		arduino.getComponents().add(leftMotor);
 	}
@@ -111,17 +114,23 @@ public class ApplicationManager {
 
 		console.setText(console.getText() + "\nSimulation executing..");
 		System.out.println("EXECUTING..");
-
+		
 		while (isSimRunning()) {
 
 			simManager.iterate();
-			// new Thread(() -> { sendMessage(simManager.generateMessage());}).start();
+			// new Thread(()->simManager.sendMessage(simManager.generateMessage()));
 
-			if (!process.isAlive()) {
-				setSimRunning(false);
-			}
+//			if (!process.isAlive()) {
+//				setSimRunning(false);
+//			}
 		}
+		
 		simManager.shutDown(console);
+		for(int i = 2;i  < arduino.getComponents().size(); i++) {
+			System.out.println("removing");
+			arduino.getComponents().remove(i);
+			
+		}
 	}
 
 	/**
