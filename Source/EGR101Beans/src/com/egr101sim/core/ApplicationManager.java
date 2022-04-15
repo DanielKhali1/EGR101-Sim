@@ -224,8 +224,12 @@ public class ApplicationManager {
 			String line = "";
 			while ((line = bfWiringData.readLine()) != null) {
 				String[] wiringD = line.split("-");
-				//component
+				//Arduino first
 				if(wiringD[0].equals("Arduino")) {
+					
+				}
+				// component first
+				else {
 					
 				}
 				
