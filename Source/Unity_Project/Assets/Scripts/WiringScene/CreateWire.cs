@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using System.IO;
+using System.Threading.Tasks;
+
 public class CreateWire : MonoBehaviour
 {
     public GameObject linePrefab;
@@ -27,8 +30,11 @@ public class CreateWire : MonoBehaviour
                     wire.Add(hit.collider.gameObject);
                     wiringMode = !wiringMode;
                     visualWire = !visualWire;
+
                     clearList();
-                }
+                    updateConnectionList();
+
+                    }
             }
         }
         if(wiringCam.GetComponent<Camera>().enabled && Input.GetMouseButtonDown(1))
@@ -38,6 +44,7 @@ public class CreateWire : MonoBehaviour
             randomPoint.gameObject.transform.position = new Vector3(Input.mousePosition.x, 3.58f, Input.mousePosition.z);
             randomPoint.gameObject.transform.name = "randomPoint";
             wire.Add(randomPoint);
+            printList();
         }
 
         if(visualWire)
@@ -62,16 +69,20 @@ public class CreateWire : MonoBehaviour
                 line.SetPosition(1, worldPosition);
             }
         }
+        printList();
     }
 
     void printList()
     {
         for(int i = 0; i < connectionsList.Count;i++)
         {
+            string str ="";
             for(int j = 0; j < connectionsList[i].Count;j++)
             {
-                Debug.Log(connectionsList[i][j]);
+                str += connectionsList[i][j].name + "-";
             }
+            Debug.Log(str);
+
         }
     }
 
@@ -88,9 +99,24 @@ public class CreateWire : MonoBehaviour
     //update every
     // - new connection formed
     // - connection deleted
-    private void updateConnectionList(List<List<GameObject>> connectionslist)
+    private void updateConnectionList()
     {
-        // hi luke 
+        //save component data to a file
+        string text = "";
+
+        for (int i = 0; i < connectionsList.Count; i++)
+        {
+            string str = "";
+            for (int j = 0; j < connectionsList[i].Count; j++)
+            {
+                str += connectionsList[i][j].name + "-";
+            }
+            text += str +"\n";
+        }
+        Debug.Log("Saving Wiring Config!");
+
+        File.WriteAllText("..\\..\\Data\\Wiring_Data.dat", text);
+        Debug.Log("Saving Wiring Config!");
     }
 
 }

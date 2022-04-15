@@ -39,7 +39,7 @@ public class CompTracker : MonoBehaviour
     {
         if(!isSim)
         {
-            Debug.Log("SAVING");
+            Debug.Log("SAVING ComponentData");
             saveData();
         }
     }

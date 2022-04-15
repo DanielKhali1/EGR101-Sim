@@ -16,6 +16,11 @@ public class ComponentFollowMouse : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        foreach (Transform child in transform)
+        {
+            child.name = gameObject.name + "-" + child.name;
+        }
         Follow = true;
         selected = true;
         if (!isSim)
