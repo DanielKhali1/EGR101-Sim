@@ -10,7 +10,7 @@ public abstract class Component {
 	protected String state;
 	private boolean grounded;
 	private boolean powered;
-	private String name;
+	protected String name;
 	
 	public Component() {
 		this.setGrounded(false);

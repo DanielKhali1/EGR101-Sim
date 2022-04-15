@@ -9,11 +9,14 @@ using System.Threading.Tasks;
 public class CompTracker : MonoBehaviour
 {
     public bool isSim;
-    List<GameObject> components;
+    public List<GameObject> components;
     // Start is called before the first frame update
     void Start()
     {
-        components = gameObject.GetComponent<placementmesh>().sensors;
+        if(!isSim)
+        {
+            components = gameObject.GetComponent<placementmesh>().sensors;
+        }
     }
 
     public void saveData()

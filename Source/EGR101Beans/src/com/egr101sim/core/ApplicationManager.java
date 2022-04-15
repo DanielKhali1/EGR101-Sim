@@ -99,7 +99,6 @@ public class ApplicationManager {
 		leftMotor.getPins()[1].setPrev(arduino.getArduino().getP5V());
 		leftMotor.getPins()[2].setPrev(arduino.getArduino().getGround()[0]);
 
-		
 		leftMotor.setName("leftMotor");
 		rightMotor.setName("rightMotor");
 		arduino.getComponents().add(rightMotor);
@@ -109,14 +108,54 @@ public class ApplicationManager {
 	public void execute(Process process, Text console) {
 		console.setText(console.getText() + "\nSimulation setting up..");
 		System.out.println("SETTING UP SIM..");
-		new Thread(() -> initializeServerCharacteristics()).start();
+		initializeServerCharacteristics();
 		simManager.setup();
 
 		console.setText(console.getText() + "\nSimulation executing..");
 		System.out.println("EXECUTING..");
-		
-		while (isSimRunning()) {
 
+		try {
+			new Thread(() -> {
+
+				try {
+					while (isSimRunning()) {
+//						System.out.println(sock.isConnected());
+						if (sock != null && sock.isConnected()) {
+							Thread.sleep(100);
+							simManager.sendMessage(simManager.generateMessage());
+						}
+					}
+
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}).start();
+
+		} catch (Exception e) {
+			System.out.println("Issue Sending message");
+		}
+
+		try {
+			new Thread(() -> {
+
+				while (isSimRunning()) {
+					if (sock != null && sock.isConnected()) {
+						simManager.updateComponents(simManager.receiveMessage());
+					}
+				}
+
+			}).start();
+
+			simManager.updateComponents(simManager.receiveMessage());
+
+		} catch (Exception e) {
+			System.out.println("Issue Receiving message");
+		}
+
+		while (isSimRunning()) {
+//			System.out.println("AHH2");
 			simManager.iterate();
 			// new Thread(()->simManager.sendMessage(simManager.generateMessage()));
 
@@ -124,12 +163,12 @@ public class ApplicationManager {
 //				setSimRunning(false);
 //			}
 		}
-		
+
 		simManager.shutDown(console);
-		for(int i = 2;i  < arduino.getComponents().size(); i++) {
+		for (int i = 2; i < arduino.getComponents().size(); i++) {
 			System.out.println("removing");
 			arduino.getComponents().remove(i);
-			
+
 		}
 	}
 
@@ -155,15 +194,18 @@ public class ApplicationManager {
 
 	public void addComponentsAndConnections() throws FileNotFoundException {
 		File componentData = new File("../../Data/Component_Data.dat");
-//		File wiringData = new File("../../Data/Wiring_Data.dat");
-		BufferedReader bf = new BufferedReader(new FileReader(componentData));
+		File wiringData = new File("../../Data/Wiring_Data.dat");
+		BufferedReader bfCompData = new BufferedReader(new FileReader(componentData));
+		BufferedReader bfWiringData = new BufferedReader(new FileReader(wiringData));
 
+		
+		// read component data and update components
 		try {
 
 			String line = "";
-			while ((line = bf.readLine()) != null) {
-				System.out.println(line);
-				if(line.contains("UltraSonic")) {
+			while ((line = bfCompData.readLine()) != null) {
+				// System.out.println(line);
+				if (line.contains("UltraSonic")) {
 					addComponent(line, new UltrasonicSensor());
 				} else if (line.contains("lineReadingIR")) {
 					addComponent(line, new LineReadingIRSensor());
@@ -171,16 +213,36 @@ public class ApplicationManager {
 					addComponent(line, new DistanceMeasuringIRSensor());
 				}
 			}
-			bf.close();
+			bfCompData.close();
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		try {
+
+			String line = "";
+			while ((line = bfWiringData.readLine()) != null) {
+				String[] wiringD = line.split("-");
+				//component
+				if(wiringD[0].equals("Arduino")) {
+					
+				}
+				
+			}
+			bfWiringData.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
 
 	}
 
 	private void addComponent(String name, Component c) {
 		Component component = c;
+		component.setName(name);
 		arduino.getComponents().add(component);
 	}
 

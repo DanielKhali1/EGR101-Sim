@@ -14,7 +14,7 @@ public class cust_sim_transfer : MonoBehaviour
 
     void Start()
     {
-        //GameObject bot = GameObject.FindGameObjectWithTag("Player");
+        GameObject bot = GameObject.FindGameObjectWithTag("Player");
 
         List<string> list = new List<string>();
         foreach (string line in System.IO.File.ReadLines("..\\..\\Data\\Component_Data.dat")) { list.Add(line); }
@@ -25,24 +25,31 @@ public class cust_sim_transfer : MonoBehaviour
             if(list[i].Contains("UltraSonic"))
             {
                 temp = Instantiate(ultransonic);
+
                 temp.GetComponent<Outline>().enabled = false;
+                temp.GetComponent<ComponentFollowMouse>().isSim = true;
+
             }
             else if (list[i].Contains("lineReadingIR"))
             {
                 temp = Instantiate(linereadingir);
                 temp.GetComponent<Outline>().enabled = false;
+                temp.GetComponent<IrFollowMouse>().isSim = true;
             }
             else if (list[i].Contains("distancemeasuringirsensor"))
             {
                 temp = Instantiate(distanceir);
                 temp.GetComponent<Outline>().enabled = false;
+                temp.GetComponent<ComponentFollowMouse>().isSim = true;
+
             }
 
             temp.transform.parent = bot.transform;
+            temp.name = list[i];
             temp.transform.localPosition = strToVector(list[i + 1]);
             temp.transform.localRotation = strToQuat(list[i + 2]);
             temp.transform.localScale = strToVector(list[i + 3]);
-            Debug.Log(i);
+            bot.GetComponent<CompTracker>().components.Add(temp);
 
         }
     }

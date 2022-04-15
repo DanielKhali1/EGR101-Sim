@@ -1,4 +1,4 @@
-lineReadingIRYETTOY(GRND)-Arduino(GND)-0
-lineReadingIRYETTOY(VCC)-Arduino(5.5V)-0
-lineReadingIRYETTOY(OUT)-Arduino(analog_0)-0
+lineReadingIRWXCXEI-GRND-Arduino-GND-0
+lineReadingIRWXCXEI-VCC-Arduino-5V-0
+lineReadingIRWXCXEI-OUT-Arduino-analog_0-0
 

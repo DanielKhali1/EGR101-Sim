@@ -8,7 +8,7 @@ import com.egr101sim.arduino.elements.PinType;
 public class UltrasonicSensor extends Component{
 
 	
-	int distance;
+	private double distance;
 	int[] randomNoiseBound;
 	
 	boolean works;
@@ -65,12 +65,12 @@ public class UltrasonicSensor extends Component{
 		
 		//this is the echo pin (INPUT PIN)
 		if(getPins()[2] != null)
-			getPins()[2].setMicro(distance*29*2);
+			getPins()[2].setMicro(getDistance()*29*2);
 	}
 	
 	public void readVal(int distance) {
 		//if(works)
-			this.distance = distance;
+			this.setDistance(distance);
 	}
 
 	@Override
@@ -78,6 +78,14 @@ public class UltrasonicSensor extends Component{
 		if(isPowered() && isGrounded()) {
 			works = true;
 		}
+	}
+
+	public double getDistance() {
+		return distance;
+	}
+
+	public void setDistance(double distance) {
+		this.distance = distance;
 	}
 
 }
