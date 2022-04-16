@@ -56,23 +56,18 @@ public class CreateWire : MonoBehaviour
             Vector3 wireLocation = new Vector3();
             wireLocation = wire[0].transform.position;
             wireLocation.y = 5.6f;
+
             line.SetPosition(0, wireLocation);
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             Plane plane = new Plane(new Vector3(0,1,0), -5.6f);
             float distance;
             Vector3 worldPosition;
-            
-            if(Input.GetMouseButtonDown(1))
-            {
-                wireCount+=1;
-            }
 
             if (plane.Raycast(ray, out distance))
             {
                 worldPosition = ray.GetPoint(distance);
-                Debug.Log(wireCount);
-                line.SetPosition(wireCount, worldPosition);
+                line.SetPosition(1, worldPosition);
             }
         }
     }
@@ -81,7 +76,7 @@ public class CreateWire : MonoBehaviour
     {
         if(!wiringMode)
         {
-            connectionsList.Add(wire);
+            connectionsList.Add(new List<GameObject>(wire));
             updateConnectionList(connectionsList);
             wire.Clear();
         }
@@ -92,5 +87,4 @@ public class CreateWire : MonoBehaviour
         GameObject bot = GameObject.FindGameObjectWithTag("Player");
         bot.GetComponent<placementmesh>().wires = connectionsList;
     }
-
 }
