@@ -7,6 +7,7 @@ TagManager:
   - UI
   - Pin
   - Wire
+  - Wall
   layers:
   - Default
   - TransparentFX

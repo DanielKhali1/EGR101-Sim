@@ -2,15 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using System.IO;
-using System.Threading.Tasks;
-
 public class CreateWire : MonoBehaviour
 {
     public GameObject linePrefab;
     private LineRenderer line;
     private List<List<GameObject>> connectionsList = new List<List<GameObject>>();
     LineRenderer oldLineRender;
+    private int wireCount = 0;
     public Camera wiringCam;
     bool wiringMode = false;
     bool visualWire = false;
@@ -30,28 +28,22 @@ public class CreateWire : MonoBehaviour
                     wire.Add(hit.collider.gameObject);
                     wiringMode = !wiringMode;
                     visualWire = !visualWire;
-
                     clearList();
-                    updateConnectionList();
-
-                    }
+                }
             }
         }
-        if(wiringCam.GetComponent<Camera>().enabled && Input.GetMouseButtonDown(1))
+
+        if(wiringCam.GetComponent<Camera>().enabled && Input.GetMouseButtonDown(1) && wiringMode)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             GameObject randomPoint = new GameObject();
             randomPoint.gameObject.transform.position = new Vector3(Input.mousePosition.x, 3.58f, Input.mousePosition.z);
             randomPoint.gameObject.transform.name = "randomPoint";
             wire.Add(randomPoint);
-            printList();
         }
 
         if(visualWire)
         {
-            Plane plane = new Plane(Vector3.up, 0);
-            float distance;
-            Vector3 worldPosition;
             try{
                 GameObject oldLine = GameObject.FindGameObjectWithTag("Wire");
                 Destroy(oldLine);
@@ -61,28 +53,27 @@ public class CreateWire : MonoBehaviour
             lineStuff.tag = "Wire";
             line = lineStuff.GetComponent<LineRenderer>(); 
 
-            line.SetPosition(0, wire[0].gameObject.transform.position);
+            Vector3 wireLocation = new Vector3();
+            wireLocation = wire[0].transform.position;
+            wireLocation.y = 5.6f;
+            line.SetPosition(0, wireLocation);
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            Plane plane = new Plane(new Vector3(0,1,0), -5.6f);
+            float distance;
+            Vector3 worldPosition;
+            
+            if(Input.GetMouseButtonDown(1))
+            {
+                wireCount+=1;
+            }
+
             if (plane.Raycast(ray, out distance))
             {
                 worldPosition = ray.GetPoint(distance);
-                line.SetPosition(1, worldPosition);
+                Debug.Log(wireCount);
+                line.SetPosition(wireCount, worldPosition);
             }
-        }
-        printList();
-    }
-
-    void printList()
-    {
-        for(int i = 0; i < connectionsList.Count;i++)
-        {
-            string str ="";
-            for(int j = 0; j < connectionsList[i].Count;j++)
-            {
-                str += connectionsList[i][j].name + "-";
-            }
-            Debug.Log(str);
-
         }
     }
 
@@ -91,32 +82,15 @@ public class CreateWire : MonoBehaviour
         if(!wiringMode)
         {
             connectionsList.Add(wire);
-            printList();
+            updateConnectionList(connectionsList);
             wire.Clear();
         }
     }
 
-    //update every
-    // - new connection formed
-    // - connection deleted
-    private void updateConnectionList()
+    private void updateConnectionList(List<List<GameObject>> connectionslist)
     {
-        //save component data to a file
-        string text = "";
-
-        for (int i = 0; i < connectionsList.Count; i++)
-        {
-            string str = "";
-            for (int j = 0; j < connectionsList[i].Count; j++)
-            {
-                str += connectionsList[i][j].name + "-";
-            }
-            text += str +"\n";
-        }
-        Debug.Log("Saving Wiring Config!");
-
-        File.WriteAllText("..\\..\\Data\\Wiring_Data.dat", text);
-        Debug.Log("Saving Wiring Config!");
+        GameObject bot = GameObject.FindGameObjectWithTag("Player");
+        bot.GetComponent<placementmesh>().wires = connectionsList;
     }
 
 }
