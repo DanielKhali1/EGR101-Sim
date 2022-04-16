@@ -81,5 +81,21 @@ public class LineReadingIRSensor extends Component{
 	public void setWhiteness(int whiteness) {
 		this.whiteness = whiteness;
 	}
+	
+	@Override
+	public Pin getVCC() {
+		return getPins()[0];
+		
+	}
+	@Override
+	public Pin getGND() {
+		return getPins()[2];
+		
+	}
+	@Override
+	public Pin getOUT() {
+		return getPins()[1];
+	
+	}
 
 }

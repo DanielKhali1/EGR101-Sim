@@ -816,7 +816,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8299193883539295760, guid: b016daa3d027d3342913be7c550fc7d0, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 160
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 8299193883539295760, guid: b016daa3d027d3342913be7c550fc7d0, type: 3}
       propertyPath: m_SizeDelta.y
@@ -852,11 +852,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8299193883539295760, guid: b016daa3d027d3342913be7c550fc7d0, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -20
+      value: -149.29999
       objectReference: {fileID: 0}
     - target: {fileID: 8299193883539295760, guid: b016daa3d027d3342913be7c550fc7d0, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -15
+      value: -26
       objectReference: {fileID: 0}
     - target: {fileID: 8299193883539295760, guid: b016daa3d027d3342913be7c550fc7d0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -873,6 +873,30 @@ PrefabInstance:
     - target: {fileID: 8299193883539295761, guid: b016daa3d027d3342913be7c550fc7d0, type: 3}
       propertyPath: m_Name
       value: WiringComponent
+      objectReference: {fileID: 0}
+    - target: {fileID: 8299193883539295763, guid: b016daa3d027d3342913be7c550fc7d0, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8299193883539295763, guid: b016daa3d027d3342913be7c550fc7d0, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8299193883539295763, guid: b016daa3d027d3342913be7c550fc7d0, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8299193883539295763, guid: b016daa3d027d3342913be7c550fc7d0, type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8299193883539295763, guid: b016daa3d027d3342913be7c550fc7d0, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 8299193883539295763, guid: b016daa3d027d3342913be7c550fc7d0, type: 3}
+      propertyPath: m_FontData.m_FontStyle
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b016daa3d027d3342913be7c550fc7d0, type: 3}
@@ -4688,7 +4712,7 @@ PrefabInstance:
       objectReference: {fileID: 1166472882}
     - target: {fileID: 88261084898203714, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_Name
-      value: Arduino-A5
+      value: Arduino-analog5
       objectReference: {fileID: 0}
     - target: {fileID: 93844470543398097, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_RootOrder
@@ -4728,7 +4752,7 @@ PrefabInstance:
       objectReference: {fileID: 1166472882}
     - target: {fileID: 224089295648249728, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_Name
-      value: Arduino-A3
+      value: Arduino-analog3
       objectReference: {fileID: 0}
     - target: {fileID: 228086100255763192, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_Constraints
@@ -5828,7 +5852,7 @@ PrefabInstance:
       objectReference: {fileID: 1166472882}
     - target: {fileID: 4745821781497345590, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_Name
-      value: Arduino-A1
+      value: Arduino-analog1
       objectReference: {fileID: 0}
     - target: {fileID: 4755343813572390050, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
@@ -6184,7 +6208,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6266380184599930307, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_Name
-      value: Arduino-A2
+      value: Arduino-analog2
       objectReference: {fileID: 0}
     - target: {fileID: 6294176621368200354, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_Name
@@ -6644,7 +6668,7 @@ PrefabInstance:
       objectReference: {fileID: 1166472882}
     - target: {fileID: 7948677547690525672, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_Name
-      value: Arduino-A4
+      value: Arduino-analog4
       objectReference: {fileID: 0}
     - target: {fileID: 7958454115269398553, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_Name
@@ -6660,7 +6684,7 @@ PrefabInstance:
       objectReference: {fileID: 1166472882}
     - target: {fileID: 7995991979250293094, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_Name
-      value: Arduino-A0
+      value: Arduino-analog0
       objectReference: {fileID: 0}
     - target: {fileID: 8053645396512506605, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam

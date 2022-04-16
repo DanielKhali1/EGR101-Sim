@@ -27,6 +27,28 @@ public abstract class Component {
 	public Pin[] getPins() {
 		return pins;
 	}
+	
+	public Pin getVCC() {
+		return null;
+		
+	}
+	
+	public Pin getGND() {
+		return null;
+		
+	}
+
+	public Pin getOUT() {
+		return null;
+	
+	}
+	
+	public Pin getIN() {
+		return null;
+		
+	}
+	
+	
 	/**
 	 * @param pins the pins to set
 	 */

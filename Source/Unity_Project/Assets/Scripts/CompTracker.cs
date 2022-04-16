@@ -19,15 +19,28 @@ public class CompTracker : MonoBehaviour
         }
     }
 
-    public void saveData()
+
+    void OnApplicationQuit()
+    {
+        if(!isSim)
+        {
+            Debug.Log("SAVING Component Data");
+            saveCompData();
+            Debug.Log("SAVING Wiring Data");
+            saveWireData();
+        }
+
+
+    }
+    public void saveCompData()
     {
         //save component data to a file
         string text = "";
 
-        for(int i = 0; i < components.Count; i++)
+        for (int i = 0; i < components.Count; i++)
         {
             GameObject comp = components[i];
-            text += comp.name+"\n";
+            text += comp.name + "\n";
             text += comp.transform.localPosition + "\n";
             text += comp.transform.localRotation + "\n";
             text += comp.transform.localScale + "\n";
@@ -35,13 +48,22 @@ public class CompTracker : MonoBehaviour
 
         File.WriteAllText("..\\..\\Data\\Component_Data.dat", text);
     }
-    void OnApplicationQuit()
+
+    private void saveWireData()
     {
-        if(!isSim)
+        string ultrastring = "";
+        List<List<GameObject>> connectionsList = GameObject.FindGameObjectWithTag("Player").GetComponent<placementmesh>().wires; ;
+        for (int i = 0; i < connectionsList.Count; i++)
         {
-            Debug.Log("SAVING ComponentData");
-            saveData();
+            string line = "";
+            foreach (GameObject pin in connectionsList[i])
+            {
+                line += pin.name + "-";
+            }
+            ultrastring += line + "\n";
         }
+        System.IO.File.WriteAllText("..\\..\\Data\\Wiring_Data.dat", ultrastring);
+
     }
 
 

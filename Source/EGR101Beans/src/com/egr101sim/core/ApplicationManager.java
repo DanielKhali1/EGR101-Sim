@@ -198,13 +198,11 @@ public class ApplicationManager {
 		BufferedReader bfCompData = new BufferedReader(new FileReader(componentData));
 		BufferedReader bfWiringData = new BufferedReader(new FileReader(wiringData));
 
-		
 		// read component data and update components
 		try {
 
 			String line = "";
 			while ((line = bfCompData.readLine()) != null) {
-				// System.out.println(line);
 				if (line.contains("UltraSonic")) {
 					addComponent(line, new UltrasonicSensor());
 				} else if (line.contains("lineReadingIR")) {
@@ -218,35 +216,77 @@ public class ApplicationManager {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		try {
 
 			String line = "";
+
 			while ((line = bfWiringData.readLine()) != null) {
 				String[] wiringD = line.split("-");
-				//Arduino first
-				if(wiringD[0].equals("Arduino")) {
-					
+				// Arduino first
+				String arduinoPinRole = null;
+				String componentName = null;
+				String compoentPineRole = null;
+				
+				Pin compPin = null;
+
+				if (wiringD[0].equals("Arduino")) {
+					arduinoPinRole = wiringD[1];
+					componentName = wiringD[2];
+					compoentPineRole = wiringD[3];
 				}
 				// component first
 				else {
-					
+					componentName = wiringD[0];
+					compoentPineRole = wiringD[1];
+					arduinoPinRole = wiringD[3];
 				}
 				
+				Component comp = null;
+				for(int i = 0; i < arduino.getComponents().size(); i++) {
+					if(componentName.equals(arduino.getComponents().get(i).getName())) {
+						comp = arduino.getComponents().get(i);
+					}
+				}
+				if(comp == null) { throw new Exception("COULD NOT FIND COMPONENT NAME TO CONNECT WIRES"); }
+				
+				if(compoentPineRole.equals("VCC")) {
+					compPin = comp.getVCC();
+				} else if (compoentPineRole.equals("GND")) {
+					compPin = comp.getGND();
+				} else if (compoentPineRole.equals("OUT")) {
+					compPin = comp.getOUT();
+				} 
+				
+				
+				if(arduinoPinRole.equals("5V")) {
+					compPin.setPrev(arduino.getArduino().getP5V());
+				} else if (arduinoPinRole.equals("GND")) {
+					compPin.setPrev(arduino.getArduino().getGround()[0]);
+				} else if (arduinoPinRole.contains("analog")) {
+					Pin arduinoPin = arduino.getArduino().getAnalogArray()[Integer.parseInt(arduinoPinRole.replace("analog", ""))];
+					arduinoPin = new Pin(PinType.IO, true);
+					compPin.setPrev(arduinoPin);
+				} else if (arduinoPinRole.contains("digital")) {
+					Pin arduinoPin = arduino.getArduino().getDigitalArray()[Integer.parseInt(arduinoPinRole.replace("digital", ""))];
+					arduinoPin = new Pin(PinType.IO, true);
+					compPin.setPrev(arduinoPin);				}
 			}
 			bfWiringData.close();
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
 
 	}
 
 	private void addComponent(String name, Component c) {
 		Component component = c;
 		component.setName(name);
+		
+		for (int i = 0; i < component.getPins().length; i++)
+			component.getPins()[i] = new Pin(PinType.GENERAL, false);
+		
 		arduino.getComponents().add(component);
 	}
 

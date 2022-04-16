@@ -6,13 +6,18 @@ public class CreateWire : MonoBehaviour
 {
     public GameObject linePrefab;
     private LineRenderer line;
-    private List<List<GameObject>> connectionsList = new List<List<GameObject>>();
+    private List<List<GameObject>> connectionsList;
     LineRenderer oldLineRender;
     private int wireCount = 0;
     public Camera wiringCam;
     bool wiringMode = false;
     bool visualWire = false;
     private List<GameObject> wire = new List<GameObject>();
+
+    private void Start()
+    {
+        connectionsList = GameObject.FindGameObjectWithTag("Player").GetComponent<placementmesh>().wires;
+    }
 
     void Update()
     {
@@ -77,29 +82,9 @@ public class CreateWire : MonoBehaviour
         if(!wiringMode)
         {
             connectionsList.Add(new List<GameObject>(wire));
-            updateConnectionList(connectionsList);
             wire.Clear();
         }
     }
 
-    private void updateConnectionList(List<List<GameObject>> connectionslist)
-    {
-        GameObject bot = GameObject.FindGameObjectWithTag("Player");
-        bot.GetComponent<placementmesh>().wires = connectionsList;
 
-        string ultrastring = "";
-
-        foreach(List<GameObject> wire in bot.GetComponent<placementmesh>().wires)
-        {
-            string f = "";
-            foreach(GameObject w in wire)
-            {
-               f += w.name + "-";
-            }
-            ultrastring += "\n";
-        }
-
-        //saving wiring data to a file
-        System.IO.File.WriteAllText("..\\..\\Data\\Wiring_Data.dat", ultrastring);
-    }
 }
