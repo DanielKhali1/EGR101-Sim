@@ -8,7 +8,7 @@ public class CreateWire : MonoBehaviour
     private LineRenderer line;
     private List<List<GameObject>> connectionsList = new List<List<GameObject>>();
     LineRenderer oldLineRender;
-    private int wireCount = 0;
+    private int wiringCount = 0;
     public Camera wiringCam;
     bool wiringMode = false;
     bool visualWire = false;
@@ -57,17 +57,23 @@ public class CreateWire : MonoBehaviour
             wireLocation = wire[0].transform.position;
             wireLocation.y = 5.6f;
 
-            line.SetPosition(0, wireLocation);
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             Plane plane = new Plane(new Vector3(0,1,0), -5.6f);
             float distance;
             Vector3 worldPosition;
+            
+            line.SetPosition(0, wireLocation);
+            
+            if(wiringMode && Input.GetMouseButtonDown(1))
+            {
+                wiringCount++;
+            }
 
             if (plane.Raycast(ray, out distance))
             {
                 worldPosition = ray.GetPoint(distance);
-                line.SetPosition(1, worldPosition);
+                line.SetPosition(wiringCount, worldPosition);
             }
         }
     }
