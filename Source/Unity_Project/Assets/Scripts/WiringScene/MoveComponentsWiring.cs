@@ -53,7 +53,7 @@ public class MoveComponentsWiring : MonoBehaviour,  IPointerClickHandler
                     sensor[i].transform.Rotate(new Vector3(-90,0,0));
                 }
                 //IR Sensors
-                if(sensor[i].transform.localPosition.y >= -2.4f && sensor[i].transform.localPosition.y <=-2.3f)
+                if(sensor[i].transform.localPosition.y < 1)
                 {
                     MoveIRSensors(sensor[i]);
                 }

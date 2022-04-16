@@ -92,5 +92,20 @@ public class CreateWire : MonoBehaviour
     {
         GameObject bot = GameObject.FindGameObjectWithTag("Player");
         bot.GetComponent<placementmesh>().wires = connectionsList;
+
+        string ultrastring = "";
+
+        foreach(List<GameObject> wire in bot.GetComponent<placementmesh>().wires)
+        {
+            string f = "";
+            foreach(GameObject w in wire)
+            {
+               f += w.name + "-";
+            }
+            ultrastring += "\n";
+        }
+
+        //saving wiring data to a file
+        System.IO.File.WriteAllText("..\\..\\Data\\Wiring_Data.dat", ultrastring);
     }
 }

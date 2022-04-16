@@ -18,6 +18,11 @@ public class IrFollowMouse : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        foreach (Transform child in transform)
+        {
+            child.name = gameObject.name + "-" + child.name;
+        }
+
         Follow = true;
         selected = true;
         if(!isSim)
@@ -108,7 +113,7 @@ public class IrFollowMouse : MonoBehaviour
                     }
                 }
 
-                bestPosition -= new Vector3(0, 0.4f, 0);
+                bestPosition -= new Vector3(0, 0.12f, 0);
                 gameObject.transform.position = bestPosition;
 
            
