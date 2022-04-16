@@ -7,77 +7,87 @@ public class CreateWire : MonoBehaviour
     public GameObject linePrefab;
     private LineRenderer line;
     private List<List<GameObject>> connectionsList = new List<List<GameObject>>();
-    LineRenderer oldLineRender;
     private int wiringCount = 0;
+    Vector3 lastWirePos;
     public Camera wiringCam;
     bool wiringMode = false;
-    bool visualWire = false;
     private List<GameObject> wire = new List<GameObject>();
 
     void Update()
     {
         if(wiringCam.GetComponent<Camera>().enabled && Input.GetMouseButtonDown(0))
         {
+
             Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
             RaycastHit hit;
             if(Physics.Raycast(ray, out hit))
             {
                 if(hit.collider.gameObject.transform.parent.tag == "Pin")
                 {
+                    if(!wiringMode)
+                    {
+                        wiringCount = 0;
+                        GameObject lineStuff = Instantiate(linePrefab);
+                        lineStuff.tag = "Wire";
+                        line = lineStuff.GetComponent<LineRenderer>();
+                        line.SetPosition(0, hit.collider.gameObject.transform.position);
+                        wiringCount++;
+                        line.positionCount = 50;
+                    }
+                    else{
+                        line.SetPosition(wiringCount, hit.collider.gameObject.transform.position);
+                        line.material.color = Color.green;
+                    }
+                    
                     hit.collider.gameObject.transform.name = hit.collider.gameObject.transform.parent.name;
                     wire.Add(hit.collider.gameObject);
                     wiringMode = !wiringMode;
-                    visualWire = !visualWire;
                     clearList();
+                }
+                if(hit.collider.gameObject.transform.parent.tag != "Pin" && wiringMode)
+                {
+                    GameObject randomPoint = new GameObject();
+                    randomPoint.gameObject.transform.name = "randomPoint";
+                    Plane plane = new Plane(new Vector3(0,1,0), -5.6f);
+                    float distance;
+                    Vector3 screenPos;
+                    
+                    if (plane.Raycast(ray, out distance))
+                    {
+                        screenPos = ray.GetPoint(distance);
+                        for(int i = wiringCount; i < 50; i++)
+                        {   
+                            line.SetPosition(i, screenPos);
+                        }
+                    }
+                    wiringCount++;
+                    wire.Add(randomPoint);
                 }
             }
         }
+        activeWire(wiringMode);
+    }
 
-        if(wiringCam.GetComponent<Camera>().enabled && Input.GetMouseButtonDown(1) && wiringMode)
+    void activeWire(bool wiringMode)
+    {
+        if(wiringMode)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            GameObject randomPoint = new GameObject();
-            randomPoint.gameObject.transform.position = new Vector3(Input.mousePosition.x, 3.58f, Input.mousePosition.z);
-            randomPoint.gameObject.transform.name = "randomPoint";
-            wire.Add(randomPoint);
-        }
-
-        if(visualWire)
-        {
-            try{
-                GameObject oldLine = GameObject.FindGameObjectWithTag("Wire");
-                Destroy(oldLine);
-            }catch{}
-
-            GameObject lineStuff = Instantiate(linePrefab);
-            lineStuff.tag = "Wire";
-            line = lineStuff.GetComponent<LineRenderer>(); 
-
-            Vector3 wireLocation = new Vector3();
-            wireLocation = wire[0].transform.position;
-            wireLocation.y = 5.6f;
-
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             Plane plane = new Plane(new Vector3(0,1,0), -5.6f);
             float distance;
             Vector3 worldPosition;
             
-            line.SetPosition(0, wireLocation);
-            
-            if(wiringMode && Input.GetMouseButtonDown(1))
-            {
-                wiringCount++;
-            }
-
             if (plane.Raycast(ray, out distance))
             {
                 worldPosition = ray.GetPoint(distance);
-                line.SetPosition(wiringCount, worldPosition);
+                for(int i = wiringCount; i < 50; i++)
+                {   
+                    line.SetPosition(i, worldPosition);
+                }
             }
         }
     }
-
     void clearList()
     {
         if(!wiringMode)
@@ -100,7 +110,8 @@ public class CreateWire : MonoBehaviour
             string f = "";
             foreach(GameObject w in wire)
             {
-               f += w.name + "-";
+                Debug.Log(w.transform.name);
+                f += w.name + "-";
             }
             ultrastring += "\n";
         }
