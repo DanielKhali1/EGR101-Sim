@@ -91,6 +91,16 @@ public class CreateWire : MonoBehaviour
     {
         GameObject bot = GameObject.FindGameObjectWithTag("Player");
         bot.GetComponent<placementmesh>().wires = connectionsList;
+
+        foreach(List<GameObject> wire in bot.GetComponent<placementmesh>().wires)
+        {
+            string f = "";
+            foreach(GameObject w in wire)
+            {
+               f += w.name + "-";
+            }
+            Debug.Log(f);
+        }
     }
 
 }
