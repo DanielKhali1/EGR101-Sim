@@ -6,6 +6,11 @@ public class LineReadingIRFunctionality : MonoBehaviour
 {
     int whiteness = 0;
 
+    private void Update()
+    {
+        GameObject.FindGameObjectWithTag("ServerController").GetComponent<ServerController>().sendBuffer += gameObject.name + "," + whiteness + "\n";
+    }
+
     private void OnTriggerEnter(Collider other)
     {
 
@@ -13,13 +18,11 @@ public class LineReadingIRFunctionality : MonoBehaviour
 
         if (other.gameObject.tag.Equals("whiteline")){
             //whiteness = 100;
-            Debug.Log(whiteness);
-            if(GameObject.FindGameObjectWithTag("ServerController").GetComponent<ServerController>().sendBuffer.Length < 100)
-                GameObject.FindGameObjectWithTag("ServerController").GetComponent<ServerController>().sendBuffer += gameObject.name + "," + 100 + "\n";
+            whiteness = 100;//GameObject.FindGameObjectWithTag("ServerController").GetComponent<ServerController>().sendBuffer += gameObject.name + "," + 100 + "\n";
         }
     }
 
-/*  private void OnTriggerStay(Collider other)
+    private void OnTriggerStay(Collider other)
     {
 
         Debug.Log(other.gameObject.name);
@@ -27,12 +30,15 @@ public class LineReadingIRFunctionality : MonoBehaviour
         if (other.gameObject.tag.Equals("whiteline"))
         {
             //whiteness = 100;
-            Debug.Log(whiteness);
-            if (GameObject.FindGameObjectWithTag("ServerController").GetComponent<ServerController>().sendBuffer.Length < 100)
-                GameObject.FindGameObjectWithTag("ServerController").GetComponent<ServerController>().sendBuffer += gameObject.name + "," + 100 + "\n";
+            whiteness = 100;//GameObject.FindGameObjectWithTag("ServerController").GetComponent<ServerController>().sendBuffer += gameObject.name + "," + 100 + "\n";
         }
+/*        else
+        {
+
+            whiteness = 0;//GameObject.FindGameObjectWithTag("ServerController").GetComponent<ServerController>().sendBuffer += gameObject.name + "," + 0 + "\n";
+        }*/
     }
-*/
+
 
     private void OnTriggerExit(Collider other)
     {
@@ -40,10 +46,7 @@ public class LineReadingIRFunctionality : MonoBehaviour
 
         if (other.gameObject.tag.Equals("whiteline"))
         {
-            whiteness = 0;
-            Debug.Log(whiteness);
-            if (GameObject.FindGameObjectWithTag("ServerController").GetComponent<ServerController>().sendBuffer.Length < 100)
-                GameObject.FindGameObjectWithTag("ServerController").GetComponent<ServerController>().sendBuffer += gameObject.name + "," + 0 + "\n";
+                whiteness = 0;//GameObject.FindGameObjectWithTag("ServerController").GetComponent<ServerController>().sendBuffer += gameObject.name + "," + 0 + "\n";
 
         }
     }

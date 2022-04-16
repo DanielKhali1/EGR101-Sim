@@ -48,7 +48,7 @@ public class ServerController : UnityEngine.MonoBehaviour
             foreach (string message in messages)
             {
                 //UnityEngine.Debug.Log(message);
-                UnityEngine.Debug.Log(message);
+                //UnityEngine.Debug.Log(message);
                 string[] info = message.Split(',');
                 if (info.Length > 2)
                 {
@@ -65,7 +65,8 @@ public class ServerController : UnityEngine.MonoBehaviour
 
             boeBot.GetComponent<BoeBotMove>().GetInput(motorInput[0] / 5.0f, motorInput[1] / 5.0f);
 
-            UnityEngine.Debug.Log("BRAINFUCK");
+           // UnityEngine.Debug.Log(string.Join(",",messages));
+
             int toSendLen = System.Text.Encoding.ASCII.GetByteCount(sendBuffer);
             byte[] toSendBytes = System.Text.Encoding.ASCII.GetBytes(sendBuffer);
             byte[] toSendLenBytes = System.BitConverter.GetBytes(toSendLen);

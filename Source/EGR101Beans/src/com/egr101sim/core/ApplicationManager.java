@@ -46,23 +46,6 @@ public class ApplicationManager {
 
 	}
 
-	public void initializeServerCharacteristics() {
-
-		try {
-			System.out.println("Starting Socket Streams");
-			ss = new ServerSocket(667);
-			sock = ss.accept();
-
-			dis = new DataInputStream(sock.getInputStream());
-			dos = new DataOutputStream(sock.getOutputStream());
-
-			simManager.setupComms(ss, sock, dis, dos);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 	/**
 	 * update the code
 	 */
@@ -104,6 +87,23 @@ public class ApplicationManager {
 		arduino.getComponents().add(rightMotor);
 		arduino.getComponents().add(leftMotor);
 	}
+	
+	public void initializeServerCharacteristics() {
+		
+		try {
+			System.out.println("Starting Socket Streams");
+			ss = new ServerSocket(667);
+			sock = ss.accept();
+			
+			dis = new DataInputStream(sock.getInputStream());
+			dos = new DataOutputStream(sock.getOutputStream());
+			
+			simManager.setupComms(ss, sock, dis, dos);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	public void execute(Process process, Text console) {
 		console.setText(console.getText() + "\nSimulation setting up..");
@@ -119,7 +119,7 @@ public class ApplicationManager {
 
 				try {
 					while (isSimRunning()) {
-//						System.out.println(sock.isConnected());
+//						System.out.println(sock.isConnected() + " " + sock == null);
 						if (sock != null && sock.isConnected()) {
 							Thread.sleep(20);
 							simManager.sendMessage(simManager.generateMessage());
@@ -264,13 +264,18 @@ public class ApplicationManager {
 				} else if (arduinoPinRole.equals("GND")) {
 					compPin.setPrev(arduino.getArduino().getGround()[0]);
 				} else if (arduinoPinRole.contains("analog")) {
-					Pin arduinoPin = arduino.getArduino().getAnalogArray()[Integer.parseInt(arduinoPinRole.replace("analog", ""))];
-					arduinoPin = new Pin(PinType.IO, true);
-					compPin.setPrev(arduinoPin);
+					int index = Integer.parseInt(arduinoPinRole.replace("analog", ""));
+					arduino.getArduino().getAnalogArray()[index] = new Pin(PinType.IO, true);
+					compPin.setPrev(arduino.getArduino().getAnalogArray()[index]);
+					arduino.getArduino().getAnalogArray()[index].addNext(compPin);
+					System.out.println(Arrays.toString(arduino.getArduino().getAnalogArray()));
 				} else if (arduinoPinRole.contains("digital")) {
-					Pin arduinoPin = arduino.getArduino().getDigitalArray()[Integer.parseInt(arduinoPinRole.replace("digital", ""))];
-					arduinoPin = new Pin(PinType.IO, true);
-					compPin.setPrev(arduinoPin);				}
+					int index = Integer.parseInt(arduinoPinRole.replace("digital", ""));
+					arduino.getArduino().getDigitalArray()[index] = new Pin(PinType.IO, true);
+					compPin.setPrev(arduino.getArduino().getDigitalArray()[index]);
+					arduino.getArduino().getDigitalArray()[index].addNext(compPin);
+					System.out.println(Arrays.toString(arduino.getArduino().getDigitalArray()));
+				}
 			}
 			bfWiringData.close();
 

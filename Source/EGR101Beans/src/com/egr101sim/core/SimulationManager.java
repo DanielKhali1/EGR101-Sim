@@ -128,6 +128,8 @@ public class SimulationManager {
 		} catch (NullPointerException e) {
 
 		}
+		
+		System.out.println("RCV " + received);
 
 		return received;
 	}

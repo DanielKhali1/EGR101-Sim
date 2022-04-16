@@ -1,3 +1,6 @@
-Arduino-5V-randomPoint-randomPoint-lineReadingIRUMMRCW-VCC-
-Arduino-analog5-randomPoint-randomPoint-randomPoint-lineReadingIRUMMRCW-OUT-
-Arduino-GND-randomPoint-randomPoint-randomPoint-lineReadingIRUMMRCW-GND-
+lineReadingIRTJHKPI-GND-Arduino-GND
+lineReadingIRTJHKPI-VCC-Arduino-5V
+Arduino-analog0-lineReadingIRTJHKPI-OUT
+Arduino-analog1-lineReadingIRWELBNZ-OUT
+Arduino-GND-lineReadingIRWELBNZ-GND
+Arduino-5V-lineReadingIRWELBNZ-VCC

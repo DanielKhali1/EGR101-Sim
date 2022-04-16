@@ -136,6 +136,14 @@ public class MainUI extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		manager = new ApplicationManager();
 		pane = new Pane();
+		
+		try {
+			manager.addComponentsAndConnections();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 
 		CodeArea codeArea = new CodeArea();
 
@@ -334,19 +342,14 @@ public class MainUI extends Application {
 			console.setText(console.getText() + "\n" + manager.stackPrint());
 			scrollPane.setVvalue(scrollPane.getVmax());
 		});
+		
 
 		runimage.setOnMouseClicked(e -> {
 			Platform.runLater(new Runnable() {
 				@Override
 				public void run() {
 					
-					try {
-						manager.addComponentsAndConnections();
-					} catch (FileNotFoundException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-
+					
 					if (manager.simManager.getArduino().behavior.getFunction() != null) {
 //						try {
 //							Runtime runTime = Runtime.getRuntime();
