@@ -8,6 +8,7 @@ public class CreateWire : MonoBehaviour
     private LineRenderer line;
     private List<List<GameObject>> connectionsList = new List<List<GameObject>>();
     LineRenderer oldLineRender;
+    private int wireCount = 0;
     public Camera wiringCam;
     bool wiringMode = false;
     bool visualWire = false;
@@ -31,7 +32,8 @@ public class CreateWire : MonoBehaviour
                 }
             }
         }
-        if(wiringCam.GetComponent<Camera>().enabled && Input.GetMouseButtonDown(1))
+
+        if(wiringCam.GetComponent<Camera>().enabled && Input.GetMouseButtonDown(1) && wiringMode)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             GameObject randomPoint = new GameObject();
@@ -42,9 +44,6 @@ public class CreateWire : MonoBehaviour
 
         if(visualWire)
         {
-            Plane plane = new Plane(Vector3.up, 0);
-            float distance;
-            Vector3 worldPosition;
             try{
                 GameObject oldLine = GameObject.FindGameObjectWithTag("Wire");
                 Destroy(oldLine);
@@ -54,23 +53,26 @@ public class CreateWire : MonoBehaviour
             lineStuff.tag = "Wire";
             line = lineStuff.GetComponent<LineRenderer>(); 
 
-            line.SetPosition(0, wire[0].gameObject.transform.position);
+            Vector3 wireLocation = new Vector3();
+            wireLocation = wire[0].transform.position;
+            wireLocation.y = 5.6f;
+            line.SetPosition(0, wireLocation);
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            Plane plane = new Plane(new Vector3(0,1,0), -5.6f);
+            float distance;
+            Vector3 worldPosition;
+            
+            if(Input.GetMouseButtonDown(1))
+            {
+                wireCount+=1;
+            }
+
             if (plane.Raycast(ray, out distance))
             {
                 worldPosition = ray.GetPoint(distance);
-                line.SetPosition(1, worldPosition);
-            }
-        }
-    }
-
-    void printList()
-    {
-        for(int i = 0; i < connectionsList.Count;i++)
-        {
-            for(int j = 0; j < connectionsList[i].Count;j++)
-            {
-                Debug.Log(connectionsList[i][j]);
+                Debug.Log(wireCount);
+                line.SetPosition(wireCount, worldPosition);
             }
         }
     }
@@ -80,17 +82,15 @@ public class CreateWire : MonoBehaviour
         if(!wiringMode)
         {
             connectionsList.Add(wire);
-            printList();
+            updateConnectionList(connectionsList);
             wire.Clear();
         }
     }
 
-    //update every
-    // - new connection formed
-    // - connection deleted
     private void updateConnectionList(List<List<GameObject>> connectionslist)
     {
-        // hi luke 
+        GameObject bot = GameObject.FindGameObjectWithTag("Player");
+        bot.GetComponent<placementmesh>().wires = connectionsList;
     }
 
 }
