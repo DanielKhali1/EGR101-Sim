@@ -18,7 +18,8 @@ public class LineReadingIRFunctionality : MonoBehaviour
                 GameObject.FindGameObjectWithTag("ServerController").GetComponent<ServerController>().sendBuffer += gameObject.name + "," + 100 + "\n";
         }
     }
-    private void OnTriggerStay(Collider other)
+
+/*  private void OnTriggerStay(Collider other)
     {
 
         Debug.Log(other.gameObject.name);
@@ -31,6 +32,7 @@ public class LineReadingIRFunctionality : MonoBehaviour
                 GameObject.FindGameObjectWithTag("ServerController").GetComponent<ServerController>().sendBuffer += gameObject.name + "," + 100 + "\n";
         }
     }
+*/
 
     private void OnTriggerExit(Collider other)
     {
@@ -41,7 +43,7 @@ public class LineReadingIRFunctionality : MonoBehaviour
             whiteness = 0;
             Debug.Log(whiteness);
             if (GameObject.FindGameObjectWithTag("ServerController").GetComponent<ServerController>().sendBuffer.Length < 100)
-                GameObject.FindGameObjectWithTag("ServerController").GetComponent<ServerController>().sendBuffer += gameObject.name + "," + whiteness + "\n";
+                GameObject.FindGameObjectWithTag("ServerController").GetComponent<ServerController>().sendBuffer += gameObject.name + "," + 0 + "\n";
 
         }
     }

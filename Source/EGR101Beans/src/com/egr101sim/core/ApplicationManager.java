@@ -121,7 +121,7 @@ public class ApplicationManager {
 					while (isSimRunning()) {
 //						System.out.println(sock.isConnected());
 						if (sock != null && sock.isConnected()) {
-							Thread.sleep(100);
+							Thread.sleep(20);
 							simManager.sendMessage(simManager.generateMessage());
 						}
 					}

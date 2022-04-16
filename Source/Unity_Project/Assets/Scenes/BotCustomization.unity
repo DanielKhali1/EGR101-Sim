@@ -4674,6 +4674,10 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 126
       objectReference: {fileID: 0}
+    - target: {fileID: 40252223864166573, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-3.3V
+      objectReference: {fileID: 0}
     - target: {fileID: 65420581627146597, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_RootOrder
       value: 57
@@ -4682,9 +4686,21 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 88261084898203714, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-A5
+      objectReference: {fileID: 0}
     - target: {fileID: 93844470543398097, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_RootOrder
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 104060119509994259, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-digital12
+      objectReference: {fileID: 0}
+    - target: {fileID: 113142750327928188, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-GND
       objectReference: {fileID: 0}
     - target: {fileID: 113398961005697944, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_RootOrder
@@ -4702,10 +4718,18 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 126
       objectReference: {fileID: 0}
+    - target: {fileID: 193927918268273442, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-5V
+      objectReference: {fileID: 0}
     - target: {fileID: 203996985785758876, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 224089295648249728, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-A3
+      objectReference: {fileID: 0}
     - target: {fileID: 228086100255763192, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_Constraints
       value: 126
@@ -4714,6 +4738,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 247843186288286198, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-5V
+      objectReference: {fileID: 0}
     - target: {fileID: 258452549748472719, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_RootOrder
       value: 55
@@ -4770,6 +4798,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 428779446761980029, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-5V
+      objectReference: {fileID: 0}
     - target: {fileID: 440894485395671335, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
       value: 
@@ -4778,10 +4810,18 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 499504922445083725, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-analog1
+      objectReference: {fileID: 0}
     - target: {fileID: 503243738868237546, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 515002267213440356, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-digital10
+      objectReference: {fileID: 0}
     - target: {fileID: 516704564643339471, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
       value: 
@@ -4797,6 +4837,10 @@ PrefabInstance:
     - target: {fileID: 551345096530549202, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_RootOrder
       value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 585144456613468351, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-digital7
       objectReference: {fileID: 0}
     - target: {fileID: 650624950912712758, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
@@ -4870,6 +4914,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 81
       objectReference: {fileID: 0}
+    - target: {fileID: 1110378739975477869, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-Vin
+      objectReference: {fileID: 0}
     - target: {fileID: 1112782078531386759, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_Constraints
       value: 126
@@ -4885,6 +4933,10 @@ PrefabInstance:
     - target: {fileID: 1139110127609141997, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_RootOrder
       value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 1146958656866994170, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-3.3V
       objectReference: {fileID: 0}
     - target: {fileID: 1161238357035066380, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
@@ -4914,9 +4966,17 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 1330969627268458926, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-digital4
+      objectReference: {fileID: 0}
     - target: {fileID: 1337509639800283597, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_Constraints
       value: 126
+      objectReference: {fileID: 0}
+    - target: {fileID: 1339388907755537959, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-5V
       objectReference: {fileID: 0}
     - target: {fileID: 1354291613288531625, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
@@ -4962,6 +5022,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 16
       objectReference: {fileID: 0}
+    - target: {fileID: 1653966043611287136, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-3.3V
+      objectReference: {fileID: 0}
     - target: {fileID: 1661217561678113773, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_RootOrder
       value: 63
@@ -4982,6 +5046,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 1715680859553169482, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-analog3
+      objectReference: {fileID: 0}
     - target: {fileID: 1722236707886686813, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
       value: 
@@ -5010,6 +5078,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 61
       objectReference: {fileID: 0}
+    - target: {fileID: 1904909470745311637, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-GND
+      objectReference: {fileID: 0}
     - target: {fileID: 1907243294848754278, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -5030,6 +5102,14 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 2040464147546271905, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-5V
+      objectReference: {fileID: 0}
+    - target: {fileID: 2057221237320623791, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-digital11
+      objectReference: {fileID: 0}
     - target: {fileID: 2060010189909340339, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_Constraints
       value: 126
@@ -5050,6 +5130,10 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 126
       objectReference: {fileID: 0}
+    - target: {fileID: 2133987969280083199, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-GND
+      objectReference: {fileID: 0}
     - target: {fileID: 2168908911581875380, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
       value: 
@@ -5061,6 +5145,10 @@ PrefabInstance:
     - target: {fileID: 2180893914008169286, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.3523103
+      objectReference: {fileID: 0}
+    - target: {fileID: 2181225259079272554, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-digital1
       objectReference: {fileID: 0}
     - target: {fileID: 2182323946426245476, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
@@ -5078,6 +5166,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 2219502086673158488, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-digital13
+      objectReference: {fileID: 0}
     - target: {fileID: 2229620858483194858, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
       value: 
@@ -5097,6 +5189,14 @@ PrefabInstance:
     - target: {fileID: 2258531096381614210, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_Constraints
       value: 126
+      objectReference: {fileID: 0}
+    - target: {fileID: 2288400210011988065, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-AREF
+      objectReference: {fileID: 0}
+    - target: {fileID: 2291517206357723594, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-digital8
       objectReference: {fileID: 0}
     - target: {fileID: 2299644712321765601, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
@@ -5174,10 +5274,22 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 2557805868126234562, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-GND
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597257489704312816, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-digital13
+      objectReference: {fileID: 0}
     - target: {fileID: 2604879522142780200, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 2619969437755607649, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-GND
+      objectReference: {fileID: 0}
     - target: {fileID: 2623721424262528065, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
       value: 
@@ -5274,6 +5386,10 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 126
       objectReference: {fileID: 0}
+    - target: {fileID: 2752761085309019414, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-Vin
+      objectReference: {fileID: 0}
     - target: {fileID: 2771446669213719601, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
       value: 
@@ -5322,6 +5438,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 21
       objectReference: {fileID: 0}
+    - target: {fileID: 2963084792444464886, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-analog5
+      objectReference: {fileID: 0}
     - target: {fileID: 2969054117628371061, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_RootOrder
       value: 44
@@ -5330,10 +5450,18 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 3039642350914600492, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-digital3
+      objectReference: {fileID: 0}
     - target: {fileID: 3043581099307812803, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 3059731484832705607, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-digital1
+      objectReference: {fileID: 0}
     - target: {fileID: 3072031374454079841, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
       value: 
@@ -5358,6 +5486,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 3142263480754148594, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-GND
+      objectReference: {fileID: 0}
     - target: {fileID: 3150246484372458470, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
       value: 
@@ -5398,6 +5530,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 3394787172321174641, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-digital9
+      objectReference: {fileID: 0}
     - target: {fileID: 3413198463467658498, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_RootOrder
       value: 27
@@ -5426,6 +5562,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 35
       objectReference: {fileID: 0}
+    - target: {fileID: 3516815094164652841, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-digital2
+      objectReference: {fileID: 0}
     - target: {fileID: 3525206953752902898, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
       value: 
@@ -5450,6 +5590,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 3619637410412480983, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-digital6
+      objectReference: {fileID: 0}
     - target: {fileID: 3673713026509774801, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_Constraints
       value: 126
@@ -5485,6 +5629,10 @@ PrefabInstance:
     - target: {fileID: 3876097299043911808, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_RootOrder
       value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 3898141359872838004, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-GND
       objectReference: {fileID: 0}
     - target: {fileID: 3959538313796007179, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_RootOrder
@@ -5538,6 +5686,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 4081312237000472442, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-digital9
+      objectReference: {fileID: 0}
     - target: {fileID: 4111389579475584097, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
       value: 
@@ -5562,6 +5714,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 4215206198696404291, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-GND
+      objectReference: {fileID: 0}
     - target: {fileID: 4235200365251349596, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
       value: 
@@ -5574,6 +5730,10 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 126
       objectReference: {fileID: 0}
+    - target: {fileID: 4321323665109662804, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-digital0
+      objectReference: {fileID: 0}
     - target: {fileID: 4322160289433414607, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_RootOrder
       value: 76
@@ -5585,6 +5745,10 @@ PrefabInstance:
     - target: {fileID: 4385056223559096622, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_RootOrder
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4401913294540058565, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-digital1
       objectReference: {fileID: 0}
     - target: {fileID: 4405581236252299120, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
@@ -5610,6 +5774,10 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 126
       objectReference: {fileID: 0}
+    - target: {fileID: 4537944364330214599, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-digital6
+      objectReference: {fileID: 0}
     - target: {fileID: 4539333869637646696, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
       value: 
@@ -5622,6 +5790,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 4569851042953172521, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-digital12
+      objectReference: {fileID: 0}
     - target: {fileID: 4615559645168681825, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
       value: 
@@ -5646,6 +5818,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 4745821781497345590, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-A1
+      objectReference: {fileID: 0}
     - target: {fileID: 4755343813572390050, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
       value: 
@@ -5662,6 +5838,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 4939894096626225262, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-GND
+      objectReference: {fileID: 0}
     - target: {fileID: 4952920613927737557, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
       value: 
@@ -5710,6 +5890,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 5159635616027074838, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-Reset
+      objectReference: {fileID: 0}
     - target: {fileID: 5177238640372383315, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
       value: 
@@ -5718,9 +5902,17 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 5183748235028426752, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-5V
+      objectReference: {fileID: 0}
     - target: {fileID: 5197413186737061294, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_RootOrder
       value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 5203174171606737001, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-digital4
       objectReference: {fileID: 0}
     - target: {fileID: 5216193461909216327, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_RootOrder
@@ -5754,6 +5946,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 3.29
       objectReference: {fileID: 0}
+    - target: {fileID: 5262696986121185005, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-GND
+      objectReference: {fileID: 0}
     - target: {fileID: 5263223184208914969, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -5770,6 +5966,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 5341395794338083187, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-Vin
+      objectReference: {fileID: 0}
     - target: {fileID: 5366364105906440143, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
       value: 
@@ -5814,6 +6014,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 5558999700592848380, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-digital3
+      objectReference: {fileID: 0}
     - target: {fileID: 5561659656432413000, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
       value: 
@@ -5834,6 +6038,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 5648781710386319937, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-digital8
+      objectReference: {fileID: 0}
     - target: {fileID: 5678131123303167452, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_RootOrder
       value: 66
@@ -5862,6 +6070,14 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 5786123241085402062, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-GND
+      objectReference: {fileID: 0}
+    - target: {fileID: 5793375724392450634, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-5V
+      objectReference: {fileID: 0}
     - target: {fileID: 5817434048197030701, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
       value: 
@@ -5874,6 +6090,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 5932736294974402557, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-digital7
+      objectReference: {fileID: 0}
     - target: {fileID: 5970291951165571409, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -5910,6 +6130,18 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 126
       objectReference: {fileID: 0}
+    - target: {fileID: 6135862794949262281, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-analog2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6158569864512282647, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-GND
+      objectReference: {fileID: 0}
+    - target: {fileID: 6160583484439193379, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-digital11
+      objectReference: {fileID: 0}
     - target: {fileID: 6180655220643462551, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_RootOrder
       value: 70
@@ -5922,6 +6154,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 6202892649609677810, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-digital10
+      objectReference: {fileID: 0}
     - target: {fileID: 6212022529423034266, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
       value: 
@@ -5930,9 +6166,21 @@ PrefabInstance:
       propertyPath: work
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6228588250375356093, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-analog0
+      objectReference: {fileID: 0}
     - target: {fileID: 6253922434662244072, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_RootOrder
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6266380184599930307, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-A2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6294176621368200354, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-3.3V
       objectReference: {fileID: 0}
     - target: {fileID: 6325131224329210579, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_Constraints
@@ -5954,6 +6202,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 6386708380183169196, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-5V
+      objectReference: {fileID: 0}
     - target: {fileID: 6420076878113311866, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
       value: 
@@ -6066,6 +6318,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 7002606423715558516, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-digital12
+      objectReference: {fileID: 0}
     - target: {fileID: 7003689952134145851, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -6074,6 +6330,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 7045833428052407721, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-5V
+      objectReference: {fileID: 0}
     - target: {fileID: 7054811061955530079, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
       value: 
@@ -6170,6 +6430,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: trw
       objectReference: {fileID: 0}
+    - target: {fileID: 7190875636278209796, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-analog4
+      objectReference: {fileID: 0}
     - target: {fileID: 7220479134163857816, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
       value: 
@@ -6185,6 +6449,10 @@ PrefabInstance:
     - target: {fileID: 7318376121388016206, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_RootOrder
       value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 7345692138162097458, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-digital5
       objectReference: {fileID: 0}
     - target: {fileID: 7347848122899033757, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
@@ -6206,6 +6474,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 7446929733626632861, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-digital10
+      objectReference: {fileID: 0}
     - target: {fileID: 7450881612013496054, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -6314,6 +6586,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 7768013861509702859, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-digital2
+      objectReference: {fileID: 0}
     - target: {fileID: 7788181183285743238, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
       value: 
@@ -6342,6 +6618,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 7935288827657285176, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-digital5
+      objectReference: {fileID: 0}
     - target: {fileID: 7940932099701653099, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -6350,6 +6630,14 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 7948677547690525672, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-A4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7958454115269398553, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-digital11
+      objectReference: {fileID: 0}
     - target: {fileID: 7959138704407860480, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_RootOrder
       value: 51
@@ -6358,6 +6646,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 7995991979250293094, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-A0
+      objectReference: {fileID: 0}
     - target: {fileID: 8053645396512506605, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
       value: 
@@ -6466,6 +6758,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 68
       objectReference: {fileID: 0}
+    - target: {fileID: 8424992858378941500, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-3.3V
+      objectReference: {fileID: 0}
     - target: {fileID: 8467488884349483074, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
       value: 
@@ -6474,6 +6770,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 8484926531060737649, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-GND
+      objectReference: {fileID: 0}
     - target: {fileID: 8499727008016343793, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
       value: 
@@ -6494,10 +6794,18 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 8574200095695267430, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-AREF
+      objectReference: {fileID: 0}
     - target: {fileID: 8584964635703117800, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 8587792867479830083, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-Vin
+      objectReference: {fileID: 0}
     - target: {fileID: 8636944722358817719, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_RootOrder
       value: 31
@@ -6538,6 +6846,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 8817579416977751501, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-digital13
+      objectReference: {fileID: 0}
     - target: {fileID: 8845031570882076989, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_Constraints
       value: 126
@@ -6546,10 +6858,18 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 126
       objectReference: {fileID: 0}
+    - target: {fileID: 9029501600404631713, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-5V
+      objectReference: {fileID: 0}
     - target: {fileID: 9056642896277639370, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 3f79d780e49aacd4a9753ac6de10cb7a, type: 2}
+    - target: {fileID: 9067997066108798834, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Name
+      value: Arduino-3.3V
+      objectReference: {fileID: 0}
     - target: {fileID: 9079768150043546692, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_TagString
       value: Untagged
