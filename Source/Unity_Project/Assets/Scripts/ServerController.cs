@@ -48,12 +48,50 @@ public class ServerController : UnityEngine.MonoBehaviour
             }
             else if(info[0] == "1")
             {
+<<<<<<< HEAD
                 motorInput[0] = Single.Parse(info[1]);
+=======
+                //UnityEngine.Debug.Log(message);
+                //UnityEngine.Debug.Log(message);
+                string[] info = message.Split(',');
+                if (info.Length > 2)
+                {
+                    if (info[1].Equals("leftMotor"))
+                    {
+                        motorInput[1] = Single.Parse(info[2]);
+                    }
+                    else if (info[1].Equals("rightMotor"))
+                    {
+                        motorInput[0] = Single.Parse(info[2]);
+                    }
+                }
+>>>>>>> origin/WiringIntegration
             }
         }
         boeBot.GetComponent<BoeBotMove>().GetInput(motorInput[0]/5.0f, motorInput[1] / 5.0f);
 
 
 
+<<<<<<< HEAD
+=======
+           // UnityEngine.Debug.Log(string.Join(",",messages));
+
+            int toSendLen = System.Text.Encoding.ASCII.GetByteCount(sendBuffer);
+            byte[] toSendBytes = System.Text.Encoding.ASCII.GetBytes(sendBuffer);
+            byte[] toSendLenBytes = System.BitConverter.GetBytes(toSendLen);
+            //socket.Send(toSendLenBytes);
+            socket.Send(toSendBytes);
+            UnityEngine.Debug.Log(sendBuffer);
+            sendBuffer = "";
+            //timer = 1;
+            
+            //timer -= UnityEngine.Time.deltaTime;
+        }
+        else
+        {
+            UnityEngine.Debug.Log("trying to connect");
+            socket.Connect(IPAddress.Parse("127.0.0.1"), 667);
+        }
+>>>>>>> origin/WiringIntegration
     }
 }

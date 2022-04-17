@@ -138,6 +138,14 @@ public class MainUI extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		manager = new ApplicationManager();
 		pane = new Pane();
+		
+		try {
+			manager.addComponentsAndConnections();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 
 		CodeArea codeArea = new CodeArea();
 
@@ -375,48 +383,11 @@ public class MainUI extends Application {
 			scrollPane.setVvalue(scrollPane.getVmax());
 		});
 		
-		upload.setOnAction(new EventHandler<ActionEvent>() {
-		    @Override public void handle(ActionEvent e) {
-		    	if (manager.simManager.getArduino().behavior.getFunction() != null) {
-					try {
-						Runtime runTime = Runtime.getRuntime();
-						String executablePath = "..\\..\\Executables\\simulation\\Unity_Project.exe";
-						process = runTime.exec(executablePath);
-
-					} catch (Exception e1) {
-						e1.printStackTrace();
-					}
-
-					thread = (new Thread(() -> {
-						manager.setSimRunning(true);
-						try {
-							manager.execute(process, console);
-							console.setText(console.getText() + "\n" + Serial.serialLog);
-							scrollPane.setVvalue(scrollPane.getVmax());
-						} catch (NullPointerException e3) {
-							process.destroy();
-							manager.setSimRunning(false);
-							manager.simManager.shutDown(console);
-							scrollPane.setVvalue(scrollPane.getVmax());
-						}
-
-						System.out.println("arduino execution thread over");
-					}));
-
-					thread.start();
-				} else {
-					console.setText("Verify before running!");
-					scrollPane.setVvalue(scrollPane.getVmax());
-				}
-		    }
-		    //manager.setSimRunning(false);
-		});
 
 		runimage.setOnMouseClicked(e -> {
 			Platform.runLater(new Runnable() {
 				@Override
 				public void run() {
-
 					if (manager.simManager.getArduino().behavior.getFunction() != null) {
 						try {
 							Runtime runTime = Runtime.getRuntime();

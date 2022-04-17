@@ -38,7 +38,16 @@ public class CompTracker : MonoBehaviour
     }
     void OnApplicationQuit()
     {
+<<<<<<< HEAD
         saveData();
+=======
+        string ultrastring = "";
+        List<List<GameObject>> connectionsList = GameObject.FindGameObjectWithTag("Player").GetComponent<placementmesh>().wires;
+        for (int i = 0; i < connectionsList.Count; i++)
+            ultrastring += connectionsList[i][0].name + "-"+ connectionsList[i][connectionsList[i].Count-1].name + "\n";
+        System.IO.File.WriteAllText("..\\..\\Data\\Wiring_Data.dat", ultrastring);
+
+>>>>>>> origin/WiringIntegration
     }
 
 
