@@ -142,6 +142,7 @@ public class MainUI extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		manager = new ApplicationManager();
+		pane = new Pane();
 
 		CodeArea codeArea = new CodeArea();
 
@@ -358,8 +359,6 @@ public class MainUI extends Application {
 		menuBar.setMinWidth(1000);
 		menuBar.getMenus().addAll(filebar, edit, sketch, tools, help);
 		
-		pane = new StackPane();
-
 		pane.getChildren().addAll(rectanglefix, rectangle4, rectangle, rectangle3, rectangle6, codeArea, rectangle2, t, rectangle5,
 			 botCustomization, scrollPane, console, menuBar);
 
@@ -736,7 +735,7 @@ public class MainUI extends Application {
 				serial.setFill(Color.BLACK);
 				
 				StackPane secondpane = new StackPane();
-				secondpane.getChildren().addAll(rectangle0, scrollPane2, serial)
+				secondpane.getChildren().addAll(rectangle0, scrollPane2, serial);
 
 				Scene secondScene = new Scene(secondpane, 300, 600);
 
