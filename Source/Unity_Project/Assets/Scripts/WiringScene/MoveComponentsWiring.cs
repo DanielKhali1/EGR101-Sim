@@ -27,6 +27,36 @@ public class MoveComponentsWiring : MonoBehaviour,  IPointerClickHandler
             {
                 MoveRightFace(sensor[i]);
                 sensor[i].transform.Rotate(new Vector3(-90,0,0));
+
+                //Right Face
+                if(sensor[i].transform.localPosition.x >= -4.01f && sensor[i].transform.localPosition.x <= -3.99f)
+                {
+                    MoveRightFace(sensor[i]);
+                    sensor[i].transform.Rotate(new Vector3(-90,0,0));
+                }
+                //Left Face
+                if(sensor[i].transform.localPosition.x >= 3.9f && sensor[i].transform.localPosition.x <= 4.1f)
+                {
+                    MoveLeftFace(sensor[i]);
+                    sensor[i].transform.Rotate(new Vector3(-90,0,0));
+                }
+                //Front Face
+                if(sensor[i].transform.localPosition.z >= -5.01f && sensor[i].transform.localPosition.z <= -4.99f)
+                {
+                    MoveFrontFace(sensor[i]);
+                    sensor[i].transform.Rotate(new Vector3(-90,0,0));
+                }
+                //Back Face
+                if(sensor[i].transform.localPosition.z <= 6.01f && sensor[i].transform.localPosition.z >= 5.99f)
+                {
+                    MoveBackFace(sensor[i]);
+                    sensor[i].transform.Rotate(new Vector3(-90,0,0));
+                }
+                //IR Sensors
+                if(sensor[i].transform.localPosition.y < 1)
+                {
+                    MoveIRSensors(sensor[i]);
+                }
             }
             //Left Face
             if(sensor[i].transform.localPosition.x >= 3.9f && sensor[i].transform.localPosition.x <= 4.1f)
