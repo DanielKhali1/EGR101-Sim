@@ -142,7 +142,6 @@ public class MainUI extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		manager = new ApplicationManager();
-		pane = new Pane();
 
 		CodeArea codeArea = new CodeArea();
 
@@ -311,6 +310,24 @@ public class MainUI extends Application {
 		botCustomization.relocate(830, 35);
 		botCustomization.setPrefSize(120, 30);
 		
+		Rectangle rectangle0 = new Rectangle();
+		rectangle0.setFill(Color.WHITE);
+		rectangle0.setX(0);
+		rectangle0.setY(0);
+		rectangle0.setWidth(300);
+		rectangle0.setHeight(600);
+		
+		ScrollPane scrollPane2 = new ScrollPane();
+        scrollPane2.setStyle("-fx-background: #ffffff;");
+        scrollPane2.setFitToWidth(true);
+        scrollPane2.setPrefWidth(300);
+        scrollPane2.setPrefHeight(600);
+        scrollPane2.setTranslateX(0);
+        scrollPane2.setTranslateY(0);
+        scrollPane2.setContent(serial);
+        serial.wrappingWidthProperty().bind(rectangle0.widthProperty());
+        scrollPane2.setVvalue(scrollPane2.getVmax());
+		
 		// new menu bar 
 		Menu filebar = new Menu("File");
 		MenuItem newf = new MenuItem("New File");
@@ -340,12 +357,14 @@ public class MainUI extends Application {
 		menuBar.setTranslateY(5);
 		menuBar.setMinWidth(1000);
 		menuBar.getMenus().addAll(filebar, edit, sketch, tools, help);
+		
+		pane = new StackPane();
 
 		pane.getChildren().addAll(rectanglefix, rectangle4, rectangle, rectangle3, rectangle6, codeArea, rectangle2, t, rectangle5,
 			 botCustomization, scrollPane, console, menuBar);
 
 		pane.getChildren().addAll(runimage, buildimage, newimage, saveimage, openimage, serialimage);
-
+		
 		scene = new Scene(pane, 1000, 760);
 
 		botCustomization.setOnAction(e -> {
@@ -558,10 +577,10 @@ public class MainUI extends Application {
 		});
 		
 		monitor.setOnAction( e-> {
-			monitorserialwhateverkeelywantstocallthisfunction(primaryStage, console, scrollPane);
+			monitorserialwhateverkeelywantstocallthisfunction(primaryStage, console, scrollPane2, scrollPane, rectangle0);
 		});
 		serialimage.setOnMouseClicked(e -> {
-			monitorserialwhateverkeelywantstocallthisfunction(primaryStage, console, scrollPane);
+			monitorserialwhateverkeelywantstocallthisfunction(primaryStage, console, scrollPane2, scrollPane, rectangle0);
 		});
 		
 		File f = new File("Styles.css");
@@ -570,6 +589,7 @@ public class MainUI extends Application {
 
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("EGR101 Simulation Software");
+		primaryStage.setResizable(false);
 		primaryStage.show();
 
 	}
@@ -707,44 +727,29 @@ public class MainUI extends Application {
 		}
 	}
 	
-	public void monitorserialwhateverkeelywantstocallthisfunction(Stage primaryStage, Text console, ScrollPane scrollPane) {
+	public void monitorserialwhateverkeelywantstocallthisfunction(Stage primaryStage, Text console, ScrollPane scrollPane2, ScrollPane scrollPane, Rectangle rectangle0) {
 	    	try {
 	    		
-	    	   // make scene pane and stage for this instead of popup
-	    		
-				System.out.println("serial clicked");
-				
-				serial.setX(10);
+	    		serial.setX(10);
 				serial.setY(20);
 				serial.setText("Serial Monitor \n\n");
 				serial.setFill(Color.BLACK);
 				
-				Rectangle rectangle0 = new Rectangle();
-				rectangle0.setFill(Color.WHITE);
-				rectangle0.setX(0);
-				rectangle0.setY(0);
-				rectangle0.setWidth(300);
-				rectangle0.setHeight(600);
-				
-				ScrollPane scrollPane2 = new ScrollPane();
-		        scrollPane2.setStyle("-fx-background: #ffffff;");
-		        scrollPane2.setFitToWidth(true);
-		        scrollPane2.setPrefWidth(300);
-		        scrollPane2.setPrefHeight(600);
-		        scrollPane2.setTranslateX(0);
-		        scrollPane2.setTranslateY(0);
-		        scrollPane2.setContent(serial);
-		        serial.wrappingWidthProperty().bind(rectangle0.widthProperty());
-		        scrollPane2.setVvalue(scrollPane2.getVmax());
-		        
-		        final Popup popupwindow = new Popup();
-				popupwindow.setX(1000);
-		        popupwindow.setY(165);
-		        popupwindow.setWidth(300);
-		        popupwindow.setHeight(600);
-		        popupwindow.getContent().addAll(rectangle0, scrollPane2, serial);
-		        
-				popupwindow.show(primaryStage);
+				StackPane secondpane = new StackPane();
+				secondpane.getChildren().addAll(rectangle0, scrollPane2, serial)
+
+				Scene secondScene = new Scene(secondpane, 300, 600);
+
+				// New window (Stage)
+				Stage newWindow = new Stage();
+				newWindow.setTitle("Serial Monitor");
+				newWindow.setScene(secondScene);
+
+				// Set position of second window, related to primary window.
+				newWindow.setX(primaryStage.getX() + 200);
+				newWindow.setY(primaryStage.getY() + 100);
+
+				newWindow.show();
 				
 				//find better way to update i guess 
 				Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20), (ActionEvent event) -> {
