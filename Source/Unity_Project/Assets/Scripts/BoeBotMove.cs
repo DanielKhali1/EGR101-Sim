@@ -13,7 +13,7 @@ public class BoeBotMove : MonoBehaviour
 		leftWheelForce = leftWheelDrive_;
 		rightWheelForce = -rightWheelDrive_;
 
-		Debug.Log(leftWheelForce + " " + rightWheelForce);
+		//Debug.Log(leftWheelForce + " " + rightWheelForce);
 
 		leftWheelDrive = true;
 		rightWheelDrive = true;

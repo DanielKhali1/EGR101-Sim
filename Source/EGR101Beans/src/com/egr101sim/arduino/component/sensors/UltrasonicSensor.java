@@ -8,7 +8,7 @@ import com.egr101sim.arduino.elements.PinType;
 public class UltrasonicSensor extends Component{
 
 	
-	int distance;
+	private double distance;
 	int[] randomNoiseBound;
 	
 	boolean works;
@@ -27,18 +27,24 @@ public class UltrasonicSensor extends Component{
 	public void checkState() throws Exception {
 		
 		// is grounded?
-		boolean grounded = false;
 		Pin cur = getPins()[3];
-		while(cur != null) {
-			if(cur.isLocal() && cur.getPinType() == PinType.GROUND ) {
-				grounded = true;
+		boolean grounded = false;
+		if(getPins()[2] != null)
+		{
+//			Pin cur = getPins()[3];
+			while(cur != null) {
+				if(cur.isLocal() && cur.getPinType() == PinType.GROUND ) {
+					grounded = true;
+				}
+				cur = cur.getPrev();
 			}
-			cur = cur.getPrev();
 		}
 		setGrounded(grounded);
 		
 		boolean powered = false;
 		// is 5V powered?
+		if(getPins()[0] != null) {
+			
 		cur = getPins()[0];
 		while(cur != null) {
 			if(cur.isLocal() && cur.getPinType() == PinType.POWER_5V) {
@@ -46,10 +52,11 @@ public class UltrasonicSensor extends Component{
 			}
 			cur = cur.getPrev();
 		}
+		}
 		setPowered(powered);
 		
 		
-		if(getPins()[1].getCurrent() > 3.0) {
+		if(getPins()[1] != null && getPins()[1].getCurrent() > 3.0 ) {
 			works = true;
 		} else {
 			works = false;
@@ -57,12 +64,13 @@ public class UltrasonicSensor extends Component{
 		
 		
 		//this is the echo pin (INPUT PIN)
-		getPins()[2].setMicro(distance*29*2);
+		if(getPins()[2] != null)
+			getPins()[2].setMicro(getDistance()*29*2);
 	}
 	
 	public void readVal(int distance) {
 		//if(works)
-			this.distance = distance;
+			this.setDistance(distance);
 	}
 
 	@Override
@@ -70,6 +78,14 @@ public class UltrasonicSensor extends Component{
 		if(isPowered() && isGrounded()) {
 			works = true;
 		}
+	}
+
+	public double getDistance() {
+		return distance;
+	}
+
+	public void setDistance(double distance) {
+		this.distance = distance;
 	}
 
 }

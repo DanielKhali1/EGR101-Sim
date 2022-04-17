@@ -7,45 +7,69 @@ public class MoveComponentsWiring : MonoBehaviour,  IPointerClickHandler
 {
 
     GameObject bot;
-    Vector3 origin;
+    public Camera wiringCam;
     public Vector2 dimensions;
+    List<Vector3> originalSensors;
 
-    void Start()
-    {
-        origin = new Vector3(0, -3, 0);
-    }
     public async void OnPointerClick(PointerEventData eventData)
     {
         bot = GameObject.FindGameObjectWithTag("Player");
         List<GameObject> sensor = bot.GetComponent<placementmesh>().sensors;
-        
+        originalSensors = bot.GetComponent<placementmesh>().origSensorsPos;
+        //sets the originalSensorPos to the positions of the sn
         for(int i = 0; i < sensor.Count; i++)
         {
-            Debug.Log(sensor[i].transform.localPosition.x);
-            //Right Face
-            if(sensor[i].transform.localPosition.x >= -4.01f && sensor[i].transform.localPosition.x <= -3.99f)
+            bot.GetComponent<placementmesh>().origSensorsPos.Add(sensor[i].transform.localPosition);
+        }
+
+        if(wiringCam.GetComponent<Camera>().enabled)
+        {
+            bot.GetComponent<Transform>().rotation = Quaternion.Euler(0,0,0);
+            bot.GetComponent<Rigidbody>().freezeRotation = true;
+            for(int i = 0; i < sensor.Count; i++)
             {
-                MoveRightFace(sensor[i]);
-                sensor[i].transform.Rotate(new Vector3(-90,0,0));
+                //Right Face
+                if(sensor[i].transform.localPosition.x >= -4.01f && sensor[i].transform.localPosition.x <= -3.99f)
+                {
+                    MoveRightFace(sensor[i]);
+                    sensor[i].transform.Rotate(new Vector3(-90,0,0));
+                }
+                //Left Face
+                if(sensor[i].transform.localPosition.x >= 3.9f && sensor[i].transform.localPosition.x <= 4.1f)
+                {
+                    MoveLeftFace(sensor[i]);
+                    sensor[i].transform.Rotate(new Vector3(-90,0,0));
+                }
+                //Front Face
+                if(sensor[i].transform.localPosition.z >= -5.01f && sensor[i].transform.localPosition.z <= -4.99f)
+                {
+                    MoveFrontFace(sensor[i]);
+                    sensor[i].transform.Rotate(new Vector3(-90,0,0));
+                }
+                //Back Face
+                if(sensor[i].transform.localPosition.z <= 6.01f && sensor[i].transform.localPosition.z >= 5.99f)
+                {
+                    MoveBackFace(sensor[i]);
+                    sensor[i].transform.Rotate(new Vector3(-90,0,0));
+                }
+                //IR Sensors
+                if(sensor[i].transform.localPosition.y < 1)
+                {
+                    MoveIRSensors(sensor[i]);
+                }
             }
-            //Left Face
-            if(sensor[i].transform.localPosition.x >= 3.9f && sensor[i].transform.localPosition.x <= 4.1f)
+        }
+        if(!wiringCam.GetComponent<Camera>().enabled)
+        {
+            bot.GetComponent<Rigidbody>().freezeRotation = false;
+            for(int i = 0; i < sensor.Count; i++)
             {
-                MoveLeftFace(sensor[i]);
-                sensor[i].transform.Rotate(new Vector3(-90,0,0));
+                sensor[i].transform.localPosition = originalSensors[i];
+                if(sensor[i].transform.localPosition.y > -2.3f)
+                    sensor[i].transform.Rotate(90,0,0);
+                //bot.GetComponent<placementmesh>().origSensorsPos.Remove(sensor[i].transform.localPosition);
             }
-            //Front Face
-            if(sensor[i].transform.localPosition.z >= -5.01f && sensor[i].transform.localPosition.z <= -4.99f)
-            {
-                MoveFrontFace(sensor[i]);
-                sensor[i].transform.Rotate(new Vector3(-90,0,0));
-            }
-            //Back Face
-            if(sensor[i].transform.localPosition.z <= 6.01f && sensor[i].transform.localPosition.z >= 5.99f)
-            {
-                MoveBackFace(sensor[i]);
-                sensor[i].transform.Rotate(new Vector3(-90,0,0));
-            }
+            bot.GetComponent<placementmesh>().origSensorsPos.RemoveAll(item => item.x < 100);
         }
     }
 
@@ -95,5 +119,12 @@ public class MoveComponentsWiring : MonoBehaviour,  IPointerClickHandler
             sensor.transform.localPosition = new Vector3(sensor.transform.localPosition.x, 4, 9);
         if(sensor.transform.localPosition.y >= 3.49f && sensor.transform.localPosition.y <= 3.51f)
             sensor.transform.localPosition = new Vector3(sensor.transform.localPosition.x, 4, 11); 
+    }
+
+    private void MoveIRSensors(GameObject sensor)
+    {
+        sensor.transform.localPosition = new Vector3(sensor.transform.localPosition.x + 8, 
+                                                    4,
+                                                    sensor.transform.localPosition.z - 5);
     }
 }
