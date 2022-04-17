@@ -39,7 +39,6 @@ public class ApplicationManager {
 		setupInitialBoeBotMotors();
 
 	}
-<<<<<<< HEAD
 	
 	public void initializeServerCharacteristics() {
 		
@@ -59,9 +58,6 @@ public class ApplicationManager {
 	}
 
 	
-=======
-
->>>>>>> origin/WiringIntegration
 	/**
 	 * update the code
 	 */
@@ -110,26 +106,6 @@ public class ApplicationManager {
 		arduino.getComponents().add(leftMotor);
 	}
 	
-<<<<<<< HEAD
-=======
-	public void initializeServerCharacteristics() {
-		
-		try {
-			System.out.println("Starting Socket Streams");
-			ss = new ServerSocket(667);
-			sock = ss.accept();
-			
-			dis = new DataInputStream(sock.getInputStream());
-			dos = new DataOutputStream(sock.getOutputStream());
-			
-			simManager.setupComms(ss, sock, dis, dos);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
->>>>>>> origin/WiringIntegration
 	public void execute(Process process, Text console) {
 		console.setText(console.getText() + "\nSimulation setting up..");
 		System.out.println("SETTING UP SIM..");
@@ -138,55 +114,9 @@ public class ApplicationManager {
 		
 		console.setText(console.getText() + "\nSimulation executing..");
 		System.out.println("EXECUTING..");
-<<<<<<< HEAD
 		
 		while(isSimRunning()) {
 			
-=======
-
-		try {
-			new Thread(() -> {
-
-				try {
-					while (isSimRunning()) {
-//						System.out.println(sock.isConnected() + " " + sock == null);
-						if (sock != null && sock.isConnected()) {
-							Thread.sleep(20);
-							simManager.sendMessage(simManager.generateMessage());
-						}
-					}
-
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-			}).start();
-
-		} catch (Exception e) {
-			System.out.println("Issue Sending message");
-		}
-
-		try {
-			new Thread(() -> {
-
-				while (isSimRunning()) {
-					if (sock != null && sock.isConnected()) {
-						simManager.updateComponents(simManager.receiveMessage());
-					}
-				}
-
-			}).start();
-
-			simManager.updateComponents(simManager.receiveMessage());
-
-		} catch (Exception e) {
-			System.out.println("Issue Receiving message");
-		}
-
-		while (isSimRunning()) {
-//			System.out.println("AHH2");
->>>>>>> origin/WiringIntegration
 			simManager.iterate();
 			//new Thread(() -> { sendMessage(simManager.generateMessage());}).start();
 			
@@ -214,116 +144,8 @@ public class ApplicationManager {
 	public String stackPrint() 
 	{
 		String temp = arduino.stackPrint();
-<<<<<<< HEAD
 		String stackPrint = temp.replace("/com/egr101sim/arduino/ArduinoBehavior1.java:","");
 		return stackPrint; 
-=======
-		String stackPrint = temp.replace("/com/egr101sim/arduino/ArduinoBehavior1.java:", "");
-		return stackPrint;
-	}
-
-	public void addComponentsAndConnections() throws FileNotFoundException {
-		File componentData = new File("../../Data/Component_Data.dat");
-		File wiringData = new File("../../Data/Wiring_Data.dat");
-		BufferedReader bfCompData = new BufferedReader(new FileReader(componentData));
-		BufferedReader bfWiringData = new BufferedReader(new FileReader(wiringData));
-
-		// read component data and update components
-		try {
-
-			String line = "";
-			while ((line = bfCompData.readLine()) != null) {
-				if (line.contains("UltraSonic")) {
-					addComponent(line, new UltrasonicSensor());
-				} else if (line.contains("lineReadingIR")) {
-					addComponent(line, new LineReadingIRSensor());
-				} else if (line.contains("distancemeasuringirsensor")) {
-					addComponent(line, new DistanceMeasuringIRSensor());
-				}
-			}
-			bfCompData.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		try {
-
-			String line = "";
-
-			while ((line = bfWiringData.readLine()) != null) {
-				String[] wiringD = line.split("-");
-				// Arduino first
-				String arduinoPinRole = null;
-				String componentName = null;
-				String compoentPineRole = null;
-				
-				Pin compPin = null;
-
-				if (wiringD[0].equals("Arduino")) {
-					arduinoPinRole = wiringD[1];
-					componentName = wiringD[2];
-					compoentPineRole = wiringD[3];
-				}
-				// component first
-				else {
-					componentName = wiringD[0];
-					compoentPineRole = wiringD[1];
-					arduinoPinRole = wiringD[3];
-				}
-				
-				Component comp = null;
-				for(int i = 0; i < arduino.getComponents().size(); i++) {
-					if(componentName.equals(arduino.getComponents().get(i).getName())) {
-						comp = arduino.getComponents().get(i);
-					}
-				}
-				if(comp == null) { throw new Exception("COULD NOT FIND COMPONENT NAME TO CONNECT WIRES"); }
-				
-				if(compoentPineRole.equals("VCC")) {
-					compPin = comp.getVCC();
-				} else if (compoentPineRole.equals("GND")) {
-					compPin = comp.getGND();
-				} else if (compoentPineRole.equals("OUT")) {
-					compPin = comp.getOUT();
-				} 
-				
-				
-				if(arduinoPinRole.equals("5V")) {
-					compPin.setPrev(arduino.getArduino().getP5V());
-				} else if (arduinoPinRole.equals("GND")) {
-					compPin.setPrev(arduino.getArduino().getGround()[0]);
-				} else if (arduinoPinRole.contains("analog")) {
-					int index = Integer.parseInt(arduinoPinRole.replace("analog", ""));
-					arduino.getArduino().getAnalogArray()[index] = new Pin(PinType.IO, true);
-					compPin.setPrev(arduino.getArduino().getAnalogArray()[index]);
-					arduino.getArduino().getAnalogArray()[index].addNext(compPin);
-					System.out.println(Arrays.toString(arduino.getArduino().getAnalogArray()));
-				} else if (arduinoPinRole.contains("digital")) {
-					int index = Integer.parseInt(arduinoPinRole.replace("digital", ""));
-					arduino.getArduino().getDigitalArray()[index] = new Pin(PinType.IO, true);
-					compPin.setPrev(arduino.getArduino().getDigitalArray()[index]);
-					arduino.getArduino().getDigitalArray()[index].addNext(compPin);
-					System.out.println(Arrays.toString(arduino.getArduino().getDigitalArray()));
-				}
-			}
-			bfWiringData.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	private void addComponent(String name, Component c) {
-		Component component = c;
-		component.setName(name);
-		
-		for (int i = 0; i < component.getPins().length; i++)
-			component.getPins()[i] = new Pin(PinType.GENERAL, false);
-		
-		arduino.getComponents().add(component);
->>>>>>> origin/WiringIntegration
 	}
 
 }

@@ -71,12 +71,6 @@ public class SimulationManager {
 			System.out.println("Issue Sending message");
 		}
 		
-<<<<<<< HEAD
-=======
-		System.out.println("RCV " + received);
-
-		return received;
->>>>>>> origin/WiringIntegration
 	}
 	
 	private void executeComponentBehavior() {
