@@ -4,11 +4,11 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.net.BindException;
 import java.security.Timestamp;
-import java.time.Duration;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
@@ -30,6 +30,8 @@ import org.reactfx.Subscription;
 import com.egr101sim.arduino.api.Serial;
 import com.egr101sim.core.ApplicationManager;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -64,11 +66,14 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import javafx.scene.text.*;
 import java.util.Observable;
 import java.util.Observer;
 
 public class MainUI extends Application {
+
+	Text serial = new Text();
 
 	Pane pane;
 	Scene scene;
@@ -413,44 +418,7 @@ public class MainUI extends Application {
 		});
 
 		runimage.setOnMouseClicked(e -> {
-			Platform.runLater(new Runnable() {
-				@Override
-				public void run() {
-
-					if (manager.simManager.getArduino().behavior.getFunction() != null) {
-						try {
-							Runtime runTime = Runtime.getRuntime();
-							String executablePath = "..\\..\\Executables\\simulation\\Unity_Project.exe";
-							process = runTime.exec(executablePath);
-
-						} catch (Exception e1) {
-							e1.printStackTrace();
-						}
-
-						thread = (new Thread(() -> {
-							manager.setSimRunning(true);
-							try {
-								manager.execute(process, console);
-								console.setText(console.getText() + "\n" + Serial.serialLog);
-								scrollPane.setVvalue(scrollPane.getVmax());
-							} catch (NullPointerException e3) {
-								process.destroy();
-								manager.setSimRunning(false);
-								manager.simManager.shutDown(console);
-								scrollPane.setVvalue(scrollPane.getVmax());
-							}
-
-							System.out.println("arduino execution thread over");
-						}));
-
-						thread.start();
-					} else {
-						console.setText("Verify before running!");
-						scrollPane.setVvalue(scrollPane.getVmax());
-					}
-				}
-			});
-			manager.setSimRunning(false);
+			runSim(console, scrollPane);
 		});
 		
 		save.setOnAction(new EventHandler<ActionEvent>() {
@@ -589,102 +557,11 @@ public class MainUI extends Application {
 			}
 		});
 		
-		monitor.setOnAction(new EventHandler<ActionEvent>() {
-		    @Override public void handle(ActionEvent e) {
-		    	try {
-					System.out.println("serial clicked");
-					
-					Text serial = new Text();
-					serial.setX(10);
-					serial.setY(20);
-					serial.setText("Serial Monitor \n\n");
-					serial.setFill(Color.BLACK);
-					
-					Rectangle rectangle0 = new Rectangle();
-					rectangle0.setFill(Color.WHITE);
-					rectangle0.setX(0);
-					rectangle0.setY(0);
-					rectangle0.setWidth(300);
-					rectangle0.setHeight(600);
-					
-					ScrollPane scrollPane2 = new ScrollPane();
-			        scrollPane2.setStyle("-fx-background: #ffffff;");
-			        scrollPane2.setFitToWidth(true);
-			        scrollPane2.setPrefWidth(300);
-			        scrollPane2.setPrefHeight(600);
-			        scrollPane2.setTranslateX(0);
-			        scrollPane2.setTranslateY(0);
-			        scrollPane2.setContent(serial);
-			        serial.wrappingWidthProperty().bind(rectangle0.widthProperty());
-			        scrollPane2.setVvalue(scrollPane2.getVmax());
-			        
-			        final Popup popupwindow = new Popup();
-					popupwindow.setX(1000);
-			        popupwindow.setY(165);
-			        popupwindow.setWidth(300);
-			        popupwindow.setHeight(600);
-			        popupwindow.getContent().addAll(rectangle0, scrollPane2, serial);
-			        
-					popupwindow.show(primaryStage);
-					
-					//find better way to update i guess 
-				    serial.setText(Serial.serialLog);
-				    scrollPane2.setVvalue(scrollPane2.getVmax());
-					
-				} catch (Exception e2) {
-					console.setText("ERROR: Unable to open Serial Monitor");
-					scrollPane.setVvalue(scrollPane.getVmax());
-					e2.printStackTrace();
-				}
-		    }
+		monitor.setOnAction( e-> {
+			monitorserialwhateverkeelywantstocallthisfunction(primaryStage, console, scrollPane);
 		});
-		
 		serialimage.setOnMouseClicked(e -> {
-			try {
-				System.out.println("serial clicked");
-				
-				Text serial = new Text();
-				serial.setX(10);
-				serial.setY(20);
-				serial.setText("Serial Monitor \n\n");
-				serial.setFill(Color.BLACK);
-				
-				Rectangle rectangle0 = new Rectangle();
-				rectangle0.setFill(Color.WHITE);
-				rectangle0.setX(0);
-				rectangle0.setY(0);
-				rectangle0.setWidth(300);
-				rectangle0.setHeight(600);
-				
-				ScrollPane scrollPane2 = new ScrollPane();
-		        scrollPane2.setStyle("-fx-background: #ffffff;");
-		        scrollPane2.setFitToWidth(true);
-		        scrollPane2.setPrefWidth(300);
-		        scrollPane2.setPrefHeight(600);
-		        scrollPane2.setTranslateX(0);
-		        scrollPane2.setTranslateY(0);
-		        scrollPane2.setContent(serial);
-		        serial.wrappingWidthProperty().bind(rectangle0.widthProperty());
-		        scrollPane2.setVvalue(scrollPane2.getVmax());
-		        
-		        final Popup popupwindow = new Popup();
-				popupwindow.setX(1000);
-		        popupwindow.setY(165);
-		        popupwindow.setWidth(300);
-		        popupwindow.setHeight(600);
-		        popupwindow.getContent().addAll(rectangle0, scrollPane2, serial);
-		        
-				popupwindow.show(primaryStage);
-				
-				//find better way to update i guess 
-			    serial.setText(Serial.serialLog);
-			    scrollPane2.setVvalue(scrollPane2.getVmax());
-				
-			} catch (Exception e2) {
-				console.setText("ERROR: Unable to open Serial Monitor");
-				scrollPane.setVvalue(scrollPane.getVmax());
-				e2.printStackTrace();
-			}
+			monitorserialwhateverkeelywantstocallthisfunction(primaryStage, console, scrollPane);
 		});
 		
 		File f = new File("Styles.css");
@@ -695,6 +572,53 @@ public class MainUI extends Application {
 		primaryStage.setTitle("EGR101 Simulation Software");
 		primaryStage.show();
 
+	}
+
+	private void runSim(Text console, ScrollPane scrollPane) {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+
+				if (manager.simManager.getArduino().behavior.getFunction() != null) {
+					try {
+//						Runtime runTime = Runtime.getRuntime();
+//						String executablePath = "..\\..\\Executables\\simulation\\Unity_Project.exe";
+//						process = runTime.exec(executablePath);
+
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+
+					thread = (new Thread(() -> {
+						try {
+							manager.addComponentsAndConnections();
+						} catch (FileNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						manager.setSimRunning(true);
+						try {
+							manager.execute(process, console);
+							console.setText(console.getText() + "\n" + Serial.serialLog);
+							scrollPane.setVvalue(scrollPane.getVmax());
+						} catch (NullPointerException e3) {
+//							process.destroy();
+							manager.setSimRunning(false);
+							manager.simManager.shutDown(console);
+							scrollPane.setVvalue(scrollPane.getVmax());
+						}
+
+						System.out.println("arduino execution thread over");
+					}));
+
+					thread.start();
+				} else {
+					console.setText("Verify before running!");
+					scrollPane.setVvalue(scrollPane.getVmax());
+				}
+			}
+		});
+		manager.setSimRunning(false);		
 	}
 
 	private StyleSpans<Collection<String>> computeHighlighting(String text) {
@@ -781,6 +705,61 @@ public class MainUI extends Application {
 		private void print() {
 			System.out.println(((CodeArea) getOwnerNode()).getText());
 		}
+	}
+	
+	public void monitorserialwhateverkeelywantstocallthisfunction(Stage primaryStage, Text console, ScrollPane scrollPane) {
+	    	try {
+	    		
+	    	   // make scene pane and stage for this instead of popup
+	    		
+				System.out.println("serial clicked");
+				
+				serial.setX(10);
+				serial.setY(20);
+				serial.setText("Serial Monitor \n\n");
+				serial.setFill(Color.BLACK);
+				
+				Rectangle rectangle0 = new Rectangle();
+				rectangle0.setFill(Color.WHITE);
+				rectangle0.setX(0);
+				rectangle0.setY(0);
+				rectangle0.setWidth(300);
+				rectangle0.setHeight(600);
+				
+				ScrollPane scrollPane2 = new ScrollPane();
+		        scrollPane2.setStyle("-fx-background: #ffffff;");
+		        scrollPane2.setFitToWidth(true);
+		        scrollPane2.setPrefWidth(300);
+		        scrollPane2.setPrefHeight(600);
+		        scrollPane2.setTranslateX(0);
+		        scrollPane2.setTranslateY(0);
+		        scrollPane2.setContent(serial);
+		        serial.wrappingWidthProperty().bind(rectangle0.widthProperty());
+		        scrollPane2.setVvalue(scrollPane2.getVmax());
+		        
+		        final Popup popupwindow = new Popup();
+				popupwindow.setX(1000);
+		        popupwindow.setY(165);
+		        popupwindow.setWidth(300);
+		        popupwindow.setHeight(600);
+		        popupwindow.getContent().addAll(rectangle0, scrollPane2, serial);
+		        
+				popupwindow.show(primaryStage);
+				
+				//find better way to update i guess 
+				Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20), (ActionEvent event) -> {
+					serial.setText(Serial.serialLog);
+				}));
+				timeline.setCycleCount(Timeline.INDEFINITE);
+				timeline.play();
+				
+			    scrollPane2.setVvalue(scrollPane2.getVmax());
+				
+			} catch (Exception e2) {
+				console.setText("ERROR: Unable to open Serial Monitor");
+				scrollPane.setVvalue(scrollPane.getVmax());
+				e2.printStackTrace();
+	    }
 	}
 
 	public static void main(String[] args) {

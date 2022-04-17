@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.egr101sim.arduino.Arduino;
+import com.egr101sim.arduino.api.Serial;
 import com.egr101sim.arduino.component.sensors.DistanceMeasuringIRSensor;
 import com.egr101sim.arduino.component.sensors.LineReadingIRSensor;
 import com.egr101sim.arduino.component.sensors.UltrasonicSensor;
