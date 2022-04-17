@@ -24,36 +24,6 @@ public class CameraFollowController : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		if(Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
-        {
-			offset.x -= 0.5f;
-        }
-
-		if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
-		{
-			offset.x += 0.5f;
-		}
-
-		if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
-		{
-			offset.y += 0.5f;
-		}
-
-		if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
-		{
-			offset.y -= 0.5f;
-		}
-
-		if (Input.mouseScrollDelta.y > 0)
-		{
-			offset.z -= 2f;
-		}
-
-		if (Input.mouseScrollDelta.y < 0)
-		{
-			offset.z += 2f;
-		}
-
 		LookAtTarget();
 		MoveToTarget();
 	}

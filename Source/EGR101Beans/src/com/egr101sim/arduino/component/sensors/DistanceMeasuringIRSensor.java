@@ -7,7 +7,7 @@ import com.egr101sim.arduino.elements.PinType;
 
 public class DistanceMeasuringIRSensor extends Component{
 	
-	private double distance;
+	int distance;
 	int[] randomNoiseBound;
 	
 	boolean works;
@@ -49,7 +49,7 @@ public class DistanceMeasuringIRSensor extends Component{
 		
 		//this is the output pin
 		cur = getPins()[0];
-		double current = voltageDistanceFunction(getDistance());
+		double current = voltageDistanceFunction(distance);
 //		System.out.println(current);
 		
 		while(cur != null) {
@@ -80,7 +80,7 @@ public class DistanceMeasuringIRSensor extends Component{
 	
 	public void readVal(int distance) {
 		if(works)
-			this.setDistance(distance);
+			this.distance = distance;
 	}
 
 	@Override
@@ -88,14 +88,6 @@ public class DistanceMeasuringIRSensor extends Component{
 		if(isPowered() && isGrounded()) {
 			works = true;
 		}
-	}
-
-	public double getDistance() {
-		return distance;
-	}
-
-	public void setDistance(double distance) {
-		this.distance = distance;
 	}
 
 }

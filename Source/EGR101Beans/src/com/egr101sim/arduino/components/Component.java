@@ -10,7 +10,6 @@ public abstract class Component {
 	protected String state;
 	private boolean grounded;
 	private boolean powered;
-	protected String name;
 	
 	public Component() {
 		this.setGrounded(false);
@@ -27,28 +26,6 @@ public abstract class Component {
 	public Pin[] getPins() {
 		return pins;
 	}
-	
-	public Pin getVCC() {
-		return null;
-		
-	}
-	
-	public Pin getGND() {
-		return null;
-		
-	}
-
-	public Pin getOUT() {
-		return null;
-	
-	}
-	
-	public Pin getIN() {
-		return null;
-		
-	}
-	
-	
 	/**
 	 * @param pins the pins to set
 	 */
@@ -97,15 +74,5 @@ public abstract class Component {
 	 */
 	public void setGrounded(boolean grounded) {
 		this.grounded = grounded;
-	}
-
-
-	public String getName() {
-		return name;
-	}
-
-
-	public void setName(String name) {
-		this.name = name;
 	}
 }
