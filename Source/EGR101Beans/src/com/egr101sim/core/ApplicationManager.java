@@ -160,9 +160,9 @@ public class ApplicationManager {
 			simManager.iterate();
 			// new Thread(()->simManager.sendMessage(simManager.generateMessage()));
 
-//			if (!process.isAlive()) {
-//				setSimRunning(false);
-//			}
+			if (!process.isAlive()) {
+				setSimRunning(false);
+			}
 		}
 
 		simManager.shutDown(console);

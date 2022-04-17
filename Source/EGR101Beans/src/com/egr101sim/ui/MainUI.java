@@ -581,9 +581,9 @@ public class MainUI extends Application {
 
 				if (manager.simManager.getArduino().behavior.getFunction() != null) {
 					try {
-//						Runtime runTime = Runtime.getRuntime();
-//						String executablePath = "..\\..\\Executables\\simulation\\Unity_Project.exe";
-//						process = runTime.exec(executablePath);
+						Runtime runTime = Runtime.getRuntime();
+						String executablePath = "..\\..\\Executables\\simulation\\Unity_Project.exe";
+						process = runTime.exec(executablePath);
 
 					} catch (Exception e1) {
 						e1.printStackTrace();
@@ -602,7 +602,7 @@ public class MainUI extends Application {
 							console.setText(console.getText() + "\n" + Serial.serialLog);
 							scrollPane.setVvalue(scrollPane.getVmax());
 						} catch (NullPointerException e3) {
-//							process.destroy();
+							process.destroy();
 							manager.setSimRunning(false);
 							manager.simManager.shutDown(console);
 							scrollPane.setVvalue(scrollPane.getVmax());
