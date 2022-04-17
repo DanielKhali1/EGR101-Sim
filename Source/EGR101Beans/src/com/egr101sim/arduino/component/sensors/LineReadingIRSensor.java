@@ -8,7 +8,7 @@ import com.egr101sim.arduino.elements.PinType;
 public class LineReadingIRSensor extends Component{
 
 	
-	private int whiteness;
+	int whiteness;
 	int[] randomNoiseBound;
 	
 	boolean works;
@@ -50,7 +50,7 @@ public class LineReadingIRSensor extends Component{
 		
 		//this is the output pin
 		cur = getPins()[1];
-		double current = 5.0 * ((double)getWhiteness()/(double)100) + (Math.random()*(randomNoiseBound[1] - randomNoiseBound[0]) + randomNoiseBound[0]);
+		double current = 5.0 * ((double)whiteness/(double)100) + (Math.random()*(randomNoiseBound[1] - randomNoiseBound[0]) + randomNoiseBound[0]);
 		
 		while(cur != null) {
 			if(cur.isLocal() && cur.getPinType() == PinType.IO && cur.getPinIO() == PinIO.INPUT) {
@@ -63,7 +63,7 @@ public class LineReadingIRSensor extends Component{
 	
 	public void readVal(int whiteness) {
 		if(works)
-			this.setWhiteness(whiteness);
+			this.whiteness = whiteness;
 	}
 
 	@Override
@@ -71,31 +71,6 @@ public class LineReadingIRSensor extends Component{
 		if(isPowered() && isGrounded()) {
 			works = true;
 		}
-		System.out.println(super.name+" "+whiteness + " " + works);
-	}
-
-	public int getWhiteness() {
-		return whiteness;
-	}
-
-	public void setWhiteness(int whiteness) {
-		this.whiteness = whiteness;
-	}
-	
-	@Override
-	public Pin getVCC() {
-		return getPins()[0];
-		
-	}
-	@Override
-	public Pin getGND() {
-		return getPins()[2];
-		
-	}
-	@Override
-	public Pin getOUT() {
-		return getPins()[1];
-	
 	}
 
 }

@@ -15,11 +15,6 @@ public class ComponentFollowMouse : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-        foreach (Transform child in transform)
-        {
-            child.name = gameObject.name + "-" + child.name;
-        }
         Follow = true;
         selected = true;
         GetComponent<Outline>().enabled = true;
@@ -43,8 +38,7 @@ public class ComponentFollowMouse : MonoBehaviour
             if (!selected)
             {
                 Debug.Log("selected component: " + ob);
-                // TODO: make selected text pop up
-                //GameObject.FindGameObjectWithTag("UI").GetComponent<UnityEngine.UI.Text>().text = gameObject.name;
+                GameObject.FindGameObjectWithTag("UI").GetComponent<UnityEngine.UI.Text>().text = gameObject.name;
                 GetComponent<Outline>().enabled = true;
                 selected = true;
             }
