@@ -14,9 +14,9 @@ public class LineReadingIRFunctionality : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        Debug.Log(other.gameObject.name);
 
         if (other.gameObject.tag.Equals("whiteline")){
+            Debug.Log(gameObject.name + " has collided with the white line");
             //whiteness = 100;
             whiteness = 100;//GameObject.FindGameObjectWithTag("ServerController").GetComponent<ServerController>().sendBuffer += gameObject.name + "," + 100 + "\n";
         }
