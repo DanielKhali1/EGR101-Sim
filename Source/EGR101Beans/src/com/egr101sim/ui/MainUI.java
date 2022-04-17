@@ -311,8 +311,10 @@ public class MainUI extends Application {
 		
 		// new menu bar 
 		Menu filebar = new Menu("File");
-		MenuItem item1 = new MenuItem("");
-		filebar.getItems().addAll(item1);
+		MenuItem newf = new MenuItem("New File");
+		MenuItem open = new MenuItem("Open File");
+		MenuItem save = new MenuItem("Save File");
+		filebar.getItems().addAll(newf, open, save);
 		
 		Menu edit = new Menu("Edit");
 		MenuItem item2 = new MenuItem("");
