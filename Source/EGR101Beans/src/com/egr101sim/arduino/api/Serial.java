@@ -42,10 +42,10 @@ public class Serial {
 	 * 
 	 */
 	public static void print(String val) {
-		if(serialLog.length() > 5000) {
-			serialLog = serialLog.substring(100);
+		if(serialLog.length() > 1000) {
+			serialLog = serialLog.substring(500);
 		}
-		serialLog += val;
+		serialLog += val + "\n";
 	}
 	
 	/**

@@ -18,7 +18,11 @@ public class LineReadingIRFunctionality : MonoBehaviour
         if (other.gameObject.tag.Equals("whiteline")){
             Debug.Log(gameObject.name + " has collided with the white line");
             //whiteness = 100;
-            whiteness = 100;//GameObject.FindGameObjectWithTag("ServerController").GetComponent<ServerController>().sendBuffer += gameObject.name + "," + 100 + "\n";
+            whiteness = 100;
+            GameObject.FindGameObjectWithTag("ServerController").GetComponent<ServerController>().sendBuffer += gameObject.name + "," + whiteness + "\n";
+            GameObject.FindGameObjectWithTag("ServerController").GetComponent<ServerController>().sendBuffer += gameObject.name + "," + whiteness + "\n";
+            GameObject.FindGameObjectWithTag("ServerController").GetComponent<ServerController>().sendBuffer += gameObject.name + "," + whiteness + "\n";
+            //GameObject.FindGameObjectWithTag("ServerController").GetComponent<ServerController>().sendBuffer += gameObject.name + "," + 100 + "\n";
         }
     }
 

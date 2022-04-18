@@ -9,6 +9,7 @@ using System;
 
 public class ServerController : UnityEngine.MonoBehaviour
 {
+    public bool isPlaying = false;
     Socket socket;
     byte[] bytes = new byte[1024];
     public string sendBuffer = "";
@@ -63,7 +64,9 @@ public class ServerController : UnityEngine.MonoBehaviour
                 }
             }
 
-            boeBot.GetComponent<BoeBotMove>().GetInput(motorInput[0] / 5.0f, motorInput[1] / 5.0f);
+
+            if(isPlaying)
+                boeBot.GetComponent<BoeBotMove>().GetInput(motorInput[0] / 5.0f, motorInput[1] / 5.0f);
 
            // UnityEngine.Debug.Log(string.Join(",",messages));
 
