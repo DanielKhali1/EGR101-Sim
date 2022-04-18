@@ -21,9 +21,7 @@ public class PrintWiringNode : MonoBehaviour
                 text.text = hit.transform.parent.name;
             }
         } catch
-        {
-            
-        }
+        {}
     }
 
     // Update is called once per frame
