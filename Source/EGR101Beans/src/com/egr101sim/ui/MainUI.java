@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.net.BindException;
 import java.security.Timestamp;
 import java.util.Collection;
@@ -39,13 +40,16 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextAreaBuilder;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -74,6 +78,8 @@ import java.util.Observer;
 public class MainUI extends Application {
 
 	Text serial = new Text();
+
+	public static final boolean testing = false;
 
 	Pane pane;
 	Scene scene;
@@ -170,7 +176,7 @@ public class MainUI extends Application {
 		codeArea.setPrefSize(1000, 400);
 
 		// colors for background
-		
+
 		Color lightGreen = Color.web("#17a1a5");
 		Color darkGreen = Color.web("#006468");
 		Color textGreen = Color.web("#0f6464");
@@ -247,17 +253,17 @@ public class MainUI extends Application {
 		console.setY(535);
 		console.setText("");
 		console.setFill(Color.WHITE);
-         
-        ScrollPane scrollPane = new ScrollPane();
-        scrollPane.setStyle("-fx-background: #000000; -fx-border-color: #000000;");
-        scrollPane.setFitToWidth(true);
-        scrollPane.setPrefWidth(1000);
-        scrollPane.setPrefHeight(170);
-        scrollPane.setTranslateX(0);
-        scrollPane.setTranslateY(530);
-        console.wrappingWidthProperty().bind(rectangle5.widthProperty());
-        scrollPane.setContent(console);
-        scrollPane.setVvalue(scrollPane.getVmax());
+
+		ScrollPane scrollPane = new ScrollPane();
+		scrollPane.setStyle("-fx-background: #000000; -fx-border-color: #000000;");
+		scrollPane.setFitToWidth(true);
+		scrollPane.setPrefWidth(1000);
+		scrollPane.setPrefHeight(170);
+		scrollPane.setTranslateX(0);
+		scrollPane.setTranslateY(530);
+		console.wrappingWidthProperty().bind(rectangle5.widthProperty());
+		scrollPane.setContent(console);
+		scrollPane.setVvalue(scrollPane.getVmax());
 
 		Image runImg = new Image("file:Resources\\arro.JPG");
 		ImageView runimage = new ImageView();
@@ -298,7 +304,7 @@ public class MainUI extends Application {
 		saveimage.setY(31);
 		saveimage.setFitHeight(37);
 		saveimage.setFitWidth(40);
-		
+
 		Image serialImage = new Image("file:Resources\\serial2.JPG");
 		ImageView serialimage = new ImageView();
 		serialimage.setImage(serialImage);
@@ -310,60 +316,100 @@ public class MainUI extends Application {
 		Button botCustomization = new Button("Bot Customization");
 		botCustomization.relocate(830, 35);
 		botCustomization.setPrefSize(120, 30);
-		
+
 		Rectangle rectangle0 = new Rectangle();
 		rectangle0.setFill(Color.WHITE);
 		rectangle0.setX(0);
 		rectangle0.setY(0);
 		rectangle0.setWidth(300);
 		rectangle0.setHeight(600);
-		
+
 		ScrollPane scrollPane2 = new ScrollPane();
-        scrollPane2.setStyle("-fx-background: #ffffff;");
-        scrollPane2.setFitToWidth(true);
-        scrollPane2.setPrefWidth(300);
-        scrollPane2.setPrefHeight(600);
-        scrollPane2.setTranslateX(0);
-        scrollPane2.setTranslateY(0);
-        scrollPane2.setContent(serial);
-        serial.wrappingWidthProperty().bind(rectangle0.widthProperty());
-        scrollPane2.setVvalue(scrollPane2.getVmax());
-		
-		// new menu bar 
+		scrollPane2.setStyle("-fx-background: #ffffff;");
+		scrollPane2.setFitToWidth(true);
+		scrollPane2.setPrefWidth(300);
+		scrollPane2.setPrefHeight(600);
+		scrollPane2.setTranslateX(0);
+		scrollPane2.setTranslateY(0);
+		scrollPane2.setContent(serial);
+		serial.wrappingWidthProperty().bind(rectangle0.widthProperty());
+		scrollPane2.setVvalue(scrollPane2.getVmax());
+
+		// new menu bar
 		Menu filebar = new Menu("File");
 		MenuItem newf = new MenuItem("New File");
 		MenuItem open = new MenuItem("Open File");
 		MenuItem save = new MenuItem("Save File");
 		filebar.getItems().addAll(newf, open, save);
-		
+
 		Menu edit = new Menu("Edit");
 		MenuItem idk = new MenuItem("Coming Soon");
 		edit.getItems().addAll(idk);
-		
+
 		Menu sketch = new Menu("Sketch");
 		MenuItem verify = new MenuItem("Verify/Compile");
 		MenuItem upload = new MenuItem("Upload");
 		sketch.getItems().addAll(verify, upload);
-		
+
 		Menu tools = new Menu("Tools");
 		MenuItem monitor = new MenuItem("Serial Monitor");
 		tools.getItems().addAll(monitor);
-		
+
 		Menu help = new Menu("Help");
 		MenuItem helpitem = new MenuItem("Help");
 		help.getItems().addAll(helpitem);
+
+		Menu course = new Menu("Courses");
+		ToggleGroup tg = new ToggleGroup();
+		RadioMenuItem course1item = new RadioMenuItem("Stage 1: Line Reading");
+		RadioMenuItem course2item = new RadioMenuItem("Stage 2: Object Avoidance");
+		course1item.setToggleGroup(tg);
+		course2item.setToggleGroup(tg);
+		course1item.setSelected(true);
+		course.getItems().addAll(course1item, course2item);
+
 		
+		//set the selected shit at start
+		for (int i = 0; i < course.getItems().size(); i++) {
+
+			if (((RadioMenuItem) course.getItems().get(i)).isSelected()) {
+
+				BufferedWriter bw;
+				try {
+					bw = new BufferedWriter(new FileWriter(new File("..\\..\\Data\\Current_Course.dat")));
+					bw.write(course.getItems().get(i).getText());
+					bw.close();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+		}
+
+		for (int i = 0; i < course.getItems().size(); i++) {
+			final int ii = i;
+			course.getItems().get(i).setOnAction(e -> {
+				BufferedWriter bw;
+				try {
+					bw = new BufferedWriter(new FileWriter(new File("..\\..\\Data\\Current_Course.dat")));
+					bw.write(course.getItems().get(ii).getText());
+					bw.close();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			});
+		}
+
 		MenuBar menuBar = new MenuBar();
 		menuBar.setTranslateX(0);
 		menuBar.setTranslateY(5);
 		menuBar.setMinWidth(1000);
-		menuBar.getMenus().addAll(filebar, edit, sketch, tools, help);
-		
-		pane.getChildren().addAll(rectanglefix, rectangle4, rectangle, rectangle3, rectangle6, codeArea, rectangle2, t, rectangle5,
-			 botCustomization, scrollPane, console, menuBar);
+		menuBar.getMenus().addAll(filebar, edit, sketch, tools, course, help);
+
+		pane.getChildren().addAll(rectanglefix, rectangle4, rectangle, rectangle3, rectangle6, codeArea, rectangle2, t,
+				rectangle5, botCustomization, scrollPane, console, menuBar);
 
 		pane.getChildren().addAll(runimage, buildimage, newimage, saveimage, openimage, serialimage);
-		
+
 		scene = new Scene(pane, 1000, 760);
 
 		botCustomization.setOnAction(e -> {
@@ -377,17 +423,18 @@ public class MainUI extends Application {
 		});
 
 		verify.setOnAction(new EventHandler<ActionEvent>() {
-		    @Override public void handle(ActionEvent e) {
-		    	if (!manager.isSimRunning()) {
+			@Override
+			public void handle(ActionEvent e) {
+				if (!manager.isSimRunning()) {
 					manager.updateBehavior(codeArea.getText(), console);
 					scrollPane.setVvalue(scrollPane.getVmax());
 				}
 				// console output
 				console.setText(console.getText() + "\n" + manager.stackPrint());
 				scrollPane.setVvalue(scrollPane.getVmax());
-		    }
+			}
 		});
-		
+
 		buildimage.setOnMouseClicked(e -> {
 			if (!manager.isSimRunning()) {
 				manager.updateBehavior(codeArea.getText(), console);
@@ -397,10 +444,11 @@ public class MainUI extends Application {
 			console.setText(console.getText() + "\n" + manager.stackPrint());
 			scrollPane.setVvalue(scrollPane.getVmax());
 		});
-		
+
 		upload.setOnAction(new EventHandler<ActionEvent>() {
-		    @Override public void handle(ActionEvent e) {
-		    	if (manager.simManager.getArduino().behavior.getFunction() != null) {
+			@Override
+			public void handle(ActionEvent e) {
+				if (manager.simManager.getArduino().behavior.getFunction() != null) {
 					try {
 						Runtime runTime = Runtime.getRuntime();
 						String executablePath = "..\\..\\Executables\\simulation\\Unity_Project.exe";
@@ -413,7 +461,7 @@ public class MainUI extends Application {
 					thread = (new Thread(() -> {
 						manager.setSimRunning(true);
 						try {
-							manager.execute(process, console);
+							manager.execute(process, console, testing);
 							console.setText(console.getText() + "\n" + Serial.serialLog);
 							scrollPane.setVvalue(scrollPane.getVmax());
 						} catch (NullPointerException e3) {
@@ -431,17 +479,18 @@ public class MainUI extends Application {
 					console.setText("Verify before running!");
 					scrollPane.setVvalue(scrollPane.getVmax());
 				}
-		    }
-		    //manager.setSimRunning(false);
+			}
+			// manager.setSimRunning(false);
 		});
 
 		runimage.setOnMouseClicked(e -> {
 			runSim(console, scrollPane);
 		});
-		
+
 		save.setOnAction(new EventHandler<ActionEvent>() {
-		    @Override public void handle(ActionEvent e) {
-		    	try {
+			@Override
+			public void handle(ActionEvent e) {
+				try {
 					FileChooser fileChooser1 = new FileChooser();
 					fileChooser1.setInitialFileName(tempName);
 					File file = fileChooser1.showSaveDialog(primaryStage);
@@ -454,7 +503,7 @@ public class MainUI extends Application {
 					console.setText("ERROR: Unable to save file");
 					scrollPane.setVvalue(scrollPane.getVmax());
 				}
-		    }
+			}
 		});
 
 		saveimage.setOnMouseClicked(e -> {
@@ -474,8 +523,9 @@ public class MainUI extends Application {
 		});
 
 		open.setOnAction(new EventHandler<ActionEvent>() {
-		    @Override public void handle(ActionEvent e) {
-		    	try {
+			@Override
+			public void handle(ActionEvent e) {
+				try {
 					FileChooser fileChooser2 = new FileChooser();
 					File Opened = fileChooser2.showOpenDialog(primaryStage);
 
@@ -495,9 +545,9 @@ public class MainUI extends Application {
 					console.setText("ERROR: Unable to open file");
 					scrollPane.setVvalue(scrollPane.getVmax());
 				}
-		    }
+			}
 		});
-		
+
 		openimage.setOnMouseClicked(e -> {
 			try {
 				FileChooser fileChooser2 = new FileChooser();
@@ -520,10 +570,11 @@ public class MainUI extends Application {
 				scrollPane.setVvalue(scrollPane.getVmax());
 			}
 		});
-		
+
 		newf.setOnAction(new EventHandler<ActionEvent>() {
-		    @Override public void handle(ActionEvent e) {
-		    	try {
+			@Override
+			public void handle(ActionEvent e) {
+				try {
 					Date date2 = new Date();
 					String tempName2 = "sketch_" + date2.getTime() + ".ino";
 
@@ -546,7 +597,7 @@ public class MainUI extends Application {
 					scrollPane.setVvalue(scrollPane.getVmax());
 					e2.printStackTrace();
 				}
-		    }
+			}
 		});
 
 		newimage.setOnMouseClicked(e -> {
@@ -574,17 +625,25 @@ public class MainUI extends Application {
 				e2.printStackTrace();
 			}
 		});
-		
-		monitor.setOnAction( e-> {
-			monitorserialwhateverkeelywantstocallthisfunction(primaryStage, console, scrollPane2, scrollPane, rectangle0);
+
+		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20), (ActionEvent event) -> {
+			serial.setText(Serial.serialLog);
+		}));
+		timeline.setCycleCount(Timeline.INDEFINITE);
+		timeline.play();
+
+		monitor.setOnAction(e -> {
+			monitorserialwhateverkeelywantstocallthisfunction(primaryStage, console, scrollPane2, scrollPane,
+					rectangle0);
 		});
 		serialimage.setOnMouseClicked(e -> {
-			monitorserialwhateverkeelywantstocallthisfunction(primaryStage, console, scrollPane2, scrollPane, rectangle0);
+			monitorserialwhateverkeelywantstocallthisfunction(primaryStage, console, scrollPane2, scrollPane,
+					rectangle0);
 		});
-		
+
 		File f = new File("Styles.css");
-		
-		scene.getStylesheets().add("File:///"+f.getAbsolutePath().replace("\\","/"));
+
+		scene.getStylesheets().add("File:///" + f.getAbsolutePath().replace("\\", "/"));
 
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("EGR101 Simulation Software");
@@ -599,14 +658,17 @@ public class MainUI extends Application {
 			public void run() {
 
 				if (manager.simManager.getArduino().behavior.getFunction() != null) {
-//					try {
-//						Runtime runTime = Runtime.getRuntime();
-//						String executablePath = "..\\..\\Executables\\simulation\\Unity_Project.exe";
-//						process = runTime.exec(executablePath);
-//
-//					} catch (Exception e1) {
-//						e1.printStackTrace();
-//					}
+
+					if (!testing) {
+						try {
+							Runtime runTime = Runtime.getRuntime();
+							String executablePath = "..\\..\\Executables\\simulation\\Unity_Project.exe";
+							process = runTime.exec(executablePath);
+
+						} catch (Exception e1) {
+							e1.printStackTrace();
+						}
+					}
 
 					thread = (new Thread(() -> {
 						try {
@@ -617,11 +679,13 @@ public class MainUI extends Application {
 						}
 						manager.setSimRunning(true);
 						try {
-							manager.execute(process, console);
+							manager.execute(process, console, testing);
 							console.setText(console.getText() + "\n" + Serial.serialLog);
 							scrollPane.setVvalue(scrollPane.getVmax());
 						} catch (NullPointerException e3) {
-							process.destroy();
+							if (!testing) {
+								process.destroy();
+							}
 							manager.setSimRunning(false);
 							manager.simManager.shutDown(console);
 							scrollPane.setVvalue(scrollPane.getVmax());
@@ -637,7 +701,7 @@ public class MainUI extends Application {
 				}
 			}
 		});
-		manager.setSimRunning(false);		
+		manager.setSimRunning(false);
 	}
 
 	private StyleSpans<Collection<String>> computeHighlighting(String text) {
@@ -725,45 +789,38 @@ public class MainUI extends Application {
 			System.out.println(((CodeArea) getOwnerNode()).getText());
 		}
 	}
-	
-	public void monitorserialwhateverkeelywantstocallthisfunction(Stage primaryStage, Text console, ScrollPane scrollPane2, ScrollPane scrollPane, Rectangle rectangle0) {
-	    	try {
-	    		
-	    		serial.setX(10);
-				serial.setY(20);
-				serial.setText("Serial Monitor \n\n");
-				serial.setFill(Color.BLACK);
-				
-				StackPane secondpane = new StackPane();
-				secondpane.getChildren().addAll(rectangle0, scrollPane2, serial);
 
-				Scene secondScene = new Scene(secondpane, 300, 600);
+	public void monitorserialwhateverkeelywantstocallthisfunction(Stage primaryStage, Text console,
+			ScrollPane scrollPane2, ScrollPane scrollPane, Rectangle rectangle0) {
+		try {
 
-				// New window (Stage)
-				Stage newWindow = new Stage();
-				newWindow.setTitle("Serial Monitor");
-				newWindow.setScene(secondScene);
+			serial.setX(10);
+			serial.setY(20);
+			serial.setText("Serial Monitor \n\n");
+			serial.setFill(Color.BLACK);
 
-				// Set position of second window, related to primary window.
-				newWindow.setX(primaryStage.getX() + 200);
-				newWindow.setY(primaryStage.getY() + 100);
+			StackPane secondpane = new StackPane();
+			secondpane.getChildren().addAll(rectangle0, scrollPane2, serial);
 
-				newWindow.show();
-				
-				//find better way to update i guess 
-				Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20), (ActionEvent event) -> {
-					serial.setText(Serial.serialLog);
-				}));
-				timeline.setCycleCount(Timeline.INDEFINITE);
-				timeline.play();
-				
-			    scrollPane2.setVvalue(scrollPane2.getVmax());
-				
-			} catch (Exception e2) {
-				console.setText("ERROR: Unable to open Serial Monitor");
-				scrollPane.setVvalue(scrollPane.getVmax());
-				e2.printStackTrace();
-	    }
+			Scene secondScene = new Scene(secondpane, 300, 600);
+
+			// New window (Stage)
+			Stage newWindow = new Stage();
+			newWindow.setTitle("Serial Monitor");
+			newWindow.setScene(secondScene);
+
+			// Set position of second window, related to primary window.
+			newWindow.setX(primaryStage.getX() + 200);
+			newWindow.setY(primaryStage.getY() + 100);
+
+			newWindow.show();
+			scrollPane2.setVvalue(scrollPane2.getVmax());
+
+		} catch (Exception e2) {
+			console.setText("ERROR: Unable to open Serial Monitor");
+			scrollPane.setVvalue(scrollPane.getVmax());
+			e2.printStackTrace();
+		}
 	}
 
 	public static void main(String[] args) {

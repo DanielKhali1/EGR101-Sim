@@ -88,17 +88,17 @@ public class ApplicationManager {
 		arduino.getComponents().add(rightMotor);
 		arduino.getComponents().add(leftMotor);
 	}
-	
+
 	public void initializeServerCharacteristics() {
-		
+
 		try {
 			System.out.println("Starting Socket Streams");
 			ss = new ServerSocket(667);
 			sock = ss.accept();
-			
+
 			dis = new DataInputStream(sock.getInputStream());
 			dos = new DataOutputStream(sock.getOutputStream());
-			
+
 			simManager.setupComms(ss, sock, dis, dos);
 
 		} catch (Exception e) {
@@ -106,7 +106,7 @@ public class ApplicationManager {
 		}
 	}
 
-	public void execute(Process process, Text console) {
+	public void execute(Process process, Text console, boolean testing) {
 		console.setText(console.getText() + "\nSimulation setting up..");
 		System.out.println("SETTING UP SIM..");
 		initializeServerCharacteristics();
@@ -160,8 +160,11 @@ public class ApplicationManager {
 			simManager.iterate();
 			// new Thread(()->simManager.sendMessage(simManager.generateMessage()));
 
-			if (!process.isAlive()) {
-				setSimRunning(false);
+			if (!testing) {
+				if (!process.isAlive()) {
+					setSimRunning(false);
+
+				}
 			}
 		}
 
@@ -228,7 +231,7 @@ public class ApplicationManager {
 				String arduinoPinRole = null;
 				String componentName = null;
 				String compoentPineRole = null;
-				
+
 				Pin compPin = null;
 
 				if (wiringD[0].equals("Arduino")) {
@@ -242,25 +245,26 @@ public class ApplicationManager {
 					compoentPineRole = wiringD[1];
 					arduinoPinRole = wiringD[3];
 				}
-				
+
 				Component comp = null;
-				for(int i = 0; i < arduino.getComponents().size(); i++) {
-					if(componentName.equals(arduino.getComponents().get(i).getName())) {
+				for (int i = 0; i < arduino.getComponents().size(); i++) {
+					if (componentName.equals(arduino.getComponents().get(i).getName())) {
 						comp = arduino.getComponents().get(i);
 					}
 				}
-				if(comp == null) { throw new Exception("COULD NOT FIND COMPONENT NAME TO CONNECT WIRES"); }
-				
-				if(compoentPineRole.equals("VCC")) {
+				if (comp == null) {
+					throw new Exception("COULD NOT FIND COMPONENT NAME TO CONNECT WIRES");
+				}
+
+				if (compoentPineRole.equals("VCC")) {
 					compPin = comp.getVCC();
 				} else if (compoentPineRole.equals("GND")) {
 					compPin = comp.getGND();
 				} else if (compoentPineRole.equals("OUT")) {
 					compPin = comp.getOUT();
-				} 
-				
-				
-				if(arduinoPinRole.equals("5V")) {
+				}
+
+				if (arduinoPinRole.equals("5V")) {
 					compPin.setPrev(arduino.getArduino().getP5V());
 				} else if (arduinoPinRole.equals("GND")) {
 					compPin.setPrev(arduino.getArduino().getGround()[0]);
@@ -289,10 +293,10 @@ public class ApplicationManager {
 	private void addComponent(String name, Component c) {
 		Component component = c;
 		component.setName(name);
-		
+
 		for (int i = 0; i < component.getPins().length; i++)
 			component.getPins()[i] = new Pin(PinType.GENERAL, false);
-		
+
 		arduino.getComponents().add(component);
 	}
 

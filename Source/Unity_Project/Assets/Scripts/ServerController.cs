@@ -30,7 +30,7 @@ public class ServerController : UnityEngine.MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UnityEngine.Debug.Log(socket.Connected);
+       // UnityEngine.Debug.Log(socket.Connected);
         if (socket.Connected)
         {
             // Receiving
@@ -48,7 +48,7 @@ public class ServerController : UnityEngine.MonoBehaviour
 
             foreach (string message in messages)
             {
-                //UnityEngine.Debug.Log(message);
+                UnityEngine.Debug.Log(message);
                 //UnityEngine.Debug.Log(message);
                 string[] info = message.Split(',');
                 if (info.Length > 2)
@@ -64,9 +64,13 @@ public class ServerController : UnityEngine.MonoBehaviour
                 }
             }
 
+            
+
 
             if(isPlaying)
                 boeBot.GetComponent<BoeBotMove>().GetInput(motorInput[0] / 5.0f, motorInput[1] / 5.0f);
+            else
+                boeBot.GetComponent<BoeBotMove>().GetInput(0, 0);
 
            // UnityEngine.Debug.Log(string.Join(",",messages));
 
@@ -75,7 +79,7 @@ public class ServerController : UnityEngine.MonoBehaviour
             byte[] toSendLenBytes = System.BitConverter.GetBytes(toSendLen);
             //socket.Send(toSendLenBytes);
             socket.Send(toSendBytes);
-            UnityEngine.Debug.Log(sendBuffer);
+            //UnityEngine.Debug.Log(sendBuffer);
             sendBuffer = "";
             //timer = 1;
             
