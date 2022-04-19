@@ -53,7 +53,7 @@ public class MoveComponentsWiring : MonoBehaviour,  IPointerClickHandler
                     sensor[i].transform.Rotate(new Vector3(-90,0,0));
                 }
                 //IR Sensors
-                if(sensor[i].transform.localPosition.y < 1)
+                if(sensor[i].transform.localPosition.y <= 1)
                 {
                     MoveIRSensors(sensor[i]);
                 }
@@ -65,9 +65,8 @@ public class MoveComponentsWiring : MonoBehaviour,  IPointerClickHandler
             for(int i = 0; i < sensor.Count; i++)
             {
                 sensor[i].transform.localPosition = originalSensors[i];
-                if(sensor[i].transform.localPosition.y > -2.3f)
+                if(sensor[i].transform.localPosition.y > 1)
                     sensor[i].transform.Rotate(90,0,0);
-                //bot.GetComponent<placementmesh>().origSensorsPos.Remove(sensor[i].transform.localPosition);
             }
             bot.GetComponent<placementmesh>().origSensorsPos.RemoveAll(item => item.x < 100);
         }
