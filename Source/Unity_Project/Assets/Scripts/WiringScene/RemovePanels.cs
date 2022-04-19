@@ -9,6 +9,18 @@ public class RemovePanels : MonoBehaviour, IPointerClickHandler
     public Camera wiringCam;
     GameObject canvas;
     GameObject[] wires;
+    GameObject color;
+
+    void Start()
+    {
+        canvas = GameObject.FindGameObjectWithTag("UI");
+        canvas.transform.GetChild(0).gameObject.SetActive(false);
+
+        for(int i = 0; i < canvas.transform.childCount; i++)
+        {
+            
+        }
+    }
 
    public async void OnPointerClick(PointerEventData eventData)
     {
@@ -28,6 +40,7 @@ public class RemovePanels : MonoBehaviour, IPointerClickHandler
                 } 
                 if(canvas.transform.GetChild(i).gameObject.name == "WiringComponent")
                 {
+                    canvas.transform.GetChild(0).gameObject.SetActive(true);
                     canvas.transform.GetChild(i).gameObject.SetActive(true);
                 }
             }
@@ -46,6 +59,7 @@ public class RemovePanels : MonoBehaviour, IPointerClickHandler
                 } 
                 if(canvas.transform.GetChild(i).gameObject.name == "WiringComponent")
                 {
+                    canvas.transform.GetChild(0).gameObject.SetActive(false);
                     canvas.transform.GetChild(i).gameObject.SetActive(false);
                 }
             }

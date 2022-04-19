@@ -19,7 +19,6 @@ public class CompTracker : MonoBehaviour
         }
     }
 
-
     void OnApplicationQuit()
     {
         if(!isSim)
@@ -58,6 +57,4 @@ public class CompTracker : MonoBehaviour
         System.IO.File.WriteAllText("..\\..\\Data\\Wiring_Data.dat", ultrastring);
 
     }
-
-
 }

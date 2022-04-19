@@ -40,7 +40,7 @@ public class updateToolBar : MonoBehaviour
         {
             case 1:
                 Debug.Log("IN general mode");
-                toolslot1.GetComponent<Image>().sprite = (LED);
+                toolslot1.GetComponent<Image>().sprite = null;
                 toolslot2.GetComponent<Image>().sprite = null;
                 toolslot3.GetComponent<Image>().sprite = null;
                 toolslot4.GetComponent<Image>().sprite = null;
@@ -97,7 +97,7 @@ public class updateToolBar : MonoBehaviour
                 toolslot1.GetComponent<Image>().sprite = (lineReadingSensor);
                 toolslot2.GetComponent<Image>().sprite = (ultraSonicSensor);
                 toolslot3.GetComponent<Image>().sprite = (distanceMeasuringIRSensor);
-                toolslot4.GetComponent<Image>().sprite = null;
+                toolslot4.GetComponent<Image>().sprite = (LED);
 
                 toolslot1.GetComponent<NodeFunctionality>().mode = 4;
                 toolslot2.GetComponent<NodeFunctionality>().mode = 4;
