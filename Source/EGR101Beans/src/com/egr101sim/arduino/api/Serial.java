@@ -29,6 +29,9 @@ public class Serial {
 	 * @param val the value to print. Allowed data types: any data type.
 	 */
 	public static void println(String val) {
+		if(serialLog.length() > 1000) {
+			serialLog = serialLog.substring(500);
+		}
 		serialLog += val + "\n";
 	}
 	
@@ -39,7 +42,10 @@ public class Serial {
 	 * 
 	 */
 	public static void print(String val) {
-		serialLog += val;
+		if(serialLog.length() > 1000) {
+			serialLog = serialLog.substring(500);
+		}
+		serialLog += val + "\n";
 	}
 	
 	/**

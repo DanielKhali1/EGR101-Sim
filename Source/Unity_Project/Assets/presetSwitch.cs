@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 public class presetSwitch : MonoBehaviour
 {
     public GameObject leftWheel;
@@ -9,24 +13,39 @@ public class presetSwitch : MonoBehaviour
 
     public GameObject mount;
     public Mesh defaultMount;
-    public Mesh defaultWheels;
+    public GameObject defaultWheels;
 
     public GameObject defaultMountPos;
     public GameObject inwardMountPos;
     public GameObject outwardMountPos;
     public GameObject lolMountPos;
 
+    public string mountName;
+    public string wheelName;
+
+
+
+
     public List<GameObject> activePositions = new List<GameObject>();
     public void Start()
     {
         ToggleMount(defaultMount, 2);
         ToggleWheel(defaultWheels);
+        wheelName = "default";
+        mountName = "default";
+        System.IO.File.WriteAllText("..\\..\\Data\\Wheel_Data.dat", defaultWheels.name);
+        System.IO.File.WriteAllText("..\\..\\Data\\Mount_Data.dat", mountName);
     }
 
-    public void ToggleWheel(Mesh mesh)
+    public void ToggleWheel(GameObject mesh)
     {
-        leftWheel.GetComponent<MeshFilter>().mesh = mesh;
-        rightWheel.GetComponent<MeshFilter>().mesh = mesh;
+        leftWheel.GetComponent<MeshFilter>().mesh = mesh.GetComponentInChildren<MeshFilter>().sharedMesh;
+        rightWheel.GetComponent<MeshFilter>().mesh = mesh.GetComponentInChildren<MeshFilter>().sharedMesh;
+
+        
+
+        System.IO.File.WriteAllText("..\\..\\Data\\Wheel_Data.dat", mesh.name);
+
     }
 
     public void ToggleMount(Mesh mesh, int num)
@@ -37,17 +56,24 @@ public class presetSwitch : MonoBehaviour
         {
             case 1:
                 showMountPositions(outwardMountPos);
+                mountName = "outward";
                 break;
             case 2:
                 showMountPositions(defaultMountPos);
+                mountName = "default";
                 break;
             case 3:
                 showMountPositions(lolMountPos);
+                mountName = "lol";
                 break;
             case 4:
                 showMountPositions(inwardMountPos);
+                mountName = "inward";
                 break;
         }
+
+        System.IO.File.WriteAllText("..\\..\\Data\\Mount_Data.dat", mountName);
+
 
         checkdiff();
     }

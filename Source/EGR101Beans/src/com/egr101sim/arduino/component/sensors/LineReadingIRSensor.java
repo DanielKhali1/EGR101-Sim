@@ -8,7 +8,7 @@ import com.egr101sim.arduino.elements.PinType;
 public class LineReadingIRSensor extends Component{
 
 	
-	private int whiteness;
+	private int whiteness = 0;
 	int[] randomNoiseBound;
 	
 	boolean works;
@@ -51,7 +51,7 @@ public class LineReadingIRSensor extends Component{
 		//this is the output pin
 		cur = getPins()[1];
 		double current = 5.0 * ((double)getWhiteness()/(double)100) + (Math.random()*(randomNoiseBound[1] - randomNoiseBound[0]) + randomNoiseBound[0]);
-		
+//		System.out.println("CURRENT " + current);
 		while(cur != null) {
 			if(cur.isLocal() && cur.getPinType() == PinType.IO && cur.getPinIO() == PinIO.INPUT) {
 				cur.setCurrent(current);
@@ -59,6 +59,11 @@ public class LineReadingIRSensor extends Component{
 			cur = cur.getPrev();
 		}
 		
+	}
+	
+	@Override
+	public String getState() {
+		return whiteness +"";
 	}
 	
 	public void readVal(int whiteness) {
@@ -71,7 +76,7 @@ public class LineReadingIRSensor extends Component{
 		if(isPowered() && isGrounded()) {
 			works = true;
 		}
-		System.out.println(super.name+" "+whiteness + " " + works);
+//		System.out.println(super.name+" "+whiteness + " " + works);
 	}
 
 	public int getWhiteness() {

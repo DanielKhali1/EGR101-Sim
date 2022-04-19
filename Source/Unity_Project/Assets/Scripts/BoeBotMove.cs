@@ -44,8 +44,16 @@ public class BoeBotMove : MonoBehaviour
 			}
 
 
+			if(gameObject.GetComponent<Rigidbody>().velocity.magnitude == 0)
+            {
+				gameObject.transform.Translate(new Vector3(0, 0, -Mathf.Sqrt(leftWheelForce * leftWheelForce + rightWheelForce * rightWheelForce)* ((leftWheelForce + rightWheelForce < 0)? -1: 1)));
+            }
+			else
+            {
+				gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
 
-			gameObject.transform.Translate(new Vector3(0, 0, -Mathf.Sqrt(leftWheelForce * leftWheelForce + rightWheelForce * rightWheelForce)* ((leftWheelForce + rightWheelForce < 0)? -1: 1)));
+			}
+			//gameObject.GetComponent<Rigidbody>().MovePosition(new Vector3(0, 0, -Mathf.Sqrt(leftWheelForce * leftWheelForce + rightWheelForce * rightWheelForce) * ((leftWheelForce + rightWheelForce < 0) ? -1 : 1)));
 
 		}
 		rot = gameObject.transform.rotation;

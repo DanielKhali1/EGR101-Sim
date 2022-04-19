@@ -127,6 +127,7 @@ public class BaseArduino {
 	public double analogRead(int pin) {
 		
 		if(pin >= 160 && pin < 2576) {
+			System.out.println(getAnalogArray()[pin-160].getCurrent()/0.0049);
 			return getAnalogArray()[pin-160].getCurrent()/0.0049;
 		} else if(pin >= 2576) {
 			return getDigitalArray()[pin-2566].getCurrent()/0.0049;
@@ -164,9 +165,14 @@ public class BaseArduino {
 	 * @param pinIo
 	 */
 	public void pinMode(int pin, int pinIo) {
-		if(pin >= 160 && pin < 2576) {
+//		System.out.println(pin);
+//		System.out.println(getAnalogArray()[0]);
+		if(pin >= 160 && pin < 2576 && getAnalogArray()[pin-160] != null) {
+			System.out.println("EEEE I MADE IT HERE");
 			getAnalogArray()[pin-160].setPinIO((pinIo == 0) ? PinIO.INPUT : PinIO.OUTPUT);
-		} else if(pin >= 2576) {
+			System.out.println("EEEE I MADE IT HERE1");
+
+		} else if(pin >= 2576 && getAnalogArray()[pin-2566] != null) {
 			getAnalogArray()[pin-2566].setPinIO((pinIo == 0) ? PinIO.INPUT : PinIO.OUTPUT);
 		}
 		else if(getDigitalArray()[pin] != null)

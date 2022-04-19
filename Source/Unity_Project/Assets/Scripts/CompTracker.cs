@@ -52,16 +52,9 @@ public class CompTracker : MonoBehaviour
     private void saveWireData()
     {
         string ultrastring = "";
-        List<List<GameObject>> connectionsList = GameObject.FindGameObjectWithTag("Player").GetComponent<placementmesh>().wires; ;
+        List<List<GameObject>> connectionsList = GameObject.FindGameObjectWithTag("Player").GetComponent<placementmesh>().wires;
         for (int i = 0; i < connectionsList.Count; i++)
-        {
-            string line = "";
-            foreach (GameObject pin in connectionsList[i])
-            {
-                line += pin.name + "-";
-            }
-            ultrastring += line + "\n";
-        }
+            ultrastring += connectionsList[i][0].name + "-"+ connectionsList[i][connectionsList[i].Count-1].name + "\n";
         System.IO.File.WriteAllText("..\\..\\Data\\Wiring_Data.dat", ultrastring);
 
     }
