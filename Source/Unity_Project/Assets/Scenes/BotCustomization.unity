@@ -5022,6 +5022,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1166472882}
+    - target: {fileID: 1477445620665155347, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1536995006320961336, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: cam
       value: 
@@ -5289,6 +5293,10 @@ PrefabInstance:
     - target: {fileID: 2505652179342406634, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_Center.z
       value: 0.6865517
+      objectReference: {fileID: 0}
+    - target: {fileID: 2505652179342406639, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
+      propertyPath: m_Mass
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 2505652179342406639, guid: 123c779100bfdd747a1d4841e8bf6f27, type: 3}
       propertyPath: m_Constraints
