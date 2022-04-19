@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Mesh xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <name>default</name>
+  <hideFlags>None</hideFlags>
+  <indexFormat>UInt16</indexFormat>
+  <bindposes />
+  <subMeshCount>1</subMeshCount>
+  <bounds>
+    <center>
+      <x>0.07001114</x>
+      <y>-0.06729317</y>
+      <z>0.980360031</z>
+    </center>
+    <size>
+      <x>66.49578</x>
+      <y>66.20261</y>
+      <z>6.809246</z>
+    </size>
+    <extents>
+      <x>33.24789</x>
+      <y>33.1013031</y>
+      <z>3.404623</z>
+    </extents>
+    <min>
+      <x>-33.17788</x>
+      <y>-33.1685944</y>
+      <z>-2.424263</z>
+    </min>
+    <max>
+      <x>33.3179</x>
+      <y>33.03401</y>
+      <z>4.384983</z>
+    </max>
+  </bounds>
+  <vertices />
+  <normals />
+  <tangents />
+  <uv />
+  <uv2 />
+  <uv3 />
+  <uv4 />
+  <uv5 />
+  <uv6 />
+  <uv7 />
+  <uv8 />
+  <colors />
+  <colors32 />
+  <triangles />
+  <boneWeights />
+</Mesh>
