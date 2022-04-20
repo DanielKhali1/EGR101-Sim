@@ -8,6 +8,8 @@ TagManager:
   - Pin
   - Wire
   - Wall
+  - WIre
+  - backButton
   layers:
   - Default
   - TransparentFX
