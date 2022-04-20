@@ -87,7 +87,6 @@ public class SimulationManager {
 							{
 							((LineReadingIRSensor) arduino.getComponents().get(i))
 							.setWhiteness(Integer.parseInt(linebr[1]));
-							System.out.println("setting");
 							}	
 						
 							break;

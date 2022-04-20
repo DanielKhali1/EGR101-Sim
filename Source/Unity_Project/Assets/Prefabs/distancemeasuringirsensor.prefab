@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 1552963783290411757}
   - component: {fileID: 5000549589771667759}
   - component: {fileID: 1136620416696857830}
+  - component: {fileID: 8727919013944428030}
+  - component: {fileID: 624572460107604163}
   m_Layer: 6
   m_Name: distancemeasuringirsensor
   m_TagString: Untagged
@@ -29,7 +31,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6601039279827266452}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children:
@@ -38,7 +40,7 @@ Transform:
   - {fileID: 324270488089228227}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!54 &7038471035588647932
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4241,6 +4243,31 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 9.231056, y: 2.779853, z: 1.8230146}
   m_Center: {x: 0.544932, y: 0.7899672, z: -1.4378738}
+--- !u!65 &8727919013944428030
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6601039279827266452}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.9538307, y: 2.9961822, z: 74.43829}
+  m_Center: {x: -0.08346904, y: 0.49809098, z: -36.709045}
+--- !u!114 &624572460107604163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6601039279827266452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e944613741b3764eb10567cdb3d196d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1123404866888067630
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4340,7 +4367,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8310763271011032585, guid: 18729fdeac1c199468f04798ebcf10c4, type: 3}
       propertyPath: m_Name
-      value: V0
+      value: OUT
       objectReference: {fileID: 0}
     - target: {fileID: 8655376996849255603, guid: 18729fdeac1c199468f04798ebcf10c4, type: 3}
       propertyPath: m_RootOrder

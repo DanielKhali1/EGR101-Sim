@@ -151,6 +151,8 @@ public class Arduino {
 	 * 
 	 */
 	private void loop() {
+		System.out.println("hello?");
+
 		behavior.getFunction().apply(getArduino());
 	}
 

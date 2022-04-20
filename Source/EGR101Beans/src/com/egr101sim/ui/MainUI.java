@@ -365,7 +365,7 @@ public class MainUI extends Application {
 		RadioMenuItem course2item = new RadioMenuItem("Stage 2: Object Avoidance");
 		course1item.setToggleGroup(tg);
 		course2item.setToggleGroup(tg);
-		course1item.setSelected(true);
+		course2item.setSelected(true);
 		course.getItems().addAll(course1item, course2item);
 
 		

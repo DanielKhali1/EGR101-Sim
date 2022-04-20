@@ -9,7 +9,8 @@ TagManager:
   - Wire
   - Wall
   - WIre
-  - backButton
+  - ServerController
+  - whiteline
   layers:
   - Default
   - TransparentFX
