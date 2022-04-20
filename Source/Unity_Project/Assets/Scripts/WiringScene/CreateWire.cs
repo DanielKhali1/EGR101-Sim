@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CreateWire : MonoBehaviour
 {
@@ -11,10 +12,16 @@ public class CreateWire : MonoBehaviour
     public Camera wiringCam;
     bool wiringMode = false;
     private List<GameObject> wire = new List<GameObject>();
-
+    public Slider redSlider;
+    public Slider greenSlider;
+    public Slider blueSlider;
+    public GameObject preview;
     private void Start()
     {
         connectionsList = GameObject.FindGameObjectWithTag("Player").GetComponent<placementmesh>().wires;
+        redSlider.onValueChanged.AddListener(delegate {RedChangeCheck();});
+        greenSlider.onValueChanged.AddListener(delegate {GreenChangeCheck();});
+        blueSlider.onValueChanged.AddListener(delegate {BlueChangeCheck();});
     }
 
     void Update()
@@ -38,8 +45,8 @@ public class CreateWire : MonoBehaviour
                         line.positionCount = 50;
                     }
                     else{
+                        line.material.color = new Color(RedChangeCheck(),GreenChangeCheck(),BlueChangeCheck(),1);
                         line.SetPosition(wiringCount, hit.collider.gameObject.transform.position);
-                        line.material.color = new Color(1f,1,1f,1);
                     }
                     
                     hit.collider.gameObject.transform.name = hit.collider.gameObject.transform.parent.name;
@@ -69,6 +76,7 @@ public class CreateWire : MonoBehaviour
             }
         }
         activeWire(wiringMode);
+        changePreview();
     }
 
     void activeWire(bool wiringMode)
@@ -90,6 +98,27 @@ public class CreateWire : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void changePreview()
+    {
+        preview.GetComponent<Image>().color = new Color(RedChangeCheck(),GreenChangeCheck(),BlueChangeCheck(),1);
+    }
+
+    public float RedChangeCheck()
+    {
+        Debug.Log(redSlider.value);
+        return redSlider.value;
+    }
+
+    public float GreenChangeCheck()
+    {
+        return greenSlider.value;
+    }
+
+    public float BlueChangeCheck()
+    {
+        return blueSlider.value;
     }
     void clearList()
     {
