@@ -21,7 +21,6 @@ public class CreateWire : MonoBehaviour
     {
         if(wiringCam.GetComponent<Camera>().enabled && Input.GetMouseButtonDown(0))
         {
-
             Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
             RaycastHit hit;
             if(Physics.Raycast(ray, out hit))
@@ -40,7 +39,7 @@ public class CreateWire : MonoBehaviour
                     }
                     else{
                         line.SetPosition(wiringCount, hit.collider.gameObject.transform.position);
-                        line.material.color = Color.green;
+                        line.material.color = new Color(1f,1,1f,1);
                     }
                     
                     hit.collider.gameObject.transform.name = hit.collider.gameObject.transform.parent.name;
@@ -99,6 +98,5 @@ public class CreateWire : MonoBehaviour
             connectionsList.Add(new List<GameObject>(wire));
             wire.Clear();
         }
-    }
-       
+    }   
 }

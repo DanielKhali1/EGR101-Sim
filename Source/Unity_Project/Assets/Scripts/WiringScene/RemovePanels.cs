@@ -15,11 +15,6 @@ public class RemovePanels : MonoBehaviour, IPointerClickHandler
     {
         canvas = GameObject.FindGameObjectWithTag("UI");
         canvas.transform.GetChild(0).gameObject.SetActive(false);
-
-        for(int i = 0; i < canvas.transform.childCount; i++)
-        {
-            
-        }
     }
 
    public async void OnPointerClick(PointerEventData eventData)
@@ -34,14 +29,15 @@ public class RemovePanels : MonoBehaviour, IPointerClickHandler
             }
             for(int i = 0; i < canvas.transform.childCount; i++)
             {
-                if(canvas.transform.GetChild(i).gameObject.name != "swap_camera_wire")
+                if(canvas.transform.GetChild(i).gameObject.name == "WiringComponent" ||
+                    canvas.transform.GetChild(i).gameObject.name == "LeftPanel" || 
+                    canvas.transform.GetChild(i).gameObject.tag == "backButton")
+                {
+                    canvas.transform.GetChild(i).gameObject.SetActive(true);
+                }
+                else
                 {
                     canvas.transform.GetChild(i).gameObject.SetActive(false);
-                } 
-                if(canvas.transform.GetChild(i).gameObject.name == "WiringComponent")
-                {
-                    canvas.transform.GetChild(0).gameObject.SetActive(true);
-                    canvas.transform.GetChild(i).gameObject.SetActive(true);
                 }
             }
         }
@@ -57,9 +53,10 @@ public class RemovePanels : MonoBehaviour, IPointerClickHandler
                 {
                     canvas.transform.GetChild(i).gameObject.SetActive(true);
                 } 
-                if(canvas.transform.GetChild(i).gameObject.name == "WiringComponent")
+                if(canvas.transform.GetChild(i).gameObject.name == "WiringComponent" ||
+                    canvas.transform.GetChild(i).gameObject.name == "LeftPanel" || 
+                    canvas.transform.GetChild(i).gameObject.tag == "backButton")
                 {
-                    canvas.transform.GetChild(0).gameObject.SetActive(false);
                     canvas.transform.GetChild(i).gameObject.SetActive(false);
                 }
             }

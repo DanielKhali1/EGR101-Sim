@@ -5,29 +5,38 @@ using UnityEngine.EventSystems;
 
 public class RemoveWireUIBut : MonoBehaviour, IPointerClickHandler
 {
-    public Camera wiringCam;
+    public Camera forkCam;
     GameObject canvas;
 
    public async void OnPointerClick(PointerEventData eventData)
     {
         canvas = GameObject.FindGameObjectWithTag("UI");
-        if(wiringCam.GetComponent<Camera>().enabled)
+        if(forkCam.GetComponent<Camera>().enabled)
         {
             for(int i = 0; i < canvas.transform.childCount; i++)
             {
-                if(canvas.transform.GetChild(i).gameObject.name == "swap_camera_wire")
+                if(canvas.transform.GetChild(i).gameObject.tag == "backButton")
+                {
+                    canvas.transform.GetChild(i).gameObject.SetActive(true);
+                }
+                if(canvas.transform.GetChild(i).gameObject.name == "swap_camera_wire" ||
+                    canvas.transform.GetChild(i).gameObject.name == "swap_camera_but")
                 {
                     canvas.transform.GetChild(i).gameObject.SetActive(false);
                 } 
             }
         }
-        if(!wiringCam.GetComponent<Camera>().enabled)
+        if(!forkCam.GetComponent<Camera>().enabled)
         {
             for(int i = 0; i < canvas.transform.childCount; i++)
             {
                 if(canvas.transform.GetChild(i).gameObject.name == "swap_camera_wire")
                 {
                     canvas.transform.GetChild(i).gameObject.SetActive(true);
+                }
+                if(canvas.transform.GetChild(i).gameObject.tag == "backButton")
+                {
+                    canvas.transform.GetChild(i).gameObject.SetActive(false);
                 } 
             }
         }
