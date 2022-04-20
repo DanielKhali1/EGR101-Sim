@@ -107,7 +107,6 @@ public class CreateWire : MonoBehaviour
 
     public float RedChangeCheck()
     {
-        Debug.Log(redSlider.value);
         return redSlider.value;
     }
 
