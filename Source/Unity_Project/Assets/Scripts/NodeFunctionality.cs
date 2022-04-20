@@ -10,6 +10,7 @@ public class NodeFunctionality : MonoBehaviour, IPointerClickHandler
     public GameObject object1, object4, mesh2;
     public GameObject mesh1;
     public GameObject bot;
+    public Camera wiringCam;
     public int mode = 0;
     public bool preset = false;
     public int num = 0;
@@ -34,6 +35,7 @@ public class NodeFunctionality : MonoBehaviour, IPointerClickHandler
                 temp.transform.parent = bot.gameObject.transform;
                 temp.transform.position = new Vector3(0, 5, -3);
                 temp.name = object4.name.Replace("Prefab", "") + (RandomString(6));
+                Debug.Log(temp.name);
                 break;
         }
         

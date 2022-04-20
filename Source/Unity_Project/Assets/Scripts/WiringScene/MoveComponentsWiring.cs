@@ -62,10 +62,11 @@ public class MoveComponentsWiring : MonoBehaviour,  IPointerClickHandler
         if(!wiringCam.GetComponent<Camera>().enabled)
         {
             bot.GetComponent<Rigidbody>().freezeRotation = false;
+            Debug.Log(sensor[0].transform.name);
             for(int i = 0; i < sensor.Count; i++)
             {
                 sensor[i].transform.localPosition = originalSensors[i];
-                if(sensor[i].transform.localPosition.y > 1)
+                if(sensor[i].transform.localPosition.y > -1.2f)
                     sensor[i].transform.Rotate(90,0,0);
             }
             bot.GetComponent<placementmesh>().origSensorsPos.RemoveAll(item => item.x < 100);
