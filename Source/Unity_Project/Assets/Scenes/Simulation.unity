@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &16231648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1519,9 +1519,9 @@ GameObject:
   - component: {fileID: 140006895}
   - component: {fileID: 140006894}
   - component: {fileID: 140006893}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (7)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1588,7 +1588,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 7741625113677808684, guid: 0f4090355457848449eadcb9e805fe7f, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4019,7 +4019,7 @@ MonoBehaviour:
   title: {fileID: 1061213557}
   course1: {fileID: 1118093486}
   course2: {fileID: 16231647}
-  course3: {fileID: 0}
+  course3: {fileID: 1512343734}
   resetPosition: {x: 0, y: 0, z: 0}
   resetRotation: {x: 0, y: 0, z: 0, w: 0}
   inward: {fileID: -2432090755550338912, guid: 983a1db9e14c029408ebaf21fdce56bb, type: 3}
@@ -6134,6 +6134,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linePrefab: {fileID: 795101825768598135, guid: b3f5cec50dad46344847f567349f98b8, type: 3}
   wiringCam: {fileID: 0}
+  redSlider: {fileID: 0}
+  greenSlider: {fileID: 0}
+  blueSlider: {fileID: 0}
+  preview: {fileID: 0}
 --- !u!114 &1082095050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7917,7 +7921,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1512343735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8979,7 +8983,7 @@ GameObject:
   - component: {fileID: 1675535475}
   m_Layer: 0
   m_Name: Course Board
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
