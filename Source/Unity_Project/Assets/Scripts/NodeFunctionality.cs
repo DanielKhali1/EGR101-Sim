@@ -27,7 +27,7 @@ public class NodeFunctionality : MonoBehaviour, IPointerClickHandler
                 break;
 
             case 3: //mount
-                bot.GetComponent<presetSwitch>().ToggleMount(mesh2.GetComponentInChildren<MeshFilter>().mesh, num);
+                bot.GetComponent<presetSwitch>().ToggleMount(mesh2.GetComponentInChildren<MeshFilter>().sharedMesh, num);
                 break;
 
             case 4: temp = Instantiate(object4);
@@ -45,7 +45,7 @@ public class NodeFunctionality : MonoBehaviour, IPointerClickHandler
         var builder = new StringBuilder(size);
 
         // Unicode/ASCII Letters are divided into two blocks
-        // (Letters 65–90 / 97–122):   
+        // (Letters 65ï¿½90 / 97ï¿½122):   
         // The first group containing the uppercase letters and
         // the second group containing the lowercase.  
 

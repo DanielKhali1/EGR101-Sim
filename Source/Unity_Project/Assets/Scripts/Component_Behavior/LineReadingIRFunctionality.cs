@@ -8,20 +8,23 @@ public class LineReadingIRFunctionality : MonoBehaviour
 
     private void Update()
     {
-        GameObject.FindGameObjectWithTag("ServerController").GetComponent<ServerController>().sendBuffer += gameObject.name + "," + whiteness + "\n";
+        try{
+            GameObject.FindGameObjectWithTag("ServerController").GetComponent<ServerController>().sendBuffer += gameObject.name + "," + whiteness + "\n";
+        }
+        catch
+        {}
+        
     }
 
     private void OnTriggerEnter(Collider other)
     {
-
-
-        if (other.gameObject.tag.Equals("whiteline")){
+        if (other.gameObject.tag.Equals("whiteline"))
+        {
             //whiteness = 100;
             whiteness = 100;
             GameObject.FindGameObjectWithTag("ServerController").GetComponent<ServerController>().sendBuffer += gameObject.name + "," + whiteness + "\n";
             GameObject.FindGameObjectWithTag("ServerController").GetComponent<ServerController>().sendBuffer += gameObject.name + "," + whiteness + "\n";
             GameObject.FindGameObjectWithTag("ServerController").GetComponent<ServerController>().sendBuffer += gameObject.name + "," + whiteness + "\n";
-            //GameObject.FindGameObjectWithTag("ServerController").GetComponent<ServerController>().sendBuffer += gameObject.name + "," + 100 + "\n";
         }
     }
 
