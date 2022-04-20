@@ -51,8 +51,8 @@ public class SimOptions : MonoBehaviour
             course1.SetActive(false);
             course2.SetActive(false);
             course3.SetActive(true);
-            resetPosition = new Vector3(-3.8f, 0.58f, 81f);
-            resetRotation = Quaternion.Euler(new Vector3(0, 2.23f, 0));
+            resetPosition = new Vector3(-69.93f, 0.58f, -3.029999f);
+            resetRotation = Quaternion.Euler(new Vector3(0, 212.761f, 0));
             title.GetComponent<Text>().text = "Stage 3: Line Reading with Noise";
 
 
