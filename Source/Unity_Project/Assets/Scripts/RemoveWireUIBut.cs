@@ -7,9 +7,11 @@ public class RemoveWireUIBut : MonoBehaviour, IPointerClickHandler
 {
     public Camera forkCam;
     GameObject canvas;
+    public GameObject ped;
 
    public async void OnPointerClick(PointerEventData eventData)
     {
+        ped.SetActive(false);
         canvas = GameObject.FindGameObjectWithTag("UI");
         if(forkCam.GetComponent<Camera>().enabled)
         {
@@ -28,7 +30,7 @@ public class RemoveWireUIBut : MonoBehaviour, IPointerClickHandler
         }
         if(!forkCam.GetComponent<Camera>().enabled)
         {
-            for(int i = 0; i < canvas.transform.childCount; i++)
+            for (int i = 0; i < canvas.transform.childCount; i++)
             {
                 if(canvas.transform.GetChild(i).gameObject.name == "swap_camera_wire")
                 {

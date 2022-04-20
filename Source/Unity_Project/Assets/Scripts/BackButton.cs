@@ -11,6 +11,7 @@ public class BackButton : MonoBehaviour, IPointerClickHandler
     public Camera bottomCam;
     GameObject[] wires;
     GameObject canvas;
+    public GameObject ped;
 
     void Start()
     {
@@ -26,6 +27,8 @@ public class BackButton : MonoBehaviour, IPointerClickHandler
 
     public async void OnPointerClick(PointerEventData eventData)
     {
+        ped.SetActive(true);
+
         wires = GameObject.FindGameObjectsWithTag("Wire");
         if(wiringCam.GetComponent<Camera>().enabled)
         {
