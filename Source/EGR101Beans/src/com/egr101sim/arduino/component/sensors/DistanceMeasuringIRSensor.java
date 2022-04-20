@@ -83,6 +83,23 @@ public class DistanceMeasuringIRSensor extends Component{
 			this.setDistance(distance);
 	}
 
+	
+	@Override
+	public Pin getVCC() {
+		return getPins()[2];
+		
+	}
+	@Override
+	public Pin getGND() {
+		return getPins()[1];
+		
+	}
+	@Override
+	public Pin getOUT() {
+		return getPins()[0];
+	
+	}
+	
 	@Override
 	public void Behavior() {
 		if(isPowered() && isGrounded()) {
@@ -96,6 +113,11 @@ public class DistanceMeasuringIRSensor extends Component{
 
 	public void setDistance(double distance) {
 		this.distance = distance;
+	}
+	
+	@Override
+	public String getState() {
+		return distance +"";
 	}
 
 }
