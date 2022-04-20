@@ -363,12 +363,10 @@ public class MainUI extends Application {
 		ToggleGroup tg = new ToggleGroup();
 		RadioMenuItem course1item = new RadioMenuItem("Stage 1: Line Reading");
 		RadioMenuItem course2item = new RadioMenuItem("Stage 2: Object Avoidance");
-		RadioMenuItem course3item = new RadioMenuItem("Stage 3: Line Reading with Noise");
 		course1item.setToggleGroup(tg);
 		course2item.setToggleGroup(tg);
-		course3item.setToggleGroup(tg);
-		course1item.setSelected(true);
-		course.getItems().addAll(course1item, course2item, course3item);
+		course2item.setSelected(true);
+		course.getItems().addAll(course1item, course2item);
 
 		
 		//set the selected shit at start
