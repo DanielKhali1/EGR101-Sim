@@ -7,9 +7,10 @@ using System;
 
 public class NodeFunctionality : MonoBehaviour, IPointerClickHandler
 {
-    public GameObject object1, object4;
-    public Mesh mesh1, mesh2;
+    public GameObject object1, object4, mesh2;
+    public GameObject mesh1;
     public GameObject bot;
+    public Camera wiringCam;
     public int mode = 0;
     public bool preset = false;
     public int num = 0;
@@ -27,13 +28,14 @@ public class NodeFunctionality : MonoBehaviour, IPointerClickHandler
                 break;
 
             case 3: //mount
-                bot.GetComponent<presetSwitch>().ToggleMount(mesh2, num);
+                bot.GetComponent<presetSwitch>().ToggleMount(mesh2.GetComponentInChildren<MeshFilter>().sharedMesh, num);
                 break;
 
             case 4: temp = Instantiate(object4);
                 temp.transform.parent = bot.gameObject.transform;
                 temp.transform.position = new Vector3(0, 5, -3);
                 temp.name = object4.name.Replace("Prefab", "") + (RandomString(6));
+                Debug.Log(temp.name);
                 break;
         }
         
@@ -45,7 +47,7 @@ public class NodeFunctionality : MonoBehaviour, IPointerClickHandler
         var builder = new StringBuilder(size);
 
         // Unicode/ASCII Letters are divided into two blocks
-        // (Letters 65–90 / 97–122):   
+        // (Letters 65ï¿½90 / 97ï¿½122):   
         // The first group containing the uppercase letters and
         // the second group containing the lowercase.  
 

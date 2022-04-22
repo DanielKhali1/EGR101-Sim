@@ -9,22 +9,37 @@ using System.Threading.Tasks;
 public class CompTracker : MonoBehaviour
 {
     public bool isSim;
-    List<GameObject> components;
+    public List<GameObject> components;
     // Start is called before the first frame update
     void Start()
     {
-        components = gameObject.GetComponent<placementmesh>().sensors;
+        if(!isSim)
+        {
+            components = gameObject.GetComponent<placementmesh>().sensors;
+        }
     }
 
-    public void saveData()
+    void OnApplicationQuit()
+    {
+        if(!isSim)
+        {
+            Debug.Log("SAVING Component Data");
+            saveCompData();
+            Debug.Log("SAVING Wiring Data");
+            saveWireData();
+        }
+
+
+    }
+    public void saveCompData()
     {
         //save component data to a file
         string text = "";
 
-        for(int i = 0; i < components.Count; i++)
+        for (int i = 0; i < components.Count; i++)
         {
             GameObject comp = components[i];
-            text += comp.name+"\n";
+            text += comp.name + "\n";
             text += comp.transform.localPosition + "\n";
             text += comp.transform.localRotation + "\n";
             text += comp.transform.localScale + "\n";
@@ -32,14 +47,14 @@ public class CompTracker : MonoBehaviour
 
         File.WriteAllText("..\\..\\Data\\Component_Data.dat", text);
     }
-    void OnApplicationQuit()
+
+    private void saveWireData()
     {
-        if(!isSim)
-        {
-            Debug.Log("SAVING");
-            saveData();
-        }
+        string ultrastring = "";
+        List<List<GameObject>> connectionsList = GameObject.FindGameObjectWithTag("Player").GetComponent<placementmesh>().wires;
+        for (int i = 0; i < connectionsList.Count; i++)
+            ultrastring += connectionsList[i][0].name + "-"+ connectionsList[i][connectionsList[i].Count-1].name + "\n";
+        System.IO.File.WriteAllText("..\\..\\Data\\Wiring_Data.dat", ultrastring);
+
     }
-
-
 }

@@ -7,6 +7,10 @@ TagManager:
   - UI
   - Pin
   - Wire
+  - Wall
+  - WIre
+  - ServerController
+  - whiteline
   layers:
   - Default
   - TransparentFX

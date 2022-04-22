@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.egr101sim.arduino.Arduino;
+import com.egr101sim.arduino.api.Serial;
 import com.egr101sim.arduino.component.sensors.DistanceMeasuringIRSensor;
 import com.egr101sim.arduino.component.sensors.LineReadingIRSensor;
 import com.egr101sim.arduino.component.sensors.UltrasonicSensor;
@@ -44,23 +45,6 @@ public class ApplicationManager {
 		setSimRunning(false);
 		setupInitialBoeBotMotors();
 
-	}
-
-	public void initializeServerCharacteristics() {
-
-		try {
-			System.out.println("Starting Socket Streams");
-			ss = new ServerSocket(667);
-			sock = ss.accept();
-
-			dis = new DataInputStream(sock.getInputStream());
-			dos = new DataOutputStream(sock.getOutputStream());
-
-			simManager.setupComms(ss, sock, dis, dos);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 
 	/**
@@ -99,37 +83,96 @@ public class ApplicationManager {
 		leftMotor.getPins()[1].setPrev(arduino.getArduino().getP5V());
 		leftMotor.getPins()[2].setPrev(arduino.getArduino().getGround()[0]);
 
-		
 		leftMotor.setName("leftMotor");
 		rightMotor.setName("rightMotor");
 		arduino.getComponents().add(rightMotor);
 		arduino.getComponents().add(leftMotor);
 	}
 
-	public void execute(Process process, Text console) {
+	public void initializeServerCharacteristics() {
+
+		try {
+			System.out.println("Starting Socket Streams");
+			ss = new ServerSocket(667);
+			sock = ss.accept();
+
+			dis = new DataInputStream(sock.getInputStream());
+			dos = new DataOutputStream(sock.getOutputStream());
+
+			simManager.setupComms(ss, sock, dis, dos);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void execute(Process process, Text console, boolean testing) {
 		console.setText(console.getText() + "\nSimulation setting up..");
 		System.out.println("SETTING UP SIM..");
-		new Thread(() -> initializeServerCharacteristics()).start();
+		initializeServerCharacteristics();
 		simManager.setup();
 
 		console.setText(console.getText() + "\nSimulation executing..");
 		System.out.println("EXECUTING..");
-		
-		while (isSimRunning()) {
 
+		try {
+			new Thread(() -> {
+
+				try {
+					while (isSimRunning()) {
+//						System.out.println(sock.isConnected() + " " + sock == null);
+						if (sock != null && sock.isConnected()) {
+							Thread.sleep(20);
+							simManager.sendMessage(simManager.generateMessage());
+						}
+					}
+
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}).start();
+
+		} catch (Exception e) {
+			System.out.println("Issue Sending message");
+		}
+
+		try {
+			new Thread(() -> {
+
+				while (isSimRunning()) {
+					if (sock != null && sock.isConnected()) {
+						simManager.updateComponents(simManager.receiveMessage());
+					}
+				}
+
+			}).start();
+
+			simManager.updateComponents(simManager.receiveMessage());
+
+		} catch (Exception e) {
+			System.out.println("Issue Receiving message");
+		}
+
+		while (isSimRunning()) {
+//			System.out.println("AHH2");
 			simManager.iterate();
 			// new Thread(()->simManager.sendMessage(simManager.generateMessage()));
 
-//			if (!process.isAlive()) {
-//				setSimRunning(false);
-//			}
+			if (!testing) {
+				if (!process.isAlive()) {
+					setSimRunning(false);
+
+				}
+			}
 		}
-		
+
 		simManager.shutDown(console);
-		for(int i = 2;i  < arduino.getComponents().size(); i++) {
+		for (int i = 2; i < arduino.getComponents().size(); i++) {
 			System.out.println("removing");
 			arduino.getComponents().remove(i);
-			
+
 		}
 	}
 
@@ -155,15 +198,16 @@ public class ApplicationManager {
 
 	public void addComponentsAndConnections() throws FileNotFoundException {
 		File componentData = new File("../../Data/Component_Data.dat");
-//		File wiringData = new File("../../Data/Wiring_Data.dat");
-		BufferedReader bf = new BufferedReader(new FileReader(componentData));
+		File wiringData = new File("../../Data/Wiring_Data.dat");
+		BufferedReader bfCompData = new BufferedReader(new FileReader(componentData));
+		BufferedReader bfWiringData = new BufferedReader(new FileReader(wiringData));
 
+		// read component data and update components
 		try {
 
 			String line = "";
-			while ((line = bf.readLine()) != null) {
-				System.out.println(line);
-				if(line.contains("UltraSonic")) {
+			while ((line = bfCompData.readLine()) != null) {
+				if (line.contains("UltraSonic")) {
 					addComponent(line, new UltrasonicSensor());
 				} else if (line.contains("lineReadingIR")) {
 					addComponent(line, new LineReadingIRSensor());
@@ -171,7 +215,74 @@ public class ApplicationManager {
 					addComponent(line, new DistanceMeasuringIRSensor());
 				}
 			}
-			bf.close();
+			bfCompData.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		try {
+
+			String line = "";
+
+			while ((line = bfWiringData.readLine()) != null) {
+				String[] wiringD = line.split("-");
+				// Arduino first
+				String arduinoPinRole = null;
+				String componentName = null;
+				String compoentPineRole = null;
+
+				Pin compPin = null;
+
+				if (wiringD[0].equals("Arduino")) {
+					arduinoPinRole = wiringD[1];
+					componentName = wiringD[2];
+					compoentPineRole = wiringD[3];
+				}
+				// component first
+				else {
+					componentName = wiringD[0];
+					compoentPineRole = wiringD[1];
+					arduinoPinRole = wiringD[3];
+				}
+
+				Component comp = null;
+				for (int i = 0; i < arduino.getComponents().size(); i++) {
+					if (componentName.equals(arduino.getComponents().get(i).getName())) {
+						comp = arduino.getComponents().get(i);
+					}
+				}
+				if (comp == null) {
+					throw new Exception("COULD NOT FIND COMPONENT NAME TO CONNECT WIRES");
+				}
+
+				if (compoentPineRole.equals("VCC")) {
+					compPin = comp.getVCC();
+				} else if (compoentPineRole.equals("GND")) {
+					compPin = comp.getGND();
+				} else if (compoentPineRole.equals("OUT")) {
+					compPin = comp.getOUT();
+				}
+
+				if (arduinoPinRole.equals("5V")) {
+					compPin.setPrev(arduino.getArduino().getP5V());
+				} else if (arduinoPinRole.equals("GND")) {
+					compPin.setPrev(arduino.getArduino().getGround()[0]);
+				} else if (arduinoPinRole.contains("analog")) {
+					int index = Integer.parseInt(arduinoPinRole.replace("analog", ""));
+					arduino.getArduino().getAnalogArray()[index] = new Pin(PinType.IO, true);
+					compPin.setPrev(arduino.getArduino().getAnalogArray()[index]);
+					arduino.getArduino().getAnalogArray()[index].addNext(compPin);
+					System.out.println(Arrays.toString(arduino.getArduino().getAnalogArray()));
+				} else if (arduinoPinRole.contains("digital")) {
+					int index = Integer.parseInt(arduinoPinRole.replace("digital", ""));
+					arduino.getArduino().getDigitalArray()[index] = new Pin(PinType.IO, true);
+					compPin.setPrev(arduino.getArduino().getDigitalArray()[index]);
+					arduino.getArduino().getDigitalArray()[index].addNext(compPin);
+					System.out.println(Arrays.toString(arduino.getArduino().getDigitalArray()));
+				}
+			}
+			bfWiringData.close();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -181,6 +292,11 @@ public class ApplicationManager {
 
 	private void addComponent(String name, Component c) {
 		Component component = c;
+		component.setName(name);
+
+		for (int i = 0; i < component.getPins().length; i++)
+			component.getPins()[i] = new Pin(PinType.GENERAL, false);
+
 		arduino.getComponents().add(component);
 	}
 

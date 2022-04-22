@@ -19,6 +19,7 @@ public class Translator {
 							"import com.egr101sim.arduino.elements.PinIO;\r\n" + 
 							"import com.egr101sim.arduino.elements.PinState;\r\n" + 
 							"import com.egr101sim.arduino.elements.PinType;\r\n" + 
+							"import com.egr101sim.arduino.api.Serial;\r\n" + 
 							"public class ArduinoBehavior implements java.util.function.Function<BaseArduino,String>{\r\n" + 
 							"   int count = 0;" + 
 							"	private static final int INPUT = 0;\r\n" + 
@@ -87,7 +88,7 @@ public class Translator {
 							.replace("micros(", "t.micros(")
 							.replace("millis(", "t.millis(")
 							.replace("delay", "t.delay")
-							.replace("Serial.print", "System.out.print")
+//							.replace("Serial.print", "System.out.print")
 							.replace("delayMicroSeconds", "t.delayMicroSeconds")
 							.replace("pinMode", "t.pinMode");
 		

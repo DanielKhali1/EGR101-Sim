@@ -32,8 +32,7 @@ public class ColorPicker : MonoBehaviour
         {
             Vector2 delta;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(Rect, Input.mousePosition, null, out delta);
-
-            string debug = "mousePosition=" + Input.mousePosition;
+            
             //debug += "<br>delta=" + delta;
 
             float width = Rect.rect.width;

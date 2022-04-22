@@ -262,3 +262,40 @@ started working on the component tracker ( a feature that makes changes to compo
 March 5th 
 spent an entire day working on the component tracker, got mostly everything finished but I'm blocked by luke so I can't
 implement the wiring configuration integration yet.
+
+April 11th
+edited the wiring scene a bit and added a better parrallax boe bot model
+
+April 13th 
+added more textures to our components and styled bot customization a little more
+also started working on figuring out how to track components and wiring connections between sim and customization
+
+April 15th (6 days ago)
+more work on saving wiring connections correctly
+got ir sensors working correctly between sim and customization
+
+April 16th (5 days ago)
+linereading semi works
+
+April 17th (4 days ago)
+re-worked keely's broken serial plotter so that it worked with my stuff because i needed it to
+print things out to test line reading
+
+April 18th (3 days ago)
+got mounts and wheels to update in the simulation
+added a course switching button to switch between stages
+
+April 19th (2 days ago)
+got distance IR and Ultrasonic sensor working in the simulation
+
+April 20th
+vivian added a new course so I updated all the peripherals for that and helped her with lighting
+worked a little more on ultrasonic sensor stuff.
+added final touches
+started the presentation
+
+April 21st
+finished the presentation
+presented the project
+
+
