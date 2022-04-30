@@ -79,7 +79,7 @@ public class MainUI extends Application {
 
 	Text serial = new Text();
 
-	public static final boolean testing = true;
+	public static final boolean testing = false;
 
 	Pane pane;
 	Scene scene;
